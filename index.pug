@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  form(action='/AHUType' method='GET')
+    div.form-group
+      label(for='AHUType') Select AHU Style  
+
+        -const AHUOptions = [{value:'Costant Volume'},{value:'VAV'}]
+        
+        select#AHUOptions (name='AHUType' size='2')
+          each AHUType in AHUOptions 
+            option(value=(AHUType.value)) #{AHUType.value}
+        br
+        br
+        input(type="submit", value=AHUOptions.value)
+
+
+  
