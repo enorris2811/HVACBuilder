@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HVAC Builder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-top">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav inline">
+                <li class="nav-item active inline">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item inline">
+                    <a class="nav-link" href="/points">Points</a>
+                </li>
+                <li class="nav-item inline">
+                    <a class="nav-link" href="/sequence">Sequence</a></li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Points List</h1>
+    <div id='ahuTable'>
+        <tr id='tableHeader'>
+            <th>
+                Point Name
+            </th>
+            <th>
+                Analog Input
+            </th>
+            <th>
+                Analog Output
+            </th>
+            <th>
+                Binary Input
+            </th>
+            <th>
+                Binary Output
+            </th>
+            <th>
+                Analog Value
+            </th>
+            <th>
+                Binary Value
+            </th>
+            <th>
+                Loop
+            </th>
+            <th>
+                Schedule
+            </th>
+            <th>
+                Trend
+            </th>
+            <th>
+                Alarm
+            </th>
+            <th>
+                Show on Graphic
+            </th>
+        </tr>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $.get('/pointsModel', function (data, status) {
+            var ahu = JSON.parse(localStorage.getItem('ahu'));
+            var points = data.points;
+            var hardPoint = points.hardware;
+            var softPoint = points.software;
+            console.log(JSON.stringify(hardPoint));
+            console.log(JSON.stringify(softPoint));
+            //localStorage.clear();
+            if (ahu == undefined) {
+                console.log("No Air Handler Built!!");
+            } else {
+                //console.log(JSON.stringify(ahu));
+                console.log(ahu);
+
+
+                var ele;
+                var b = 0;
+                for (ele in ahu) {
+
+
+                    console.log(ahu.hasOwnProperty(ele));
+                    console.log(JSON.stringify(ele));
+                    var val = ahu[ele];
+                    console.log(val);
+
+
+
+                    var pointName = JSON.stringify(ele);
+                    var i;
+                    for (i in val) {
+                        console.log(JSON.stringify(i));
+                        var x = val[i];
+                        if (i != 'none') {
+                            //console.log(JSON.stringify(x));
+                            if (x.isUsed == true) {
+                                console.log('RIGHT HERE!!!');
+                                var q = x.points;
+                                var z;
+
+                                for (z in q) {
+
+                                    b++;
+                                    var tableTop = document.getElementById('ahuTable');
+                                    var tableRow = document.createElement("tr");
+                                    tableRow.id = 'tableRow' + b;
+                                    //console.log(tableRow.id);
+                                    tableTop.appendChild(tableRow);
+                                    var pointName = q[z];
+                                    var temp;
+                                    for (temp in hardPoint) {
+                                        var wx = hardPoint[temp];
+                                        var wy = temp;
+                                        //console.log(wx);
+                                        if (pointName == wy) {
+                                            console.log("ANd AGAIN RIGHT HERE!!!");
+                                            if (wx.isUsed == false) {
+                                                wx.isUsed == true;
+                                                for (a = 0; a < 12; a++) {
+                                                    var tableColumn = document.createElement('td');
+                                                    tableColumn.id = "tableColumn" + (a + 1);
+                                                    var textNode = document.createTextNode('0');
+                                                    tableColumn.appendChild(textNode);
+                                                    tableRow.appendChild(tableColumn);
+                                                    console.log(a);
+                                                    switch (a) {
+                                                        case (0):
+                                                            textNode.textContent = JSON.stringify(pointName);
+                                                            break;
+                                                        case (1):
+                                                            console.log(wx);
+                                                            textNode.textContent = wx.points.AI;
+                                                            break;
+                                                        case (2):
+                                                            textNode.textContent = wx.points.AO;
+                                                            break;
+                                                        case (3):
+                                                            textNode.textContent = wx.points.BI;
+                                                            break;
+                                                        case (4):
+                                                            textNode.textContent = wx.points.BO;
+                                                            break;
+                                                        case (5):
+                                                            textNode.textContent = wx.points.AV;
+                                                            break;
+                                                        case (6):
+                                                            textNode.textContent = wx.points.BV;
+                                                            break;
+                                                        case (7):
+                                                            textNode.textContent = wx.points.Loop;
+                                                            break;
+                                                        case (8):
+                                                            textNode.textContent = wx.points.Schedule;
+                                                            break;
+                                                        case (9):
+                                                            textNode.textContent = wx.points.Trend;
+                                                            break;
+                                                        case (10):
+                                                            textNode.textContent = wx.points.Alarm;
+                                                            break;
+                                                        case (11):
+                                                            textNode.textContent = wx.points.Graphics;
+                                                            break;
+                                                    }
+
+
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+                                    var temp2;
+                                    for (temp2 in softPoint) {
+                                        var wx = softPoint[temp2];
+                                        var wy = temp2;
+                                        //console.log(wx);
+                                        if (pointName == wy) {
+                                            console.log("ANd AGAIN RIGHT HERE!!!");
+                                            if (wx.isUsed == false) {
+                                                wx.isUsed == true;
+                                                for (a = 0; a < 12; a++) {
+                                                    var tableColumn = document.createElement('td');
+                                                    tableColumn.id = "tableColumn" + (a + 1);
+                                                    var textNode = document.createTextNode("0");
+                                                    tableColumn.appendChild(textNode);
+                                                    tableRow.appendChild(tableColumn);
+                                                    switch (a) {
+                                                        case (0):
+                                                            textNode.textContent = JSON.stringify(pointName);
+                                                            break;
+                                                        case (1):
+                                                            console.log(wx);
+                                                            textNode.textContent = wx.points.AI;
+                                                            break;
+                                                        case (2):
+                                                            textNode.textContent = wx.points.AO;
+                                                            break;
+                                                        case (3):
+                                                            textNode.textContent = wx.points.BI;
+                                                            break;
+                                                        case (4):
+                                                            textNode.textContent = wx.points.BO;
+                                                            break;
+                                                        case (5):
+                                                            textNode.textContent = wx.points.AV;
+                                                            break;
+                                                        case (6):
+                                                            textNode.textContent = wx.points.BV;
+                                                            break;
+                                                        case (7):
+                                                            textNode.textContent = wx.points.Loop;
+                                                            break;
+                                                        case (8):
+                                                            textNode.textContent = wx.points.Schedule;
+                                                            break;
+                                                        case (9):
+                                                            textNode.textContent = wx.points.Trend;
+                                                            break;
+                                                        case (10):
+                                                            textNode.textContent = wx.points.Alarm;
+                                                            break;
+                                                        case (11):
+                                                            textNode.textContent = wx.points.Graphics;
+                                                            break;
+                                                    }
+
+
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+
+
+                                }
+
+                            }
+                        }
+
+                    }
+
+
+
+                }
+            }
+        });
+    });
+</script>
+
+</html>

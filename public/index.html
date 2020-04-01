@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HVAC Builder</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-top">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav inline">
+        <li class="nav-item active inline">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item inline">
+          <a class="nav-link" href="/points">Points</a>
+        </li>
+        <li class="nav-item inline">
+          <a class="nav-link" href="/sequence">Sequence</a></li>
+      </ul>
+    </div>
+  </nav>
+</body>
+<h1>HVAC Builder</h1>
+<form id="ahuTypes" action="/" method="GET">
+  <div class="form-group">
+    <label for="AHUType">Select AHU Style
+      <select id="AHUOptions">
+        <option value="">Select....</option>
+        <option value="Constant Volume">Constant Volume</option>
+        <option value="VAV">VAV</option>
+      </select>
+      <br>
+      <br>
+    </label>
+  </div>
+  <button type="button" onclick="getAHU()">Submit</button>
+</form>
+<script>
+  function getAHU() {
+    var x = document.getElementById('AHUOptions');
+    var y = x[x.selectedIndex].text;
+    if (y == 'Constant Volume') {
+      url = '/cv';
+    } else if (y == 'VAV') {
+      url = '/vav';
+    } else {
+      console.log("error-ick!!!");
+    }
+    console.log(url);
+    var z = document.getElementById('ahuTypes');
+    z.action = url;
+    z.submit();
+  }
+  </script>
+
+</html>

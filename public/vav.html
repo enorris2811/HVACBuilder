@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>vav</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-top">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav inline">
+                <li class="nav-item active inline"> <a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item inline"><a class="nav-link" href="/points">Points</a></li>
+                <li class="nav-item inline"><a class="nav-link" href="/sequence">Sequence</a></li>
+            </ul>
+        </div>
+    </nav>
+</body>
+<h1>vav</h1>
+<form>
+    <label>Remote Occupancy: </label>
+    <select id='remoteOccupancy'>
+        <option value="0"></option>
+        <option value="1">None</option>
+        <option value="2">Binary Input</option>
+    </select><br><br>
+    <label>Safties:</label>
+    <input id="freezeProtection" type="checkbox" name="FreezeProtection">Freeze
+    Protection<br>
+    <input id="returnAirSmokeDetector" type="checkbox" name="RASmokeDetector">Return Air Smoke
+    Detector<br>
+    <input id="supplyAirSmokeDetector" type="checkbox" name="SASmokeDetector">Supply Air Smoke
+    Detector<br><br>
+    <label for="SmokeControl">Smoke Control</label>
+    <input id="fireShutdown" type="checkbox" name="FireShutdown" value="1">Fire Shutdown<br>
+    <input id="Evacuation" type="checkbox" name="Evacuation" value="1">Evacuation<br>
+    <input id="Pressurization" type="checkbox" name="Pressurization" value="1">Pressurization<br>
+    <input id="Purge" type="checkbox" name="Purge" value="1">Purge<br><br>
+    <label>Outdoor Air Temperature: </label>
+    <select id="outdoorAirTemp" name="outdoorAirTemp">
+        <option value="1">Network Input</option>
+        <option value="1">Physical Input</option>
+    </select><br><br><label>Supply Fan</label><select id="supplyFan" name="supplyFan" on>
+        <option value="1">Blow Through</option>
+        <option value="1">Draw Through</option>
+    </select><br><br><label>Return Fan</label><select id="returnFan" name="returnFan">
+        <option value="1">None</option>
+        <option value="1">On-Off</option>
+        <option value="1">Building Pressurization</option>
+        <option value="1">Tracking - Based on Supply Fan Speed</option>
+        <option value="1">Tracking - Based on Supply Fan Flow</option>
+    </select><br><br><label>Exhaust Fan</label><select id="exhaustFan" name="exhaustFan">
+        <option value="1">None</option>
+        <option value="1">On-Off</option>
+        <option value="1">Building Pressurization</option>
+    </select><br><br><label>Supply Air Cooling Setpoint</label><input id="supplyAirCoolingSetpoint" type="checkbox"
+        name="supplyAirCoolingSetpoint" value="1">Fixed with Priority Space Temperature
+    Reset<br><br><label>PreHeating</label><select id="preHeating" name="preHeating">
+        <option value="1">None</option>
+        <option value="1">Electric Staging 1</option>
+        <option value="2">Electric Staging 2</option>
+        <option value="3">Electric Staging 3</option>
+        <option value="4">Electric Staging 4</option>
+        <option value="5">Electric Staging 5</option>
+        <option value="6">Electric Staging 6</option>
+        <option value="1">Gas Staging 1</option>
+        <option value="2">Gas Staging 2</option>
+        <option value="3">Gas Staging 3</option>
+        <option value="4">Gas Staging 4</option>
+        <option value="5">Gas Staging 5</option>
+        <option value="6">Gas Staging 6</option>
+        <option value="1">SCR Electric</option>
+        <option value="1">Hot Water Modulating</option>
+        <option value="1">Hot Water Face and Bypass</option>
+        <option value="1">Steam Modulating</option>
+        <option value="1">Steam Face and Bypass</option>
+    </select><br><br><label>Face and Bypass Dampers</label><select id="faceAndBypassDampers" name="faceBypassDampers">
+        <option value="1">None</option>
+        <option value="1">External Bypass</option>
+        <option value="1">Internal Bypass</option>
+    </select><br><br><label>Heating</label><select id="heating" name="heating">
+        <option value="1">None</option>
+        <option value="1">Electric Staging 1</option>
+        <option value="2">Electric Staging 2</option>
+        <option value="3">Electric Staging 3</option>
+        <option value="4">Electric Staging 4</option>
+        <option value="5">Electric Staging 5</option>
+        <option value="6">Electric Staging 6</option>
+        <option value="1">Gas Staging 1</option>
+        <option value="2">Gas Staging 2</option>
+        <option value="3">Gas Staging 3</option>
+        <option value="4">Gas Staging 4</option>
+        <option value="5">Gas Staging 5</option>
+        <option value="6">Gas Staging 6</option>
+        <option value="1">SCR Electric</option>
+        <option value="1">Hot Water: Modulating</option>
+        <option value="1">Hot Water: External Face and Bypass</option>
+        <option value="1">Hot Water: Internal Face and Bypass</option>
+        <option value="1">Hot Water: Integral Face and Bypass</option>
+        <option value="1">Steam: Modulating</option>
+        <option value="1">Steam: External Face and Bypass</option>
+        <option value="1">Steam: Internal Face and Bypass</option>
+        <option value="1">Steam: Integral Face and Bypass</option>
+    </select><br><br><label>Cooling</label><select id="cooling" name="cooling">
+        <option value="1">None</option>
+        <option value="1">Dx Cooling</option>
+        <option value="1">Chilled Water: Modulating</option>
+        <option value="1">Chilled Water: Modulating Coil Delta T</option>
+        <option value="1">Chilled Water: External Face and Bypass</option>
+        <option value="1">Chilled Water: Internal Face and Bypass</option>
+    </select><br><br><label>Mixed Air Damper</label><select id="mixedAirDamper" name="mixedAirDamper">
+        <option value="1">None</option>
+        <option value="1">Economizer: OA Enthalpy Switch</option>
+        <option value="1">Economizer: OA Enthalpy Sensor</option>
+        <option value="1">Economizer: OA Differential Enthalpy</option>
+        <option value="1">Economizer: OA Dry Bulb</option>
+    </select><br><br><label>Minimum Outside Air</label><select id="minOutsideAir" name="minOutsideAir">
+        <option value="1">None</option>
+        <option value="1">Differential CO2</option>
+        <option value="1">Space CO2</option>
+        <option value="1">OA Damper - Flow Station</option>
+    </select><br><br><label>Humidity Options</label><input id="humidityOptions" type="checkbox"
+        name="indoorRelativeHumiditySensor">Indoor Relative Humidity Sensor<br><input id="dehumidification"
+        type="checkbox" name="Dehumidification">Dehumidification<br><br><label>Humidifier</label><select id="humidifier"
+        name="humidifier">
+        <opition value="1">None</opition>
+        <option value="1">SS</option>
+        <option value="1">SS and Modulation</option>
+    </select><br><br><label>Misc Monitoring</label><input id="RARH" type="checkbox" name="rarh">Return Air Relative
+    Humiditiy<br><input id="OARH" type="checkbox" name="oarh">Outdoor Air Relative Humidity<br><input id="RACO2"
+        type="checkbox" name="raco2">Return Air Carbon Dioxide (CO2)<br><input id="OACO2" type="checkbox"
+        name="oaco2">Outdoor Air Carbon Dioxide (CO2)<br><br><label>Filter One Monitoring</label><select
+        id="filterOneMonitoring" name="filterOneMonitoring">
+        <option value="1">None</option>
+        <option value="1">Hours</option>
+        <option value="1">Status</option>
+        <option value="1">Differential Pressure</option>
+    </select>
+    <br><br>
+    <label>Filter Two Monitoring</label>
+    <select id="filterTwoMonitoring" name="filterTwoMonitoring">
+        <option value="1">None</option>
+        <option value="1">Hours</option>
+        <option value="1">Status</option>
+        <option value="1">Differential Pressure</option>
+    </select>
+    <br><br>
+</form>
+<button onclick="submitVAV()">Submit</button>
+<script>
+    function submitVAV() {
+        $.get('/vavModel', function(data, status){
+            console.log(data);
+            var vav = data.ahu;
+            console.log(JSON.stringify(vav));
+            var x = document.getElementById('remoteOccupancy');
+            var  v = x.selectedIndex;
+            if(v == 1){
+                vav.remoteOccupancy.none = 1;
+                vav.remoteOccupancy.binaryInput = 0;
+            }else if (v == 2){
+                vav.remoteOccupancy.none = 0;
+                vav.remoteOccupancy.binaryInput = 1;
+            }
+            console.log(JSON.stringify(vav.remoteOccupancy));
+            x = document.getElementById('freezeProtection');
+            if (x.checked == true){
+                vav.safties.freezeProtection = 1;
+            }
+            x = document.getElementById('returnAirSmokeDetector');
+            if( x.checked == true){
+                vav.safties.returnAirSmokeDetector = 1;
+            }
+            x = document.getElementById('supplyAirSmokeDetector');
+            if(x.checked == true){
+                vav.safties.supplyAirSmokeDetector = 1;
+            }
+            x = document.getElementById('fireShutdown');
+            if(x.checked == true){
+                vav.smokeControl.fireShutdown = 1;
+            }
+            x = document.getElementById('Evacuation');
+            if(x.checked == true){
+                vav.smokeControl.Evacuation = 1;
+            }
+            x = document.getElementById('Pressurization');
+            if(x.checked == true){
+                vav.smokeControl.Pressurization = 1;
+            }
+            x = document.getElementById('Purge');
+            if(x.checked == true){
+                vav.smokeControle.Purge = 1;
+            }
+            x = document.getElementById('outdoorAirTemp').selectedIndex;
+            if (x == 1){
+                vav.outdoorAirTemp.physicalInput = 1
+                vav.outdoorAirTemp.networkInput = 0;
+            }else if(x == 0){
+                vav.outdoorAirTemp.physicalInput = 0;
+                vav.outdoorAirTemp.networkInput = 1;
+            }
+            x = document.getElementById('supplyFan').selectedIndex;
+            if(x==0){
+                vav.supplyFan.blowThrough = 1;
+                vav.supplyFan.drawThrough = 0;
+            }else if(x==1){
+                vav.supplyFan.blowThrough = 0;
+                vav.supplyFan.drawThrough = 1;
+            }
+            x = document.getElementById('returnFan').selectedIndex;
+            if(x==0){
+                vav.returnFan.none = 1;
+                vav.returnFan.onOff = 0;
+                vav.returnFan.buildingPressurization = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackAnalogInputAmerage = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackAnalogInputAmerage = 0;
+            }else if(x == 1){
+                vav.returnFan.none = 0;
+                vav.returnFan.onOff = 1;
+                vav.returnFan.buildingPressurization = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackAnalogInputAmerage = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackAnalogInputAmerage = 0;
+            }else if( x == 2){
+                vav.returnFan.none = 0;
+                vav.returnFan.onOff = 0;
+                vav.returnFan.buildingPressurization = 1;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackAnalogInputAmerage = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackAnalogInputAmerage = 0;
+            }else if(x == 3){
+                vav.returnFan.none = 0;
+                vav.returnFan.onOff = 0;
+                vav.returnFan.buildingPressurization = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackBinaryInputDryContact = 1;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackAnalogInputAmerage = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackAnalogInputAmerage = 0;
+            }else if(x == 4){
+                vav.returnFan.none = 0;
+                vav.returnFan.onOff = 0;
+                vav.returnFan.buildingPressurization = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackAnalogInputAmerage = 1;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackAnalogInputAmerage = 0;
+            }else if(x == 5){
+                vav.returnFan.none = 0;
+                vav.returnFan.onOff = 0;
+                vav.returnFan.buildingPressurization = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackAnalogInputAmerage = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackBinaryInputDryContact = 1;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackAnalogInputAmerage = 0;
+            }else if(x == 6){
+                vav.returnFan.none = 0;
+                vav.returnFan.onOff = 0;
+                vav.returnFan.buildingPressurization = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingPercentOfSupplyFanSpeed.feedbackAnalogInputAmerage = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackBinaryInputDryContact = 0;
+                vav.returnFan.trackingBasedOnSupplyFanFlow.feedbackAnalogInputAmerage = 1;
+            }
+            x = document.getElementById('exhaustFan').selectedIndex;
+            if(x == 0){
+                vav.exhaustFan.none = 1;
+                vav.exhaustFan.onOff = 0;
+                vav.exhaustFan.buildingPressurization = 0;
+            }else if(x ==1){
+                vav.exhaustFan.none = 0;
+                vav.exhaustFan.onOff = 1;
+                vav.exhaustFan.buildingPressurization = 0;
+            }else if(x == 2){
+                vav.exhaustFan.none = 0;
+                vav.exhaustFan.onOff = 0;
+                vav.exhaustFan.buildingPressurization = 1;
+            }
+            x = document.getElementById('supplyAirCoolingSetpoint');
+            if(x.checked==true){
+                vav.supplyAirCoolingSetpoint.fixedWithPrioritySpaceTemperatureReset = 1;
+            }
+            x = document.getElementById('preHeating').selectedIndex;
+            if(x==0){
+                vav.preHeating.none = 1;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 0;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==1){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 1;
+                vav.preHeating.gasStage = 0;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==2){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 2;
+                vav.preHeating.gasStage = 0;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==3){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 3;
+                vav.preHeating.gasStage = 0;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==4){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 4;
+                vav.preHeating.gasStage = 0;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==5){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 5;
+                vav.preHeating.gasStage = 0;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==6){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 6;
+                vav.preHeating.gasStage = 0;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==7){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 1;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==8){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 2;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==9){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 2;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==10){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 3;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==11){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 4;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==12){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 5;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==13){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 6;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==14){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 0;
+                vav.preHeating.SCRElectric = 1;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==15){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 0;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 1;
+                vav.preHeating.stemFaceBypass = 0;
+            }else if(x ==16){
+                vav.preHeating.none = 0;
+                vav.preHeating.electricStaging = 0;
+                vav.preHeating.gasStage = 0;
+                vav.preHeating.SCRElectric = 0;
+                vav.preHeating.steamModulating = 0;
+                vav.preHeating.stemFaceBypass = 1;
+            }
+            x = document.getElementById('faceAndBypassDampers').selectedIndex;
+            if(x==0){
+                vav.faceBypassDampers.none = 1;
+                vav.faceBypassDampers.external = 0;
+                vav.faceBypassDampers.internal = 0;
+            }else if(x==1){
+                vav.faceBypassDampers.none = 0;
+                vav.faceBypassDampers.external = 1;
+                vav.faceBypassDampers.internal = 0;
+            }else if(x==2){
+                vav.faceBypassDampers.none = 0;
+                vav.faceBypassDampers.external = 0;
+                vav.faceBypassDampers.internal = 1;
+            }
+            x = document.getElementById('heating').selectedIndex;
+            if(x == 0){
+                vav.heating.none = 1;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 1){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 1;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 2){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 2;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 3){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 3;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 4){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 4;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 5){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 5;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 6){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 6;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 7){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 1;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 8){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 2;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 9){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 3;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 10){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 4;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 11){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 5;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 12){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 6;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 13){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 1;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 14){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating =1;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 15){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass =1;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 16){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 1;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 17){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 1;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 18){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 1;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 19){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 1;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 20){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 1;
+                vav.heating.steamIntegralFaceAndBypass = 0;
+            }else if(x == 21){
+                vav.heating.none = 0;
+                vav.heating.electricStaging = 0;
+                vav.heating.gasStage = 0;
+                vav.heating.SCRElectric = 0;
+                vav.heating.hotWaterModulating = 0;
+                vav.heating.hotWaterExternalAndFaceBypass = 0;
+                vav.heating.hotWaterInternalAndFaceBypass = 0;
+                vav.heating.hotWaterIntegralFaceAndBypass = 0;
+                vav.heating.steamModulating = 0;
+                vav.heating.steamExternalFaceBypass = 0;
+                vav.heating.steamInternalFaceAndBypass = 0;
+                vav.heating.steamIntegralFaceAndBypass = 1;
+            }
+            x = document.getElementById('cooling').selectedIndex;
+            if(x == 0){
+                vav.cooling.none = 1;
+                vav.cooling.dxCooling = 0;
+                vav.cooling.chilledWaterModulating = 0;
+                vav.cooling.chilledWaterModulatingCoilDeltaT = 0;
+                vav.cooling.chilledWaterExternalFaceBypass = 0;
+                vav.cooling.chilledWaterInternalFaceBypass = 0;
+            }else if(x == 1){
+                vav.cooling.none = 0;
+                vav.cooling.dxCooling = 1;
+                vav.cooling.chilledWaterModulating = 0;
+                vav.cooling.chilledWaterModulatingCoilDeltaT = 0;
+                vav.cooling.chilledWaterExternalFaceBypass = 0;
+                vav.cooling.chilledWaterInternalFaceBypass = 0;
+            }else if(x == 2){
+                vav.cooling.none = 0;
+                vav.cooling.dxCooling = 0;
+                vav.cooling.chilledWaterModulating = 1;
+                vav.cooling.chilledWaterModulatingCoilDeltaT = 0;
+                vav.cooling.chilledWaterExternalFaceBypass = 0;
+                vav.cooling.chilledWaterInternalFaceBypass = 0;
+            }else if(x == 3){
+                vav.cooling.none = 0;
+                vav.cooling.dxCooling = 0;
+                vav.cooling.chilledWaterModulating = 0;
+                vav.cooling.chilledWaterModulatingCoilDeltaT = 1;
+                vav.cooling.chilledWaterExternalFaceBypass = 0;
+                vav.cooling.chilledWaterInternalFaceBypass = 0;
+            }else if(x == 4){
+                vav.cooling.none = 0;
+                vav.cooling.dxCooling = 0;
+                vav.cooling.chilledWaterModulating = 0;
+                vav.cooling.chilledWaterModulatingCoilDeltaT = 0;
+                vav.cooling.chilledWaterExternalFaceBypass = 1;
+                vav.cooling.chilledWaterInternalFaceBypass = 0;
+            }else if(x == 5){
+                vav.cooling.none = 0;
+                vav.cooling.dxCooling = 1;
+                vav.cooling.chilledWaterModulating = 0;
+                vav.cooling.chilledWaterModulatingCoilDeltaT = 0;
+                vav.cooling.chilledWaterExternalFaceBypass = 0;
+                vav.cooling.chilledWaterInternalFaceBypass = 1;
+            }
+            x = document.getElementById('mixedAirDamper').selectedIndex;
+            if(x==0){
+                vav.mixedAirDamper.none = 1;
+                vav.mixedAirDamper.economizerOAEnthalpySwitch = 0;
+                vav.mixedAirDamper.economizerOAEnthalpySensor = 0;
+                vav.mixedAirDamper.economizerOADifferentialEnthalpy = 0;
+                vav.mixedAirDamper.economizerOADryBulb = 0;
+            }else if(x == 1){
+                vav.mixedAirDamper.none = 0;
+                vav.mixedAirDamper.economizerOAEnthalpySwitch = 1;
+                vav.mixedAirDamper.economizerOAEnthalpySensor = 0;
+                vav.mixedAirDamper.economizerOADifferentialEnthalpy = 0;
+                vav.mixedAirDamper.economizerOADryBulb = 0;
+            }else if(x == 2){
+                vav.mixedAirDamper.none = 0;
+                vav.mixedAirDamper.economizerOAEnthalpySwitch = 0;
+                vav.mixedAirDamper.economizerOAEnthalpySensor = 1;
+                vav.mixedAirDamper.economizerOADifferentialEnthalpy = 0;
+                vav.mixedAirDamper.economizerOADryBulb = 0;
+            }else if(x == 3){
+                vav.mixedAirDamper.none = 0;
+                vav.mixedAirDamper.economizerOAEnthalpySwitch = 0;
+                vav.mixedAirDamper.economizerOAEnthalpySensor = 0;
+                vav.mixedAirDamper.economizerOADifferentialEnthalpy = 1;
+                vav.mixedAirDamper.economizerOADryBulb = 0;
+            }else if(x == 4){
+                vav.mixedAirDamper.none = 0;
+                vav.mixedAirDamper.economizerOAEnthalpySwitch = 0;
+                vav.mixedAirDamper.economizerOAEnthalpySensor = 0;
+                vav.mixedAirDamper.economizerOADifferentialEnthalpy = 0;
+                vav.mixedAirDamper.economizerOADryBulb = 1;
+            }
+            x = document.getElementById('minOutsideAir').selectedIndex;
+            if(x == 0){
+                vav.minOutsideAir.none = 1;
+                vav.minOutsideAir.differentialCO2 = 0;
+                vav.minOutsideAir.spaceCO2 = 0;
+                vav.minOutsideAir.oADamperFlowStation = 0;
+            }else if(x == 1){
+                vav.minOutsideAir.none = 0;
+                vav.minOutsideAir.differentialCO2 = 1;
+                vav.minOutsideAir.spaceCO2 = 0;
+                vav.minOutsideAir.oADamperFlowStation = 0;
+            }else if(x == 2){
+                vav.minOutsideAir.none = 0;
+                vav.minOutsideAir.differentialCO2 = 0;
+                vav.minOutsideAir.spaceCO2 = 1;
+                vav.minOutsideAir.oADamperFlowStation = 0;
+            }else if(x == 3){
+                vav.minOutsideAir.none = 0;
+                vav.minOutsideAir.differentialCO2 = 0;
+                vav.minOutsideAir.spaceCO2 = 0;
+                vav.minOutsideAir.oADamperFlowStation = 1;
+            }
+            x = document.getElementById('humidityOptions');
+            if(x.checked == true){
+                vav.humidityOptions.indoorRelativeHumidySensor = 1;
+            }
+            x = document.getElementById('dehumidification');
+            if(x.checked == true){
+                vav.humidityOptions.dehumidification = 1;
+            }
+            x = document.getElementById('humidifier').selectedIndex;
+            if(x == 0){
+                vav.humidifier.none = 1;
+                vav.humidifier.ss = 0;
+                vav.humidifier.sSAndModulation = 0;
+            }else if(x == 1){
+                vav.humidifier.none = 0;
+                vav.humidifier.ss = 1;
+                vav.humidifier.sSAndModulation = 0;
+            }else if(x == 2){
+                vav.humidifier.none = 0;
+                vav.humidifier.ss = 0;
+                vav.humidifier.sSAndModulation = 1;
+            }
+            x = document.getElementById('RARH');
+            if(x.checked == true){
+                vav.RARH = true;
+            }
+            x = document.getElementById("OARH");
+            if(x.checked==true){
+                vav.OARH = true;
+            }
+            x = document.getElementById("RACO2");
+            if(x.checked==true){
+                vav.RACO2 = true;
+            }
+            x = document.getElementById('OACO2');
+            if(x.checked==true){
+                vav.OACO2 = true;
+            }
+            x = document.getElementById('filterOneMonitoring').selectedIndex;
+            if(x == 0){
+                vav.filterOneMonitoring.none = 1;
+                vav.filterOneMonitoring.hours = 0;
+                vav.filterOneMonitoring.status = 0;
+                vav.filterOneMonitoring.differentialPressure = 0;
+            }else if(x == 1){
+                vav.filterOneMonitoring.none = 0;
+                vav.filterOneMonitoring.hours = 1;
+                vav.filterOneMonitoring.status = 0;
+                vav.filterOneMonitoring.differentialPressure = 0;
+            }else if(x == 2){
+                vav.filterOneMonitoring.none = 0;
+                vav.filterOneMonitoring.hours = 0;
+                vav.filterOneMonitoring.status = 1;
+                vav.filterOneMonitoring.differentialPressure = 0;
+            }else if(x == 3){
+                vav.filterOneMonitoring.none = 0;
+                vav.filterOneMonitoring.hours = 0;
+                vav.filterOneMonitoring.status = 0;
+                vav.filterOneMonitoring.differentialPressure = 1;
+            }
+            x = document.getElementById('filterTwoMonitoring').selectedIndex;
+            if(x== 0){
+                vav.filterTwoMonitoring.none = 1;
+                vav.filterTwoMonitoring.hours = 0;
+                vav.filterTwoMonitoring.status = 0;
+                vav.filterTwoMonitoring.differentialPressure = 0;
+            }else if(x== 1){
+                vav.filterTwoMonitoring.none = 0;
+                vav.filterTwoMonitoring.hours = 1;
+                vav.filterTwoMonitoring.status = 0;
+                vav.filterTwoMonitoring.differentialPressure = 0;
+            }else if(x== 2){
+                vav.filterTwoMonitoring.none = 0;
+                vav.filterTwoMonitoring.hours = 0;
+                vav.filterTwoMonitoring.status = 1;
+                vav.filterTwoMonitoring.differentialPressure = 0;
+            }else if(x== 3){
+                vav.points.filterTwoMonitoring.none = 0;
+                vav.filterTwoMonitoring.hours = 0;
+                vav.filterTwoMonitoring.status =0;
+                vav.filterTwoMonitoring.differentialPressure = 1;
+            }
+            console.log(JSON.stringify(vav));
+            localStorage.setItem('ahu',JSON.stringify(vav));
+            //getSelectValue('remoteOccupancy');
+        },'json');
+       
+    }
+
+    function getSelectValue(ele){
+
+        var x = $('#remoteOccupancy').selectedIndex;
+        console.log(ele); 
+        console.log('entered function');   
+    }
+</script>
+
+</html>

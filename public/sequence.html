@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HVAC Builder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-top">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav inline">
+                <li class="nav-item active inline">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item inline">
+                    <a class="nav-link" href="/points">Points</a>
+                </li>
+                <li class="nav-item inline">
+                    <a class="nav-link" href="/sequence">Sequence</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id='sequence'>
+        
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+        var ahu = JSON.parse(localStorage.getItem('ahu'));
+   
+        if (ahu == undefined) {
+                console.log("No Air Handler Built!!");
+        } else {
+            var topNode = document.getElementById('sequence');
+            var ele;
+            for(ele in ahu){
+                var val = ahu[ele];
+                var ele2;
+                for(ele2 in val){
+                    var point = val[ele2];
+                    if((point.isUsed == true )&& (point.sequence != undefined)){
+                        var temp = point.sequence;
+                        
+                        var node = document.createElement('div');
+                        node.id = JSON.stringify(ele);
+                        topNode.appendChild(node);
+                        var textNode = document.createElement('p');
+                        textNode.innerHTML = temp;
+                        node.appendChild(textNode);
+                        console.log(JSON.stringify(ele));
+                        console.log(temp);
+                    }
+                }
+            }
+        }
+    });
+</script>
+</html>
