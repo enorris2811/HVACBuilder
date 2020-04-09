@@ -29,7 +29,7 @@ var runConditions =
             18: 'supplyFanInHand',
             19: 'supplyFanRuntimeExceeded'
         },
-        'sequence': '<strong>Run Conditions</strong>:<br> The unit will supply conditioned air to its designated zone or linked air terminals and operates a constant volume air unit.  The unit will run acccording to the following user selectable modes:<br> <ul>Off</ul><br><ul> Continuously</ul><br><ul> via BAS Command</ul><br><ul> as Locally Scheduled</ul><br><ul> via Link Schedule</ul><br>  <br><strong>Off Mode</strong>:<br> The unit will run and all dampers, valves and fans will remain in their off position.<br>  <br><strong>Continuously</strong>: <br>The unit will run continuously in the occupied mode.<br><br> <strong> via BAS Command</strong>:<br><br> The unit will be enabled and disabled via a Bacnet Binary Command, either from a remote source or locally through the software interface. Once enabled the unit will run continuously in the occupied mode. <br><br><strong> as Locally Scheduled</strong>:<br> The air handling unit will operate as a constant volume unit having setpoints that represent those of a single zone unit.  The unit will then run according to a user finable time schdule in the follow modes: <br> <strong>Occupied Mode:</strong><br><ul> the unit will maintain A <input type=\'text\' id=\'occHighSetpoint\'> degrees F space cooling setpoint. </ul><br><ul> A <input type=\'text\' id=\'occLowSetpoint\'> degrees F space heating set point.</ul> <br><ul>  Unoccupied Mode (night setback): The unit will maintain A <input type=\'text\' id=\'unOccHighSetpoint\'> degrees F space cooling setpoint. </ul><br><ul> A <input type=\'text\' id=\'unOccLowSetpoint\'> degress F space heating setpoint.</ul><br><br> <strong>via Linked Scheduled:</strong> the air handling unit will exchange information with the terminal units as follows: <br><br> <ul>Calculated information sent from the Air Handling Unit to the Terminal Units: <br> <ul>Current Mode of operation</ul><br><ul>Current supply air temperatur</ul><br><ul>Current outside Air Temperature</ul></ul><br><br><ul>Caluculated information representative of all terminal units sent from the terminal units to the air handling unit:<br><br><ul>Space Temperatur</ul><br><ul>Setpoints, both occupied and unoocupied</ul><br><ul>Maximum Damper Position</ul><br><ul>Indoor air quality</ul><br><ul>Space relative humidity (if present)</ul></ul><br><br> Based of the above information exchange, the air handling unit will determin which operation best meets the needs of teh terminal units. The air handling unit will then operate as a constant volume unit, but one having setpoints representative of its designated group of terminal units. The unit will then run according to a user definable time schedule in the following modes<br><br><ul>Occupied Mode: the unit will maintain<br><br><ul> A <input type=\'text\' id=\'occCoolingSetpoint\' default=\'74\'>degrees F space cooling setpoint<br></ul><ul>A <input type=\'text\' id=\'occHeatingSetpoint\' default=\'70\'>degrees F space heating setpoint </ul><br><br></ul><ul>Unoccupied Mode(night setback): The unit will maintain<br><br><ul>A <input type=\'text\'id=\'unOccCoolingSetpoint\'default=\'85\'>degrees F space cooling setpint</ul><br><ul>A <input type=\'text\'id=\'unOccHeatingSetpoint\'default=\'55\'>degrees F space heating setpoint</ul></ul><br><br><strong>Unit Optimal Start:</strong><br>The unit will use an optimal start algorithm for morning start up.  This algorithm will minimize the unoocupied warm up or cool down period while still achieving comfort conditions of scheduled occupied period.<br><br><strong>Alarms will be provided as follows</strong><br><ul>High Space Temp: If the zone temperature is greater than the cooling sepoint by a user definable amount.<br></ul><ul>Low Space Temp: If the zone temperature is less that the heating setpoint by a user definable amount.</ul><br><br><strong>Power up start Delay:</strong><br>There will be a 60 second delay in enabling the equipment on intial start up or after a power loss.<br><br><strong>Demand Limiting - Setpoint Optimization:</strong><br>To lower power consumption, the cooling and heating setpoints will automatically relax(offset up when cooling and down when heating) when the facility power consumption exceeds definable thresholds. The amount of relaxation will be user configurable. The setpoints will automatically return to their previous settings when the facility power consumption drops below the thresholds.<br><br><strong>Rnet wireless Gateway</strong>:<br>The Rnet Wireless Gateway is designed for use within the building interior.  The wireless signals can pass through a drop ceiling and up to two walls made of gypsum and steel studs with minimal degradation.<br><br>'
+        'sequence': '<strong>Run Conditions</strong>:<br> The unit will supply conditioned air to its designated zone or linked air terminals and operates a constant volume air unit.  The unit will run acccording to the following user selectable modes:<br> <ul><li>Off</li><li> Continuously</li><li> via BAS Command</li><li> as Locally Scheduled</li><li> via Link Schedule</li></ul><br> <br><strong>Off Mode</strong>:<br> The unit will run and all dampers, valves and fans will remain in their off position.<br>  <br><strong>Continuously</strong>: <br>The unit will run continuously in the occupied mode.<br><br> <strong> via BAS Command</strong>:<br><br> The unit will be enabled and disabled via a Bacnet Binary Command, either from a remote source or locally through the software interface. Once enabled the unit will run continuously in the occupied mode. <br><br><strong> as Locally Scheduled</strong>:<br> The air handling unit will operate as a constant volume unit having setpoints that represent those of a single zone unit.  The unit will then run according to a user finable time schdule in the follow modes: <br> <strong>Occupied Mode:</strong><br><ul><li> the unit will maintain A <input type=\'text\' id=\'occHighSetpoint\'> degrees F space cooling setpoint. </li><li> A <input type=\'text\' id=\'occLowSetpoint\'> degrees F space heating set point.</li><li>  Unoccupied Mode (night setback): The unit will maintain A <input type=\'text\' id=\'unOccHighSetpoint\'> degrees F space cooling setpoint. </li><li> A <input type=\'text\' id=\'unOccLowSetpoint\'> degress F space heating setpoint.</li></ul><br><br> <strong>via Linked Scheduled:</strong> the air handling unit will exchange information with the terminal units as follows: <br><br> <ul><li>Calculated information sent from the Air Handling Unit to the Terminal Units:</li> <li>Current Mode of operation</li><li>Current supply air temperatur</li><li>Current outside Air Temperature</li></ul><br><br>Caluculated information representative of all terminal units sent from the terminal units to the air handling unit:<br><br><ul><li>Space Temperatur</li><li>Setpoints, both occupied and unoocupied</li><li>Maximum Damper Position</li><li>Indoor air quality</li><li>Space relative humidity (if present)</li></ul><br><br> Based off the above information exchange, the air handling unit will determine which operation best meets the needs of the terminal units. The air handling unit will then operate as a constant volume unit, but one having setpoints representative of its designated group of terminal units. The unit will then run according to a user definable time schedule in the following modes<br><br>Occupied Mode: the unit will maintain<br><br><ul> <li>A <input type=\'text\' id=\'occCoolingSetpoint\' default=\'74\'>degrees F space cooling setpoint</li><li>A <input type=\'text\' id=\'occHeatingSetpoint\' default=\'70\'>degrees F space heating setpoint </li></ul><br><br>Unoccupied Mode(night setback): The unit will maintain<br><br><ul><li>A <input type=\'text\'id=\'unOccCoolingSetpoint\'default=\'85\'>degrees F space cooling setpint</li><li>A <input type=\'text\'id=\'unOccHeatingSetpoint\'default=\'55\'>degrees F space heating setpoint</li></ul><br><br><strong>Unit Optimal Start:</strong><br>The unit will use an optimal start algorithm for morning start up.  This algorithm will minimize the unoocupied warm up or cool down period while still achieving comfort conditions of scheduled occupied period.<br><br><strong>Alarms will be provided as follows</strong><br><ul><li>High Space Temp: If the zone temperature is greater than the cooling sepoint by a user definable amount.</li><li>Low Space Temp: If the zone temperature is less that the heating setpoint by a user definable amount.</li></ul><br><br><strong>Power up start Delay:</strong><br>There will be a 60 second delay in enabling the equipment on intial start up or after a power loss.<br><br><strong>Demand Limiting - Setpoint Optimization:</strong><br>To lower power consumption, the cooling and heating setpoints will automatically relax(offset up when cooling and down when heating) when the facility power consumption exceeds definable thresholds. The amount of relaxation will be user configurable. The setpoints will automatically return to their previous settings when the facility power consumption drops below the thresholds.<br><br><strong>Rnet wireless Gateway</strong>:<br>The Rnet Wireless Gateway is designed for use within the building interior.  The wireless signals can pass through a drop ceiling and up to two walls made of gypsum and steel studs with minimal degradation.<br><br>'
     },
     'WSSensorWithLinkage': {
         'isUsed': false,
@@ -83,19 +83,19 @@ var smokeControl = {
     'fireShutdown':
      { 'isUsed': false, 'points': { 0:'fireShutdown' },
      'sequence':'<strong>Fire Shutdown</strong>:<br> K1 closed(on), K2 closed(on)<br><br> The Unit will shut down and generate and alarm upon receiving a fire shutdown status.<br><br>' },
-    'Evacuation': 
+    'evacuation': 
     { 'isUsed': false, 'points': 
     {0:'smokeEvacuation',
     1:'smokeRelayK1',
     2:'smokeRelayK2'
  },
  'sequence':'<strong>Smoke Evacuation</strong>:<br>K1 Open(off), K2 Closed(on)<br><br>Upon receiving a smoke evacuation status signal the unit will:<br><br><ul>Shut down the supply fan</ul><ul>And start the return Fan</ul><ul>AND close the outdoor and return air dampers</ul><ul>AND open the exhaust air damper</ul><br><br> Alarm will be provided as follows:<br><ul>Smoke Evacuation Alarm: Unit smoke evacuation input is on and unit is in area smoke evacuation mode.<br><br>' },
-    'Pressurization': { 'isUsed': false, 'points': { 
+    'pressurization': { 'isUsed': false, 'points': { 
         0:'smokePressurization',
         1:'smokeRelayK1',
         2:'smokeRelayK2'
      },'sequence':'<strong>Smoke Pressurization</strong>:<br> K1 Closed(on), K2 Open(off)<br><br> Upon receiving a smoke pressurization status signal, the unit will:<br><br><ul>Start the supply fan</ul><ul>AND stop the return fan</ul><ul>AND open the outdoor air dampers</ul><ul>AND close the return and exhaust air damper</ul><br><br>Alarm will be provided as follows:<br><ul>Smoke Pressurization Alarm: Unit smoke pressurization input is on and unit is in area pressurization mode.<br><br>'},
-    'Purge': { 'isUsed': false, 'points': {
+    'purge': { 'isUsed': false, 'points': {
         0:'smokePurge',
         1:'smokeRelayK1',
         2:'smokeRelayK2'
@@ -124,7 +124,7 @@ var vfd = { 'isUsed': false,
 'sequence':'<strong>Single Zone VAV control</strong>:<br> The purpose of this algorithm is to reduce fan energy consumption in a single zone application by adjusting the fan speed to meet the cooling or heating capacity necessary to meet the space load requirements.  This algorithm is applicable to all types of heating and cooling except electric heat.<br><br>The algorithm monitors the supply air temperature of the unit and will adjust the fan speed appropriately to maintain the desired cooling SAT setpoint in cooling mode or the desired heating SAT setpoint in heating mode. When no heating or cooling is active, the fan will operate at a user configurable minimum fan speed to save energy while maintaining proper ventilation.  When cooling or heating becomes active, the algorithm will increase the fan speed as necessary to main teh appropriate SAT setpoint.<br><br> To maintain proper ventilation rates, the economizer minimum position will also be modulated in order to maintain constant ventilation over the entire operating range of the fan.  A second low speed economizer minimum position will be added and used when the fan is operating at its lowest fan speed.  The existing economizer minimum position will be used when the fan operates at its highest operating speed. A calulation will be preformed to compute the exact minimum economizer position to be used at any fan speed between minimum and maximum.<br><br> A fan speed override will be provided to prevent cold air dumping during conditions when the unit is operating in a fan only mode and the OAT is very cold, causing the SAT to fall below the ventilation SAT setpoint (due to a large percentage of OA being introduced at low fan speeds). The fan speed will increase as required up to the maximum fan speed in order to maintain the SAT at the ventilation SAT setpoint any time heating or cooling is inactive.<br><br> In the cases of the above, when these heat types are active, the fan will override the vairable speed function and operate at the maximum fan speed.<br><br>'  };
 
 var returnFan = {
-    'none': { 'isUsed': false, 'points': { },'sequence':''  }
+    'none': { 'isUsed': true, 'points': { },'sequence':''  }
     , 'onOff': { 'isUsed': false, 'points': {
         0:'returnFanStatus',
         1:'returnFanSS',
@@ -145,7 +145,7 @@ var exhaustFan = {
 };
 
 var preHeating = {
-    'none': { 'isUsed': false, 'points': {  }  },
+    'none': { 'isUsed': true, 'points': {  }  },
     'electricStaging': { 'isUsed': false, 'points': { 
         0:'preheatDischargeAirTemperature',
         1:'preheaingOutput',
@@ -194,7 +194,7 @@ var preHeating = {
 };
 
 var heating = {
-    'none':{'isUsed':false, 'points':{}},
+    'none':{'isUsed':true, 'points':{}},
     'electricStaging': { 'isUsed': false, 'points': { 
         0:'heatingStage',
         'stages':null
@@ -241,7 +241,7 @@ var heating = {
 };
 
 var cooling = {
-    'none': { 'isUsed': false },
+    'none': { 'isUsed': true },
     'dXCooling': { 'isUsed': false, 'points': { 
         0:'compressorStage',
         1:'compressorRunTimeExceeded',
@@ -264,7 +264,7 @@ var cooling = {
 };
 
 var mixedAirDamper = {
-    'none':{'isUsed':false },
+    'none':{'isUsed':true },
     'economizerOAEnthalpySwitch': { 'isUsed': false, 'points': {
         0:'mixedAirTemperature',
         1:'mixedAirDampers',
@@ -298,7 +298,7 @@ var mixedAirDamper = {
 };
 
 var minOutsideAir = {
-    'none': { 'isUsed': false },
+    'none': { 'isUsed': true },
     'differentialCO2': { 'isUsed': false, 'points': {
         0:'outsideAirCO2Concentration',
         1:'returnAirCO2Concentration',
@@ -321,7 +321,7 @@ var humidityControl = { 'dehumidification':{'isUsed': false, 'points': {
     } ,'sequence':'<strong>Dehumidification:</strong><br><strong>When Heat is NOT operating:</strong> Dehumidification will be enabled whenever the supply fan is on and the temperature is greater than the heating setpoint.  The controller will measure the return air or space humidity and calculate a cooling coil output to maintain the humitity at or below <input type=\'number\' id=\'relativeHumiditySetpoint\' relative humidity.  The dehumidification output is compared to the temperature control based cooling coil output, with the greater being sent to the valve.  Once enabled, dehumidification will disable when the temperature is less than the heating setpoint minus 2 degress.<br><br><strong>When Heat is operating:<strong>Dehumidification will be enabled whenever the supply fan status is on and the temperature is greater than the heating setpoint + 1. The controller will measure the return air or space humiditiy and calculate a cooling coil output to maintain the humidity at or below <input type=\'number\' id=\'relativeHumiditySetpoint2\'> relative humidity.  The dehumidificaiton output is compared to the temperature control based cooling coil output, with the greater being sent to the valve.  Once enabled, dehumidification will disable when the temperature is less than the heating setpoint.<br><br>' }};
 
 var humidifier = {
-    'none': { 'isUsed': false  },
+    'none': { 'isUsed': true  },
     'SS': { 'isUsed': false, 'points': { 
          0:'spaceRelativeHumidity',
          1:'highDuctRelativeHumidity',
@@ -354,8 +354,8 @@ var OARH = { 'isUsed': false, 'points': {
     1:'outdoorAirRelativeHumidityValue'
 } ,'sequence':'<strong>Outside Air Relative Humidity(OARH):<strong><br>The controller will measure outside air relative humidity percentage levels.<br><br>' };
 
-var faceBypassDampers = {
-    'none': { 'isUsed': false },
+var faceAndBypassDampers = {
+    'none': { 'isUsed': true },
     'external': { 'isUsed': false, 'points': { 
         0:'faceAndBypassDamper'    
     },'sequence':'<strong>Face and Bypass Dampers Control:</strong><br>The unit will maintain space heating and cooling setpoints (if equipped with associated heating and cooling coils) by modulating the face and bypass dampers through one of the following:<br><br>Cooling:<br><ul>When the space temperature is greater than the cooling setpoint, the face and bypass dampers will modulate open to face position (closed to bypass position) to maintain supply air temperature setpoint by modulating the air passing over the cooling coil (if present).  The supply air temperature setpoint will be reset downwards as the space temperature rises above its cooling setpoint.</ul><br><ul>When the space temperature is less than the cooling setpoint, the face and bypass dampers will close to face position (open to bypass position).</ul><br><br>Heating:<br><ul>When the space temperature is less than the heating setpoint, the face and bypass dampers will modulate open to face position (closed to bypass position) to maintain supply air temperature setpoint by modulating the air passing over the heating coil (if present). The supply air temperature setpoint will be reset upwards as the space temperature drops below its heating setpoint.</ul><br><ul>When the space temperature is greater than the ehating setpoint, the face and bypass dampers will close to face position (open to bypass position).</ul><br><br>'  },
@@ -365,14 +365,14 @@ var faceBypassDampers = {
 };
 
 var filterOneMonitoring = {
-    'none': { 'isUsed': false},
+    'none': { 'isUsed': true},
     'hours': { 'isUsed': false, 'points': { 0: 'schedule' ,'sequence':'<strong>Filter One Hours:</strong><br>The controller will monitor the fan runtime.<br><br>Alarms will be provided as follows:<br><ul>Filter One change required: Filter 1 has been in use for more than <input type=\'number\' id=\'filter1hoursSetpoint\'> hours.</ul><br><br>' } },
     'status': { 'isUsed': false, 'points': { 0: 'filter1Status' },'sequence':'<strong>Filter One Status:</strong>the controller will monitor filter 1 status.<br><br>Alarms will be provided as follows:<br><ul>Filter 1 change required: Filter1 differential pressure exceeds a user definable limit.<br><br>'  },
     'differentialPressure': { 'isUsed': false, 'points': { 0: 'filter1DifferentialPressure' },'sequence':'<strong>Filter One Differential Pressure:</strong><br>The controller will monitor Filter 1 differential pressure in H2O.<br><br>Gain used to smooth the filter differential pressure input reading is <input type=\'number\' id=\'filter1DiffPress\'>, where 1 = no smoothing and 10 = maximum smoothing.<br><br>Alarms will be provided as follows:<br><ul>Filter One change required: Filter One differential pressure exceeds a user definable limit <input type=\'number\' id=\'filter1DiffPressLimit\'> in H2O.<br><br>'  }
 };
 
 var filterTwoMonitoring = {
-    'none': { 'isUsed': false},
+    'none': { 'isUsed': true},
     'hours': { 'isUsed': false, 'points': { 0: 'schedule' },'sequence':'<strong>Filter Two Hours:</strong><br>The controller will monitor the fan runtime.<br><br>Alarms will be provided as follows:<br><ul>Filter two change required: Filter 2 has been in use for more than <input type=\'number\' id=\'filter2hoursSetpoint\'> hours.</ul><br><br>'  },
     'status': { 'isUsed': false, 'points': { 0: 'filter2Status' } ,'sequence':'<strong>Filter two Status:</strong>the controller will monitor filter 2 status.<br><br>Alarms will be provided as follows:<br><ul>Filter 2 change required: Filter 2 differential pressure exceeds a user definable limit.<br><br>' },
     'differentialPressure': { 'isUsed': false, 'points': { 0: 'filter2DifferentialPressure' },'sequence':'<strong>Filter Two Differential Pressure:</strong><br>The controller will monitor Filter 2 differential pressure in H2O.<br><br>Gain used to smooth the filter differential pressure input reading is <input type=\'number\' id=\'filter2DiffPress\'>, where 1 = no smoothing and 10 = maximum smoothing.<br><br>Alarms will be provided as follows:<br><ul>Filter Two change required: Filter Two differential pressure exceeds a user definable limit <input type=\'number\' id=\'filter2DiffPressLimit\'> in H2O.<br><br>'}
@@ -391,7 +391,7 @@ var constantVolume =
     returnFan,
     exhaustFan,
     preHeating,
-    faceBypassDampers,
+    faceAndBypassDampers,
     heating,
     cooling,
     mixedAirDamper,
