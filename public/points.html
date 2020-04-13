@@ -3,85 +3,151 @@
 
 <head>
     <title>HVAC Builder</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-top">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav inline">
-                <li class="nav-item active inline">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item inline">
-                    <a class="nav-link" href="/points">Points</a>
-                </li>
-                <li class="nav-item inline">
-                    <a class="nav-link" href="/sequence">Sequence</a></li>
-            </ul>
+
+    <div id='nav' class="w3-top">
+        <div class="w3-bar">
+
+            <a class="w3-bar-item w3-button" href="/">Home</a>
+
+            <a class='w3-bar-item w3-button' href='/options'>options</a>
+
+            <a class="w3-bar-item w3-button" href="/points">Points</a>
+
+            <a class="w3-bar-item w3-button" href="/sequence">Sequence</a></li>
+
         </div>
+    </div>
     </nav>
     <h1>Points List</h1>
-    <div id='ahuTable'>
-        <tr id='tableHeader'>
-            <th>
-                Point Name
-            </th>
-            <th>
-                Analog Input
-            </th>
-            <th>
-                Analog Output
-            </th>
-            <th>
-                Binary Input
-            </th>
-            <th>
-                Binary Output
-            </th>
-            <th>
-                Analog Value
-            </th>
-            <th>
-                Binary Value
-            </th>
-            <th>
-                Loop
-            </th>
-            <th>
-                Schedule
-            </th>
-            <th>
-                Trend
-            </th>
-            <th>
-                Alarm
-            </th>
-            <th>
-                Show on Graphic
-            </th>
-        </tr>
+    <div id='selectAHUDiv'>
+        <form id='selectAHUForm'>
+            <label>Select an AHU unit in the Project</label>
+            <select id='selectAHU'>
+                <option>select...</option>
+            </select>
+
+        </form>
+        <br><br>
+    </div>
+    <div>
+        <table id='ahuTable' calss='w3-table w3-hoverable w3-striped w3-bordered'>
+            <div class='tableHeader'>
+                <tr id='tableHeader' class='rowHeader'>
+                    <th>
+                        Point Name
+                    </th>
+                    <th>
+                        Analog Input
+                    </th>
+                    <th>
+                        Analog Output
+                    </th>
+                    <th>
+                        Binary Input
+                    </th>
+                    <th>
+                        Binary Output
+                    </th>
+                    <th>
+                        Analog Value
+                    </th>
+                    <th>
+                        Binary Value
+                    </th>
+                    <th>
+                        Loop
+                    </th>
+                    <th>
+                        Schedule
+                    </th>
+                    <th>
+                        Trend
+                    </th>
+                    <th>
+                        Alarm
+                    </th>
+                    <th>
+                        Show on Graphic
+                    </th>
+                </tr>
+            </div>
+
+        </table>
     </div>
 </body>
 
 <script>
     $(document).ready(function () {
+        var project = JSON.parse(localStorage.getItem('project'));
+        var url = document.URL;
+        var n = url.lastIndexOf('/');
+        var ahuType = url.substring((n+1),url.length);
+        console.log(ahuType);
+        if(ahuType  != 'points'){
+            var  temp = document.getElementById('selectAHU').options;
+            if(temp.length>0){
+                for( x = 0;x<temp.length;x++){
+                    if(temp[x].value == ahuType){
+                         populateTable(x);
+                    }
+                }
+            }
+        }
+        if (project != undefined) {
+            var x;
+            for (x in project.units) {
+                if (project.units[x] != null) {
+                    var option = document.createElement('option');
+                    var parentNode = document.getElementById('selectAHU');
+                    parentNode.appendChild(option);
+                    option.textContent = project.units[x].name;
+                    option.value = project.units[x].name;
+                }
+            }
+
+        }
+    })
+    document.getElementById('selectAHU').onchange = function () {
+        removeNodes();
+        populateTable(this.selectedIndex - 1);
+        //removeNodes();
+    }
+    function removeNodes() {
+        var nodeTop = document.getElementById('ahuTable');
+        console.log(nodeTop);
+        console.log(nodeTop.hasChildNodes());
+        var x = nodeTop.childElementCount;
+        while (x > 1) {
+            console.log(bottomNode);
+            var bottomNode = nodeTop.lastChild;
+            bottomNode.remove();
+            console.log('hello hello hello');
+            x = nodeTop.childElementCount;
+        }
+        console.log('all nodes removed');
+    }
+
+    function populateTable(a) {
         $.get('/pointsModel', function (data, status) {
-            var ahu = JSON.parse(localStorage.getItem('ahu'));
+            var project = JSON.parse(localStorage.getItem('project'));
             var points = data.points;
+            var ahu = project.units[a].points;
             var hardPoint = points.hardware;
             var softPoint = points.software;
-            console.log(JSON.stringify(hardPoint));
-            console.log(JSON.stringify(softPoint));
+            // console.log(JSON.stringify(hardPoint));
+            //console.log(JSON.stringify(softPoint));
             //localStorage.clear();
             if (ahu == undefined) {
                 console.log("No Air Handler Built!!");
             } else {
                 //console.log(JSON.stringify(ahu));
-                console.log(ahu);
+                //console.log(ahu);
 
 
                 var ele;
@@ -89,22 +155,22 @@
                 for (ele in ahu) {
 
 
-                    console.log(ahu.hasOwnProperty(ele));
-                    console.log(JSON.stringify(ele));
+                    // console.log(ahu.hasOwnProperty(ele));
+                    //console.log(JSON.stringify(ele));
                     var val = ahu[ele];
-                    console.log(val);
+                    //console.log(val);
 
 
 
                     var pointName = JSON.stringify(ele);
                     var i;
                     for (i in val) {
-                        console.log(JSON.stringify(i));
+                        //console.log(JSON.stringify(i));
                         var x = val[i];
                         if (i != 'none') {
                             //console.log(JSON.stringify(x));
                             if (x.isUsed == true) {
-                                console.log('RIGHT HERE!!!');
+                                // console.log('RIGHT HERE!!!');
                                 var q = x.points;
                                 var z;
 
@@ -113,7 +179,7 @@
                                     b++;
                                     var tableTop = document.getElementById('ahuTable');
                                     var tableRow = document.createElement("tr");
-                                    tableRow.id = 'tableRow' + b;
+                                    tableRow.class = 'tableRow';
                                     //console.log(tableRow.id);
                                     tableTop.appendChild(tableRow);
                                     var pointName = q[z];
@@ -123,16 +189,16 @@
                                         var wy = temp;
                                         //console.log(wx);
                                         if (pointName == wy) {
-                                            console.log("ANd AGAIN RIGHT HERE!!!");
+                                            //console.log("ANd AGAIN RIGHT HERE!!!");
                                             if (wx.isUsed == false) {
                                                 wx.isUsed == true;
                                                 for (a = 0; a < 12; a++) {
                                                     var tableColumn = document.createElement('td');
-                                                    tableColumn.id = "tableColumn" + (a + 1);
+                                                    tableColumn.class = "tableCell";
                                                     var textNode = document.createTextNode('0');
                                                     tableColumn.appendChild(textNode);
                                                     tableRow.appendChild(tableColumn);
-                                                    console.log(a);
+                                                    // console.log(a);
                                                     switch (a) {
                                                         case (0):
                                                             textNode.textContent = JSON.stringify(pointName);
@@ -186,12 +252,12 @@
                                         var wy = temp2;
                                         //console.log(wx);
                                         if (pointName == wy) {
-                                            console.log("ANd AGAIN RIGHT HERE!!!");
+                                            // console.log("ANd AGAIN RIGHT HERE!!!");
                                             if (wx.isUsed == false) {
                                                 wx.isUsed == true;
                                                 for (a = 0; a < 12; a++) {
                                                     var tableColumn = document.createElement('td');
-                                                    tableColumn.id = "tableColumn" + (a + 1);
+                                                    tableColumn.class = "tableCell";
                                                     var textNode = document.createTextNode("0");
                                                     tableColumn.appendChild(textNode);
                                                     tableRow.appendChild(tableColumn);
@@ -200,7 +266,7 @@
                                                             textNode.textContent = JSON.stringify(pointName);
                                                             break;
                                                         case (1):
-                                                            console.log(wx);
+                                                            //   console.log(wx);
                                                             textNode.textContent = wx.points.AI;
                                                             break;
                                                         case (2):
@@ -256,7 +322,7 @@
                 }
             }
         });
-    });
+    }
 </script>
 
 </html>

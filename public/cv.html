@@ -3,165 +3,219 @@
 
 <head>
     <title>Constant Volume</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-top">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav inline">
-                <li class="nav-item active inline"> <a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item inline"><a class="nav-link" href="/points">Points</a></li>
-                <li class="nav-item inline"><a class="nav-link" href="/sequence">Sequence</a></li>
-            </ul>
+    <div id='nav' class="w3-top">
+        <div class="w3-bar">
+
+            <a class="w3-bar-item w3-button" href="/">Home</a>
+
+            <a class='w3-bar-item w3-button' href='/options'>options</a>
+            <a class="w3-bar-item w3-button" href="/points">Points</a>
+
+            <a class="w3-bar-item w3-button" href="/sequence">Sequence</a></li>
+
         </div>
-    </nav>
+    </div>
+
+    <h1>Constant Volume</h1>
+    <div id='selectAHUDiv'>
+        <form id='selectAHUForm'>
+            <label>Select an AHU unit in the Project</label>
+            <select id='selectAHU'>
+                <option>select...</option>
+            </select>
+            <button id='ahuButton' type='button'>Select Unit Options</button>
+        </form>
+        <br><br>
+    </div>
+    <form><label for="runCond">Run Conditions</label>
+        <select class="runConditons" id="runConditions" name="runCond">
+            <option value="ZSSensorWithLinkage">ZS Sensor with Linkage</option>
+            <option value="WSSensorWithLinkage">WS Sensor with Linkage</option>
+        </select>
+        <br><br>
+        <label for="safties">Safeties</label>
+        <input id="freezeProtection" type="checkbox" value="1">Freeze Protection
+        <input id="returnAirSmokeDetector" type="checkbox" value="1">Return Air Smoke Detector
+        <input id="supplyAirSmokeDetector" type="checkbox" value="1">Supply Air Smoke Detector
+        <br><br>
+        <label for="SmokeControl">Smoke Control</label>
+        <input id="fireShutdown" type="checkbox" value="1">Fire Shutdown
+        <input id="evacuation" type="checkbox" value="1">Evacuation
+        <input id="pressurization" type="checkbox" value="1">Pressurization
+        <input id="purge" type="checkbox" name="Purge" value="1">Purge
+        <br><br>
+        <label for="OAT">Outdoor Air Temperature</label>
+        <select id="outdoorAirTemp" name="OAT">
+            <option value="physicalInput">Physical Input</option>
+            <option value="networkInput">Network Input</option>
+        </select><br><br>
+        <label for="SF">Supply Fan</label>
+        <select id="supplyFan" name="SF">
+            <option value="blowThrough">Blow Through -- On - Off</option>
+            <option value="drawThrough">Draw Through -- On - Off</option>
+        </select>
+        <br><br>
+        <label for="VFD">VFD</label>
+        <input id="vfd" type="checkbox" value="1">Single Zone VFD<br><br>
+        <label for="ReturnFan">Return Fan</label>
+        <select id="returnFan" name="RF">
+            <option value="none">None</option>
+            <option value="onOff">On - Off</option>
+        </select><br><br>
+        <label for="EF">Exhaust Fan</label>
+        <select id="exhaustFan" name="EF">
+            <option value="none">None</option>
+            <option value="onOff">On - Off</option>
+        </select><br><br>
+        <label for="Preheating">Preheating</label>
+        <select id="preHeating" name="Preheating">
+            <option value="none">None</option>
+            <option value="electricStaging">Electric Staging</option>
+            <option value="SCRElectric">SCR Electric</option>
+            <option value="hotWaterModulating">Hot Water: Modulating</option>
+            <option value="hotWaterModulationCoilDeltaT">Hot Water: Modulating Coil Delta T</option>
+            <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass</option>
+            <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass</option>
+        </select><br><br>
+        <label for="FaceBypassD">Face and Bypass Dampers</label>
+        <select id="faceAndBypassDampers" name="FaceBypassD">
+            <option value="none">None</option>
+            <option value="external">External Bypass</option>
+            <option value="internal">Internal Bypass</option>
+        </select><br><br>
+        <label for="Heating">Heating</label>
+        <select name="Heating" id="heating">
+            <option value="none">None</option>
+            <option value="electricStaging1">Electric Staging 1</option>
+            <option value="electricStaging2">Electric Staging 2</option>
+            <option value="electricStaging3">Electric Staging 3</option>
+            <option value="electricStaging4">Electric Staging 4</option>
+            <option value="electricStaging5">Electric Staging 5</option>
+            <option value="electricStaging6">Electric Staging 6</option>
+            <option value="gasStaging1">Gas Staging 1</option>
+            <option value="gasStaging2">Gas Staging 2</option>
+            <option value="gasStaging3">Gas Staging 3</option>
+            <option value="gasStaging4">Gas Staging 4</option>
+            <option value="gasStaging5">Gas Staging 5</option>
+            <option value="gasStaging6">Gas Staging 6</option>
+            <option value="SCRElectric">SCR Electric</option>
+            <option value="hotWaterModulating">Hot Water: Modulating</option>
+            <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass</option>
+            <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass</option>
+            <option value="hotWaterIntegralFaceAndBypass">Hot Water: Integral Face and Bypass</option>
+            <option value="steamModulating">Steam: Modulating</option>
+            <option value="steamExternalFaceBypass">Steam: External Face and Bypass</option>
+            <option value="steamInternalFaceAndBypass">Steam: Internal Face and Bypass</option>
+            <option value="steamIntegralFaceAndBypass">Steam: Integral Face and Bypass</option>
+        </select>
+        <br><br>
+        <label for="Cooling">Cooling</label>
+        <select id="cooling" name="Cooling">
+            <option value="none">None</option>
+            <option value="dXCooling">Dx Cooling</option>
+            <option value="chilledWaterModulating">Chilled Water: Modulating</option>
+            <option value="chilledWaterModulatingCoilDeltaT">Chilled Water: Modulating Coil Delta T</option>
+            <option value="chilledWaterExternalFaceBypass">Chilled Water: External Face and Bypass</option>
+            <option value="chilledWaterInternalFaceBypass">Chilled Water: Internal Face and Bypass</option>
+        </select>
+        <br><br>
+        <label for="MAD">Mixed Air Dampers</label>
+        <select id="mixedAirDamper" name="MAD">
+            <option value="none">None</option>
+            <option value="economizerOAEnthalpySwitch">Economizer: OA Enthalpy Switch</option>
+            <option value="economizerOAEnthalpySensor">Economizer: OA Enthalpy Sensor</option>
+            <option value="economizerOADifferentialEnthalpy">Economizer: OA Differential Enthalpy</option>
+            <option value="economizerOADryBulb">Economizer: OA Dry Bulb</option>
+        </select>
+        <br><br>
+        <label for="mOA">Minimum Outside Air</label>
+        <select id="minOutsideAir" name="mOA">
+            <option value="none">None</option>
+            <option value="differentialCO2">Differential CO2</option>
+            <option value="returnSpaceCO2">Return/Space CO2</option>
+        </select>
+        <br><br>
+        <label for="humidityControl">Humiditiy Control</label>
+        <input id="humidityControl" type="checkbox" name="humdidtyControl">Dehumidification
+        <br><br>
+        <label for="humidifier">Humidifier</label>
+        <select id="humidifier" name="humidifier">
+            <option value="none">None</option>
+            <option value="SS">Humidifier SS</option>
+            <option value="sSAndModulation">Humidifier SS and Modulation</option>
+        </select>
+        <br><br>
+        <label for="RARH">Misc Monitoring</label>
+        <input id="RARH" type="checkbox" name="RARH">Return Air Relative Humidity<br>
+        <input id="OARH" type="checkbox" name="OARH">Outdoor Air
+        Relative Humidity
+        <br><br>
+        <label for="f1M">Filter 1 Monitoring</label>
+        <select id="filterOneMonitoring" name="f1M">
+            <option value="none">None</option>
+            <option value="hours">Hours</option>
+            <option value="status">Status</option>
+            <option value="differentialPressure">Differential Pressure</option>
+        </select>
+        <br><br>
+        <label for="f2M">Filter 2 Monitoring</label>
+        <select id="filterTwoMonitoring" name="f2M">
+            <option value="none">None</option>
+            <option value="hours">Hours</option>
+            <option value="status">Status</option>
+            <option value="differentialPressure">Differential Pressure</option>
+        </select>
+        <br><br>
+    </form>
+
+    <button onclick="submitCV()">Submit</button>
 </body>
-<h1>Constant Volume</h1>
-<form><label for="runCond">Run Conditions</label><select class="runConditons" id="runConditions" name="runCond">
-        <option value="1">ZS Sensor with Linkage</option>
-        <option value="1">WS Sensor with Linkage</option>
-    </select>
-    <br><br>
-    <label for="safties">Safeties</label>
-    <input id="freezeProtection" type="checkbox" value="1">Freeze Protection
-    <input id="RASmokeDetector" type="checkbox" value="1">Return Air Smoke Detector
-    <input id="SASmokeDetector" type="checkbox" value="1">Supply Air Smoke Detector
-    <br><br>
-    <label for="SmokeControl">Smoke Control</label>
-    <input id="fireShutdown" type="checkbox" value="1">Fire Shutdown
-    <input id="evacuation" type="checkbox" value="1">Evacuation
-    <input id="pressurization" type="checkbox" value="1">Pressurization
-    <input id="purge" type="checkbox" name="Purge" value="1">Purge
-    <br><br>
-    <label for="OAT">Outdoor Air Temperature</label>
-    <select id="outdoorAirTemp" name="OAT">
-        <option value="1">Physical Input</option>
-        <option value="1">Network Input</option>
-    </select><br><br>
-    <label for="SF">Supply Fan</label>
-    <select id="supplyFan" name="SF">
-        <option value="1">Blow Through -- On - Off</option>
-        <option value="1">Draw Through -- On - Off</option>
-    </select>
-    <br><br>
-    <label for="VFD">VFD</label>
-    <input id="vFD" type="checkbox" value="1">Single Zone VFD<br><br>
-    <label for="ReturnFan">Return Fan</label>
-    <select id="returnFan" name="RF">
-        <option value="1">None</option>
-        <option value="1">On - Off</option>
-    </select><br><br>
-    <label for="EF">Exhaust Fan</label>
-    <select id="exhaustFan" name="EF">
-        <option value="1">None</option>
-        <option value="1">On - Off</option>
-    </select><br><br>
-    <label for="Preheating">Preheating</label>
-    <select id="preHeating" name="Preheating">
-        <option value="0">None</option>
-        <option value="1">Electric Staging</option>
-        <option value="2">SCR Electric</option>
-        <option value="3">Hot Water: Modulating</option>
-        <option value="4">Hot Water: Modulating Coil Delta T</option>
-        <option value="5">Hot Water: External Face and Bypass</option>
-        <option value="6">Hot Water: Internal Face and Bypass</option>
-    </select><br><br>
-    <label for="FaceBypassD">Face and Bypass Dampers</label>
-    <select id="faceAndBypassDampers" name="FaceBypassD">
-        <option value="0">None</option>
-        <option value="1">External Bypass</option>
-        <option value="2">Internal Bypass</option>
-    </select><br><br>
-    <label for="Heating">Heating</label>
-    <select name="Heating" id="heating">
-        <option value="0">None</option>
-        <option value="1">Electric Staging 1</option>
-        <option value="2">Electric Staging 2</option>
-        <option value="3">Electric Staging 3</option>
-        <option value="4">Electric Staging 4</option>
-        <option value="5">Electric Staging 5</option>
-        <option value="6">Electric Staging 6</option>
-        <option value="7">Gas Staging 1</option>
-        <option value="8">Gas Staging 2</option>
-        <option value="9">Gas Staging 3</option>
-        <option value="10">Gas Staging 4</option>
-        <option value="11">Gas Staging 5</option>
-        <option value="12">Gas Staging 6</option>
-        <option value="13">SCR Electric</option>
-        <option value="14">Hot Water: Modulating</option>
-        <option value="15">Hot Water: External Face and Bypass</option>
-        <option value="16">Hot Water: Internal Face and Bypass</option>
-        <option value="17">Hot Water: Integral Face and Bypass</option>
-        <option value="18">Steam: Modulating</option>
-        <option value="19">Steam: External Face and Bypass</option>
-        <option value="20">Steam: Internal Face and Bypass</option>
-        <option value="21">Steam: Integral Face and Bypass</option>
-    </select>
-    <br><br>
-    <label for="Cooling">Cooling</label>
-    <select id="cooling" name="Cooling">
-        <option value="0">None</option>
-        <option value="1">Dx Cooling</option>
-        <option value="2">Chilled Water: Modulating</option>
-        <option value="3">Chilled Water: Modulating Coil Delta T</option>
-        <option value="4">Chilled Water: External Face and Bypass</option>
-        <option value="5">Chilled Water: Internal Face and Bypass</option>
-    </select>
-    <br><br>
-    <label for="MAD">Mixed Air Dampers</label>
-    <select id="mixedAirDamper" name="MAD">
-        <option value="1">None</option>
-        <option value="1">Economizer: OA Enthalpy Switch</option>
-        <option value="1">Economizer: OA Enthalpy Sensor</option>
-        <option value="1">Economizer: OA Differential Enthalpy</option>
-        <option value="1">Economizer: OA Dry Bulb</option>
-    </select>
-    <br><br>
-    <label for="mOA">Minimum Outside Air</label>
-    <select id="minOutsideAir" name="mOA">
-        <option value="1">None</option>
-        <option value="1">Differential CO2</option>
-        <option value="1">Return/Space CO2</option>
-    </select>
-    <br><br>
-    <label for="humidityControl">Humiditiy Control</label>
-    <input id="humidityControl" type="checkbox" name="humdidtyControl">Dehumidification
-    <br><br>
-    <label for="humidifier">Humidifier</label>
-    <select id="humidifier" name="humidifier">
-        <option value="1">None</option>
-        <option value="1">Humidifier SS</option>
-        <option value="1">Humidifier SS and Modulation</option>
-    </select>
-    <br><br>
-    <label for="RARH">Misc Monitoring</label>
-    <input id="RARH" type="checkbox" name="RARH">Return Air Relative Humidity<br>
-    <input id="OARH" type="checkbox" name="OARH">Outdoor Air
-    Relative Humidity
-    <br><br>
-    <label for="f1M">Filter 1 Monitoring</label>
-    <select id="filterOneMonitoring" name="f1M">
-        <option value="1">None</option>
-        <option value="1">Hours</option>
-        <option value="1">Status</option>
-        <option value="1">Differential Pressure</option>
-    </select>
-    <br><br>
-    <label for="f2M">Filter 2 Monitoring</label>
-    <select id="filterTwoMonitoring" name="f2M">
-        <option value="1">None</option>
-        <option value="1">Hours</option>
-        <option value="1">Status</option>
-        <option value="1">Differential Pressure</option>
-    </select>
-    <br><br>
-</form>
-<button onclick="submitCV()">Submit</button>
 <script>
+    $(document).ready(function () {
+        var project = JSON.parse(localStorage.getItem('project'));
+        if (project != undefined) {
+            var x;
+            for (x in project.units) {
+
+                var option = document.createElement('option');
+                var parentNode = document.getElementById('selectAHU');
+                parentNode.appendChild(option);
+                option.textContent = project.units[x].name;
+                var unit = project.units[x];
+                if (unit.points != null) {
+
+                }
+            }
+
+        }
+    })
+    document.getElementById('ahuButton').onclick = function () {
+        var s = document.getElementById('selectAHU').selectedIndex - 1;
+        var project = JSON.parse(localStorage.getItem('project'));
+        console.log(project.units);
+        var modelType = project.units[s].type;
+        console.log(modelType);
+
+        switch (modelType) {
+            case 'cv':
+                $.get('/options/cv', function (data, status) {
+                    console.log('called cv');
+                });
+                break;
+            case 'vav':
+                $.get('/options/vav', function (data, status) {
+                    console.log('called vav');
+                });
+                break;
+
+        }
+    }
 
     function submitCV() {
 
@@ -182,11 +236,11 @@
             if (x.checked == true) {
                 cv.safties.freezeProtection.isUsed = true;
             }
-            x = document.getElementById('RASmokeDetector');
+            x = document.getElementById('returnAirSmokeDetector');
             if (x.checked == true) {
                 cv.safties.returnAirSmokeDetector.isUsed = true;
             }
-            x = document.getElementById('SASmokeDetector');
+            x = document.getElementById('supplyAirSmokeDetector');
             if (x.checked == true) {
                 cv.safties.supplyAirSmokeDetector.isUsed = true;
             }
@@ -196,15 +250,15 @@
             }
             x = document.getElementById('evacuation');
             if (x.checked == true) {
-                cv.smokeControl.Evacuation.isUsed = true;
+                cv.smokeControl.evacuation.isUsed = true;
             }
             x = document.getElementById('pressurization');
             if (x.checked == true) {
-                cv.smokeControl.Pressurization.isUsed = true;
+                cv.smokeControl.pressurization.isUsed = true;
             }
             x = document.getElementById('purge');
             if (x.checked == true) {
-                cv.smokeControl.Purge.isUsed = true;
+                cv.smokeControl.purge.isUsed = true;
             }
             x = document.getElementById('outdoorAirTemp');
             v = x.selectedIndex;
@@ -224,7 +278,7 @@
 
                 cv.supplyFan.drawThrough.isUsed = true;
             }
-            x = document.getElementById('vFD');
+            x = document.getElementById('vfd');
             if (x.checked == true) {
                 cv.vfd.isUsed = true;
             } else {
@@ -242,7 +296,7 @@
             x = document.getElementById('exhaustFan');
             v = x.selectedIndex;
             if (v == 0) {
-
+                cv.exhaustFan.none = true;
             } else if (v == 1) {
 
                 cv.exhaustFan.onOff.isUsed = true;
@@ -279,13 +333,13 @@
             x = document.getElementById('faceAndBypassDampers');
             v = x.selectedIndex;
             if (v == 0) {
-                cv.faceBypassDampers.none.isUsed = true;
+                cv.faceAndBypassDampers.none.isUsed = true;
 
             } else if (v == 1) {
-                cv.faceBypassDampers.external.isUsed = true;
+                cv.faceAndBypassDampers.external.isUsed = true;
 
             } else if (v == 2) {
-                cv.faceBypassDampers.internal.isUsed = true;
+                cv.faceAndBypassDampers.internal.isUsed = true;
             }
             x = document.getElementById('heating').selectedIndex;
             if (x == 0) {
@@ -489,6 +543,13 @@
             }
             console.log(JSON.stringify(cv));
             localStorage.setItem('ahu', JSON.stringify(cv));
+            var project = JSON.parse(localStorage.getItem('project'));
+            var abc = document.getElementById('selectAHU').selectedIndex;
+            console.log(project);
+            console.log(abc);
+            project.units[abc - 1].points = cv;
+            
+            localStorage.setItem('project', JSON.stringify(project));
 
         });
     }
@@ -544,7 +605,7 @@
                     cool.options[a].disabled = true;
                 }
             }
-        } else if (this.selectedIndex== 20) {
+        } else if (this.selectedIndex == 20) {
             var y = face.length;
             var w = cool.length;
             var a = 0;
@@ -610,7 +671,7 @@
                     cool.options[a].disabled = true;
                 }
             }
-        } else  {
+        } else {
             var y = heat.length;
             var w = cool.length;
             var a = 1;
@@ -638,7 +699,7 @@
             for (a; a < y; a++) {
                 if ((a == 15) || (a == 19)) {
                     heat.options[a].disabled = false;
-                }else{
+                } else {
                     heat.options[a].disabled = true;
                 }
             }
@@ -654,9 +715,9 @@
             var a = 1;
             face.selectedIndex = 2;
             for (a; a < y; a++) {
-                if ((a == 16 )||(a == 20)) {
+                if ((a == 16) || (a == 20)) {
                     heat.options[a].disabled = false;
-                }else{
+                } else {
                     heat.options[a].disabled = true;
                 }
             }
@@ -693,7 +754,7 @@
                 cool.options[a].disabled = false;
             }
             alert("Must choose a cooling option!!!!");
-        }else{
+        } else {
             cool.options[0].disabled = false;
         }
     };
@@ -710,21 +771,103 @@
         }
     };
 
-    document.getElementById('returnFan').onchange = function(){
-        if(this.selectedIndex != 0){
+    document.getElementById('returnFan').onchange = function () {
+        if (this.selectedIndex != 0) {
             document.getElementById('exhaustFan').disabled = true;
-        }else{
+        } else {
             document.getElementById('exhaustFan').disabled = false;
         }
     };
 
-    document.getElementById('exhaustFan').onchange = function(){
-        if(this.selectedIndex != 0){
+    document.getElementById('exhaustFan').onchange = function () {
+        if (this.selectedIndex != 0) {
             document.getElementById('returnFan').disabled = true;
-        }else{
+        } else {
             document.getElementById('returnFan').disabled = false;
         }
     };
+
+    document.getElementById('selectAHU').onchange = function () {
+        var project = JSON.parse(localStorage.getItem('project'));
+        console.log(project);
+        var unit = project.units[this.selectedIndex - 1];
+        var ahu = unit.points;
+        console.log(JSON.stringify(ahu));
+        var point;
+        for (point in ahu) {
+            var ele = ahu[point];
+            console.log(point);
+            var i;
+            if (ele.isUsed != undefined) {
+                console.log(ele.isUsed);
+                var docEle = document.getElementById(point);
+                console.log(docEle.type);
+                if (ele.isUsed) {
+                    console.log('found isUsed..now set select or checkbox');
+                    if (i == 'none') {
+                        docEle.checked = false;
+                    }
+                    if (docEle.type == 'checkbox') {
+                        docEle.checked = true;
+                    }
+                } else {
+                    console.log('found isUsed..now set select or checkbox');
+                    if(docEle.type == 'checkbox'){
+                        docEle.checked = false;
+                    }
+                    if(docEle.type == 'select-one'){
+                        docEle.selectedIndex = 0;
+                    }
+                }
+            } else {
+                for (i in ele) {
+                    var h = ele[i];
+                    console.log(i);
+                    console.log(h);
+                    var docEle = document.getElementById(point);
+                    if (docEle == null) {
+                        docEle = document.getElementById(i)
+                        console.log("docEle is null: " + i);
+                        console.log(docEle.type);
+
+                    }
+                    console.log(docEle.type);
+                    if (h.isUsed) {
+                        console.log(h);
+                        if (i != 'none') {
+                            if (docEle.type == 'checkbox') {
+                                docEle.checked = true;
+                            }
+                        } else {
+                            docEle.checked = false;
+                        }
+
+                        if (docEle.type == 'select-one') {
+                            console.log("find selected Index");
+                            var itera = 0;
+                            var z;
+                            for (z in docEle.options) {
+                                var val = docEle.options[z].value;
+                                console.log(val);
+                                if (val == i) {
+                                    docEle.selectedIndex = itera;
+                                }
+                                itera++;
+                            }
+                        }
+                        //console.log('found isUsed..now set select or checkbox');
+                    }else{
+                        if(docEle.type == 'checkbox'){
+                            docEle.checked = false;
+                        }else if (docEle.type == 'select-one'){
+                            //docEle.selectedIndex = 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 </script>
 
 </html>

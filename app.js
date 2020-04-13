@@ -23,4 +23,10 @@ app.use('/cvModel', indexRouter);
 app.use('/points',indexRouter);
 app.use('/pointsModel',indexRouter);
 app.use('/sequence',indexRouter);
+app.use('/options', indexRouter);
+app.use('/options/vav',indexRouter);
+app.use('/options/cv',indexRouter);
+app.use('/newProject',indexRouter);
+
+app.use('/points/:option', indexRouter);
 module.exports = app;

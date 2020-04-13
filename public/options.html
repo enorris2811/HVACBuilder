@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HVAC Builder</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div id='nav' class="w3-top">
+        <div class="w3-bar">
+
+            <a class="w3-bar-item w3-button" href="/">Home</a>
+            <a class='w3-bar-item w3-button' href='/options'>options</a>
+
+
+            <a class="w3-bar-item w3-button" href="/points">Points</a>
+
+            <a class="w3-bar-item w3-button" href="/sequence">Sequence</a></li>
+
+        </div>
+    </div>
+
+    <h1>HVAC Builder</h1>
+    <div id='selectAHUDiv'>
+        <form id='selectAHUForm' action='/' method='GET'>
+            <label>Select an AHU unit in the Project</label>
+            <select id='selectAHU'>
+                <option>select...</option>
+            </select>
+            <button id='ahuButton' type='button'>Select Unit Options</button>
+        </form>
+    </div>
+
+
+
+</body>
+<script>
+    $(document).ready(function () {
+        var project = JSON.parse(localStorage.getItem('project'));
+        if (project != undefined) {
+            var x;
+            for (x in project.units) {
+                if (project.units[x] != null) {
+                    var option = document.createElement('option');
+                    var parentNode = document.getElementById('selectAHU');
+                    parentNode.appendChild(option);
+                    option.textContent = project.units[x].name;
+                }
+            }
+
+        }
+    })
+
+    document.getElementById('selectAHU').onchange = function(){
+        var s = document.getElementById('selectAHU').selectedIndex - 1;
+        var project = JSON.parse(localStorage.getItem('project'));
+        console.log(project.units);
+        var modelType = project.units[s].type;
+        console.log(modelType);
+        var f = document.getElementById('selectAHUForm');
+        switch (modelType) {
+            case 'cv':
+                f.action = '/options/cv';
+                f.submit();
+                break;
+            case 'vav':
+                $.get('/options/vav', function (data, status) {
+                    console.log('called vav');
+                });
+                break;
+
+        }
+    }
+
+    document.getElementById('ahuButton').onclick = function () {
+        var s = document.getElementById('selectAHU').selectedIndex - 1;
+        var project = JSON.parse(localStorage.getItem('project'));
+        console.log(project.units);
+        var modelType = project.units[s].type;
+        console.log(modelType);
+        var f = document.getElementById('selectAHUForm');
+        switch (modelType) {
+            case 'cv':
+                f.action = '/options/cv';
+                f.submit();
+                break;
+            case 'vav':
+                $.get('/options/vav', function (data, status) {
+                    console.log('called vav');
+                });
+                break;
+
+        }
+    }
+</script>
+
+</html>

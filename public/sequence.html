@@ -3,60 +3,110 @@
 
 <head>
     <title>HVAC Builder</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-top">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav inline">
-                <li class="nav-item active inline">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item inline">
-                    <a class="nav-link" href="/points">Points</a>
-                </li>
-                <li class="nav-item inline">
-                    <a class="nav-link" href="/sequence">Sequence</a></li>
-            </ul>
+    <div id='nav' class="w3-top">
+        <div class="w3-bar">
+
+            <a class="w3-bar-item w3-button" href="/">Home</a>
+            <a class='w3-bar-item w3-button' href='/options'>options</a>
+
+
+            <a class="w3-bar-item w3-button" href="/points">Points</a>
+
+            <a class="w3-bar-item w3-button" href="/sequence">Sequence</a></li>
+
         </div>
-    </nav>
+    </div>
+    <div id='selectAHUDiv'>
+        <form id='selectAHUForm'>
+            <label>Select an AHU unit in the Project</label>
+            <select id='selectAHU'>
+                <option>select...</option>
+            </select>
+            <button id='ahuButton' type='button'>Select Unit Options</button>
+        </form>
+        <br><br>
+    </div>
     <div id='sequence'>
-        
     </div>
 </body>
 <script>
-    $(document).ready(function(){
-        var ahu = JSON.parse(localStorage.getItem('ahu'));
-   
+    $(document).ready(function () {
+        var project = JSON.parse(localStorage.getItem('project'));
+        if (project != undefined) {
+            var x;
+            for (x in project.units) {
+                if (project.units[x]!=null) {
+                    var option = document.createElement('option');
+                    var parentNode = document.getElementById('selectAHU');
+                    parentNode.appendChild(option);
+                    option.textContent = project.units[x].name;
+                }
+            }
+
+        }
+    })
+    document.getElementById('selectAHU').onchange = function () {
+        removeNodes();
+        displaySequence(this.selectedIndex - 1);
+        //removeNodes();
+    }
+    function removeNodes() {
+        console.log("called removeNodes");
+        var topNode = document.getElementById('sequence');
+        var children = topNode.childNodes;
+        console.log(topNode);
+        console.log(children);
+        var x = children.length;
+        console.log(topNode.hasChildNodes())
+        console.log(x);
+        while (x > 0) {
+            topNode.lastChild.remove();
+            x = x - 1;
+        }
+        children.remove;
+
+
+    }
+    function displaySequence(abc) {
+        var project = JSON.parse(localStorage.getItem('project'));
+        var ahu = project.units[abc];
+        console.log(ahu);
         if (ahu == undefined) {
-                console.log("No Air Handler Built!!");
+            console.log("No Air Handler Built!!");
         } else {
             var topNode = document.getElementById('sequence');
             var ele;
-            for(ele in ahu){
-                var val = ahu[ele];
+            var points = ahu.points
+            for (ele in points) {
+                var val = points[ele];
+                //console.log(val);
                 var ele2;
-                for(ele2 in val){
+                for (ele2 in val) {
                     var point = val[ele2];
-                    if((point.isUsed == true )&& (point.sequence != undefined)){
+                    if ((point.isUsed == true) && (point.sequence != undefined)) {
                         var temp = point.sequence;
-                        
+
                         var node = document.createElement('div');
                         node.id = JSON.stringify(ele);
+                        node.class = 'w3-container';
                         topNode.appendChild(node);
-                        var textNode = document.createElement('p');
+                        var textNode = document.createElement('div');
                         textNode.innerHTML = temp;
                         node.appendChild(textNode);
-                        console.log(JSON.stringify(ele));
-                        console.log(temp);
+                        //console.log(JSON.stringify(ele));
+                        //console.log(temp);
                     }
                 }
             }
         }
-    });
+    }
 </script>
+
 </html>
