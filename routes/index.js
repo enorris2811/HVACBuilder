@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var cvModel = require('../models/cv');
-var vavModel = require('../models/vav');
-var projectModel = require('../models/project');
-var pointsModel = require('../models/points');
+var cvModel = require('../models/cv.js');
+var vavModel = require('../models/vav.js');
+var projectModel = require('../models/project.js');
+var pointsModel = require('../models/points.js');
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index');
@@ -60,6 +60,7 @@ router.get('/options/vav', function (req, res, next) {
 
 });
 router.get('/newProject', function (req, res, next) {
+  console.log('found');
   res.type('json');
   res.send({ project: projectModel });
 });
