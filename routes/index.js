@@ -50,7 +50,7 @@ router.get('/options', function (req, res, next) {
   res.sendFile(path.resolve('./public/options.html'));
 
 });
-router.get('/options/:cv', function (req, res, next) {
+router.get('/options/cv', function (req, res, next) {
   res.type('html');
   res.sendFile(path.resolve('./public/cv.html'));
 
