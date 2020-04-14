@@ -12,13 +12,13 @@
   <div id='nav' class="w3-top">
     <div class="w3-bar">
 
-      <button class="w3-bar-item w3-button" id='home' >Home</a>
-      <button class='w3-bar-item w3-button'id='options'  >options</a>
+      <a class="w3-bar-item w3-button" id='home' href="/">Home</a>
+      <a class='w3-bar-item w3-button'id='options' href="/options">options</a>
 
 
-      <button class="w3-bar-item w3-button" id='points' >Points</a>
+      <a class="w3-bar-item w3-button" id='points'href='/points' >Points</a>
 
-      <button class="w3-bar-item w3-button"id='sequence' >Sequence</a></li>
+      <a class="w3-bar-item w3-button"id='sequence'href='/sequence' >Sequence</a></li>
 
     </div>
   </div>
@@ -91,21 +91,7 @@
   </div>
 </body>
 <script>
-document.getElementById('home').onclick = function(){
-    $.get('/',function(data,status){});
-}
 
-document.getElementById('options').onclick = function(){
-    $.get('/options',function(data,status){});
-}
-
-document.getElementById('points').onclick = function(){
-    $.get('/points',function(data,status){});
-}
-document.getElementById('sequence').onclick = function(){
-    $.get('/sequence',function(data,status){});
-}
-  
 
   document.getElementById('removeAHUButton').onclick = function () {
     var project = JSON.parse(localStorage.getItem('project'));
