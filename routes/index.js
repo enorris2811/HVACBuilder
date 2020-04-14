@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var router = express.Router();
 var cvModel = require('../models/cv.js');
 var vavModel = require('../models/vav.js');
@@ -11,12 +12,12 @@ router.get('/', function (req, res, next) {
 
 router.get('/cv', function (req, res, next) {
   res.type('html');
-  res.sendFile('./public/cv.html');
+  res.sendFile('/public/cv.html');
 });
 
 router.get('/vav', function (req, res, next) {
   res.type('html');
-  res.sendFile('./public/vav.html');
+  res.sendFile('/public/vav.html');
 });
 
 router.get('/vavModel', function (req, res, next) {
@@ -31,7 +32,7 @@ router.get('/cvModel', function (req, res, next) {
 
 router.get('/points', function (req, res, next) {
   res.type('html');
-  res.sendFile('./public/points.html');
+  res.sendFile('/public/points.html');
 });
 
 router.get('/pointsModel', function (req, res, next) {
@@ -41,12 +42,12 @@ router.get('/pointsModel', function (req, res, next) {
 
 router.get('/sequence', function (req, res, next) {
   res.type('html');
-  res.sendFile('./public/sequence.html');
+  res.sendFile('/public/sequence.html');
 });
 
 router.get('/options', function (req, res, next) {
   res.type('html');
-  res.sendFile('./public/options.html');
+  res.sendFile('/public/options.html');
 
 });
 router.get('/options/cv', function (req, res, next) {
@@ -70,6 +71,6 @@ router.get('/points/:option',function(req,res,next){
   console.log(x);
   //res.send({ahu:x});
   res.type('html');
-  res.sendFile('https://hvacbuilder.herokuapp.com/public/points.html');
+  res.sendFile('/public/points.html'),{root:__dirname};
 })
 module.exports = router;
