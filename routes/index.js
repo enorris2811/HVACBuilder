@@ -69,6 +69,7 @@ router.get('/points/:option',function(req,res,next){
   var x = req.params.option;
   console.log(x);
   //res.send({ahu:x});
+  res.type('html');
   res.sendFile('./public/points.html');
 })
 module.exports = router;
