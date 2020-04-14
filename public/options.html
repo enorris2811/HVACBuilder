@@ -64,6 +64,9 @@
             case 'cv':
                 f.action = '/options/cv';
                 f.submit();
+                $.get('/options/cv',function(data, status){
+
+                });
                 break;
             case 'vav':
                 $.get('/options/vav', function (data, status) {
