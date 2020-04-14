@@ -306,7 +306,6 @@ var minOutsideAir = {
         3:'highReturnAirCO2Concentration',
     },'sequence':'<strong>Minimum Outside Air Ventilation - Carbon Dioxide (CO2) Control:</strong><br>When in the occupied mode, the controller will measure the differeence between return air and outside air CO2 levels.  The controller will then modulate the outside air dampers open on rising return air CO2 concentrations, overriding normal damper operation to maintain return air CO2 concentrations no more than <input type=\'number\' id=\'maxReturnAirCO2\'> ppm above outside air CO2 levels.<br><br>'  },
     'returnSpaceCO2': { 'isUsed': false, 'points': {
-        0:'returnAirCO2',
         1:'spaceCO2Concentration',
         2:'spaceCO2ConcentrationSetpoint',
         3:'highSpaceCO2Concentration'

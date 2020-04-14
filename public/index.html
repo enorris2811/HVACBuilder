@@ -53,6 +53,12 @@
         <br>
         <label for='ahuName'>Enter the Name of The AHU</label>
         <input id='ahuName' type='text'>
+        <label for='ahuSize'>Select the Size of the AHU</label>
+        <select id='ahuSize'>
+          <option value='small'>Small(0 to 9999k CFM) </option>
+          <option value='medium'>Medium(10k to 15999k CFM)</option>
+          <option value='large'>Large (16K to 20k CFM)</option>
+        </select>
         <br>
         <br>
       </label>
@@ -71,12 +77,16 @@
           Unit Type
         </th>
         <th>
-
+          Unit Size
+        </th>
+        <th>
+          Options
+        </th>
+        <th>
           Points
           </a>
         </th>
         <th>
-
           Sequence
           </a>
         </th>
@@ -208,6 +218,7 @@
         var newUnit = project.ahu;
         newUnit.name = name;
         newUnit.type = type;
+        newUnit.size = document.getElementById('ahuSize').selectedIndex.value;
         newUnit.points = cv
         project.units.push(newUnit);
         console.log(JSON.stringify(project));
@@ -263,6 +274,12 @@
         newNode1 = document.createElement('td');
         newNode.appendChild(newNode1);
         newNode1.innerText = temp.type;
+        newNode1 = document.createElement('td');
+        newNode.appendChild(newNode1);
+        newNode1.innerText = temp.size;
+        newNode1 = document.createElement('td');
+        newNode.appendChild(newNode1);
+        newNode1.innerHTML = '<a href=\'/options/' + temp.name + '\'>' + temp.name + ' Points</a>';
         newNode1 = document.createElement('td');
         newNode.appendChild(newNode1);
         newNode1.innerHTML = '<a href=\'/points/' + temp.name + '\'>' + temp.name + ' Points</a>';

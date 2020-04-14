@@ -8,7 +8,7 @@ var project = {
 
     'name': null,
     units,
-    ahu:{'name':null,'type':null,'points':null,'sequence':null}
+    ahu:{'name':null,'type':null,'size':null, 'points':null,'sequence':null}
 }
 
 
