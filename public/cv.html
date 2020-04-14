@@ -177,19 +177,19 @@
     <button onclick="submitCV()">Submit</button>
 </body>
 <script>
-document.getElementById('home').onclick = function(data,status){
-    $.get('/');
+document.getElementById('home').onclick = function(){
+    $.get('/',function(data,status){});
 }
 
-document.getElementById('options').onclick = function(data,status){
-    $.get('/options');
+document.getElementById('options').onclick = function(){
+    $.get('/options',function(data,status){});
 }
 
-document.getElementById('points').onclick = function(data,status){
-    $.get('/points');
+document.getElementById('points').onclick = function(){
+    $.get('/points',function(data,status){});
 }
-document.getElementById('sequence').onclick = function(data,status){
-    $.get('/sequence');
+document.getElementById('sequence').onclick = function(){
+    $.get('/sequence',function(data,status){});
 }
 
 

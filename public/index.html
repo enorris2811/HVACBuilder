@@ -92,18 +92,18 @@
 </body>
 <script>
 document.getElementById('home').onclick = function(){
-    $.get('/');
+    $.get('/',function(data,status){});
 }
 
 document.getElementById('options').onclick = function(){
-    $.get('/options');
+    $.get('/options',function(data,status){});
 }
 
 document.getElementById('points').onclick = function(){
-    $.get('/points');
+    $.get('/points',function(data,status){});
 }
 document.getElementById('sequence').onclick = function(){
-    $.get('/sequence');
+    $.get('/sequence',function(data,status){});
 }
   
 
