@@ -6,7 +6,10 @@ var vavModel = require('../models/vav.js');
 var projectModel = require('../models/project.js');
 var pointsModel = require('../models/points.js');
 /* GET home page. */
+
+
 router.get('/', function (req, res, next) {
+  res.type('html');
   res.render(path.resolve('./public/index.html'));
 });
 
