@@ -29,7 +29,7 @@ app.use('/options/cv',indexRouter);
 app.use('/newProject',indexRouter);
 
 app.use('/points/:option', indexRouter);
-
+app.use('/sequence/:ahu',indexRouter);
 
 if(process.env.NODE_ENV === 'production'){
     //set static folder
