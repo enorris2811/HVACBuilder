@@ -7,7 +7,7 @@ var projectModel = require('../models/project.js');
 var pointsModel = require('../models/points.js');
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index');
+  res.render(path.resolve('./public/index.html'));
 });
 
 router.get('/cv', function (req, res, next) {
