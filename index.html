@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HVAC Builder</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" type='text/css' href="/stylesheets/style.css">
+</head>
+
+<body>
+  <div id='nav' class="w3-top">
+    <div class="w3-bar">
+
+      <a class="w3-bar-item w3-button" id='home' href="https://hvacbuilder.herokuapp.com/public/index.html">Home</a>
+      <a class='w3-bar-item w3-button'id='options' href="https://hvacbuilder.herokuapp.com/public/optoins.html" >options</a>
+
+
+      <a class="w3-bar-item w3-button" id='points' href="https://hvacbuilder.herokuapp.com/public/points.html">Points</a>
+
+      <a class="w3-bar-item w3-button"id='sequence' href="https://hvacbuilder.herokuapp.com/public/points.html">Sequence</a></li>
+
+    </div>
+  </div>
+
+  <h1>HVAC Builder</h1>
+  <form id='newProject' action='/' method="GET">
+    <label for='newProjectTextbox'>Enter the name for a new project</label>
+    <input type='text' id='newProjectTextbox'>
+    <br>
+    <br>
+    <button type='button' id='newProjectButton' onclick='createNewProject()'>Create New Project</button>
+    <button type='button' id='loadProjectButton' onclick='loadProjects()'>Load Projects</button>
+    <br>
+    <br>
+  </form>
+  <div class='form-group'>
+    <form id='projectSetUp'>
+      <label id='projectNameLabel'></label>
+      <button type='button' id='newAHUButton' onclick='addNewAHU()'>Add New AHU</button>
+
+    </form>
+  </div>
+  <div class="form-group">
+    <form id="ahuTypes" action="/" method="GET" dispaly='none'>
+
+      <label for="AHUType">Select AHU Style
+        <select id="AHUOptions">
+          <option value="">Select....</option>
+          <option value="Constant Volume">Constant Volume</option>
+          <option value="VAV">VAV</option>
+        </select>
+        <br>
+        <label for='ahuName'>Enter the Name of The AHU</label>
+        <input id='ahuName' type='text'>
+        <br>
+        <br>
+      </label>
+
+      <button type="button" onclick="getAHU()">Submit</button>
+    </form>
+  </div>
+  <div id='projectTableDiv'>
+    <label id='projectTableLabel' for='projectTable'></label>
+    <table id='projectTable'>
+      <tr>
+        <th>
+          Unit Name
+        </th>
+        <th>
+          Unit Type
+        </th>
+        <th>
+
+          Points
+          </a>
+        </th>
+        <th>
+
+          Sequence
+          </a>
+        </th>
+      </tr>
+    </table>
+    <form>
+      <button type='button' id='removeAHUButton'>Remove AHU</button>
+      <select id='projectAHUSelect'>
+
+      </select>
+    </form>
+  </div>
+</body>
+<script>
+document.getElementById('home').onclick = function(){
+    $.get('/');
+}
+
+document.getElementById('options').onclick = function(){
+    $.get('/options');
+}
+
+document.getElementById('points').onclick = function(){
+    $.get('/points');
+}
+document.getElementById('sequence').onclick = function(){
+    $.get('/sequence');
+}
+  
+
+  document.getElementById('removeAHUButton').onclick = function () {
+    var project = JSON.parse(localStorage.getItem('project'));
+    var x = document.getElementById('projectAHUSelect').selectedIndex;
+
+    var tempA = [];
+    do {
+      var temp = project.units.pop();
+
+      var y = project.units.length;
+      console.log(y);
+      if (x != y) {
+        tempA.push(temp);
+        console.log(tempA);
+      }
+    } while (y != x)
+
+    console.log(tempA.length);
+    console.log(tempA);
+    var y = tempA.length;
+
+    do {
+      var temp = tempA.pop();
+      console.log(temp);
+      project.units.push(temp);
+      y = tempA.length;
+    } while (y > 0);
+
+    localStorage.setItem('project', JSON.stringify(project));
+    removeTableNodes();
+    projectSelectRemove();
+    var x;
+
+    populateTable();
+    
+    projectSelectPopulate();
+  }
+
+  function projectSelectPopulate() {
+
+    var parentNode = document.getElementById('projectAHUSelect');
+    var project = JSON.parse(localStorage.getItem('project'));
+    var units = project.units;
+    console.log(project);
+    for (x in units) {
+      if (units[x] != null) {
+        var ele = document.createElement('option');
+        ele.textContent = units[x].name;
+        parentNode.appendChild(ele);
+      }
+
+    }
+  }
+
+  function projectSelectRemove() {
+    var parentNode = document.getElementById('projectAHUSelect');
+    var x = parentNode.options.length;
+    var i = 0;
+    while (x > 0) {
+      parentNode.lastChild.remove();
+      x = x - 1;
+    }
+  }
+
+  $(document).ready(function () {
+
+    var project = JSON.parse(localStorage.getItem('project'));
+    if (project != undefined) {
+      document.getElementById('projectTableLabel').textContent = project.name;
+      document.getElementById('projectTableDiv').style.display = 'block';
+      document.getElementById('ahuTypes').style.display = 'none';
+
+      console.log(project);
+      projectSelectPopulate();
+
+      populateTable();
+
+    } else {
+      document.getElementById('projectSetUp').style.display = 'none';
+      document.getElementById('projectTableDiv').style.display = 'none';
+      document.getElementById('ahuTypes').style.display = 'none';
+    }
+  });
+  function addNewAHU() {
+    document.getElementById('ahuTypes').style.display = 'block';
+
+  }
+
+  function createNewProject() {
+    $.get('/newProject', function (data, status) {
+      var projectName = document.getElementById('newProjectTextbox').value;
+      var project = data.project;
+      console.log(projectName);
+      console.log(JSON.stringify(project));
+      project.name = projectName;
+      console.log(project);
+      localStorage.setItem('project', JSON.stringify(project));
+      document.getElementById('projectSetUp').style.display = 'block';
+      document.getElementById('projectTableDiv').style.display = 'block';
+      document.getElementById('projectTableLabel').innerText = project.name;
+    });
+
+  }
+  function getAHU() {
+    var x = document.getElementById('AHUOptions');
+    var y = x[x.selectedIndex].text;
+    if (y == 'Constant Volume') {
+      url = '/options/cv';
+      $.get('/cvModel', function (data, status) {
+        var cv = data.ahu;
+        var name = document.getElementById('ahuName').value;
+        var type = 'cv';
+        var project = JSON.parse(localStorage.getItem('project'));
+        var newUnit = project.ahu;
+        newUnit.name = name;
+        newUnit.type = type;
+        newUnit.points = cv
+        project.units.push(newUnit);
+        console.log(JSON.stringify(project));
+        localStorage.setItem('project', JSON.stringify(project));
+        removeTableNodes();
+        populateTable();
+        projectSelectRemove();
+        projectSelectPopulate();
+      });
+    } else if (y == 'VAV') {
+      url = '/options/vav';
+      $.get('/vavModel', function (data, status) {
+
+      });
+    } else {
+      console.log("error-ick!!!");
+    }
+    console.log(url);
+    //var z = document.getElementById('ahuTypes');
+    //z.action = url;
+    //z.submit();
+
+    document.getElementById('ahuTypes').style.display = 'none';
+
+  }
+  function removeTableNodes() {
+    var parentNode = document.getElementById('projectTable');
+    var x = parentNode.childElementCount;
+    while (x > 1) {
+      parentNode.lastChild.remove();
+      x = x - 1;
+    }
+  }
+
+  function populateTable() {
+    var project = JSON.parse(localStorage.getItem('project'));
+
+    var parentNode = document.getElementById('projectTable');
+    console.log('we are building the project summary');
+    console.log(project);
+    console.log(parentNode);
+    var unit = project.units;
+    var flag;
+    for (x in unit) {
+
+      var temp = unit[x];
+      if (temp != null) {
+        var newNode = document.createElement('tr');
+        parentNode.appendChild(newNode);
+        var newNode1 = document.createElement('td');
+        newNode.appendChild(newNode1);
+        newNode1.innerText = temp.name;
+        newNode1 = document.createElement('td');
+        newNode.appendChild(newNode1);
+        newNode1.innerText = temp.type;
+        newNode1 = document.createElement('td');
+        newNode.appendChild(newNode1);
+        newNode1.innerHTML = '<a href=\'/points/' + temp.name + '\'>' + temp.name + ' Points</a>';
+        newNode1 = document.createElement('td');
+        newNode.appendChild(newNode1);
+        newNode1.innerHTML = '<a href=\'/sequence/' + temp.name + '\'>' + temp.name + ' sequence</a>';
+      } else {
+        flag = x;
+        console.log(flag);
+      }
+    }
+  }
+</script>
+
+</html>
