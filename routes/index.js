@@ -64,6 +64,10 @@ router.get('/options/vav', function (req, res, next) {
   res.sendFile(path.resolve('./public/vav.html'));
 
 });
+router.get('/options/:ahu',function(req,res,next){
+  res.type('html');
+  res.sendFile(path.resolve('./public/options.html'));
+})
 router.get('/newProject', function (req, res, next) {
   console.log('found');
   res.type('json');

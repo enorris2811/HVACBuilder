@@ -218,7 +218,8 @@
         var newUnit = project.ahu;
         newUnit.name = name;
         newUnit.type = type;
-        newUnit.size = document.getElementById('ahuSize').selectedIndex.value;
+        var temp23 =  document.getElementById('ahuSize');
+        newUnit.size = temp23[temp23.selectedIndex].value;
         newUnit.points = cv
         project.units.push(newUnit);
         console.log(JSON.stringify(project));
@@ -279,7 +280,7 @@
         newNode1.innerText = temp.size;
         newNode1 = document.createElement('td');
         newNode.appendChild(newNode1);
-        newNode1.innerHTML = '<a href=\'/options/' + temp.name + '\'>' + temp.name + ' Points</a>';
+        newNode1.innerHTML = '<a href=\'/options/' + temp.name + '\'>' + temp.name + ' options</a>';
         newNode1 = document.createElement('td');
         newNode.appendChild(newNode1);
         newNode1.innerHTML = '<a href=\'/points/' + temp.name + '\'>' + temp.name + ' Points</a>';
