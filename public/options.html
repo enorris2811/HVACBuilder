@@ -5,23 +5,23 @@
     <title>HVAC Builder</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet"  type='text/css'href="/stylesheets/style.css">
+    <link rel="stylesheet" type='text/css' href="/stylesheets/style.css">
 </head>
 
 <body>
     <div id='nav' class="w3-top">
         <div class="w3-bar">
-    
-          <a class="w3-bar-item w3-button" id='home' href="/">Home</a>
-          <a class='w3-bar-item w3-button'id='options' href="/options">options</a>
-    
-    
-          <a class="w3-bar-item w3-button" id='points'href='/points' >Points</a>
-    
-          <a class="w3-bar-item w3-button"id='sequence'href='/sequence' >Sequence</a></li>
-    
+
+            <a class="w3-bar-item w3-button" id='home' href="/">Home</a>
+            <a class='w3-bar-item w3-button' id='options' href="/options">options</a>
+
+
+            <a class="w3-bar-item w3-button" id='points' href='/points'>Points</a>
+
+            <a class="w3-bar-item w3-button" id='sequence' href='/sequence'>Sequence</a></li>
+
         </div>
-      </div>
+    </div>
     <h1>HVAC Builder</h1>
     <div id='selectAHUDiv'>
         <form id='selectAHUForm' action='/' method='GET'>
@@ -42,6 +42,10 @@
         var project = JSON.parse(localStorage.getItem('project'));
         if (project != undefined) {
             var x;
+            var url = document.URL;
+            var n = url.lastIndexOf('/');
+            var ahuName = url.substring((n + 1), url.length);
+            console.log(ahuName);
             for (x in project.units) {
                 if (project.units[x] != null) {
                     var option = document.createElement('option');
@@ -54,7 +58,7 @@
         }
     })
 
-    document.getElementById('selectAHU').onchange = function(){
+    document.getElementById('selectAHU').onchange = function () {
         var s = document.getElementById('selectAHU').selectedIndex - 1;
         var project = JSON.parse(localStorage.getItem('project'));
         console.log(project.units);
@@ -64,8 +68,8 @@
         var f = document.getElementById('selectAHUForm');
         switch (modelType) {
             case 'cv':
-                
-                $.get('/options/cv',function(data, status){
+
+                $.get('/options/cv', function (data, status) {
 
                 });
                 break;
