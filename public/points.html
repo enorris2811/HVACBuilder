@@ -93,9 +93,11 @@
         if(ahuName  != 'points'){
             console.log('inside if');
             var  temp = document.getElementById('selectAHU').options;
+            console.log(temp);
             if(temp.length>0){
                 for( x = 0;x<temp.length;x++){
                     console.log(x);
+                    console.log(temp[x].value);
                     if(temp[x].value == ahuName){
                         console.log(temp[x].value);
                          populateTable(x);
