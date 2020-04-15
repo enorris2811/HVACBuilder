@@ -182,6 +182,7 @@
     $(document).ready(function () {
         var project = JSON.parse(localStorage.getItem('project'));
         var url = document.URL;
+        console.log(url);
         if (project != undefined) {
             var x;
             for (x in project.units) {
@@ -202,6 +203,7 @@
         var s = document.getElementById('selectAHU').selectedIndex - 1;
         var project = JSON.parse(localStorage.getItem('project'));
         console.log(project.units);
+        console.log(s);
         var modelType = project.units[s].type;
         console.log(modelType);
 

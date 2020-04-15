@@ -64,7 +64,7 @@ router.get('/options/vav', function (req, res, next) {
   res.sendFile(path.resolve('./public/vav.html'));
 
 });
-router.get('/options/:ahu',function(req,res,next){
+router.get('/options/name/:ahu',function(req,res,next){
   res.type('html');
   res.sendFile(path.resolve('./public/options.html'));
 })
@@ -74,7 +74,7 @@ router.get('/newProject', function (req, res, next) {
   res.send({ project: projectModel });
 });
 
-router.get('/points/:option',function(req,res,next){
+router.get('/points/name/:ahu',function(req,res,next){
   var x = req.params.option;
   console.log(x);
   //res.send({ahu:x});
@@ -82,7 +82,7 @@ router.get('/points/:option',function(req,res,next){
   res.sendFile(path.resolve('./public/points.html'));
 });
 
-router.get('/sequence/:ahu',function(req,res,next){
+router.get('/sequence/name/:ahu',function(req,res,next){
   res.type('html');
   res.sendFile(path.resolve('./public/sequence.html'));
 })

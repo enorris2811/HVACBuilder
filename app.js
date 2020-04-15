@@ -27,9 +27,9 @@ app.use('/options', indexRouter);
 app.use('/options/vav',indexRouter);
 app.use('/options/cv',indexRouter);
 app.use('/newProject',indexRouter);
-
-app.use('/points/:option', indexRouter);
-app.use('/sequence/:ahu',indexRouter);
+app.use('/options/name/:ahu',indexRouter);
+app.use('/points/name/:option', indexRouter);
+app.use('/sequence/name/:ahu',indexRouter);
 
 if(process.env.NODE_ENV === 'production'){
     //set static folder
