@@ -3,82 +3,134 @@
 
 <head>
     <title>HVAC Builder</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link rel="stylesheet" type='text/css' href="/stylesheets/style.css">
 </head>
 
 <body>
 
-    <div id='nav' class="w3-top">
-        <div class="w3-bar">
+    <nav id='navTop' class="navbar navbar-expand-sm justify-content-end">
+        <ul class="navbar-nav">
+            <img src="/public/images/CCG_Logo_New.bmp" class="rounded-circle" alt="CCG LOGO">
+            <li class="nav-item"></li>
+            <a class="nav-link" id='home' href="/">Get Started</a>
+            </li>
+            <li class="nav-item">
+                </liclass>
+                <a class='nav-link' id='options' href="/options">Projects</a>
+            </li>
+            <li class="nav-item"></li>
 
-            <a class="w3-bar-item w3-button" id='home' href="/">Home</a>
-            <a class='w3-bar-item w3-button' id='options' href="/options">options</a>
+            <a class="nav-link" id='points' href='/points'>Contact</a>
+            </li>
+            <li class="nav-item"></li>
+            <a class="nav-link" id='sequence' href='/sequence'>login</a></li>
+            </li>
+        </ul>
+    </nav>
+    <div class='row'>
+        <div id='sideBar' class='container col-sm-3'>
 
+            <ul class="nav flex-column">
+                <li>Projects</li>
+            </ul>
 
-            <a class="w3-bar-item w3-button" id='points' href='/points'>Points</a>
-
-            <a class="w3-bar-item w3-button" id='sequence' href='/sequence'>Sequence</a></li>
 
         </div>
-    </div>
-    </nav>
-    <h1>Points List</h1>
-    <div id='selectAHUDiv'>
-        <form id='selectAHUForm'>
-            <label>Select an AHU unit in the Project</label>
-            <select id='selectAHU'>
-                <option>select...</option>
-            </select>
 
-        </form>
-        <br><br>
-    </div>
-    <div>
-        <table id='ahuTable' calss='w3-table w3-hoverable w3-striped w3-bordered'>
-            <div class='tableHeader'>
-                <tr id='tableHeader' class='rowHeader'>
-                    <th>
-                        Point Name
-                    </th>
-                    <th>
-                        Analog Input
-                    </th>
-                    <th>
-                        Analog Output
-                    </th>
-                    <th>
-                        Binary Input
-                    </th>
-                    <th>
-                        Binary Output
-                    </th>
-                    <th>
-                        Analog Value
-                    </th>
-                    <th>
-                        Binary Value
-                    </th>
-                    <th>
-                        Loop
-                    </th>
-                    <th>
-                        Schedule
-                    </th>
-                    <th>
-                        Trend
-                    </th>
-                    <th>
-                        Alarm
-                    </th>
-                    <th>
-                        Show on Graphic
-                    </th>
-                </tr>
-            </div>
+        <div id='navBottom' class='container col-sm-9'>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href='/overview'>Overview</a>
+                </li>
 
-        </table>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href='/options'> Options</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href='/points'>Points</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/sequence'>Sequence</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/drawings'>Drawings</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/material'>Material</a>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+    </div>
+   
+    <div class="container col-sm-9">
+        <h1>Points List</h1>
+        <div class="container" id='selectAHUDiv'>
+            <form id='selectAHUForm'>
+                <label>Select an AHU unit in the Project</label>
+                <select id='selectAHU'>
+                    <option>select...</option>
+                </select>
+
+            </form>
+            <br><br>
+        </div>
+        <div class="container">
+            <table id='ahuTable' class='table'>
+                <div class='tableHeader'>
+                    <tr id='tableHeader' class='rowHeader'>
+                        <th>
+                            Point Name
+                        </th>
+                        <th>
+                            Analog Input
+                        </th>
+                        <th>
+                            Analog Output
+                        </th>
+                        <th>
+                            Binary Input
+                        </th>
+                        <th>
+                            Binary Output
+                        </th>
+                        <th>
+                            Analog Value
+                        </th>
+                        <th>
+                            Binary Value
+                        </th>
+                        <th>
+                            Loop
+                        </th>
+                        <th>
+                            Schedule
+                        </th>
+                        <th>
+                            Trend
+                        </th>
+                        <th>
+                            Alarm
+                        </th>
+                        <th>
+                            Show on Graphic
+                        </th>
+                    </tr>
+                </div>
+
+            </table>
+        </div>
     </div>
 </body>
 
@@ -147,7 +199,7 @@
             var ahu = project.units[a].points;
             var hardPoint = points.hardware;
             var softPoint = points.software;
-            var AI = 0 ,AO=0,BI=0,BO=0,AV=0,BV=0,Loop=0,Schedule=0,Trend=0,Alarm=0,Graphics = 0;
+            var AI = 0, AO = 0, BI = 0, BO = 0, AV = 0, BV = 0, Loop = 0, Schedule = 0, Trend = 0, Alarm = 0, Graphics = 0;
             var totals = { AI, AO, BI, BO, AV, BV, Loop, Schedule, Trend, Alarm, Graphics };
             // console.log(JSON.stringify(hardPoint));
             //console.log(JSON.stringify(softPoint));
@@ -212,89 +264,89 @@
                                                     switch (a) {
                                                         case (0):
 
-                                                        console.log(preparePointName(JSON.stringify(pointName)));
+                                                            console.log(preparePointName(JSON.stringify(pointName)));
                                                             textNode.textContent = preparePointName(JSON.stringify(pointName));
 
                                                             break;
                                                         case (1):
                                                             console.log(wx);
                                                             textNode.textContent = wx.points.AI;
-                                                            if(wx.points.AI == 1){
+                                                            if (wx.points.AI == 1) {
                                                                 totals.AI = totals.AI + 1;
 
                                                             }
-                                                            
+
                                                             break;
                                                         case (2):
                                                             textNode.textContent = wx.points.AO;
-                                                            if(wx.points.AO==1){
+                                                            if (wx.points.AO == 1) {
                                                                 totals.AO++;
                                                             }
-                                                            
+
                                                             break;
                                                         case (3):
                                                             textNode.textContent = wx.points.BI;
-                                                            if(wx.points.BI ==1){
-                                                            totals.BI++;
-                                                                
+                                                            if (wx.points.BI == 1) {
+                                                                totals.BI++;
+
                                                             }
                                                             break;
                                                         case (4):
                                                             textNode.textContent = wx.points.BO;
-                                                            if(wx.points.BO == 1){
+                                                            if (wx.points.BO == 1) {
                                                                 totals.BO++;
                                                             }
-                                                            
+
                                                             break;
                                                         case (5):
                                                             textNode.textContent = wx.points.AV;
-                                                            if(wx.points.AV==1){
+                                                            if (wx.points.AV == 1) {
                                                                 totals.AV++;
                                                             }
-                                                            
+
                                                             break;
                                                         case (6):
                                                             textNode.textContent = wx.points.BV;
-                                                            if(wx.points.BV == 1){
+                                                            if (wx.points.BV == 1) {
                                                                 totals.BV++;
                                                             }
 
-                                                            
+
                                                             break;
                                                         case (7):
                                                             textNode.textContent = wx.points.Loop;
-                                                            if(wx.points.Loop ==1){
+                                                            if (wx.points.Loop == 1) {
                                                                 totals.Loop++
                                                             }
-                                                            
+
                                                             break;
                                                         case (8):
                                                             textNode.textContent = wx.points.Schedule;
-                                                            if(wx.points.Schedule==  1){
+                                                            if (wx.points.Schedule == 1) {
                                                                 totals.Schedule++;
                                                             }
-                                                            
+
                                                             break;
                                                         case (9):
                                                             textNode.textContent = wx.points.Trend;
-                                                            if(wx.points.Trend == 1){
+                                                            if (wx.points.Trend == 1) {
                                                                 totals.Trend++;
                                                             }
-                                                            
+
                                                             break;
                                                         case (10):
                                                             textNode.textContent = wx.points.Alarm;
-                                                            if(wx.points.Alarm == 1){
+                                                            if (wx.points.Alarm == 1) {
 
                                                                 totals.Alarm++;
                                                             }
                                                             break;
                                                         case (11):
                                                             textNode.textContent = wx.points.Graphics;
-                                                            if(wx.points.Graphics == 1){
+                                                            if (wx.points.Graphics == 1) {
                                                                 totals.Graphics++;
                                                             }
-                                                           
+
                                                             break;
                                                     }
 
@@ -329,82 +381,82 @@
                                                         case (1):
                                                             console.log(wx);
                                                             textNode.textContent = wx.points.AI;
-                                                            if(wx.points.AI == 1){
+                                                            if (wx.points.AI == 1) {
                                                                 totals.AI = totals.AI + 1;
 
                                                             }
-                                                            
+
                                                             break;
                                                         case (2):
                                                             textNode.textContent = wx.points.AO;
-                                                            if(wx.points.AO==1){
+                                                            if (wx.points.AO == 1) {
                                                                 totals.AO++;
                                                             }
-                                                            
+
                                                             break;
                                                         case (3):
                                                             textNode.textContent = wx.points.BI;
-                                                            if(wx.points.BI ==1){
-                                                            totals.BI++;
-                                                                
+                                                            if (wx.points.BI == 1) {
+                                                                totals.BI++;
+
                                                             }
                                                             break;
                                                         case (4):
                                                             textNode.textContent = wx.points.BO;
-                                                            if(wx.points.BO == 1){
+                                                            if (wx.points.BO == 1) {
                                                                 totals.BO++;
                                                             }
-                                                            
+
                                                             break;
                                                         case (5):
                                                             textNode.textContent = wx.points.AV;
-                                                            if(wx.points.AV==1){
+                                                            if (wx.points.AV == 1) {
                                                                 totals.AV++;
                                                             }
-                                                            
+
                                                             break;
                                                         case (6):
                                                             textNode.textContent = wx.points.BV;
-                                                            if(wx.points.BV == 1){
+                                                            if (wx.points.BV == 1) {
                                                                 totals.BV++;
                                                             }
 
-                                                            
+
                                                             break;
                                                         case (7):
                                                             textNode.textContent = wx.points.Loop;
-                                                            if(wx.points.Loop ==1){
+                                                            if (wx.points.Loop == 1) {
                                                                 totals.Loop++
                                                             }
-                                                            
+
                                                             break;
                                                         case (8):
                                                             textNode.textContent = wx.points.Schedule;
-                                                            if(wx.points.Schedule==  1){
+                                                            if (wx.points.Schedule == 1) {
                                                                 totals.Schedule++;
                                                             }
-                                                            
+
                                                             break;
                                                         case (9):
                                                             textNode.textContent = wx.points.Trend;
-                                                            if(wx.points.Trend == 1){
+                                                            if (wx.points.Trend == 1) {
                                                                 totals.Trend++;
                                                             }
-                                                            
+
                                                             break;
                                                         case (10):
                                                             textNode.textContent = wx.points.Alarm;
-                                                            if(wx.points.Alarm == 1){
+                                                            if (wx.points.Alarm == 1) {
 
                                                                 totals.Alarm++;
                                                             }
                                                             break;
                                                         case (11):
                                                             textNode.textContent = wx.points.Graphics;
-                                                            if(wx.points.Graphics == 1){
+                                                            if (wx.points.Graphics == 1) {
                                                                 totals.Graphics++;
                                                             }
-                                                           
+
                                                             break;
                                                     }
 
@@ -431,13 +483,13 @@
                 var tableTop = document.getElementById('ahuTable');
                 var tableRow = document.createElement("tr");
                 tableRow.class = 'tableTotals';
-              
+
                 tableTop.appendChild(tableRow);
                 var temp = document.createElement('td');
 
                 tableRow.appendChild(temp);
-                temp.innerText= "totals:"
-                for(x in totals){
+                temp.innerText = "totals:"
+                for (x in totals) {
                     var tempNode = document.createElement('td');
                     tableRow.appendChild(tempNode);
                     console.log();
@@ -448,39 +500,39 @@
         });
     }
 
-    function preparePointName(s){
+    function preparePointName(s) {
         var i = s.indexOf('"');
-        var n = s.lastIndexOf(s.length,'"');
+        var n = s.lastIndexOf(s.length, '"');
         console.log(i);
         console.log(n);
-        var temp = s.substring((i+1),s.length);
+        var temp = s.substring((i + 1), s.length);
         console.log(temp);
-        s = temp.substring(0,temp.length-1);
+        s = temp.substring(0, temp.length - 1);
         s = addSpaces(s)
         return s;
     }
 
-    function addSpaces(s){
+    function addSpaces(s) {
 
         var n = s.length;
         var temp = [];
-        for(x in s){
+        for (x in s) {
             console.log(s[x].charCodeAt(0));
             var i = s[x].charCodeAt(0);
-            if((i<= 90) && (i>=65)){
+            if ((i <= 90) && (i >= 65)) {
                 temp.push(x);
             }
         }
         console.log(temp);
-        var newS="";
-        var last=0;
-        for(z in temp){
+        var newS = "";
+        var last = 0;
+        for (z in temp) {
             var cap = temp[z];
-            newS += s.substring(last,cap)+" ";
+            newS += s.substring(last, cap) + " ";
             console.log(newS);
             last = cap;
         }
-        newS += s.substring(last,s.length);
+        newS += s.substring(last, s.length);
         console.log(newS);
         return newS;
     }

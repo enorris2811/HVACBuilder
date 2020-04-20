@@ -3,101 +3,155 @@
 
 <head>
   <title>HVAC Builder</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <link rel="stylesheet" type='text/css' href="/stylesheets/style.css">
 </head>
 
 <body>
-  <div id='nav' class="w3-top">
-    <div class="w3-bar">
 
-      <a class="w3-bar-item w3-button" id='home' href="/">Home</a>
-      <a class='w3-bar-item w3-button'id='options' href="/options">options</a>
+  <nav id='navTop' class="navbar navbar-expand-sm justify-content-end">
+    <ul class="navbar-nav">
+      <img src="/public/images/CCG_Logo_New.bmp" class="rounded-circle" alt="CCG LOGO">
+      <li class="nav-item"></li>
+      <a class="nav-link" id='home' href="/">Get Started</a>
+      </li>
+      <li class="nav-item">
+        </liclass>
+        <a class='nav-link' id='options' href="/options">Projects</a>
+      </li>
+      <li class="nav-item"></li>
 
+      <a class="nav-link" id='points' href='/points'>Contact</a>
+      </li>
+      <li class="nav-item"></li>
+      <a class="nav-link" id='sequence' href='/sequence'>login</a></li>
+      </li>
+    </ul>
+  </nav>
+  <div class='row'>
+    <div id='sideBar' class='container col-sm-3'>
+      
+        <ul class="nav flex-column">
+          <li>Projects</li>
+        </ul>
 
-      <a class="w3-bar-item w3-button" id='points'href='/points' >Points</a>
-
-      <a class="w3-bar-item w3-button"id='sequence'href='/sequence' >Sequence</a></li>
-
+      
     </div>
+
+    <div id='navBottom' class='container col-sm-9'>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href='/overview'>Overview</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href='/options'> Options</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href='/points'>Points</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href='/sequence'>Sequence</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href='/drawings'>Drawings</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href='/material'>Material</a>
+        </li>
+
+
+      </ul>
+    </div>
+
+
   </div>
-
-  <h1>HVAC Builder</h1>
-  <form id='newProject' action='/' method="GET">
-    <label for='newProjectTextbox'>Enter the name for a new project</label>
-    <input type='text' id='newProjectTextbox'>
-    <br>
-    <br>
-    <button type='button' id='newProjectButton' onclick='createNewProject()'>Create New Project</button>
-    <button type='button' id='loadProjectButton' onclick='loadProjects()'>Load Projects</button>
-    <br>
-    <br>
-  </form>
-  <div class='form-group'>
-    <form id='projectSetUp'>
-      <label id='projectNameLabel'></label>
-      <button type='button' id='newAHUButton' onclick='addNewAHU()'>Add New AHU</button>
-
+  <div class="container col-sm-9">
+    <h1>HVAC Builder</h1>
+    <div class="container">
+    <form id='newProject' action='/' method="GET">
+      <label for='newProjectTextbox'>Enter the name for a new project</label>
+      <input type='text' id='newProjectTextbox'>
+      <br>
+      <br>
+      <button type='button' id='newProjectButton' onclick='createNewProject()'>Create New Project</button>
+      <button type='button' id='loadProjectButton' onclick='loadProjects()'>Load Projects</button>
+      <br>
+      <br>
     </form>
   </div>
-  <div class="form-group">
-    <form id="ahuTypes" action="/" method="GET" dispaly='none'>
+    <div class='container'>
+      <form id='projectSetUp'>
+        <label id='projectNameLabel'></label>
+        <button type='button' id='newAHUButton' onclick='addNewAHU()'>Add New AHU</button>
 
-      <label for="AHUType">Select AHU Style
-        <select id="AHUOptions">
-          <option value="">Select....</option>
-          <option value="Constant Volume">Constant Volume</option>
-          <option value="VAV">VAV</option>
+      </form>
+    </div>
+    <div class="container">
+      <form id="ahuTypes" action="/" method="GET" dispaly='none'>
+
+        <label for="AHUType">Select AHU Style
+          <select id="AHUOptions">
+            <option value="">Select....</option>
+            <option value="Constant Volume">Constant Volume</option>
+            <option value="VAV">VAV</option>
+          </select>
+          <br>
+          <label for='ahuName'>Enter the Name of The AHU</label>
+          <input id='ahuName' type='text'>
+          <label for='ahuSize'>Select the Size of the AHU</label>
+          <select id='ahuSize'>
+            <option value='small'>Small(0 to 9999k CFM) </option>
+            <option value='medium'>Medium(10k to 15999k CFM)</option>
+            <option value='large'>Large (16K to 20k CFM)</option>
+          </select>
+          <br>
+          <br>
+        </label>
+
+        <button type="button" onclick="getAHU()">Submit</button>
+      </form>
+    </div>
+    <div class="container"id='projectTableDiv'>
+      <label id='projectTableLabel' for='projectTable'></label>
+      <table id='projectTable' class="table">
+        <tr class='rowHeader'>
+          <th>
+            Unit Name
+          </th>
+          <th>
+            Unit Type
+          </th>
+          <th>
+            Unit Size
+          </th>
+          <th>
+            Options
+          </th>
+          <th>
+            Points
+            </a>
+          </th>
+          <th>
+            Sequence
+            </a>
+          </th>
+        </tr>
+      </table>
+      <form>
+        <button type='button' id='removeAHUButton'>Remove AHU</button>
+        <select id='projectAHUSelect'>
+
         </select>
-        <br>
-        <label for='ahuName'>Enter the Name of The AHU</label>
-        <input id='ahuName' type='text'>
-        <label for='ahuSize'>Select the Size of the AHU</label>
-        <select id='ahuSize'>
-          <option value='small'>Small(0 to 9999k CFM) </option>
-          <option value='medium'>Medium(10k to 15999k CFM)</option>
-          <option value='large'>Large (16K to 20k CFM)</option>
-        </select>
-        <br>
-        <br>
-      </label>
-
-      <button type="button" onclick="getAHU()">Submit</button>
-    </form>
-  </div>
-  <div id='projectTableDiv'>
-    <label id='projectTableLabel' for='projectTable'></label>
-    <table id='projectTable'>
-      <tr>
-        <th>
-          Unit Name
-        </th>
-        <th>
-          Unit Type
-        </th>
-        <th>
-          Unit Size
-        </th>
-        <th>
-          Options
-        </th>
-        <th>
-          Points
-          </a>
-        </th>
-        <th>
-          Sequence
-          </a>
-        </th>
-      </tr>
-    </table>
-    <form>
-      <button type='button' id='removeAHUButton'>Remove AHU</button>
-      <select id='projectAHUSelect'>
-
-      </select>
-    </form>
+      </form>
+    </div>
   </div>
 </body>
 <script>
@@ -136,7 +190,7 @@
     var x;
 
     populateTable();
-    
+
     projectSelectPopulate();
   }
 
@@ -218,7 +272,7 @@
         var newUnit = project.ahu;
         newUnit.name = name;
         newUnit.type = type;
-        var temp23 =  document.getElementById('ahuSize');
+        var temp23 = document.getElementById('ahuSize');
         newUnit.size = temp23[temp23.selectedIndex].value;
         newUnit.points = cv
         project.units.push(newUnit);

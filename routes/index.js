@@ -85,6 +85,11 @@ router.get('/points/name/:ahu',function(req,res,next){
 router.get('/sequence/name/:ahu',function(req,res,next){
   res.type('html');
   res.sendFile(path.resolve('./public/sequence.html'));
-})
+});
+
+router.get('/ejs', function(req,res,next){
+  res.render(path.resolve('./views/pages/index.ejs'));
+});
+
 
 module.exports = router;

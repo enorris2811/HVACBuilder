@@ -3,36 +3,88 @@
 
 <head>
     <title>HVAC Builder</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link rel="stylesheet" type='text/css' href="/stylesheets/style.css">
 </head>
 
 <body>
-    <div id='nav' class="w3-top">
-        <div class="w3-bar">
 
-            <a class="w3-bar-item w3-button" id='home' href="/">Home</a>
-            <a class='w3-bar-item w3-button' id='options' href="/options">options</a>
+    <nav id='navTop' class="navbar navbar-expand-sm justify-content-end">
+        <ul class="navbar-nav justify-content-right">
+            <img src="/public/images/CCG_Logo_New.bmp" class="rounded-circle" alt="CCG LOGO">
+            <li class="nav-item"></li>
+            <a class="nav-link" id='home' href="/">Get Started</a>
+            </li>
+            <li class="nav-item">
+                </liclass>
+                <a class='nav-link' id='options' href="/options">Projects</a>
+            </li>
+            <li class="nav-item"></li>
 
+            <a class="nav-link" id='points' href='/points'>Contact</a>
+            </li>
+            <li class="nav-item"></li>
+            <a class="nav-link" id='sequence' href='/sequence'>Login</a></li>
+            </li>
+        </ul>
+    </nav>
+    <div class='row'>
+        <div id='sideBar' class='container col-sm-3'>
 
-            <a class="w3-bar-item w3-button" id='points' href='/points'>Points</a>
+            <ul class="nav flex-column">
+                <li>Projects</li>
+            </ul>
 
-            <a class="w3-bar-item w3-button" id='sequence' href='/sequence'>Sequence</a></li>
 
         </div>
-    </div>
-    <h1>HVAC Builder</h1>
-    <div id='selectAHUDiv'>
-        <form id='selectAHUForm' action='/' method='GET'>
-            <label>Select an AHU unit in the Project</label>
-            <select id='selectAHU'>
-                <option>select...</option>
-            </select>
-            <button id='ahuButton' type='button'>Select Unit Options</button>
-        </form>
-    </div>
 
+        <div id='navBottom' class='container col-sm-9'>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href='/overview'>Overview</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href='/options'> Options</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/points'>Points</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/sequence'>Sequence</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/drawings'>Drawings</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/material'>Material</a>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+    </div>
+    <div class="container col-sm-9">
+        <h1>HVAC Builder</h1>
+        <div id='selectAHUDiv'>
+            <form id='selectAHUForm' action='/' method='GET'>
+                <label>Select an AHU unit in the Project</label>
+                <select id='selectAHU'>
+                    <option>select...</option>
+                </select>
+                <button id='ahuButton' type='button'>Select Unit Options</button>
+            </form>
+        </div>
+    </div>
 
 
 </body>
@@ -55,14 +107,14 @@
                     parentNode.appendChild(option);
                     option.textContent = project.units[x].name;
                     console.log(x);
-                    if(ahuName == project.units[x].name){
+                    if (ahuName == project.units[x].name) {
                         console.log('inside');
-                       flag = i;
+                        flag = i;
                     }
                 }
                 i++;
             }
-            flag = flag +1;
+            flag = flag + 1;
             console.log((flag));
             parentNode.selectedIndex = (flag);
             parentNode.submit;
@@ -95,7 +147,7 @@
     }
 
     document.getElementById('ahuButton').onclick = getOptions();
-    
+
     function getOptions() {
         var s = document.getElementById('selectAHU').selectedIndex - 1;
         var project = JSON.parse(localStorage.getItem('project'));

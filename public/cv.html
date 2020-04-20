@@ -2,179 +2,232 @@
 <html>
 
 <head>
-    <title>Constant Volume</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>HVAC Builder</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link rel="stylesheet" type='text/css' href="/stylesheets/style.css">
 </head>
 
 <body>
-    <div id='nav' class="w3-top">
-        <div class="w3-bar">
-    
-          <a class="w3-bar-item w3-button" id='home' href="/">Home</a>
-          <a class='w3-bar-item w3-button'id='options' href="/options">options</a>
-    
-    
-          <a class="w3-bar-item w3-button" id='points'href='/points' >Points</a>
-    
-          <a class="w3-bar-item w3-button"id='sequence'href='/sequence' >Sequence</a></li>
-    
-        </div>
-      </div>
-    <h1>Constant Volume</h1>
-    <div id='selectAHUDiv'>
-        <form id='selectAHUForm'>
-            <label>Select an AHU unit in the Project</label>
-            <select id='selectAHU'>
-                <option>select...</option>
-            </select>
-            <button id='ahuButton' type='button'>Select Unit Options</button>
-        </form>
-        <br><br>
-    </div>
-    <form><label for="runCond">Run Conditions</label>
-        <select class="runConditons" id="runConditions" name="runCond">
-            <option value="ZSSensorWithLinkage">ZS Sensor with Linkage</option>
-            <option value="WSSensorWithLinkage">WS Sensor with Linkage</option>
-        </select>
-        <br><br>
-        <label for="safties">Safeties</label>
-        <input id="freezeProtection" type="checkbox" value="1">Freeze Protection
-        <input id="returnAirSmokeDetector" type="checkbox" value="1">Return Air Smoke Detector
-        <input id="supplyAirSmokeDetector" type="checkbox" value="1">Supply Air Smoke Detector
-        <br><br>
-        <label for="SmokeControl">Smoke Control</label>
-        <input id="fireShutdown" type="checkbox" value="1">Fire Shutdown
-        <input id="evacuation" type="checkbox" value="1">Evacuation
-        <input id="pressurization" type="checkbox" value="1">Pressurization
-        <input id="purge" type="checkbox" name="Purge" value="1">Purge
-        <br><br>
-        <label for="OAT">Outdoor Air Temperature</label>
-        <select id="outdoorAirTemp" name="OAT">
-            <option value="physicalInput">Physical Input</option>
-            <option value="networkInput">Network Input</option>
-        </select><br><br>
-        <label for="SF">Supply Fan</label>
-        <select id="supplyFan" name="SF">
-            <option value="blowThrough">Blow Through -- On - Off</option>
-            <option value="drawThrough">Draw Through -- On - Off</option>
-        </select>
-        <br><br>
-        <label for="VFD">VFD</label>
-        <input id="vfd" type="checkbox" value="1">Single Zone VFD<br><br>
-        <label for="ReturnFan">Return Fan</label>
-        <select id="returnFan" name="RF">
-            <option value="none">None</option>
-            <option value="onOff">On - Off</option>
-        </select><br><br>
-        <label for="EF">Exhaust Fan</label>
-        <select id="exhaustFan" name="EF">
-            <option value="none">None</option>
-            <option value="onOff">On - Off</option>
-        </select><br><br>
-        <label for="Preheating">Preheating</label>
-        <select id="preHeating" name="Preheating">
-            <option value="none">None</option>
-            <option value="electricStaging">Electric Staging</option>
-            <option value="SCRElectric">SCR Electric</option>
-            <option value="hotWaterModulating">Hot Water: Modulating</option>
-            <option value="hotWaterModulationCoilDeltaT">Hot Water: Modulating Coil Delta T</option>
-            <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass</option>
-            <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass</option>
-        </select><br><br>
-        <label for="FaceBypassD">Face and Bypass Dampers</label>
-        <select id="faceAndBypassDampers" name="FaceBypassD">
-            <option value="none">None</option>
-            <option value="external">External Bypass</option>
-            <option value="internal">Internal Bypass</option>
-        </select><br><br>
-        <label for="Heating">Heating</label>
-        <select name="Heating" id="heating">
-            <option value="none">None</option>
-            <option value="electricStaging1">Electric Staging 1</option>
-            <option value="electricStaging2">Electric Staging 2</option>
-            <option value="electricStaging3">Electric Staging 3</option>
-            <option value="electricStaging4">Electric Staging 4</option>
-            <option value="electricStaging5">Electric Staging 5</option>
-            <option value="electricStaging6">Electric Staging 6</option>
-            <option value="gasStaging1">Gas Staging 1</option>
-            <option value="gasStaging2">Gas Staging 2</option>
-            <option value="gasStaging3">Gas Staging 3</option>
-            <option value="gasStaging4">Gas Staging 4</option>
-            <option value="gasStaging5">Gas Staging 5</option>
-            <option value="gasStaging6">Gas Staging 6</option>
-            <option value="SCRElectric">SCR Electric</option>
-            <option value="hotWaterModulating">Hot Water: Modulating</option>
-            <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass</option>
-            <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass</option>
-            <option value="hotWaterIntegralFaceAndBypass">Hot Water: Integral Face and Bypass</option>
-            <option value="steamModulating">Steam: Modulating</option>
-            <option value="steamExternalFaceBypass">Steam: External Face and Bypass</option>
-            <option value="steamInternalFaceAndBypass">Steam: Internal Face and Bypass</option>
-            <option value="steamIntegralFaceAndBypass">Steam: Integral Face and Bypass</option>
-        </select>
-        <br><br>
-        <label for="Cooling">Cooling</label>
-        <select id="cooling" name="Cooling">
-            <option value="none">None</option>
-            <option value="dXCooling">Dx Cooling</option>
-            <option value="chilledWaterModulating">Chilled Water: Modulating</option>
-            <option value="chilledWaterModulatingCoilDeltaT">Chilled Water: Modulating Coil Delta T</option>
-            <option value="chilledWaterExternalFaceBypass">Chilled Water: External Face and Bypass</option>
-            <option value="chilledWaterInternalFaceBypass">Chilled Water: Internal Face and Bypass</option>
-        </select>
-        <br><br>
-        <label for="MAD">Mixed Air Dampers</label>
-        <select id="mixedAirDamper" name="MAD">
-            <option value="none">None</option>
-            <option value="economizerOAEnthalpySwitch">Economizer: OA Enthalpy Switch</option>
-            <option value="economizerOAEnthalpySensor">Economizer: OA Enthalpy Sensor</option>
-            <option value="economizerOADifferentialEnthalpy">Economizer: OA Differential Enthalpy</option>
-            <option value="economizerOADryBulb">Economizer: OA Dry Bulb</option>
-        </select>
-        <br><br>
-        <label for="mOA">Minimum Outside Air</label>
-        <select id="minOutsideAir" name="mOA">
-            <option value="none">None</option>
-            <option value="differentialCO2">Differential CO2</option>
-            <option value="returnSpaceCO2">Return/Space CO2</option>
-        </select>
-        <br><br>
-        <label for="humidityControl">Humiditiy Control</label>
-        <input id="humidityControl" type="checkbox" name="humdidtyControl">Dehumidification
-        <br><br>
-        <label for="humidifier">Humidifier</label>
-        <select id="humidifier" name="humidifier">
-            <option value="none">None</option>
-            <option value="SS">Humidifier SS</option>
-            <option value="sSAndModulation">Humidifier SS and Modulation</option>
-        </select>
-        <br><br>
-        <label for="RARH">Misc Monitoring</label>
-        <input id="RARH" type="checkbox" name="RARH">Return Air Relative Humidity<br>
-        <input id="OARH" type="checkbox" name="OARH">Outdoor Air
-        Relative Humidity
-        <br><br>
-        <label for="f1M">Filter 1 Monitoring</label>
-        <select id="filterOneMonitoring" name="f1M">
-            <option value="none">None</option>
-            <option value="hours">Hours</option>
-            <option value="status">Status</option>
-            <option value="differentialPressure">Differential Pressure</option>
-        </select>
-        <br><br>
-        <label for="f2M">Filter 2 Monitoring</label>
-        <select id="filterTwoMonitoring" name="f2M">
-            <option value="none">None</option>
-            <option value="hours">Hours</option>
-            <option value="status">Status</option>
-            <option value="differentialPressure">Differential Pressure</option>
-        </select>
-        <br><br>
-    </form>
 
-    <button onclick="submitCV()">Submit</button>
+    <nav id='navTop' class="navbar navbar-expand-sm justify-content-end">
+        <ul class="navbar-nav">
+            <img src="/public/images/CCG_Logo_New.bmp" class="rounded-circle" alt="CCG LOGO">
+            <li class="nav-item"></li>
+            <a class="nav-link" id='home' href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                </liclass>
+                <a class='nav-link' id='options' href="/options">options</a>
+            </li>
+            <li class="nav-item"></li>
+
+            <a class="nav-link" id='points' href='/points'>Points</a>
+            </li>
+            <li class="nav-item"></li>
+            <a class="nav-link" id='sequence' href='/sequence'>Sequence</a></li>
+            </li>
+        </ul>
+    </nav>
+    <div class='row'>
+        <div id='sideBar' class='container col-sm-3'>
+
+            <ul class="nav flex-column">
+                <li>Projects</li>
+            </ul>
+
+
+        </div>
+
+        <div id='navBottom' class='container col-sm-9'>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href='/overview'>Overview</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href='/options'> Options</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/points'>Points</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/sequence'>Sequence</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/drawings'>Drawings</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/material'>Material</a>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+    </div>
+    <div class="container col-sm-9">
+        <h1>Constant Volume</h1>
+        <div id='selectAHUDiv'>
+            <form id='selectAHUForm'>
+                <label>Select an AHU unit in the Project</label>
+                <select id='selectAHU'>
+                    <option>select...</option>
+                </select>
+                <button id='ahuButton' type='button'>Select Unit Options</button>
+            </form>
+            <br><br>
+        </div>
+        <form><label for="runCond">Run Conditions</label>
+            <select class="runConditons" id="runConditions" name="runCond">
+                <option value="ZSSensorWithLinkage">ZS Sensor with Linkage</option>
+                <option value="WSSensorWithLinkage">WS Sensor with Linkage</option>
+            </select>
+            <br><br>
+            <label for="safties">Safeties</label>
+            <input id="freezeProtection" type="checkbox" value="1">Freeze Protection
+            <input id="returnAirSmokeDetector" type="checkbox" value="1">Return Air Smoke Detector
+            <input id="supplyAirSmokeDetector" type="checkbox" value="1">Supply Air Smoke Detector
+            <br><br>
+            <label for="SmokeControl">Smoke Control</label>
+            <input id="fireShutdown" type="checkbox" value="1">Fire Shutdown
+            <input id="evacuation" type="checkbox" value="1">Evacuation
+            <input id="pressurization" type="checkbox" value="1">Pressurization
+            <input id="purge" type="checkbox" name="Purge" value="1">Purge
+            <br><br>
+            <label for="OAT">Outdoor Air Temperature</label>
+            <select id="outdoorAirTemp" name="OAT">
+                <option value="physicalInput">Physical Input</option>
+                <option value="networkInput">Network Input</option>
+            </select><br><br>
+            <label for="SF">Supply Fan</label>
+            <select id="supplyFan" name="SF">
+                <option value="blowThrough">Blow Through -- On - Off</option>
+                <option value="drawThrough">Draw Through -- On - Off</option>
+            </select>
+            <br><br>
+            <label for="VFD">VFD</label>
+            <input id="vfd" type="checkbox" value="1">Single Zone VFD<br><br>
+            <label for="ReturnFan">Return Fan</label>
+            <select id="returnFan" name="RF">
+                <option value="none">None</option>
+                <option value="onOff">On - Off</option>
+            </select><br><br>
+            <label for="EF">Exhaust Fan</label>
+            <select id="exhaustFan" name="EF">
+                <option value="none">None</option>
+                <option value="onOff">On - Off</option>
+            </select><br><br>
+            <label for="Preheating">Preheating</label>
+            <select id="preHeating" name="Preheating">
+                <option value="none">None</option>
+                <option value="electricStaging">Electric Staging</option>
+                <option value="SCRElectric">SCR Electric</option>
+                <option value="hotWaterModulating">Hot Water: Modulating</option>
+                <option value="hotWaterModulationCoilDeltaT">Hot Water: Modulating Coil Delta T</option>
+                <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass</option>
+                <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass</option>
+            </select><br><br>
+            <label for="FaceBypassD">Face and Bypass Dampers</label>
+            <select id="faceAndBypassDampers" name="FaceBypassD">
+                <option value="none">None</option>
+                <option value="external">External Bypass</option>
+                <option value="internal">Internal Bypass</option>
+            </select><br><br>
+            <label for="Heating">Heating</label>
+            <select name="Heating" id="heating">
+                <option value="none">None</option>
+                <option value="electricStaging1">Electric Staging 1</option>
+                <option value="electricStaging2">Electric Staging 2</option>
+                <option value="electricStaging3">Electric Staging 3</option>
+                <option value="electricStaging4">Electric Staging 4</option>
+                <option value="electricStaging5">Electric Staging 5</option>
+                <option value="electricStaging6">Electric Staging 6</option>
+                <option value="gasStaging1">Gas Staging 1</option>
+                <option value="gasStaging2">Gas Staging 2</option>
+                <option value="gasStaging3">Gas Staging 3</option>
+                <option value="gasStaging4">Gas Staging 4</option>
+                <option value="gasStaging5">Gas Staging 5</option>
+                <option value="gasStaging6">Gas Staging 6</option>
+                <option value="SCRElectric">SCR Electric</option>
+                <option value="hotWaterModulating">Hot Water: Modulating</option>
+                <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass</option>
+                <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass</option>
+                <option value="hotWaterIntegralFaceAndBypass">Hot Water: Integral Face and Bypass</option>
+                <option value="steamModulating">Steam: Modulating</option>
+                <option value="steamExternalFaceBypass">Steam: External Face and Bypass</option>
+                <option value="steamInternalFaceAndBypass">Steam: Internal Face and Bypass</option>
+                <option value="steamIntegralFaceAndBypass">Steam: Integral Face and Bypass</option>
+            </select>
+            <br><br>
+            <label for="Cooling">Cooling</label>
+            <select id="cooling" name="Cooling">
+                <option value="none">None</option>
+                <option value="dXCooling">Dx Cooling</option>
+                <option value="chilledWaterModulating">Chilled Water: Modulating</option>
+                <option value="chilledWaterModulatingCoilDeltaT">Chilled Water: Modulating Coil Delta T</option>
+                <option value="chilledWaterExternalFaceBypass">Chilled Water: External Face and Bypass</option>
+                <option value="chilledWaterInternalFaceBypass">Chilled Water: Internal Face and Bypass</option>
+            </select>
+            <br><br>
+            <label for="MAD">Mixed Air Dampers</label>
+            <select id="mixedAirDamper" name="MAD">
+                <option value="none">None</option>
+                <option value="economizerOAEnthalpySwitch">Economizer: OA Enthalpy Switch</option>
+                <option value="economizerOAEnthalpySensor">Economizer: OA Enthalpy Sensor</option>
+                <option value="economizerOADifferentialEnthalpy">Economizer: OA Differential Enthalpy</option>
+                <option value="economizerOADryBulb">Economizer: OA Dry Bulb</option>
+            </select>
+            <br><br>
+            <label for="mOA">Minimum Outside Air</label>
+            <select id="minOutsideAir" name="mOA">
+                <option value="none">None</option>
+                <option value="differentialCO2">Differential CO2</option>
+                <option value="returnSpaceCO2">Return/Space CO2</option>
+            </select>
+            <br><br>
+            <label for="humidityControl">Humiditiy Control</label>
+            <input id="humidityControl" type="checkbox" name="humdidtyControl">Dehumidification
+            <br><br>
+            <label for="humidifier">Humidifier</label>
+            <select id="humidifier" name="humidifier">
+                <option value="none">None</option>
+                <option value="SS">Humidifier SS</option>
+                <option value="sSAndModulation">Humidifier SS and Modulation</option>
+            </select>
+            <br><br>
+            <label for="RARH">Misc Monitoring</label>
+            <input id="RARH" type="checkbox" name="RARH">Return Air Relative Humidity<br>
+            <input id="OARH" type="checkbox" name="OARH">Outdoor Air
+            Relative Humidity
+            <br><br>
+            <label for="f1M">Filter 1 Monitoring</label>
+            <select id="filterOneMonitoring" name="f1M">
+                <option value="none">None</option>
+                <option value="hours">Hours</option>
+                <option value="status">Status</option>
+                <option value="differentialPressure">Differential Pressure</option>
+            </select>
+            <br><br>
+            <label for="f2M">Filter 2 Monitoring</label>
+            <select id="filterTwoMonitoring" name="f2M">
+                <option value="none">None</option>
+                <option value="hours">Hours</option>
+                <option value="status">Status</option>
+                <option value="differentialPressure">Differential Pressure</option>
+            </select>
+            <br><br>
+        </form>
+
+        <button onclick="submitCV()">Submit</button>
+    </div>
 </body>
 <script>
 
@@ -553,7 +606,7 @@
             console.log(project);
             console.log(abc);
             project.units[abc - 1].points = cv;
-            
+
             localStorage.setItem('project', JSON.stringify(project));
 
         });
@@ -817,10 +870,10 @@
                     }
                 } else {
                     console.log('found isUsed..now set select or checkbox');
-                    if(docEle.type == 'checkbox'){
+                    if (docEle.type == 'checkbox') {
                         docEle.checked = false;
                     }
-                    if(docEle.type == 'select-one'){
+                    if (docEle.type == 'select-one') {
                         docEle.selectedIndex = 0;
                     }
                 }
@@ -861,10 +914,10 @@
                             }
                         }
                         //console.log('found isUsed..now set select or checkbox');
-                    }else{
-                        if(docEle.type == 'checkbox'){
+                    } else {
+                        if (docEle.type == 'checkbox') {
                             docEle.checked = false;
-                        }else if (docEle.type == 'select-one'){
+                        } else if (docEle.type == 'select-one') {
                             //docEle.selectedIndex = 0;
                         }
                     }

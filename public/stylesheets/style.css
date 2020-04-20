@@ -7,7 +7,7 @@ a {
   color: #00B7FF;
 }
 
-#nav {
+#navTop {
   background-color: rgb(0,111,81);
   
 
@@ -22,52 +22,10 @@ td{
 ul{
   list-style-type: disc;
 }
-#ahuTable {
-  border-style: solid;
-  border-spacing: 5px;
-  width: 100%;
-  display:table;
-  margin:0;
-  max-width: 100%;
-  background-color: transparent;
-  padding:0px;
-  box-sizing: border-box;
-}
+
 
 .rowHeader{
   color:#ffffff;
   background:rgb(0, 111, 81);
 }
 
-th {
-  border-top-color: rgb(0,111,81);
-  border-bottom-color: rgb(0, 111, 81);
-  background-color: rgb(0, 111, 81);
-  border-bottom-style:solid;
-  border-bottom-width:2px;
-  border-collapse: collapse;
-  box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 21px;
-  padding-bottom: 10px;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 10px;
-}
-.tableRow {
-  display: table-row;
-  border-bottom-width: 1px;
-  border-collapse: collapse;
-  box-sizing: border-box;
-  font-size: 12px;
-  line-height: 18px;
-  background:#fff;
-  width:100%; 
-  border-bottom: 1px solid #030303;
-}
-
-.tableCell {
-  border:none;
-  text-align: left;
-}
