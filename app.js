@@ -3,27 +3,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index.js');
 var usersRouter = require('./routes/users.js');
-
+var projectRouter = require('./routes/projects.js');
 
 var app = express();
+var db = require('./db.js')
 
-var appEJS = express();
-
-appEJS.set('view engine','ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'C:/Users/Eric Norris/ahu/HVACBuilder/public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-appEJS.use(logger('dev'));
-appEJS.use(express.json());
-appEJS.use(express.urlencoded({extended: false}));
-appEJS.use(cookieParser());
-appEJS.use(express.static(path.join(__dirname,'views')));
 
 app.use('/', indexRouter);
 app.use('/cv', indexRouter);
@@ -34,16 +28,30 @@ app.use('/cvModel', indexRouter);
 app.use('/points',indexRouter);
 app.use('/pointsModel',indexRouter);
 app.use('/sequence',indexRouter);
-app.use('/options', indexRouter);
-app.use('/options/vav',indexRouter);
-app.use('/options/cv',indexRouter);
+
 app.use('/newProject',indexRouter);
-app.use('/options/name/:ahu',indexRouter);
-app.use('/points/name/:option', indexRouter);
+
 app.use('/sequence/name/:ahu',indexRouter);
-
-appEJS.use('/ejs', indexRouter);
-
+app.use('/saveProject',indexRouter);
+app.use('/getStarted',indexRouter);
+app.use('/getAHU', indexRouter);
+app.use('/addAHU',indexRouter);
+app.use('/user',usersRouter);
+app.use('/getGroups',indexRouter);
+app.use('/getProjects', indexRouter);
+app.use('/getUnits',indexRouter);
+app.use('/newuser', indexRouter);
+app.use('/login', indexRouter);
+app.use('/addNewGroup',indexRouter);
+app.use('/overview',indexRouter);
+app.use('/overview/project/:project/group/:group',indexRouter);
+app.use('/overview/project/:project/group/:group/unit/:unit',indexRouter);
+app.use('/overview/project/:project',indexRouter);
+app.use('/options', indexRouter);
+app.use('/options/project/:project/group/:group',indexRouter);
+app.use('/options/project/:project/group/:group/unit/:unit',indexRouter);
+app.use('/options/project/:project',indexRouter);
+app.use('/getUserProjects',indexRouter);
 if(process.env.NODE_ENV === 'production'){
     //set static folder
     app.use(express.static('client/build'));

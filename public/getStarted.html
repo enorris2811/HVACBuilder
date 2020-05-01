@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HVAC Builder</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type='text/css' href="/stylesheets/newStyle.css">
+</head>
+
+<body>
+
+    <nav id='navTop' class="navbar navbar-expand-sm">
+        <ul class="navbar-nav" id='navbar'>
+            <img src="/images/CCG_Logo_New.bmp" class="align-self-*-start" alt="CCG LOGO">
+            <li class="nav-item">
+                <a class="nav-link" id='home' href="/">Get Started</a>
+            </li>
+            <li class="nav-item">
+                <a class='nav-link' id='options' href="/">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id='points' href='/'>Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id='loginLink' data-target="#loginForm" data-toggle='collapse'>login</a>
+            </li>
+            <li class="collapse nav-item" id='loginForm'>
+
+                <label for='userName'>User Name:</label>
+                <input type='text' id='userName'>
+                <label for='password'>Password:</label>
+                <input type='text' id='password'>
+                <button id='loginButton' data-toggle='collapse' data-target='#loginForm'
+                    onclick='login()'>Submit</button>
+                <button id='newUserButton' data-toggle='collapse' data-target='#loginForm' onclick='newuser()'>New
+                    User</button>
+
+            </li>
+        </ul>
+    </nav>
+    <div class='row'>
+        <div class='container col-sm-3' id='sidebar'>
+            <h2>Projects Controls</h2>
+            <div class="list-group invisible" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="home-list" data-toggle="list" href="#home"
+                    role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="newProject-list" data-toggle="list"
+                    href="#newProject" role="tab" aria-controls="newProject">New Project</a>
+                <a class="list-group-item list-group-item-action" id="newGroup-list" data-toggle="list" href="#newGroup"
+                    role="tab" aria-controls="newGroup">New Group</a>
+                <a class="list-group-item list-group-item-action" id="newUnit-list" data-toggle="list" href="#newUnit"
+                    role="tab" aria-controls="newUnit">New Unit</a>
+
+            </div>
+            <h4>Select a link to configure</h4>
+
+        </div>
+
+
+
+
+
+        <div id='navBottom' class='container col-sm-9'>
+            <ul class="nav nav-tabs" id='projectNav'>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" id='breadcrumb'>
+                        <li class='breadcrumb-item active'aria-current="page">Home</li>
+                    </ol>
+                </nav>
+                <li class="nav-item">
+                    <a class="nav-link" href='/overview'>Overview</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/options'>Options</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/points'>Points</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/sequence'>Sequence</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/drawings'>Drawings</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/material'>Material</a>
+                </li>
+
+
+            </ul>
+
+            <div class="container">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class='tab-pane fade show active' id='home' role='tabpanel' aria-labelledby="home-list">
+                        <h1>HVAC Builder</h1>
+                        <p>Welcome to the CCG Equipment Configurator. LogIn to access
+                            saved projects and equipment, or create a new user and start
+                            configuring a equipment and organizing a project now! </p>
+                    </div>
+
+                    <div class="tab-pane fade" id="newProject" role="tabpanel" aria-labelledby="newProject-list">
+                        <label for='newProjectTextbox'>Enter the name for a new project</label>
+                        <input type='text' id='newProjectTextbox'>
+
+                        <button type='submit' onclick='createNewProject()'>Submit</button>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="newGroup" role="tabpanel" aria-labelledby="newGroup-list">
+
+                        <label for='newGroupTextbox'>Enter a name for a group</label>
+                        <input type='text' id='newGroupTextbox'>
+                        <select id='newGroupProjectSelect'>
+                            <option value=''>....</option>
+                        </select>
+                        <button type='submit' id='newGroupSubmit' onclick='addNewGroup()'>Submit</button>
+                    </div>
+
+                    <div class="tab-pane fade" id="newUnit" role="tabpanel" aria-labelledby="newUnit-list">
+
+                        <ul class='list-group'>
+
+                            <li class='list-group-item'>
+                                <label for="AHUType">Select AHU Style</label>
+                                <select id="AHUOptions">
+                                    <option value="">Select....</option>
+                                    <option value="Constant Volume">Constant Volume</option>
+                                    <option value="VAV">VAV</option>
+                                </select>
+                            </li>
+
+                            <li class='list-group-item'>
+                                <label for='ahuName'>Enter the Name of The AHU</label>
+                                <input id='ahuName' type='text'>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='projectSelect'>Select the project for the AHU:</label>
+                                <select id='projectSelect'>
+                                    <option value=''>Select....</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='groupSelect'>Select the Group</label>
+                                <select id='groupSelect'>
+                                    <option value=''>Select....</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='ahuSize'>Select the Size of the AHU</label>
+                                <select id='ahuSize'>
+                                    <option value='small'>Small(0 to 9999k CFM) </option>
+                                    <option value='medium'>Medium(10k to 15999k CFM)</option>
+                                    <option value='large'>Large (16K to 20k CFM)</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='controllerSelect'>Select the controller manufacturer</label>
+                                <select id='controllerSelect'>
+                                    <option value='siemens'>Siemens</option>
+                                    <option value='carrier'>Carrier</option>
+                                    <option value='distech'>Distech</option>
+                                    <option value='trane'>Trane</option>
+                                </select>
+                            </li>
+                            <br>
+                            <br>
+                            <button type='submit' onclick='addAHU()'>Submit new AHU</button>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        var user = sessionStorage.getItem('user');
+        var userID = sessionStorage.getItem('userID');
+        if (user != undefined) {
+            var temp = document.getElementById('list-tab');
+            temp.className = 'list-group';
+            updateSidebar();
+            loadProjectSelect('projectSelect');
+            loadProjectSelect('newGroupProjectSelect');
+            var temp = document.getElementById('loginLink');
+            temp.textContent = user;
+            var topNode = document.getElementById('navbar');
+            var newNode = document.createElement('li');
+            var newButton = document.createElement('a');
+            newNode.className = 'nav-item';
+            topNode.appendChild(newNode);
+
+            newButton.setAttribute('onclick', 'logOut()');
+            newButton.textContent = 'LogOut';
+            newButton.className = 'nav-link';
+            newNode.appendChild(newButton);
+        }
+
+    });
+
+    function addNewGroup() {
+        var groupName = document.getElementById('newGroupTextbox').value;
+        var projectID = document.getElementById('newGroupProjectSelect').value;
+        $.post('/addNewGroup', { groupName, projectID }, function (data, status) {
+
+        });
+
+    }
+
+
+    function logOut() {
+        sessionStorage.clear();
+        console.log('seesion storage cleared');
+
+    }
+    function addAHU() {
+        console.log('clicked addAHU');
+        var x = document.getElementById('AHUOptions');
+        var type = x[x.selectedIndex].value;
+        x = document.getElementById('ahuName');
+        var name = x.value;
+        x = document.getElementById('projectSelect');
+        var project = x[x.selectedIndex].value;
+        x = document.getElementById('groupSelect');
+        var group = x[x.selectedIndex].value;
+        x = document.getElementById('ahuSize');
+        var size = x[x.selectedIndex].value;
+        x = document.getElementById('controllerSelect');
+        var manu = x[x.selectedIndex].value;
+        var temp = sessionStorage.getItem('user');
+        var user;
+        if (temp != undefined) {
+            user = temp;
+        }
+        console.log(manu);
+        if (type == 'Constant Volume') {
+
+            $.post('/addAHU', { name, type, project, size, user, manu, group }, function (data, status) {
+
+            });
+
+        }
+
+    }
+
+
+
+    function createNewProject() {
+        console.log('clicked!!');
+        var ele = document.getElementById('newProjectTextbox').value;
+        console.log(ele);
+        var name = document.getElementById('newProjectTextbox').value;
+        var userID = sessionStorage.getItem('userID');
+
+        if (userID != undefined) {
+            $.post('/newProject', { name, userID }, function (data, status) {
+                updateSidebar(userID);
+            });
+        } else {
+            alert('Please log In');
+        }
+    }
+    function addNewSideBarItem(name, name2, project, topNode) {
+        var newListItem = document.createElement('li');
+        newListItem.className = 'list-group-item';
+        topNode.appendChild(newListItem);
+        var newA = document.createElement('a');
+        newA.textContent = project.name;
+        newListItem.appendChild(newA);
+        newA.id = project.name;
+        newA.className = 'list-group-item';
+
+        // newA.setAttribute('data-toggle', 'collapse');
+
+        var newUL = document.createElement('ul');
+        if (name == null) {
+            //  newA.setAttribute('data-target', '#' + project.name + 'List');
+            newUL.id = project.name + 'List';
+            newA.setAttribute('href', '/overview/project/' + project.name);
+
+        } else {
+            // newA.setAttribute('data-target', '#' + name + project.name + 'List');
+            newUL.id = name + project.name + 'List';
+            newA.setAttribute('href', '/overview/project/' + name + '/group/' + project.name);
+
+        }
+        if (name2 != null) {
+            newA.setAttribute('href', '/overview/project/' + name2 + '/group/' + name + '/unit/' + project.name);
+            //newA.className = 'list-group-item';
+        }
+
+        newUL.className = 'list-group';
+
+        newListItem.appendChild(newUL);
+        return newUL;
+    }
+
+
+    function updateSidebar() {
+        var topNode = document.getElementById('sidebar');
+        //topNode.childNodes.remove();
+
+        var projects = JSON.parse(sessionStorage.getItem('projects'));
+
+        var groups = JSON.parse(sessionStorage.getItem('groups'));
+
+        var units = JSON.parse(sessionStorage.getItem('units'));
+        console.log(projects);
+        console.log(groups);
+        console.log(units);
+        var topNode = document.getElementById('sidebar');
+        var newNode = document.createElement('ul');
+        newNode.className = 'list-group';
+        topNode.appendChild(newNode);
+        while (projects.length > 0) {
+            var tempProject = projects.shift();
+            var newUL = addNewSideBarItem(null, null, tempProject, newNode);
+
+            for (var x = 0; x < groups.length; x++) {
+                var tempGroup = groups[x];
+                if (tempGroup.project == tempProject._id) {
+                    var nextUL = addNewSideBarItem(tempProject.name, null, tempGroup, newUL);
+
+                    for (var y = 0; y < units.length; y++) {
+                        var tempUnit = units[y];
+                        if (tempUnit.group == tempGroup._id) {
+                            var dump = addNewSideBarItem(tempGroup.name, tempProject.name, tempUnit, nextUL);
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+
+    }
+    function saveProject(project) {
+        $.post('/saveProject', { project }, function (data, status) {
+            console.log('save maybe');
+            if (status == 400 || status == 200) {
+                console.log(data);
+            }
+        });
+    }
+
+
+
+    function loadProjectSelect(eleID) {
+
+        var projects = JSON.parse(sessionStorage.getItem('projects'));
+        var topNode = document.getElementById(eleID);
+      
+        for (x in projects) {
+            console.log(projects[x]);
+            var temp = document.createElement('option');
+            temp.textContent = projects[x].name;
+            temp.value = projects[x]._id;
+            topNode.appendChild(temp);
+        }
+
+    }
+    function newuser() {
+        var tempUserName = document.getElementById('userName').value;
+        var tempPassword = document.getElementById('password').value;
+        $.post('/newuser', { tempUserName, tempPassword }, function (data, status) {
+            console.log(data.auth);
+        });
+    }
+
+    function login() {
+        var tempUserName = document.getElementById('userName').value;
+        var tempPassword = document.getElementById('password').value;
+
+        var temp = document.getElementById('loginLink');
+        $.post('/login', { tempUserName, tempPassword }, function (data, status) {
+            console.log(data.auth);
+            if (data.auth == true) {
+                temp.textContent = tempUserName;
+                sessionStorage.setItem('user', tempUserName);
+                sessionStorage.setItem('userID', data.userID);
+                getUserData(data.userID);
+            } else {
+                alert('login failed!');
+            }
+        });
+    }
+    function getUserData(userID) {
+        var id;
+        $.post('/getProjects', { userID }, function (data, status) {
+            var projects = data.projects;
+            var id = projects[0]._id;
+            console.log(projects[0]);
+            console.log(data);
+            console.log(id);
+            sessionStorage.setItem('projects', JSON.stringify(projects));
+            $.post('/getGroups', { id }, function (data, status) {
+                sessionStorage.setItem('groups', JSON.stringify(data.list));
+                console.log(data);
+            });
+            $.post('/getUnits', { id }, function (data, status) {
+                console.log(data);
+                sessionStorage.setItem('units', JSON.stringify(data.units));
+            });
+        });
+
+
+
+        console.log(JSON.parse(sessionStorage.getItem('projects')));
+        console.log(sessionStorage.getItem('groups'));
+        console.log(sessionStorage.getItem('units'));
+    }
+
+    document.getElementById('projectSelect').onchange = function () {
+        var groupSelect = document.getElementById('groupSelect');
+        console.log('select changed');
+        var val = this.options[this.selectedIndex].value;
+        console.log(val);
+
+
+        $.post('/getGroups', { id: val }, function (data, status) {
+            var groups = data.list;
+            for (x in groups) {
+                var newOption = document.createElement('option');
+                newOption.value = groups[x]._id;
+                newOption.textContent = groups[x].name;
+                groupSelect.appendChild(newOption);
+            }
+        });
+
+    }
+</script>
+
+</html>
