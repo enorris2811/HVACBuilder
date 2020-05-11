@@ -1,10 +1,13 @@
 var points = {
     'hardware': {
-
+        'remoteOccupancy':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'mixedAirDampers': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'compressorStage': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
-        'outsideAirEnthalpySwithc': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
-
+        'outsideAirEnthalpySwitch': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
+        'staticPressure':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
+        'supplyFanVFDSpeed':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
+        'highStaticResetInput':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
+        'highStaticSafteySwitch':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'outsideAirCO2Concentration': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'highDuctRelativeHumidity': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 1, 'BO': 0, 'AV': 0, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 0, 'Alarm': 0, 'Graphics': 0 } },
         'supplyAirHumidity': { 'isUsed': false, 'points': { 'AI': 1, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 0, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 0, 'Alarm': 0, 'Graphics': 0 } },
@@ -43,7 +46,10 @@ var points = {
         'supplyFanSS': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 1, 'AV': 0, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } }
     },
     'software': {
-
+        'spaceUnoccupiedOverride':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
+        'highSupplyAirStaticPressureLimit':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
+        'staticPressureSetpoint':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
+        'supplyAirTemperatureCoolingSetpoint':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'cO2ConcentrationDifferentialSetpoint': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'highReturnAirCO2Concentration': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'humidificationSetpoint': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 0, 'Alarm': 0, 'Graphics': 0 } },
@@ -73,7 +79,9 @@ var points = {
         'highSpaceCO2Concentration': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 0, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 0, 'Alarm': 1, 'Graphics': 0 } },
         'highSpaceRelativeHumiditiy': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 0, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 0, 'Alarm': 1, 'Graphics': 0 } },
         'highSpaceTemperature': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 0, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 0, 'Alarm': 1, 'Graphics': 0 } },
+        'highStaticPressure':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'highSupplyAirTemperature': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 0, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 0, 'Alarm': 1, 'Graphics': 0 } },
+        'lowStaticPressure':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'lowMixedAirTemperature': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 0, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 0, 'Alarm': 1, 'Graphics': 0 } },
         'lowPreheatDischargeAirTemp': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 0, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 0, 'Alarm': 1, 'Graphics': 0 } },
         'lowReturnAirTemperature': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 0, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 0, 'Alarm': 1, 'Graphics': 0 } },

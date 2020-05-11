@@ -6,57 +6,83 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" type='text/css' href="/stylesheets/style.css">
+    <link rel="stylesheet" type='text/css' href="/stylesheets/newStyle.css">
 </head>
 
 <body>
 
-    <nav id='navTop' class="navbar navbar-expand-sm justify-content-end">
-        <ul class="navbar-nav justify-content-right">
-            <img src="/public/images/CCG_Logo_New.bmp" class="rounded-circle" alt="CCG LOGO">
+    <nav id='navTop' class="navbar navbar-expand-sm">
+        <ul class="navbar-nav" id='navbar'>
+            <img src="/images/CCG_Logo_New.bmp" class="align-self-*-start" alt="CCG LOGO">
             <li class="nav-item">
                 <a class="nav-link" id='home' href="/">Get Started</a>
             </li>
             <li class="nav-item">
-
-                <a class='nav-link' id='options' href="/options">Projects</a>
+                <a class='nav-link' id='options' href="/">Projects</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id='points' href='/points'>Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id='sequence' href='/sequence'>Login</a>
+                <a class="nav-link" id='loginLink' data-target="#loginForm" data-toggle='collapse'>login</a>
             </li>
+            <li class="collapse nav-item" id='loginForm'>
 
+                <label for='userName'>User Name:</label>
+                <input type='text' id='userName'>
+                <label for='password'>Password:</label>
+                <input type='text' id='password'>
+                <button id='loginButton' data-toggle='collapse' data-target='#loginForm'
+                    onclick='login()'>Submit</button>
+                <button id='newUserButton' data-toggle='collapse' data-target='#loginForm' onclick='newuser()'>New
+                    User</button>
+
+            </li>
         </ul>
     </nav>
     <div class='row'>
-        <div id='sideBar' class='container col-sm-3'>
+        <div class='container col-sm-3'>
+            <h2>Projects Controls</h2>
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="home-list" data-toggle="list" href="#home"
+                    role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="newProject-list" data-toggle="list"
+                    href="#newProject" role="tab" aria-controls="newProject">New Project</a>
+                <a class="list-group-item list-group-item-action" id="newGroup-list" data-toggle="list" href="#newGroup"
+                    role="tab" aria-controls="newGroup">New Group</a>
+                <a class="list-group-item list-group-item-action" id="newUnit-list" data-toggle="list" href="#newUnit"
+                    role="tab" aria-controls="newUnit">New Unit</a>
 
-            <ul class="nav flex-column">
-                <li>Projects</li>
-            </ul>
-
-
+            </div>
+            <h4>Overview Selector</h4>
+            <div id='sidebar'></div>
         </div>
 
+
+
+
+
         <div id='navBottom' class='container col-sm-9'>
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id='projectNav'>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" id='breadcrumb'>
+                        <li class='breadcrumb-item active' aria-current="page">Home</li>
+                    </ol>
+                </nav>
                 <li class="nav-item">
-                    <a class="nav-link" href='/'>Overview</a>
+                    <a class="nav-link" id='overviewLink' href='/overview'>Overview</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link"  href='/options'> Options</a>
+                    <a class="nav-link" id='optionsLink' href='/options'>Options</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active"data-toggle="tab" href='/points'>Points</a>
+                    <a class="nav-link active" id='pointsLink' href='/points'>Points</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href='/sequence'>Sequence</a>
+                    <a class="nav-link" id='sequenceLink' href='/sequence'>Sequence</a>
                 </li>
 
                 <li class="nav-item">
@@ -67,24 +93,92 @@
                     <a class="nav-link" href='/material'>Material</a>
                 </li>
 
-
             </ul>
-        </div>
+
+            <div class="container">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class='tab-pane fade show active' id='home' role='tabpanel' aria-labelledby="home-list">
+                        <h1>HVAC Builder</h1>
+                        <p>Welcome to the CCG Equipment Configurator. LogIn to access
+                            saved projects and equipment, or create a new user and start
+                            configuring a equipment and organizing a project now! </p>
+                    </div>
+
+                    <div class="tab-pane fade" id="newProject" role="tabpanel" aria-labelledby="newProject-list">
+                        <label for='newProjectTextbox'>Enter the name for a new project</label>
+                        <input type='text' id='newProjectTextbox'>
+
+                        <button type='submit' onclick='createNewProject()'>Submit</button>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="newGroup" role="tabpanel" aria-labelledby="newGroup-list">
+
+                        <label for='newGroupTextbox'>Enter a name for a group</label>
+                        <input type='text' id='newGroupTextbox'>
+                        <select id='newGroupProjectSelect'>
+                            <option value=''>....</option>
+                        </select>
+                        <button type='submit' id='newGroupSubmit' onclick='addNewGroup()'>Submit</button>
+                    </div>
+
+                    <div class="tab-pane fade" id="newUnit" role="tabpanel" aria-labelledby="newUnit-list">
+
+                        <ul class='list-group'>
+
+                            <li class='list-group-item'>
+                                <label for="AHUType">Select AHU Style</label>
+                                <select id="AHUOptions">
+                                    <option value="">Select....</option>
+                                    <option value="Constant Volume">Constant Volume</option>
+                                    <option value="VAV">VAV</option>
+                                </select>
+                            </li>
+
+                            <li class='list-group-item'>
+                                <label for='ahuName'>Enter the Name of The AHU</label>
+                                <input id='ahuName' type='text'>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='projectSelect'>Select the project for the AHU:</label>
+                                <select id='projectSelect'>
+                                    <option value=''>Select....</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='groupSelect'>Select the Group</label>
+                                <select id='groupSelect'>
+                                    <option value=''>Select....</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='ahuSize'>Select the Size of the AHU</label>
+                                <select id='ahuSize'>
+                                    <option value='small'>Small(0 to 9999k CFM) </option>
+                                    <option value='medium'>Medium(10k to 15999k CFM)</option>
+                                    <option value='large'>Large (16K to 20k CFM)</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='controllerSelect'>Select the controller manufacturer</label>
+                                <select id='controllerSelect'>
+                                    <option value='siemens'>Siemens</option>
+                                    <option value='carrier'>Carrier</option>
+                                    <option value='distech'>Distech</option>
+                                    <option value='trane'>Trane</option>
+                                </select>
+                            </li>
+                            <br>
+                            <br>
+                            <button type='submit' onclick='addAHU()'>Submit new AHU</button>
+
+                        </ul>
+
+                    </div>
+
+                </div>
 
 
-
-
-        <div class="container col-sm-9">
-            <h1>Points List</h1>
-            <div class="container" id='selectAHUDiv'>
-                <form id='selectAHUForm'>
-                    <label>Select an AHU unit in the Project</label>
-                    <select id='selectAHU'>
-                        <option>select...</option>
-                    </select>
-
-                </form>
-                <br><br>
             </div>
             <div class="container">
                 <table id='ahuTable' class='table'>
@@ -133,50 +227,87 @@
             </div>
         </div>
     </div>
+    <script src='/javascripts/login.js'></script>
+    <script src='/javascripts/loadSideBar.js'></script>
+    <script src='/javascripts/breadcrumb.js'></script>
+    <script src='/javascripts/projectControl.js'></script>
+    <script src='/javascripts/getUnit.js'></script>
+    <script src='/javascripts/helper.js'></script>
 </body>
 
 <script>
 
     $(document).ready(function () {
-        var project = JSON.parse(localStorage.getItem('project'));
-        var url = document.URL;
-        var n = url.lastIndexOf('/');
-        var ahuName = url.substring((n + 1), url.length);
-        console.log(ahuName);
 
-        if (project != undefined) {
-            var x;
-            for (x in project.units) {
-                if (project.units[x] != null) {
-                    var option = document.createElement('option');
-                    var parentNode = document.getElementById('selectAHU');
-                    parentNode.appendChild(option);
-                    option.textContent = project.units[x].name;
-                    option.value = project.units[x].name;
-                }
+
+        var user = sessionStorage.getItem('user');
+        if (user != undefined) {
+            var temp = document.getElementById('optionsLink');
+            var link = getLink();
+            if (link != false) {
+
+                temp.setAttribute('href', '/options' + link);
+                temp = document.getElementById('pointsLink');
+                temp.setAttribute('href', '/points' + link);
+                temp = document.getElementById('sequenceLink');
+                temp.setAttribute('href', '/sequence' + link);
+                temp = document.getElementById('/overviewLink');
+                temp.setAttribute('href', '/overview' + link);
             }
-            if (ahuName != 'points') {
-                console.log('inside if');
-                var temp = document.getElementById('selectAHU').options;
-                console.log(temp);
-                if (temp.length > 0) {
-                    for (x = 0; x < temp.length; x++) {
-                        console.log(x);
-                        console.log(temp[x].value);
-                        if (temp[x].value == ahuName) {
-                            console.log(temp[x].value);
-                            populateTable(x - 1);
+            updateSidebar();
+            getURL(document.URL);
+            loadProjectSelect('projectSelect','projects');
+            helper(user);
+            var ahu = getUnit();
+            if (ahu != null) {
+                removeNodes();
+                populateTable(ahu);
+            }
+        }
+
+    });
+    function getUnit() {
+        var tempP = document.getElementById('projectSlice').innerText;
+        var tempG = document.getElementById('groupSlice').innerText;
+        var tempU = document.getElementById('unitSlice').innerText;
+        var p = JSON.parse(sessionStorage.getItem('projects'));
+        var g = JSON.parse(sessionStorage.getItem('gropus'));
+        var u = JSON.parse(sessionStorage.getItem('units'));
+        for (x in p) {
+            if (tempP == p[x].name) {
+                var id = p[x]._id;
+                for (i in u) {
+                    if (tempU == u[i].name) {
+                        if (id == u[i].project) {
+                            return u[i];
                         }
                     }
                 }
             }
-
         }
-    })
-    document.getElementById('selectAHU').onchange = function () {
-        removeNodes();
-        populateTable(this.selectedIndex - 1);
-        //removeNodes();
+    }
+
+    function getLink() {
+        var tempP = document.getElementById('projectSlice');
+        var link = "";
+        if (tempP != null) {
+            link = '/project/' + tempP.innerText;
+            var tempG = document.getElementById('groupSlice');
+
+
+            if (tempG != null) {
+                link = link + '/group/' + tempG.innerText;
+                var tempU = document.getElementById('unitSlice');
+                if (tempU != null) {
+                    link = link + '/unit/' + tempU.innerText;
+                }
+
+            }
+        } else {
+            return false;
+        }
+
+        return link;
     }
     function removeNodes() {
         var nodeTop = document.getElementById('ahuTable');
@@ -193,321 +324,296 @@
         console.log('all nodes removed');
     }
 
-    function populateTable(a) {
+    function populateTable(x) {
         $.get('/pointsModel', function (data, status) {
-            var project = JSON.parse(localStorage.getItem('project'));
+
             var points = data.points;
-            var ahu = project.units[a].points;
+            //var ahu = project.units[a].points;
             var hardPoint = points.hardware;
             var softPoint = points.software;
             var AI = 0, AO = 0, BI = 0, BO = 0, AV = 0, BV = 0, Loop = 0, Schedule = 0, Trend = 0, Alarm = 0, Graphics = 0;
             var totals = { AI, AO, BI, BO, AV, BV, Loop, Schedule, Trend, Alarm, Graphics };
-            // console.log(JSON.stringify(hardPoint));
-            //console.log(JSON.stringify(softPoint));
-            //localStorage.clear();
-            if (ahu == undefined) {
-                console.log("No Air Handler Built!!");
-            } else {
-                //console.log(JSON.stringify(ahu));
-                //console.log(ahu);
 
-
-                var ele;
-                var b = 0;
-                for (ele in ahu) {
-
-
-                    // console.log(ahu.hasOwnProperty(ele));
-                    //console.log(JSON.stringify(ele));
-                    var val = ahu[ele];
-                    //console.log(val);
+            //console.log(JSON.stringify(ahu));
+            //console.log(ahu);
+            var unit = x;
+            //var unit = JSON.parse(unitT);
+            console.log(unit.points);
+            if(unit.points.length == 0){
+                var temp = document.getElementById('ahuTable');
+                var tempP = document.createElement('p');
+                tempP.innerText = "Unit has not Been configured!!";
+                temp.appendChild(tempP);
+            }
+            for (p in unit.points) {
+                var pointName = unit.points[p];
 
 
 
-                    var pointName = JSON.stringify(ele);
-                    var i;
-                    for (i in val) {
-                        //console.log(JSON.stringify(i));
-                        var x = val[i];
-                        if (i != 'none') {
-                            //console.log(JSON.stringify(x));
-                            if (x.isUsed == true) {
-                                // console.log('RIGHT HERE!!!');
-                                var q = x.points;
-                                var z;
+                // console.log(uniy.points);
 
-                                for (z in q) {
-                                    console.log(totals);
+                var tableTop = document.getElementById('ahuTable');
+                var tableRow = document.createElement("tr");
+                tableRow.class = 'tableRow';
 
-                                    b++;
-                                    var tableTop = document.getElementById('ahuTable');
-                                    var tableRow = document.createElement("tr");
-                                    tableRow.class = 'tableRow';
-                                    //console.log(tableRow.id);
-                                    tableTop.appendChild(tableRow);
-                                    var pointName = q[z];
-                                    var temp;
-                                    for (temp in hardPoint) {
-                                        var wx = hardPoint[temp];
-                                        var wy = temp;
-                                        //console.log(wx);
-                                        if (pointName == wy) {
-                                            //console.log("ANd AGAIN RIGHT HERE!!!");
-                                            if (wx.isUsed == false) {
-                                                wx.isUsed == true;
-                                                for (a = 0; a < 12; a++) {
-                                                    var tableColumn = document.createElement('td');
-                                                    tableColumn.class = "tableCell";
-                                                    var textNode = document.createTextNode('0');
-                                                    tableColumn.appendChild(textNode);
-                                                    tableRow.appendChild(tableColumn);
-                                                    // console.log(a);
-                                                    switch (a) {
-                                                        case (0):
+                tableTop.appendChild(tableRow);
 
-                                                            console.log(preparePointName(JSON.stringify(pointName)));
-                                                            textNode.textContent = preparePointName(JSON.stringify(pointName));
+                var temp;
+                for (temp in hardPoint) {
+                    var wx = hardPoint[temp];
+                    var wy = temp;
+                    //console.log(wx);
+                    if (pointName == wy) {
+                        //console.log("ANd AGAIN RIGHT HERE!!!");
+                        if (wx.isUsed == false) {
 
-                                                            break;
-                                                        case (1):
-                                                            console.log(wx);
-                                                            textNode.textContent = wx.points.AI;
-                                                            if (wx.points.AI == 1) {
-                                                                totals.AI = totals.AI + 1;
+                            wx.isUsed == true;
+                            for (a = 0; a < 12; a++) {
+                                var tableColumn = document.createElement('td');
+                                tableColumn.class = "tableCell";
+                                var textNode = document.createTextNode('0');
+                                tableColumn.appendChild(textNode);
+                                tableRow.appendChild(tableColumn);
+                                // console.log(a);
+                                switch (a) {
+                                    case (0):
 
-                                                            }
+                                        console.log(preparePointName(JSON.stringify(pointName)));
+                                        textNode.textContent = preparePointName(JSON.stringify(pointName));
 
-                                                            break;
-                                                        case (2):
-                                                            textNode.textContent = wx.points.AO;
-                                                            if (wx.points.AO == 1) {
-                                                                totals.AO++;
-                                                            }
+                                        break;
+                                    case (1):
+                                        console.log(wx);
+                                        textNode.textContent = wx.points.AI;
+                                        if (wx.points.AI == 1) {
+                                            totals.AI = totals.AI + 1;
 
-                                                            break;
-                                                        case (3):
-                                                            textNode.textContent = wx.points.BI;
-                                                            if (wx.points.BI == 1) {
-                                                                totals.BI++;
-
-                                                            }
-                                                            break;
-                                                        case (4):
-                                                            textNode.textContent = wx.points.BO;
-                                                            if (wx.points.BO == 1) {
-                                                                totals.BO++;
-                                                            }
-
-                                                            break;
-                                                        case (5):
-                                                            textNode.textContent = wx.points.AV;
-                                                            if (wx.points.AV == 1) {
-                                                                totals.AV++;
-                                                            }
-
-                                                            break;
-                                                        case (6):
-                                                            textNode.textContent = wx.points.BV;
-                                                            if (wx.points.BV == 1) {
-                                                                totals.BV++;
-                                                            }
-
-
-                                                            break;
-                                                        case (7):
-                                                            textNode.textContent = wx.points.Loop;
-                                                            if (wx.points.Loop == 1) {
-                                                                totals.Loop++
-                                                            }
-
-                                                            break;
-                                                        case (8):
-                                                            textNode.textContent = wx.points.Schedule;
-                                                            if (wx.points.Schedule == 1) {
-                                                                totals.Schedule++;
-                                                            }
-
-                                                            break;
-                                                        case (9):
-                                                            textNode.textContent = wx.points.Trend;
-                                                            if (wx.points.Trend == 1) {
-                                                                totals.Trend++;
-                                                            }
-
-                                                            break;
-                                                        case (10):
-                                                            textNode.textContent = wx.points.Alarm;
-                                                            if (wx.points.Alarm == 1) {
-
-                                                                totals.Alarm++;
-                                                            }
-                                                            break;
-                                                        case (11):
-                                                            textNode.textContent = wx.points.Graphics;
-                                                            if (wx.points.Graphics == 1) {
-                                                                totals.Graphics++;
-                                                            }
-
-                                                            break;
-                                                    }
-
-
-                                                }
-                                            }
                                         }
 
-                                    }
-
-                                    var temp2;
-                                    for (temp2 in softPoint) {
-                                        var wx = softPoint[temp2];
-                                        var wy = temp2;
-                                        //console.log(wx);
-                                        if (pointName == wy) {
-                                            // console.log("ANd AGAIN RIGHT HERE!!!");
-                                            if (wx.isUsed == false) {
-                                                wx.isUsed == true;
-                                                for (a = 0; a < 12; a++) {
-                                                    var tableColumn = document.createElement('td');
-                                                    tableColumn.class = "tableCell";
-                                                    var textNode = document.createTextNode("0");
-                                                    tableColumn.appendChild(textNode);
-                                                    tableRow.appendChild(tableColumn);
-                                                    switch (a) {
-                                                        case (0):
-                                                            console.log(preparePointName(JSON.stringify(pointName)));
-                                                            textNode.textContent = preparePointName(JSON.stringify(pointName));
-
-                                                            break;
-                                                        case (1):
-                                                            console.log(wx);
-                                                            textNode.textContent = wx.points.AI;
-                                                            if (wx.points.AI == 1) {
-                                                                totals.AI = totals.AI + 1;
-
-                                                            }
-
-                                                            break;
-                                                        case (2):
-                                                            textNode.textContent = wx.points.AO;
-                                                            if (wx.points.AO == 1) {
-                                                                totals.AO++;
-                                                            }
-
-                                                            break;
-                                                        case (3):
-                                                            textNode.textContent = wx.points.BI;
-                                                            if (wx.points.BI == 1) {
-                                                                totals.BI++;
-
-                                                            }
-                                                            break;
-                                                        case (4):
-                                                            textNode.textContent = wx.points.BO;
-                                                            if (wx.points.BO == 1) {
-                                                                totals.BO++;
-                                                            }
-
-                                                            break;
-                                                        case (5):
-                                                            textNode.textContent = wx.points.AV;
-                                                            if (wx.points.AV == 1) {
-                                                                totals.AV++;
-                                                            }
-
-                                                            break;
-                                                        case (6):
-                                                            textNode.textContent = wx.points.BV;
-                                                            if (wx.points.BV == 1) {
-                                                                totals.BV++;
-                                                            }
-
-
-                                                            break;
-                                                        case (7):
-                                                            textNode.textContent = wx.points.Loop;
-                                                            if (wx.points.Loop == 1) {
-                                                                totals.Loop++
-                                                            }
-
-                                                            break;
-                                                        case (8):
-                                                            textNode.textContent = wx.points.Schedule;
-                                                            if (wx.points.Schedule == 1) {
-                                                                totals.Schedule++;
-                                                            }
-
-                                                            break;
-                                                        case (9):
-                                                            textNode.textContent = wx.points.Trend;
-                                                            if (wx.points.Trend == 1) {
-                                                                totals.Trend++;
-                                                            }
-
-                                                            break;
-                                                        case (10):
-                                                            textNode.textContent = wx.points.Alarm;
-                                                            if (wx.points.Alarm == 1) {
-
-                                                                totals.Alarm++;
-                                                            }
-                                                            break;
-                                                        case (11):
-                                                            textNode.textContent = wx.points.Graphics;
-                                                            if (wx.points.Graphics == 1) {
-                                                                totals.Graphics++;
-                                                            }
-
-                                                            break;
-                                                    }
-
-
-                                                }
-                                            }
+                                        break;
+                                    case (2):
+                                        textNode.textContent = wx.points.AO;
+                                        if (wx.points.AO == 1) {
+                                            totals.AO++;
                                         }
 
-                                    }
+                                        break;
+                                    case (3):
+                                        textNode.textContent = wx.points.BI;
+                                        if (wx.points.BI == 1) {
+                                            totals.BI++;
+
+                                        }
+                                        break;
+                                    case (4):
+                                        textNode.textContent = wx.points.BO;
+                                        if (wx.points.BO == 1) {
+                                            totals.BO++;
+                                        }
+
+                                        break;
+                                    case (5):
+                                        textNode.textContent = wx.points.AV;
+                                        if (wx.points.AV == 1) {
+                                            totals.AV++;
+                                        }
+
+                                        break;
+                                    case (6):
+                                        textNode.textContent = wx.points.BV;
+                                        if (wx.points.BV == 1) {
+                                            totals.BV++;
+                                        }
 
 
+                                        break;
+                                    case (7):
+                                        textNode.textContent = wx.points.Loop;
+                                        if (wx.points.Loop == 1) {
+                                            totals.Loop++
+                                        }
 
+                                        break;
+                                    case (8):
+                                        textNode.textContent = wx.points.Schedule;
+                                        if (wx.points.Schedule == 1) {
+                                            totals.Schedule++;
+                                        }
+
+                                        break;
+                                    case (9):
+                                        textNode.textContent = wx.points.Trend;
+                                        if (wx.points.Trend == 1) {
+                                            totals.Trend++;
+                                        }
+
+                                        break;
+                                    case (10):
+                                        textNode.textContent = wx.points.Alarm;
+                                        if (wx.points.Alarm == 1) {
+
+                                            totals.Alarm++;
+                                        }
+                                        break;
+                                    case (11):
+                                        textNode.textContent = wx.points.Graphics;
+                                        if (wx.points.Graphics == 1) {
+                                            totals.Graphics++;
+                                        }
+
+                                        break;
                                 }
+
 
                             }
                         }
-
                     }
 
+                }
 
+                var temp2;
+                for (temp2 in softPoint) {
+                    var wx = softPoint[temp2];
+                    var wy = temp2;
+                    //console.log(wx);
+                    if (pointName == wy) {
+                        // console.log("ANd AGAIN RIGHT HERE!!!");
+                        if (wx.isUsed == false) {
+                            wx.isUsed == true;
+
+                            for (a = 0; a < 12; a++) {
+                                var tableColumn = document.createElement('td');
+                                tableColumn.class = "tableCell";
+                                var textNode = document.createTextNode("0");
+                                tableColumn.appendChild(textNode);
+                                tableRow.appendChild(tableColumn);
+                                switch (a) {
+                                    case (0):
+                                        console.log(preparePointName(JSON.stringify(pointName)));
+                                        textNode.textContent = preparePointName(JSON.stringify(pointName));
+
+                                        break;
+                                    case (1):
+                                        console.log(wx);
+                                        textNode.textContent = wx.points.AI;
+                                        if (wx.points.AI == 1) {
+                                            totals.AI = totals.AI + 1;
+
+                                        }
+
+                                        break;
+                                    case (2):
+                                        textNode.textContent = wx.points.AO;
+                                        if (wx.points.AO == 1) {
+                                            totals.AO++;
+                                        }
+
+                                        break;
+                                    case (3):
+                                        textNode.textContent = wx.points.BI;
+                                        if (wx.points.BI == 1) {
+                                            totals.BI++;
+
+                                        }
+                                        break;
+                                    case (4):
+                                        textNode.textContent = wx.points.BO;
+                                        if (wx.points.BO == 1) {
+                                            totals.BO++;
+                                        }
+
+                                        break;
+                                    case (5):
+                                        textNode.textContent = wx.points.AV;
+                                        if (wx.points.AV == 1) {
+                                            totals.AV++;
+                                        }
+
+                                        break;
+                                    case (6):
+                                        textNode.textContent = wx.points.BV;
+                                        if (wx.points.BV == 1) {
+                                            totals.BV++;
+                                        }
+
+
+                                        break;
+                                    case (7):
+                                        textNode.textContent = wx.points.Loop;
+                                        if (wx.points.Loop == 1) {
+                                            totals.Loop++
+                                        }
+
+                                        break;
+                                    case (8):
+                                        textNode.textContent = wx.points.Schedule;
+                                        if (wx.points.Schedule == 1) {
+                                            totals.Schedule++;
+                                        }
+
+                                        break;
+                                    case (9):
+                                        textNode.textContent = wx.points.Trend;
+                                        if (wx.points.Trend == 1) {
+                                            totals.Trend++;
+                                        }
+
+                                        break;
+                                    case (10):
+                                        textNode.textContent = wx.points.Alarm;
+                                        if (wx.points.Alarm == 1) {
+
+                                            totals.Alarm++;
+                                        }
+                                        break;
+                                    case (11):
+                                        textNode.textContent = wx.points.Graphics;
+                                        if (wx.points.Graphics == 1) {
+                                            totals.Graphics++;
+                                        }
+
+                                        break;
+                                }
+
+
+                            }
+                        }
+                    }
 
                 }
-                //totals row
-                var tableTop = document.getElementById('ahuTable');
-                var tableRow = document.createElement("tr");
-                tableRow.class = 'tableTotals';
 
-                tableTop.appendChild(tableRow);
-                var temp = document.createElement('td');
 
-                tableRow.appendChild(temp);
-                temp.innerText = "totals:"
-                for (x in totals) {
-                    var tempNode = document.createElement('td');
-                    tableRow.appendChild(tempNode);
-                    console.log();
-                    tempNode.innerText = totals[x];
-                }
+
 
             }
-        });
-    }
 
+            var tableTop = document.getElementById('ahuTable');
+            var tableRow = document.createElement("tr");
+            tableRow.class = 'tableTotals';
+
+            tableTop.appendChild(tableRow);
+            var temp = document.createElement('td');
+
+            tableRow.appendChild(temp);
+            temp.innerText = "totals:"
+            for (x in totals) {
+                var tempNode = document.createElement('td');
+                tableRow.appendChild(tempNode);
+                console.log();
+                tempNode.innerText = totals[x];
+            }
+            console.log(unit);
+        });
+
+
+    }
     function preparePointName(s) {
         var i = s.indexOf('"');
         var n = s.lastIndexOf(s.length, '"');
-        console.log(i);
-        console.log(n);
+        // console.log(i);
+        //console.log(n);
         var temp = s.substring((i + 1), s.length);
-        console.log(temp);
+        // console.log(temp);
         s = temp.substring(0, temp.length - 1);
         s = addSpaces(s)
         return s;
@@ -530,11 +636,11 @@
         for (z in temp) {
             var cap = temp[z];
             newS += s.substring(last, cap) + " ";
-            console.log(newS);
+            //console.log(newS);
             last = cap;
         }
         newS += s.substring(last, s.length);
-        console.log(newS);
+        //console.log(newS);
         return newS;
     }
 </script>

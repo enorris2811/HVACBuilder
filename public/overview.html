@@ -6,7 +6,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
+    <script src='/javascripts/login.js'></script>
+    <script src='/javascripts/getUnit.js'></script>
+    <script src='/javascripts/loadSideBar.js'></script>
+    <script src='/javascripts/breadcrumb.js'></script>
+    <script src='/javascripts/projectControl.js'></script>
+    <script src='/javascripts/helper.js'></script>
+    
     <link rel="stylesheet" type='text/css' href="/stylesheets/newStyle.css">
 </head>
 
@@ -42,7 +48,7 @@
         </ul>
     </nav>
     <div class='row'>
-        <div class='container col-sm-3' id='sidebar'>
+        <div class='container col-sm-3'>
             <h2>Projects Controls</h2>
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="home-list" data-toggle="list" href="#home"
@@ -56,6 +62,7 @@
 
             </div>
             <h4>Select a link to configure</h4>
+            <div id='sidebar'></div>
         </div>
 
 
@@ -71,7 +78,7 @@
                 </nav>
                 
                 <li class="nav-item">
-                    <a class="nav-link active disable" id='overviewLink'href='/overview'>Overview</a>
+                    <a class="nav-link active" id='overviewLink'href='/overview'>Overview</a>
                 </li>
 
                 <li class="nav-item">
@@ -177,6 +184,9 @@
                 </div>
 
             </div>
+            <div id='overviewContent'>
+                
+            </div>
 
         </div>
     </div>
@@ -193,227 +203,15 @@
 
             var projects = JSON.parse(sessionStorage.getItem('projects'));
             updateSidebar();
-            getURL();
+
+            getURL(document.URL);
             
-            var temp = document.getElementById('loginLink');
-            temp.textContent = user;
-            temp = document.getElementById('optionsLink');
-            var link = getLink();
-            if(link != false){
-                temp.setAttribute('href','/options'+link);
-                temp = document.getElementById('pointsLink');
-                temp.setAttribute('href','/points'+link);
-                temp = document.getElementById('sequenceLink');
-                temp.setAttribute('href','/sequence'+link);
-
-            }
-
-            
-            var topNode = document.getElementById('navbar');
-            var newNode = document.createElement('li');
-            var newButton = document.createElement('a');
-            newNode.className = 'nav-item';
-            topNode.appendChild(newNode);
-
-            newButton.setAttribute('onclick', 'logOut()');
-            newButton.textContent = 'LogOut';
-            newButton.className = 'nav-link';
-            newNode.appendChild(newButton);
-
-        } else {
-
-        }
+            helper(user);
+            loadProjectSelect('projectSelect','projects');
+        } 
     });
-    function getLink(){
-        var tempP = document.getElementById('projectSlice');
-        var link ="";
-        if(tempP != null){
-            link =  '/project/'+tempP.innerText;
-            var tempG = document.getElementById('groupSlice');
 
-            
-            if(tempG != null){
-                link = link + '/group/'+tempG.innerText;
-                var tempU = document.getElementById('unitSlice');
-                if(tempU != null){
-                    link = link +'/unit/'+ tempU.innerText;
-                }
-                
-            }
-        }else{
-            return false;
-        }
-
-        return link;
-    }
-
-    function addNewSideBarItem(name, name2, project, topNode) {
-        var newListItem = document.createElement('li');
-        newListItem.className = 'list-group-item';
-        topNode.appendChild(newListItem);
-        var newA = document.createElement('a');
-        newA.textContent = project.name;
-        newListItem.appendChild(newA);
-        newA.id = project.name;
-        newA.className = 'list-group-item';
-
-        //newA.setAttribute('data-toggle', 'collapse');
-
-        var newUL = document.createElement('ul');
-        if (name == null) {
-            //  newA.setAttribute('data-target', '#' + project.name + 'List');
-            newUL.id = project.name + 'List';
-            newA.setAttribute('href', '/overview/project/' + project.name);
-
-        } else {
-            //  newA.setAttribute('data-target', '#' + name + project.name + 'List');
-            newUL.id = name + project.name + 'List';
-            newA.setAttribute('href', '/overview/project/' + name + '/group/' + project.name);
-
-        }
-        if (name2 != null) {
-            newA.setAttribute('href', '/overview/project/' + name2 + '/group/' + name + '/unit/' + project.name);
-        }
-
-        newUL.className = 'list-group';
-
-        newListItem.appendChild(newUL);
-        return newUL;
-    }
-
-
-    function updateSidebar() {
-        var topNode = document.getElementById('sidebar');
-        //topNode.childNodes.remove();
-
-        var projects = JSON.parse(sessionStorage.getItem('projects'));
-
-        var groups = JSON.parse(sessionStorage.getItem('groups'));
-
-        var units = JSON.parse(sessionStorage.getItem('units'));
-        console.log(projects);
-        console.log(groups);
-        console.log(units);
-        var topNode = document.getElementById('sidebar');
-        var newNode = document.createElement('ul');
-        newNode.className = 'list-group';
-        topNode.appendChild(newNode);
-        while (projects.length > 0) {
-            var tempProject = projects.shift();
-            var newUL = addNewSideBarItem(null, null, tempProject, newNode);
-
-            for (var x = 0; x < groups.length; x++) {
-                var tempGroup = groups[x];
-                if (tempGroup.project == tempProject._id) {
-                    var nextUL = addNewSideBarItem(tempProject.name, null, tempGroup, newUL);
-
-                    for (var y = 0; y < units.length; y++) {
-                        var tempUnit = units[y];
-                        if (tempUnit.group == tempGroup._id) {
-                            var dump = addNewSideBarItem(tempGroup.name, tempProject.name, tempUnit, nextUL);
-                        }
-                    }
-
-                }
-
-            }
-        }
-    }
-    function newuser() {
-        var tempUserName = document.getElementById('userName').value;
-        var tempPassword = document.getElementById('password').value;
-        $.post('/newuser', { tempUserName, tempPassword }, function (data, status) {
-            console.log(data.auth);
-        });
-    }
-
-    function login() {
-        var tempUserName = document.getElementById('userName').value;
-        var tempPassword = document.getElementById('password').value;
-
-        var temp = document.getElementById('loginLink');
-        $.post('/login', { tempUserName, tempPassword }, function (data, status) {
-            console.log(data.auth);
-            if (data.auth == true) {
-                temp.textContent = tempUserName;
-                sessionStorage.setItem('user', tempUserName);
-                sessionStorage.setItem('userID', data.userID);
-            } else {
-                alert('login failed!');
-            }
-        });
-    }
-
-    function logOut() {
-        sessionStorage.clear();
-        console.log('seesion storage cleared');
-
-    }
-
-    function getURL() {
-        var url = document.URL;
-        var iProject = url.indexOf('project');
-        var iGroup = url.indexOf('group');
-        var iUnit = url.indexOf('unit');
-        var projectName;
-        var groupName;
-        var unitName;
-        if (iProject != -1) {
-            //get project name
-            if (iGroup != -1) {
-                //get group name
-                if (iUnit != -1) {
-                    //get unit name;
-                    var i = url.lastIndexOf('/');
-                    i++;
-                    unitName = url.substring(i, url.length);
-                    i = i - 6;
-                    var g = iGroup + 6;
-                    groupName = url.substring(g, iUnit - 1);
-                    var p = iProject + 8;
-                    projectName = url.substring(p, iGroup - 1);
-                    console.log(unitName, groupName, projectName);
-                    breadCrumb(projectName,groupName,unitName);
-                } else {
-                    var i = iGroup + 6;
-                    groupName = url.substring(i, url.length);
-                    var p = iProject + 8;
-                    projectName = url.substring(p, iGroup - 1);
-                    console.log(groupName, projectName);
-                    breadCrumb(projectName,groupName,null);
-                }
-            } else {
-                var i = iProject + 8;
-                projectName = url.substring(i, url.length);
-                console.log(projectName);
-                breadCrumb(projectName,null,null);
-            }
-        } else {
-            console.log('no project!!');
-        }
-    }
-    function breadCrumb(p, g, u) {
-        var tempNode = document.createElement('li');
-        tempNode.className = 'breadcrumb-item';
-        var topNode = document.getElementById('breadcrumb');
-        topNode.appendChild(tempNode);
-        tempNode.textContent = p;
-        tempNode.id = 'projectSlice';
-        if (g != null) {
-            tempNode = document.createElement('li');
-            tempNode.className = 'breadcrumb-item';
-            topNode.appendChild(tempNode);
-            tempNode.textContent = g;
-            tempNode.id = 'groupSlice';
-            if (u != null) {
-                tempNode = document.createElement('li');
-                tempNode.className = 'breadcrumb-item';
-                topNode.appendChild(tempNode);
-                tempNode.textContent = u;
-                tempNode.id = 'unitSlice';
-            }
-        }
-    }
+  
 </script>
 
 </html>

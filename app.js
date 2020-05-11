@@ -51,6 +51,13 @@ app.use('/options', indexRouter);
 app.use('/options/project/:project/group/:group',indexRouter);
 app.use('/options/project/:project/group/:group/unit/:unit',indexRouter);
 app.use('/options/project/:project',indexRouter);
+app.use('/points/project/:project/group/:group',indexRouter);
+app.use('/points/project/:project/group/:group/unit/:unit',indexRouter);
+app.use('/points/project/:project',indexRouter);
+app.use('/sequence/project/:project/group/:group',indexRouter);
+app.use('/sequence/project/:project/group/:group/unit/:unit',indexRouter);
+app.use('/sequence/project/:project',indexRouter);
+app.use('/updateUnitOptions',indexRouter);
 app.use('/getUserProjects',indexRouter);
 if(process.env.NODE_ENV === 'production'){
     //set static folder

@@ -42,9 +42,9 @@
         </ul>
     </nav>
     <div class='row'>
-        <div class='container col-sm-3' id='sidebar'>
+        <div class='container col-sm-3' >
             <h2>Projects Controls</h2>
-            <div class="list-group invisible" id="list-tab" role="tablist">
+            <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="home-list" data-toggle="list" href="#home"
                     role="tab" aria-controls="home">Home</a>
                 <a class="list-group-item list-group-item-action" id="newProject-list" data-toggle="list"
@@ -56,7 +56,9 @@
 
             </div>
             <h4>Select a link to configure</h4>
-
+            <div id='sidebar'>
+                
+            </div>
         </div>
 
 
@@ -183,6 +185,11 @@
             </div>
         </div>
     </div>
+    <script src='/javascripts/login.js'></script>
+    <script src='/javascripts/loadSideBar.js'></script>
+    <script src='/javascripts/breadcrumb.js'></script>
+    <script src='/javascripts/projectControl.js'></script>
+    <script src='/javascripts/helper.js'></script>
 </body>
 <script>
     $(document).ready(function () {
@@ -192,255 +199,15 @@
             var temp = document.getElementById('list-tab');
             temp.className = 'list-group';
             updateSidebar();
-            loadProjectSelect('projectSelect');
-            loadProjectSelect('newGroupProjectSelect');
-            var temp = document.getElementById('loginLink');
-            temp.textContent = user;
-            var topNode = document.getElementById('navbar');
-            var newNode = document.createElement('li');
-            var newButton = document.createElement('a');
-            newNode.className = 'nav-item';
-            topNode.appendChild(newNode);
-
-            newButton.setAttribute('onclick', 'logOut()');
-            newButton.textContent = 'LogOut';
-            newButton.className = 'nav-link';
-            newNode.appendChild(newButton);
+            loadProjectSelect('projectSelect','projects');
+            //loadProjectSelect('groupSelect','groups');
+            helper(user);
+           
         }
 
     });
 
-    function addNewGroup() {
-        var groupName = document.getElementById('newGroupTextbox').value;
-        var projectID = document.getElementById('newGroupProjectSelect').value;
-        $.post('/addNewGroup', { groupName, projectID }, function (data, status) {
 
-        });
-
-    }
-
-
-    function logOut() {
-        sessionStorage.clear();
-        console.log('seesion storage cleared');
-
-    }
-    function addAHU() {
-        console.log('clicked addAHU');
-        var x = document.getElementById('AHUOptions');
-        var type = x[x.selectedIndex].value;
-        x = document.getElementById('ahuName');
-        var name = x.value;
-        x = document.getElementById('projectSelect');
-        var project = x[x.selectedIndex].value;
-        x = document.getElementById('groupSelect');
-        var group = x[x.selectedIndex].value;
-        x = document.getElementById('ahuSize');
-        var size = x[x.selectedIndex].value;
-        x = document.getElementById('controllerSelect');
-        var manu = x[x.selectedIndex].value;
-        var temp = sessionStorage.getItem('user');
-        var user;
-        if (temp != undefined) {
-            user = temp;
-        }
-        console.log(manu);
-        if (type == 'Constant Volume') {
-
-            $.post('/addAHU', { name, type, project, size, user, manu, group }, function (data, status) {
-
-            });
-
-        }
-
-    }
-
-
-
-    function createNewProject() {
-        console.log('clicked!!');
-        var ele = document.getElementById('newProjectTextbox').value;
-        console.log(ele);
-        var name = document.getElementById('newProjectTextbox').value;
-        var userID = sessionStorage.getItem('userID');
-
-        if (userID != undefined) {
-            $.post('/newProject', { name, userID }, function (data, status) {
-                updateSidebar(userID);
-            });
-        } else {
-            alert('Please log In');
-        }
-    }
-    function addNewSideBarItem(name, name2, project, topNode) {
-        var newListItem = document.createElement('li');
-        newListItem.className = 'list-group-item';
-        topNode.appendChild(newListItem);
-        var newA = document.createElement('a');
-        newA.textContent = project.name;
-        newListItem.appendChild(newA);
-        newA.id = project.name;
-        newA.className = 'list-group-item';
-
-        // newA.setAttribute('data-toggle', 'collapse');
-
-        var newUL = document.createElement('ul');
-        if (name == null) {
-            //  newA.setAttribute('data-target', '#' + project.name + 'List');
-            newUL.id = project.name + 'List';
-            newA.setAttribute('href', '/overview/project/' + project.name);
-
-        } else {
-            // newA.setAttribute('data-target', '#' + name + project.name + 'List');
-            newUL.id = name + project.name + 'List';
-            newA.setAttribute('href', '/overview/project/' + name + '/group/' + project.name);
-
-        }
-        if (name2 != null) {
-            newA.setAttribute('href', '/overview/project/' + name2 + '/group/' + name + '/unit/' + project.name);
-            //newA.className = 'list-group-item';
-        }
-
-        newUL.className = 'list-group';
-
-        newListItem.appendChild(newUL);
-        return newUL;
-    }
-
-
-    function updateSidebar() {
-        var topNode = document.getElementById('sidebar');
-        //topNode.childNodes.remove();
-
-        var projects = JSON.parse(sessionStorage.getItem('projects'));
-
-        var groups = JSON.parse(sessionStorage.getItem('groups'));
-
-        var units = JSON.parse(sessionStorage.getItem('units'));
-        console.log(projects);
-        console.log(groups);
-        console.log(units);
-        var topNode = document.getElementById('sidebar');
-        var newNode = document.createElement('ul');
-        newNode.className = 'list-group';
-        topNode.appendChild(newNode);
-        while (projects.length > 0) {
-            var tempProject = projects.shift();
-            var newUL = addNewSideBarItem(null, null, tempProject, newNode);
-
-            for (var x = 0; x < groups.length; x++) {
-                var tempGroup = groups[x];
-                if (tempGroup.project == tempProject._id) {
-                    var nextUL = addNewSideBarItem(tempProject.name, null, tempGroup, newUL);
-
-                    for (var y = 0; y < units.length; y++) {
-                        var tempUnit = units[y];
-                        if (tempUnit.group == tempGroup._id) {
-                            var dump = addNewSideBarItem(tempGroup.name, tempProject.name, tempUnit, nextUL);
-                        }
-                    }
-
-                }
-
-            }
-        }
-
-
-    }
-    function saveProject(project) {
-        $.post('/saveProject', { project }, function (data, status) {
-            console.log('save maybe');
-            if (status == 400 || status == 200) {
-                console.log(data);
-            }
-        });
-    }
-
-
-
-    function loadProjectSelect(eleID) {
-
-        var projects = JSON.parse(sessionStorage.getItem('projects'));
-        var topNode = document.getElementById(eleID);
-      
-        for (x in projects) {
-            console.log(projects[x]);
-            var temp = document.createElement('option');
-            temp.textContent = projects[x].name;
-            temp.value = projects[x]._id;
-            topNode.appendChild(temp);
-        }
-
-    }
-    function newuser() {
-        var tempUserName = document.getElementById('userName').value;
-        var tempPassword = document.getElementById('password').value;
-        $.post('/newuser', { tempUserName, tempPassword }, function (data, status) {
-            console.log(data.auth);
-        });
-    }
-
-    function login() {
-        var tempUserName = document.getElementById('userName').value;
-        var tempPassword = document.getElementById('password').value;
-
-        var temp = document.getElementById('loginLink');
-        $.post('/login', { tempUserName, tempPassword }, function (data, status) {
-            console.log(data.auth);
-            if (data.auth == true) {
-                temp.textContent = tempUserName;
-                sessionStorage.setItem('user', tempUserName);
-                sessionStorage.setItem('userID', data.userID);
-                getUserData(data.userID);
-            } else {
-                alert('login failed!');
-            }
-        });
-    }
-    function getUserData(userID) {
-        var id;
-        $.post('/getProjects', { userID }, function (data, status) {
-            var projects = data.projects;
-            var id = projects[0]._id;
-            console.log(projects[0]);
-            console.log(data);
-            console.log(id);
-            sessionStorage.setItem('projects', JSON.stringify(projects));
-            $.post('/getGroups', { id }, function (data, status) {
-                sessionStorage.setItem('groups', JSON.stringify(data.list));
-                console.log(data);
-            });
-            $.post('/getUnits', { id }, function (data, status) {
-                console.log(data);
-                sessionStorage.setItem('units', JSON.stringify(data.units));
-            });
-        });
-
-
-
-        console.log(JSON.parse(sessionStorage.getItem('projects')));
-        console.log(sessionStorage.getItem('groups'));
-        console.log(sessionStorage.getItem('units'));
-    }
-
-    document.getElementById('projectSelect').onchange = function () {
-        var groupSelect = document.getElementById('groupSelect');
-        console.log('select changed');
-        var val = this.options[this.selectedIndex].value;
-        console.log(val);
-
-
-        $.post('/getGroups', { id: val }, function (data, status) {
-            var groups = data.list;
-            for (x in groups) {
-                var newOption = document.createElement('option');
-                newOption.value = groups[x]._id;
-                newOption.textContent = groups[x].name;
-                groupSelect.appendChild(newOption);
-            }
-        });
-
-    }
 </script>
 
 </html>

@@ -64,22 +64,13 @@ router.get('/newProject', function (req, res, next) {
   res.send({ project: projectModel });
 });
 
-router.get('/points/name/:ahu',function(req,res,next){
-  var x = req.params.option;
-  console.log(x);
-  //res.send({ahu:x});
-  res.type('html');
-  res.sendFile(path.resolve('./public/points.html'));
-});
+
 
 router.get('/sequence/name/:ahu',function(req,res,next){
   res.type('html');
   res.sendFile(path.resolve('./public/sequence.html'));
 });
 
-router.get('/ejs', function(req,res,next){
-  res.render(path.resolve('./views/pages/index.ejs'));
-});
 
 router.post('/saveProject', projectController.save_project);
 
@@ -111,8 +102,14 @@ router.post('/getUserProjects',projectController.get_projects_login);
 router.get('/overview/project/:project/group/:group',projectController.get_group_overview);
 router.get('/overview/project/:project/group/:group/unit/:unit',projectController.get_unit_overview);
 router.get('/overview/project/:project',projectController.get_project_overview);
-
+router.get('/points/project/:project/group/:group',projectController.get_group_points);
+router.get('/points/project/:project/group/:group/unit/:unit',projectController.get_unit_points);
+router.get('/points/project/:project',projectController.get_project_points);
 router.get('/options/project/:project/group/:group',projectController.get_group_options);
 router.get('/options/project/:project/group/:group/unit/:unit',projectController.get_unit_options);
 router.get('/options/project/:project',projectController.get_project_options);
+router.get('/sequence/project/:project/group/:group',projectController.get_group_sequence);
+router.get('/sequence/project/:project/group/:group/unit/:unit',projectController.get_unit_sequence);
+router.get('/sequence/project/:project',projectController.get_project_sequence);
+router.post('/updateUnitOptions',projectController.updateUnitOptions);
 module.exports = router;

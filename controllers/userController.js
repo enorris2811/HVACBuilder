@@ -1,7 +1,7 @@
 var mongoose = require('mongoose').MongoClient;
 var user = require('../models/user');
 
-exports.create_user = function(req,res){
+exports.create_user = function (req, res) {
     var tempUserName = req.body.tempUserName;
     var tempPassword = req.body.tempPassword;
     console.log(req.body);
@@ -9,30 +9,32 @@ exports.create_user = function(req,res){
     tempUser.userName = tempUserName;
     tempUser.password = tempPassword;
     console.log(tempUser);
-    tempUser.save(function(err){
-        if(err){console.log(err);}else{res.json({'saved':true});}
+    tempUser.save(function (err) {
+        if (err) { console.log(err); } else { res.json({ 'saved': true }); }
     });
 
 }
 
-exports.get_user = function(req,res){
+exports.get_user = function (req, res) {
     var tempUserName = req.body.tempUserName;
     var tempPassword = req.body.tempPassword;
     console.log(tempPassword + tempUserName);
     console.log(req.body);
-    user.find({'userName':tempUserName},function(err,result){
-        if(err){console.log(err)}else{
-            console.log('the results of the login query are:'+ result[0]);
-          
-            if(tempPassword == result[0].password){
-                console.log('true');
-                res.json({'userID':result[0]._id,'auth':true});
-            }else{
-                
-                console.log('false');
-                res.json({'auth':false});
+    if ((tempUserName != "") || (tempUserName != undefined)) {
+        user.find({ 'userName': tempUserName }, function (err, result) {
+            if (err) { console.log(err) } else {
+                console.log('the results of the login query are:' + result[0]);
 
+                if (tempPassword == result[0].password) {
+                    console.log('true');
+                    res.json({ 'userID': result[0]._id, 'auth': true });
+                } else {
+
+                    console.log('false');
+                    res.json({ 'auth': false });
+
+                }
             }
-        }
-    });
+        });
+    }
 }
