@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
     userName:{type:String},
     password:{type:String},
+    emial:{type:String},
     projects:[{type:Schema.Types.ObjectId}]
 });
 

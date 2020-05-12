@@ -15,7 +15,7 @@ function getLink(){
             
         }
     }else{
-        return false;
+        return "";
     }
 
     return link;
@@ -45,7 +45,7 @@ function helper(user){
 
         newButton.setAttribute('onclick', 'logOut()');
         newButton.textContent = 'LogOut';
-        newButton.className = 'nav-link';
+        newButton.className = 'btn btn-default btn-rounded mb-4';
         newNode.appendChild(newButton);
 }
 
@@ -57,9 +57,10 @@ function getUserData(userID) {
     var id;
     $.post('/getProjects', { userID }, function (data, status) {
         var projects = data.projects;
-        var id = projects[0]._id;
+        
         console.log(projects[0]);
         console.log(data);
+        var id = projects[0]._id;
         console.log(id);
         sessionStorage.setItem('projects', JSON.stringify(projects));
         $.post('/getGroups', { id }, function (data, status) {

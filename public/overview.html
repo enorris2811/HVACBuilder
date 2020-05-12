@@ -6,13 +6,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src='/javascripts/login.js'></script>
-    <script src='/javascripts/getUnit.js'></script>
-    <script src='/javascripts/loadSideBar.js'></script>
-    <script src='/javascripts/breadcrumb.js'></script>
-    <script src='/javascripts/projectControl.js'></script>
-    <script src='/javascripts/helper.js'></script>
-    
+
+
     <link rel="stylesheet" type='text/css' href="/stylesheets/newStyle.css">
 </head>
 
@@ -28,23 +23,18 @@
                 <a class='nav-link' id='options' href="/">Projects</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id='points' href='/'>Contact</a>
+                <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
+                    data-target="#modalContactForm">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id='loginLink' data-target="#loginForm" data-toggle='collapse'>login</a>
+                <a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm"
+                    id='loginLink'>login</a>
             </li>
-            <li class="collapse nav-item" id='loginForm'>
-
-                <label for='userName'>User Name:</label>
-                <input type='text' id='userName'>
-                <label for='password'>Password:</label>
-                <input type='text' id='password'>
-                <button id='loginButton' data-toggle='collapse' data-target='#loginForm'
-                    onclick='login()'>Submit</button>
-                <button id='newUserButton' data-toggle='collapse' data-target='#loginForm' onclick='newuser()'>New
-                    User</button>
-
+            <li class="nav-item">
+                <a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm"
+                    id='singupLink'>New User</a>
             </li>
+
         </ul>
     </nav>
     <div class='row'>
@@ -70,15 +60,15 @@
 
 
         <div id='navBottom' class='container col-sm-9'>
-            <ul class="nav nav-tabs"id="projectNav">
+            <ul class="nav nav-tabs" id="projectNav">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb" id='breadcrumb'>
-                        <li class='breadcrumb-item active'aria-current="page">Home</li>
+                        <li class='breadcrumb-item active' aria-current="page">Home</li>
                     </ol>
                 </nav>
-                
+
                 <li class="nav-item">
-                    <a class="nav-link active" id='overviewLink'href='/overview'>Overview</a>
+                    <a class="nav-link active" id='overviewLink' href='/overview'>Overview</a>
                 </li>
 
                 <li class="nav-item">
@@ -86,7 +76,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" id='pointsLink'href='/points'>Points</a>
+                    <a class="nav-link" id='pointsLink' href='/points'>Points</a>
                 </li>
 
                 <li class="nav-item">
@@ -103,8 +93,116 @@
 
 
             </ul>
+            <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="userName" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="userName">Your
+                                    email</label>
+                            </div>
 
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="password" id="password" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="password">Your
+                                    password</label>
+                            </div>
 
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-default" onclick='login()'>Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="userNameNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="userNameNew">Your name</label>
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="emailNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="emailNew">Your email</label>
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="password" id="passwordNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="passwordNew">Your
+                                    password</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-deep-orange" onclick='newUser()'>Sign up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="form34" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="form29" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-tag prefix grey-text"></i>
+                                <input type="text" id="form32" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form32">Subject</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fas fa-pencil prefix grey-text"></i>
+                                <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                                <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="tab-content" id="nav-tabContent">
                 <div class='tab-pane fade show active' id='home' role='tabpanel' aria-labelledby="home-list">
                     <h1>Overview</h1>
@@ -185,11 +283,18 @@
 
             </div>
             <div id='overviewContent'>
-                
+
             </div>
 
         </div>
     </div>
+    <script src='/javascripts/login.js'></script>
+    <script src='/javascripts/getUnit.js'></script>
+    <script src='/javascripts/loadSideBar.js'></script>
+    <script src='/javascripts/breadcrumb.js'></script>
+    <script src='/javascripts/projectControl.js'></script>
+    <script src='/javascripts/helper.js'></script>
+    <script src='/javascripts/overviewContent.js'></script>
 </body>
 
 <script>
@@ -205,13 +310,14 @@
             updateSidebar();
 
             getURL(document.URL);
-            
+
             helper(user);
-            loadProjectSelect('projectSelect','projects');
-        } 
+            loadProjectSelect('projectSelect', 'projects');
+            getOverviewContent();
+        }
     });
 
-  
+
 </script>
 
 </html>

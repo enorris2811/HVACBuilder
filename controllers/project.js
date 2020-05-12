@@ -14,7 +14,7 @@ exports.updateUnitOptions = function (req, res) {
     console.log(unit);
     var points = unit.points;
     // console.log(points);
-    ahu.findOneAndUpdate({ '_id': unit._id }, { 'points': unit.points, 'sequence': unit.sequence }, { 'useFindAndModify': false }).exec(function (err, temp) {
+    ahu.findOneAndUpdate({ '_id': unit._id }, { 'points': unit.points, 'sequence': unit.sequence,'model':unit.model }, { 'useFindAndModify': false }).exec(function (err, temp) {
         if (err) {
             console.log(err);
         } else {
@@ -128,6 +128,7 @@ exports.add_ahu = function (req, res) {
     tempInstance.size = size;
     tempInstance.controller = conttroller;
     tempInstance.group = group;
+    
     tempInstance.save(function (err) { if (err) { console.log(err); } else { res.json({"auth":true }); } });
 
 }

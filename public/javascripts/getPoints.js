@@ -23,7 +23,8 @@ function createPointsList(ahu) {
             for (i in val) {
 
                 var x = val[i];
-                if (i != 'none' || x == 'remoteOccupancy') {
+                console.log(ele);
+                if (i != 'none' || ele == 'remoteOccupancy') {
 
                     if (x.isUsed == true) {
 
@@ -72,13 +73,14 @@ function createPointsList(ahu) {
         console.log(s);
         unit.points = p;
         unit.sequence = s;
+        unit.model = JSON.stringify(ahu);
         console.log(unit);
         var hmmm = JSON.stringify(unit);
         $.post('/updateUnitOptions', { 'unit':JSON.stringify(unit) }, function (data, status) {
             console.log(data);
-            sessionStorage.clear();
-            getUserData(unit._id);
-            updateSidebar();
+            //sessionStorage.clear();
+            getUserData(sessionStorage.getItem('userID'));
+            //updateSidebar();
         });
 
     });

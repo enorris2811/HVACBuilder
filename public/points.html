@@ -21,22 +21,17 @@
                 <a class='nav-link' id='options' href="/">Projects</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id='points' href='/points'>Contact</a>
+                <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
+                    data-target="#modalContactForm">Contact</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm"
+                    id='loginLink'>login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id='loginLink' data-target="#loginForm" data-toggle='collapse'>login</a>
-            </li>
-            <li class="collapse nav-item" id='loginForm'>
-
-                <label for='userName'>User Name:</label>
-                <input type='text' id='userName'>
-                <label for='password'>Password:</label>
-                <input type='text' id='password'>
-                <button id='loginButton' data-toggle='collapse' data-target='#loginForm'
-                    onclick='login()'>Submit</button>
-                <button id='newUserButton' data-toggle='collapse' data-target='#loginForm' onclick='newuser()'>New
-                    User</button>
-
+                <a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm"
+                    id='singupLink'>New User</a>
             </li>
         </ul>
     </nav>
@@ -94,7 +89,116 @@
                 </li>
 
             </ul>
+            <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="userName" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="userName">Your
+                                    email</label>
+                            </div>
 
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="password" id="password" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="password">Your
+                                    password</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-default" onclick='login()'>Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="userNameNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="userNameNew">Your name</label>
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="emailNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="emailNew">Your email</label>
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="password" id="passwordNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="passwordNew">Your
+                                    password</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-deep-orange" onclick='newUser()'>Sign up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="form34" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="form29" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-tag prefix grey-text"></i>
+                                <input type="text" id="form32" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form32">Subject</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fas fa-pencil prefix grey-text"></i>
+                                <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                                <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container">
                 <div class="tab-content" id="nav-tabContent">
                     <div class='tab-pane fade show active' id='home' role='tabpanel' aria-labelledby="home-list">
@@ -255,60 +359,21 @@
                 temp.setAttribute('href', '/overview' + link);
             }
             updateSidebar();
-            getURL(document.URL);
-            loadProjectSelect('projectSelect','projects');
+            var isUnit = getURL(document.URL);
+            loadProjectSelect('projectSelect', 'projects');
             helper(user);
-            var ahu = getUnit();
-            if (ahu != null) {
-                removeNodes();
-                populateTable(ahu);
+            if (isUnit) {
+                var ahu = getUnit();
+                if (ahu != null) {
+                    removeNodes();
+                    populateTable(ahu);
+                }
             }
         }
 
     });
-    function getUnit() {
-        var tempP = document.getElementById('projectSlice').innerText;
-        var tempG = document.getElementById('groupSlice').innerText;
-        var tempU = document.getElementById('unitSlice').innerText;
-        var p = JSON.parse(sessionStorage.getItem('projects'));
-        var g = JSON.parse(sessionStorage.getItem('gropus'));
-        var u = JSON.parse(sessionStorage.getItem('units'));
-        for (x in p) {
-            if (tempP == p[x].name) {
-                var id = p[x]._id;
-                for (i in u) {
-                    if (tempU == u[i].name) {
-                        if (id == u[i].project) {
-                            return u[i];
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    function getLink() {
-        var tempP = document.getElementById('projectSlice');
-        var link = "";
-        if (tempP != null) {
-            link = '/project/' + tempP.innerText;
-            var tempG = document.getElementById('groupSlice');
 
 
-            if (tempG != null) {
-                link = link + '/group/' + tempG.innerText;
-                var tempU = document.getElementById('unitSlice');
-                if (tempU != null) {
-                    link = link + '/unit/' + tempU.innerText;
-                }
-
-            }
-        } else {
-            return false;
-        }
-
-        return link;
-    }
     function removeNodes() {
         var nodeTop = document.getElementById('ahuTable');
         console.log(nodeTop);
@@ -339,7 +404,7 @@
             var unit = x;
             //var unit = JSON.parse(unitT);
             console.log(unit.points);
-            if(unit.points.length == 0){
+            if (unit.points.length == 0) {
                 var temp = document.getElementById('ahuTable');
                 var tempP = document.createElement('p');
                 tempP.innerText = "Unit has not Been configured!!";
@@ -624,7 +689,7 @@
         var n = s.length;
         var temp = [];
         for (x in s) {
-            console.log(s[x].charCodeAt(0));
+            // console.log(s[x].charCodeAt(0));
             var i = s[x].charCodeAt(0);
             if ((i <= 90) && (i >= 65)) {
                 temp.push(x);

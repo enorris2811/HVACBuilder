@@ -10,7 +10,7 @@ var ahu = new Schema({
     points:[{type:String, default:undefined}],
     sequence:[{type:String,default:undefined}],
     model:{type:String,default:undefined},
-    group:{type:Schema.Types.Mixed},
+    group:{type:Schema.Types.ObjectId,ref:'groupModel'},
     project:{type:Schema.Types.ObjectId,ref:'projectModel'}
 });
 

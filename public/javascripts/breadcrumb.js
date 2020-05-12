@@ -22,6 +22,7 @@ function getURL(url) {
                 projectName = url.substring(p, iGroup - 1);
                 console.log(unitName, groupName, projectName);
                 breadCrumb(projectName, groupName, unitName);
+                return true;
             } else {
                 var i = iGroup + 6;
                 groupName = url.substring(i, url.length);
@@ -29,15 +30,18 @@ function getURL(url) {
                 projectName = url.substring(p, iGroup - 1);
                 console.log(groupName, projectName);
                 breadCrumb(projectName, groupName, null);
+                return false;
             }
         } else {
             var i = iProject + 8;
             projectName = url.substring(i, url.length);
             console.log(projectName);
             breadCrumb(projectName, null, null);
+            return false;
         }
     } else {
         console.log('no project!!');
+        return false;
     }
 }
 

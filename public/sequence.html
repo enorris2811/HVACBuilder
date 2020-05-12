@@ -21,27 +21,22 @@
                 <a class='nav-link' id='options' href="/">Projects</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id='points' href='/points'>Contact</a>
+                <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
+                    data-target="#modalContactForm">Contact</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm"
+                    id='loginLink'>login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id='loginLink' data-target="#loginForm" data-toggle='collapse'>login</a>
-            </li>
-            <li class="collapse nav-item" id='loginForm'>
-
-                <label for='userName'>User Name:</label>
-                <input type='text' id='userName'>
-                <label for='password'>Password:</label>
-                <input type='text' id='password'>
-                <button id='loginButton' data-toggle='collapse' data-target='#loginForm'
-                    onclick='login()'>Submit</button>
-                <button id='newUserButton' data-toggle='collapse' data-target='#loginForm' onclick='newuser()'>New
-                    User</button>
-
+                <a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm"
+                    id='singupLink'>New User</a>
             </li>
         </ul>
     </nav>
     <div class='row'>
-        <div class='container col-sm-3' >
+        <div class='container col-sm-3'>
             <h2>Projects Controls</h2>
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="home-list" data-toggle="list" href="#home"
@@ -94,7 +89,116 @@
                 </li>
 
             </ul>
+            <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="userName" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="userName">Your
+                                    email</label>
+                            </div>
 
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="password" id="password" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="password">Your
+                                    password</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-default" onclick='login()'>Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="userNameNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="userNameNew">Your name</label>
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="emailNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="emailNew">Your email</label>
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="password" id="passwordNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="passwordNew">Your
+                                    password</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-deep-orange" onclick='newUser()'>Sign up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="form34" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="form29" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-tag prefix grey-text"></i>
+                                <input type="text" id="form32" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form32">Subject</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fas fa-pencil prefix grey-text"></i>
+                                <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                                <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container">
                 <div class="tab-content" id="nav-tabContent">
                     <div class='tab-pane fade show active' id='home' role='tabpanel' aria-labelledby="home-list">
@@ -197,26 +301,28 @@
         var user = sessionStorage.getItem('user');
 
         updateSidebar();
-        getURL(document.URL);
-        loadProjectSelect('projectSelect','projects');
+        var isUnit = getURL(document.URL);
+        loadProjectSelect('projectSelect', 'projects');
         helper(user);
-        var unit = getUnit();
-        if (unit != null) {
-            var s =unit.sequence;
-            console.log(s);
-            if (s.length == 0){
-                var topNode = document.getElementById('sequence');
-                var temp = document.createElement('p');
-                temp.innerText = "Unit has not been configured!! Configure Unit!";
-                topNode.appendChild(temp);
-            }
-            for (x in s) {
-               var temp = s[x];
+        if (isUnit) {
+            var unit = getUnit();
+            if (unit != null) {
+                var s = unit.sequence;
+                console.log(s);
+                if (s.length == 0) {
+                    var topNode = document.getElementById('sequence');
+                    var temp = document.createElement('p');
+                    temp.innerText = "Unit has not been configured!! Configure Unit!";
+                    topNode.appendChild(temp);
+                }
+                for (x in s) {
+                    var temp = s[x];
                     newDiv(temp);
-             
+
+                }
+
+
             }
-
-
         }
     });
 

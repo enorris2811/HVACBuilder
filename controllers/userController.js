@@ -4,10 +4,12 @@ var user = require('../models/user');
 exports.create_user = function (req, res) {
     var tempUserName = req.body.tempUserName;
     var tempPassword = req.body.tempPassword;
+    var tempEmail = req.body.tempEmail
     console.log(req.body);
     var tempUser = new user();
     tempUser.userName = tempUserName;
     tempUser.password = tempPassword;
+    tempUser.email = tempEmail;
     console.log(tempUser);
     tempUser.save(function (err) {
         if (err) { console.log(err); } else { res.json({ 'saved': true }); }
@@ -18,6 +20,7 @@ exports.create_user = function (req, res) {
 exports.get_user = function (req, res) {
     var tempUserName = req.body.tempUserName;
     var tempPassword = req.body.tempPassword;
+    
     console.log(tempPassword + tempUserName);
     console.log(req.body);
     if ((tempUserName != "") || (tempUserName != undefined)) {

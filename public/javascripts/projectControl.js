@@ -24,8 +24,8 @@ function addAHU() {
 
 
     $.post('/addAHU', { name, type, project, size, user, manu, group }, function (data, status) {
-        sessionStorage.clear();
-        getUserData(user);
+        //sessionStorage.clear();
+        getUserData(userID);
         updateSidebar(userID);
         
     });

@@ -1,7 +1,8 @@
 function newuser() {
-    var tempUserName = document.getElementById('userName').value;
-    var tempPassword = document.getElementById('password').value;
-    $.post('/newuser', { tempUserName, tempPassword }, function (data, status) {
+    var tempUserName = document.getElementById('userNameNew').value;
+    var tempPassword = document.getElementById('passwordNew').value;
+    var tempEmail = document.getElementById('emailNew').value;
+    $.post('/newuser', { tempUserName, tempPassword,tempEmail }, function (data, status) {
         console.log(data.auth);
         window.location.reload();
     });
@@ -20,10 +21,10 @@ function login() {
             sessionStorage.setItem('userID', data.userID);
             //location.reload();
             getUserData(data.userID);
-            helper(data.user);
+            //helper(data.user);
             //location.reload(true);
-            updateSidebar();
-            window.location.reload();
+           // updateSidebar();
+          //location.reload();
         } else {
             alert('login failed!');
         }
