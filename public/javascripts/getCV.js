@@ -69,9 +69,9 @@ function submitCV() {
         }
         x = document.getElementById('vfd');
         if (x.checked == true) {
-            cv.vfd.isUsed = true;
+            cv.vfd.vfd.isUsed = true;
         } else {
-            cv.vfd.isUsed = false;
+            cv.vfd.vfd.isUsed = false;
         }
         x = document.getElementById('returnFan');
         v = x.selectedIndex;
@@ -288,15 +288,15 @@ function submitCV() {
         }
         x = document.getElementById('RARH');
         if (x.checked == true) {
-            cv.RARH.isUsed = true;
+            cv.RARH.RARH.isUsed = true;
         } else {
-            cv.RARH.isUsed = false;
+            cv.RARH.RARH.isUsed = false;
         }
         x = document.getElementById('OARH');
         if (x.checked == true) {
-            cv.OARH.isUsed = true;
+            cv.OARH.OARH.isUsed = true;
         } else {
-            cv.OARH.isUsed = false;
+            cv.OARH.OARH.isUsed = false;
         }
         x = document.getElementById('filterOneMonitoring').selectedIndex;
         if (x == 0) {

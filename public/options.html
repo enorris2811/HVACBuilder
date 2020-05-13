@@ -327,8 +327,10 @@
                 console.log(unit);
                 if (unit.type == 'Constant Volume') {
                     getCVHTML();
+                    getOptions(unit);
                 } else if (unit.type == 'VAV') {
                     getVAV();
+                    getOptions(unit);
                 }
             }
 

@@ -450,30 +450,30 @@ var exhaustFan = {
             }, 'sequence': '<strong>Modulating Humidifier Control:</strong><br> The controller will measure the space relative humidity and modulate output humidifier output to maintain a setpoint of <input type=\'number\' id=\'relativeHumiditySetpoint4\'> relative humidiity.  The modulating humidifier output will be upper limited by the Maximum SA Humidity setpoint of <input type=\'number\' id=\'maxRelativeHumiditySetpoint\'> relative humidity (permissable range of 50% to 90%) and/or the Hi Duct Relative Humidity swith as well as an adjustable Humidifier PID High Limit Clamp of <input type=\'number\' id=\'humidifierHighLimitClamp\'> percent. Optional Humidifier Enable output is turned ON when the humidification PID is greater that 0%(fixed).  The humidifier will be allowed to operate whenever the supply fan is on. The humidifier will turn off on loss of supply fan status.<br><br>  '
         }
     };
-    var RARH = {
+    var RARH = {'RARH':{
         'isUsed': false, 'points': {
             0: 'returnAirRelativeHumidityInput',
             1: 'returnAirRelativeHumidityValue'
         }, 'sequence': '<strong>Return Air Relative Humidity (RARH):<strong><br>The controller will measure return air relative humidity percentage levels.<br><br>'
-    };
+    }};
 
-    var OARH = {
+    var OARH = {'OARH':{
         'isUsed': false, 'points': {
             0: 'outdoorAirRelativeHumidityInput',
             1: 'outdoorAirRelativeHumidityValue'
         }, 'sequence': '<strong>Outside Air Relative Humidity(OARH):<strong><br>The controller will measure outside air relative humidity percentage levels.<br><br>'
-    };
+    }};
 
-    var RACO2 = {
+    var RACO2 = {'RACO2':{
         'isUsed': false,
         'points': { 0: 'returnAirCO2Comncentration', 1: 'returnAirCO2ConcentrationSetoint', 2: 'highReturnAirCO2Concentration' },
         'sequence': '<strong>Return Air Carbon Dioxide (CO2):</strong><br>Return Air Carbon Dioxide (CO2) Concentration Monitoring:<br>The Controller will measure the return air CO2 leavels.<br><br>Alrams will be provided as follows:<br><br>High Return Air Carbon Dioxide Concentration:<br>If the return air CO2 concentration is greater than <input type\'numnber\'>ppm while the unit is running.<br><br>'
-    };
-    var OACO2 = {
+    }};
+    var OACO2 = {'OACO2':{
         'isUsed': false,
         'points': { 0: 'outsideAirCO2Concentration', 1: 'outsideAirCO2SensorFailure' },
         'sequence': '<strong>Outside Air Carbon Dioxide (CO2):</strong><br>The controller will measure the outside air CO2 levels.<br><br>'
-    };
+    }};
     var faceAndBypassDampers = {
         'none': { 'isUsed': false },
         'external': {

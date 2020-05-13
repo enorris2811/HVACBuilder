@@ -277,15 +277,27 @@ function submitVAV() {
         }
         x = document.getElementById('RARH');
         if (x.checked == true) {
-            vav.RARH.isUsed = true;
+            vav.RARH.RARH.isUsed = true;
         } else {
-            vav.RARH.isUsed = false;
+            vav.RARH.RARH.isUsed = false;
+        }
+        x = document.getElementById('RACO2');
+        if (x.checked == true) {
+            vav.RACO2.RACO2.isUsed = true;
+        } else {
+            vav.RACO2.RACO2.isUsed = false;
         }
         x = document.getElementById('OARH');
         if (x.checked == true) {
-            vav.OARH.isUsed = true;
+            vav.OARH.OARH.isUsed = true;
         } else {
-            vav.OARH.isUsed = false;
+            vav.OARH.OARH.isUsed = false;
+        }
+        x = document.getElementById('OACO2');
+        if (x.checked == true) {
+            vav.OACO2.OACO2.isUsed = true;
+        } else {
+            vav.OACO2.OACO2.isUsed = false;
         }
         x = document.getElementById('filterOneMonitoring').selectedIndex;
         if (x == 0) {
