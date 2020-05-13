@@ -1,4 +1,4 @@
-function newuser() {
+function newUser() {
     var tempUserName = document.getElementById('userNameNew').value;
     var tempPassword = document.getElementById('passwordNew').value;
     var tempEmail = document.getElementById('emailNew').value;
