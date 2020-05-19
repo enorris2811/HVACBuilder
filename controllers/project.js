@@ -287,3 +287,32 @@ exports.get_group_options = function (req, res) {
 exports.get_unit_options = function (req, res) {
     res.sendFile(path.resolve('./public/options.html'));
 }
+
+
+exports.remove_project = function (req, res){
+    var id = req.body.temp;
+    project.findOneAndDelete({'_id': id}).exec(function(err,data){
+        if(err){console.log(err);}else{
+            console.log(data);
+        }
+    });
+}
+
+exports.remove_group = function (req, res){
+    var id = req.body.temp;
+    group.findOneAndDelete({'_id': id}).exec(function(err,data){
+        if(err){console.log(err);}else{
+            console.log(data);
+        }
+    });
+}
+
+exports.remove_unit = function (req,res){
+    var id = req.body.temp;
+    console.log(id);
+    ahu.findOneAndDelete({'_id':id}).exec(function(err,data){
+        if(err){console.log(err);}else{
+            console.log(data);
+        }
+    });
+}

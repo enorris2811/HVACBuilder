@@ -102,3 +102,30 @@ document.getElementById('projectSelect').onchange = function () {
     });
 
 }
+
+function removeProject(){
+    var p = document.getElementById('removeProjectSelect');
+    var temp = p.options[p.selectedIndex].value;
+    console.log(temp);
+    $.post('/removeProject',{temp}, function(data, status){
+
+    });
+}
+
+function removeGroup(){
+    var p = document.getElementById('removeGroupSelect');
+    var temp = p.options[p.selectedIndex].value;
+    console.log(temp);
+    $.post('/removeGroup',{temp}, function(data, status){
+        
+    });
+}
+
+function removeUnit(){
+    var p = document.getElementById('removeUnitSelect');
+    var temp = p.options[p.selectedIndex].value;
+    console.log(temp);
+    $.post('/removeUnit',{temp}, function(data, status){
+        
+    });
+}

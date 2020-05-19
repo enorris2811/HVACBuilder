@@ -47,7 +47,8 @@
                     role="tab" aria-controls="newGroup">New Group</a>
                 <a class="list-group-item list-group-item-action" id="newUnit-list" data-toggle="list" href="#newUnit"
                     role="tab" aria-controls="newUnit">New Unit</a>
-
+                <a class="list-group-item list-group-item-action" id="remove-list" data-toggle="list" href="#removeUnit"
+                    role="tab" aria-controls="removeUnit">Remove Unit</a>
             </div>
             <h4>Select a link to configure</h4>
             <div id='sidebar'>
@@ -282,6 +283,31 @@
                         </ul>
 
                     </div>
+                    <div class="tab-pane fade" id="removeUnit" role="tabpanel" aria-labelledby="remove-list">
+                        <ul>
+                            <li>
+                                <label for='removeProjectSelect'>Select Project for Deletion </label>
+                                <select id='removeProjectSelect'>
+                                    <option value=''>....</option>
+                                </select>
+                                <button type='button' id='removeProjectSubmit' onclick='removeProject()'>Submit</button>
+                            </li>
+                            <li>
+                                <label for='removeGrouptSelect'>Select Group for Deletion</label>
+                                <select id='removeGroupSelect'>
+                                    <option value=''>....</option>
+                                </select>
+                                <button type='button' id='removeGrouptSubmit' onclick='removeGroup()'>Submit</button>
+                            </li>
+                            <li>
+                                <label for='removeUnitSelect'>Select Unit for Deletion</label>
+                                <select id='removeUnitSelect'>
+                                    <option value=''>....</option>
+                                </select>
+                                <button type='button' id='removeUnitSubmit' onclick='removeUnit()'>Submit</button>
+                            </li>
+                        </ul>
+                    </div>
 
                 </div>
 
@@ -306,12 +332,12 @@
             loadProjectSelect('projectSelect', 'projects');
             //loadProjectSelect('groupSelect','groups');
             helper(user);
-
+            loadProjectSelect('removeProjectSelect','projects');
+            loadProjectSelect('removeGroupSelect','groups');
+            loadProjectSelect('removeUnitSelect','units');
         }
 
     });
-
-
 </script>
 
 </html>

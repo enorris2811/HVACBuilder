@@ -59,6 +59,10 @@ app.use('/sequence/project/:project/group/:group/unit/:unit',indexRouter);
 app.use('/sequence/project/:project',indexRouter);
 app.use('/updateUnitOptions',indexRouter);
 app.use('/getUserProjects',indexRouter);
+app.use('/removeProject',indexRouter);
+app.use('/removeGroup',indexRouter);
+app.use('/removeUnit',indexRouter);
+
 if(process.env.NODE_ENV === 'production'){
     //set static folder
     app.use(express.static('client/build'));

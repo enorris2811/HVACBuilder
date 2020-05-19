@@ -203,7 +203,7 @@ function submitCV() {
 
         } else if (x == 19) {
 
-            cv.heating.steamExternalFaceBypass.isUsed = true;
+            cv.heating.steamExternalFaceAndBypass.isUsed = true;
 
         } else if (x == 20) {
 
