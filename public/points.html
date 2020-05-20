@@ -371,25 +371,16 @@
 
         var user = sessionStorage.getItem('user');
         if (user != undefined) {
+            var isUnit = getURL(document.URL);
             helper(user);
             var temp = document.getElementById('optionsLink');
-            var link = getLink();
-            if (link != false) {
-
-                temp.setAttribute('href', '/options' + link);
-                temp = document.getElementById('pointsLink');
-                temp.setAttribute('href', '/points' + link);
-                temp = document.getElementById('sequenceLink');
-                temp.setAttribute('href', '/sequence' + link);
-                temp = document.getElementById('/overviewLink');
-                temp.setAttribute('href', '/overview' + link);
-            }
+           
 
             var projects = JSON.parse(sessionStorage.getItem('projects'));
             if (projects != undefined) {
                 updateSidebar();
 
-                var isUnit = getURL(document.URL);
+                
                 if (isUnit) {
                     var ahu = getUnit();
                     if (ahu != null) {

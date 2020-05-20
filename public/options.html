@@ -338,14 +338,15 @@
         var userID = sessionStorage.getItem('userID');
 
         if (user != undefined) {
+            var isUnit = getURL(document.URL);
+
             helper(user);
 
 
             var projects = JSON.parse(sessionStorage.getItem('projects'));
             if (projects != undefined) {
                 updateSidebar();
-                var isUnit = getURL(document.URL);
-
+                
                 loadProjectSelect('projectSelect', 'projects');
                 loadProjectSelect('removeProjectSelect', 'projects');
                 loadProjectSelect('removeGroupSelect', 'groups');

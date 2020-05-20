@@ -74,7 +74,7 @@ var smokeControl = {
         'isUsed': false, 'points': { 0: 'fireShutdown' },
         'sequence': '<strong>Fire Shutdown</strong>:<br> K1 closed(on), K2 closed(on)<br><br> The Unit will shut down and generate and alarm upon receiving a fire shutdown status.<br><br>'
     },
-    'Evacuation':
+    'evacuation':
     {
         'isUsed': false, 'points':
         {
@@ -84,14 +84,14 @@ var smokeControl = {
         },
         'sequence': '<strong>Smoke Evacuation</strong>:<br>K1 Open(off), K2 Closed(on)<br><br>Upon receiving a smoke evacuation status signal the unit will:<br><br><ul>Shut down the supply fan</ul><ul>And start the return Fan</ul><ul>AND close the outdoor and return air dampers</ul><ul>AND open the exhaust air damper</ul><br><br> Alarm will be provided as follows:<br><ul>Smoke Evacuation Alarm: Unit smoke evacuation input is on and unit is in area smoke evacuation mode.<br><br>'
     },
-    'Pressurization': {
+    'pressurization': {
         'isUsed': false, 'points': {
             0: 'smokePressurization',
             1: 'smokeRelayK1',
             2: 'smokeRelayK2'
         }, 'sequence': '<strong>Smoke Pressurization</strong>:<br> K1 Closed(on), K2 Open(off)<br><br> Upon receiving a smoke pressurization status signal, the unit will:<br><br><ul>Start the supply fan</ul><ul>AND stop the return fan</ul><ul>AND open the outdoor air dampers</ul><ul>AND close the return and exhaust air damper</ul><br><br>Alarm will be provided as follows:<br><ul>Smoke Pressurization Alarm: Unit smoke pressurization input is on and unit is in area pressurization mode.<br><br>'
     },
-    'Purge': {
+    'purge': {
         'isUsed': false, 'points': {
             0: 'smokePurge',
             1: 'smokeRelayK1',
