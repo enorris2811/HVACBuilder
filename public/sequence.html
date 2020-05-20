@@ -47,7 +47,7 @@
                     role="tab" aria-controls="newGroup">New Group</a>
                 <a class="list-group-item list-group-item-action" id="newUnit-list" data-toggle="list" href="#newUnit"
                     role="tab" aria-controls="newUnit">New Unit</a>
-                    <a class="list-group-item list-group-item-action" id="remove-list" data-toggle="list" href="#removeUnit"
+                <a class="list-group-item list-group-item-action" id="remove-list" data-toggle="list" href="#removeUnit"
                     role="tab" aria-controls="removeUnit">Remove Unit</a>
             </div>
             <h4>Overview Selector</h4>
@@ -321,35 +321,38 @@
         <script src='/javascripts/helper.js'></script>
 </body>
 <script>
-
     $(document).ready(function () {
         var user = sessionStorage.getItem('user');
+        if (user != undefined) {
+            var isUnit = getURL(document.URL);
+            helper(user);
 
-        updateSidebar();
-        var isUnit = getURL(document.URL);
-        loadProjectSelect('projectSelect', 'projects');
-        loadProjectSelect('removeProjectSelect','projects');
-            loadProjectSelect('removeGroupSelect','groups');
-            loadProjectSelect('removeUnitSelect','units');
-        helper(user);
-        if (isUnit) {
-            var unit = getUnit();
-            if (unit != null) {
-                var s = unit.sequence;
-                console.log(s);
-                if (s.length == 0) {
-                    var topNode = document.getElementById('sequence');
-                    var temp = document.createElement('p');
-                    temp.innerText = "Unit has not been configured!! Configure Unit!";
-                    topNode.appendChild(temp);
+            updateSidebar();
+
+            loadProjectSelect('projectSelect', 'projects');
+            loadProjectSelect('removeProjectSelect', 'projects');
+            loadProjectSelect('removeGroupSelect', 'groups');
+            loadProjectSelect('removeUnitSelect', 'units');
+
+            if (isUnit) {
+                var unit = getUnit();
+                if (unit != null) {
+                    var s = unit.sequence;
+                    console.log(s);
+                    if (s.length == 0) {
+                        var topNode = document.getElementById('sequence');
+                        var temp = document.createElement('p');
+                        temp.innerText = "Unit has not been configured!! Configure Unit!";
+                        topNode.appendChild(temp);
+                    }
+                    for (x in s) {
+                        var temp = s[x];
+                        newDiv(temp);
+
+                    }
+
+
                 }
-                for (x in s) {
-                    var temp = s[x];
-                    newDiv(temp);
-
-                }
-
-
             }
         }
     });
@@ -372,13 +375,13 @@
 
 
     }
+
     function newDiv(x) {
         var temp = document.createElement('div');
         temp.innerHTML = x;
         var top = document.getElementById('sequence');
         top.appendChild(temp);
     }
-
 </script>
 
 </html>

@@ -29,7 +29,7 @@ function login() {
             alert('login failed!');
         }
     });
-    
+    $('#modalLoginForm').modal('hide');
 }
     
 

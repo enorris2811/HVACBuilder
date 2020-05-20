@@ -36,7 +36,7 @@
         </ul>
     </nav>
     <div class='row'>
-        <div class='container col-sm-3'>
+        <div class='container col-sm-3' id='sidebarTop'>
             <h2>Projects Controls</h2>
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="home-list" data-toggle="list" href="#home"
@@ -284,22 +284,22 @@
 
                     </div>
                     <div class="tab-pane fade" id="removeUnit" role="tabpanel" aria-labelledby="remove-list">
-                        <ul>
-                            <li>
+                        <ul class='list-group'>
+                            <li class='list-group-item'>
                                 <label for='removeProjectSelect'>Select Project for Deletion </label>
                                 <select id='removeProjectSelect'>
                                     <option value=''>....</option>
                                 </select>
                                 <button type='button' id='removeProjectSubmit' onclick='removeProject()'>Submit</button>
                             </li>
-                            <li>
+                            <li class='list-group-item'>
                                 <label for='removeGrouptSelect'>Select Group for Deletion</label>
                                 <select id='removeGroupSelect'>
                                     <option value=''>....</option>
                                 </select>
                                 <button type='button' id='removeGrouptSubmit' onclick='removeGroup()'>Submit</button>
                             </li>
-                            <li>
+                            <li class='list-group-item'>
                                 <label for='removeUnitSelect'>Select Unit for Deletion</label>
                                 <select id='removeUnitSelect'>
                                     <option value=''>....</option>
@@ -325,16 +325,21 @@
         var user = sessionStorage.getItem('user');
         var userID = sessionStorage.getItem('userID');
         if (user != undefined) {
+            helper(user);
             var temp = document.getElementById('list-tab');
             temp.className = 'list-group';
-            getUserData(userID);
+           getUserData(userID);
+           var projects = JSON.stringify(sessionStorage.getItem('projects'));
+           if(projects != undefined){
             updateSidebar();
             loadProjectSelect('projectSelect', 'projects');
             //loadProjectSelect('groupSelect','groups');
-            helper(user);
+            
             loadProjectSelect('removeProjectSelect','projects');
             loadProjectSelect('removeGroupSelect','groups');
             loadProjectSelect('removeUnitSelect','units');
+           }
+           
         }
 
     });

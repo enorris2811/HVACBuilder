@@ -47,7 +47,7 @@
                     role="tab" aria-controls="newGroup">New Group</a>
                 <a class="list-group-item list-group-item-action" id="newUnit-list" data-toggle="list" href="#newUnit"
                     role="tab" aria-controls="newUnit">New Unit</a>
-                    <a class="list-group-item list-group-item-action" id="remove-list" data-toggle="list" href="#removeUnit"
+                <a class="list-group-item list-group-item-action" id="remove-list" data-toggle="list" href="#removeUnit"
                     role="tab" aria-controls="removeUnit">Remove Unit</a>
             </div>
             <h4>Overview Selector</h4>
@@ -366,12 +366,12 @@
 </body>
 
 <script>
-
     $(document).ready(function () {
 
 
         var user = sessionStorage.getItem('user');
         if (user != undefined) {
+            helper(user);
             var temp = document.getElementById('optionsLink');
             var link = getLink();
             if (link != false) {
@@ -384,20 +384,31 @@
                 temp = document.getElementById('/overviewLink');
                 temp.setAttribute('href', '/overview' + link);
             }
-            updateSidebar();
-            var isUnit = getURL(document.URL);
-            loadProjectSelect('projectSelect', 'projects');
-            loadProjectSelect('removeProjectSelect','projects');
-            loadProjectSelect('removeGroupSelect','groups');
-            loadProjectSelect('removeUnitSelect','units');
-            helper(user);
-            if (isUnit) {
-                var ahu = getUnit();
-                if (ahu != null) {
-                    removeNodes();
-                    populateTable(ahu);
+
+            var projects = JSON.parse(sessionStorage.getItem('projects'));
+            if (projects != undefined) {
+                updateSidebar();
+
+                var isUnit = getURL(document.URL);
+                if (isUnit) {
+                    var ahu = getUnit();
+                    if (ahu != null) {
+                        removeNodes();
+                        populateTable(ahu);
+                    }
+                }
+                loadProjectSelect('projectSelect', 'projects');
+                loadProjectSelect('removeProjectSelect', 'projects');
+                var groups = JSON.parse(sessionStorage.getItem('groups'));
+                if (groups != undefined) {
+                    loadProjectSelect('removeGroupSelect', 'groups');
+                }
+                var units = JSON.parse(sessionStorage.getItem('units'));
+                if (units != undefined) {
+                    loadProjectSelect('removeUnitSelect', 'units');
                 }
             }
+
         }
 
     });
@@ -425,8 +436,30 @@
             //var ahu = project.units[a].points;
             var hardPoint = points.hardware;
             var softPoint = points.software;
-            var AI = 0, AO = 0, BI = 0, BO = 0, AV = 0, BV = 0, Loop = 0, Schedule = 0, Trend = 0, Alarm = 0, Graphics = 0;
-            var totals = { AI, AO, BI, BO, AV, BV, Loop, Schedule, Trend, Alarm, Graphics };
+            var AI = 0,
+                AO = 0,
+                BI = 0,
+                BO = 0,
+                AV = 0,
+                BV = 0,
+                Loop = 0,
+                Schedule = 0,
+                Trend = 0,
+                Alarm = 0,
+                Graphics = 0;
+            var totals = {
+                AI,
+                AO,
+                BI,
+                BO,
+                AV,
+                BV,
+                Loop,
+                Schedule,
+                Trend,
+                Alarm,
+                Graphics
+            };
 
             //console.log(JSON.stringify(ahu));
             //console.log(ahu);
@@ -701,6 +734,7 @@
 
 
     }
+
     function preparePointName(s) {
         var i = s.indexOf('"');
         var n = s.lastIndexOf(s.length, '"');
