@@ -245,26 +245,26 @@ exports.get_projects_login = function (req, res) {
     project.find({ 'user': temp }, function (err, projects) {
         if (err) console.log(err);
         else {
-            console.log(projects);
+           // console.log(projects);
             p = projects;
             for (var x = 0; x < projects.length; x++) {
 
-                group.find({ 'project': projects[x]._id }, function (err, groups) {
+                group.find({ }, function (err, groups) {
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log('the results of the group query are:' + groups);
+                        //console.log('the results of the group query are:' + groups);
 
                         g.push(groups);
 
                     }
                 });
 
-                ahu.find({ 'project': projects[x]._id }).exec(function (err, units) {
+                ahu.find({ }).exec(function (err, units) {
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log('the results of the units query are:' + units);
+                       // console.log('the results of the units query are:' + units);
 
                         u.push(units);
 

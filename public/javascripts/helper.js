@@ -70,17 +70,13 @@ function getUserData(userID) {
             var id = projects[0]._id;
             console.log(id);
             sessionStorage.setItem('projects', JSON.stringify(projects));
-            $.post('/getGroups', {
-                id
-            }, function (data, status) {
+            $.get('/getGroups',  function (data, status) {
                 sessionStorage.setItem('groups', JSON.stringify(data.list));
                 console.log(data);
             });
-            $.post('/getUnits', {
-                id
-            }, function (data, status) {
+            $.get('/getUnits',  function (data, status) {
                 console.log(data);
-                sessionStorage.setItem('units', JSON.stringify(data.units));
+                sessionStorage.setItem('units', JSON.stringify(data.list));
             });
         } else {
            // return false;
