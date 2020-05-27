@@ -380,6 +380,7 @@
     function newDiv(x) {
         var temp = document.createElement('div');
         temp.innerHTML = x;
+        temp.className = 'card';
         var top = document.getElementById('sequence');
         top.appendChild(temp);
     }

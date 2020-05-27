@@ -27,7 +27,7 @@ function addAHU() {
         //sessionStorage.clear();
         getUserData(userID);
         updateSidebar(userID);
-        
+        alert('New Unit Added');
     });
 
 
@@ -45,6 +45,7 @@ function createNewProject() {
     if (userID != undefined) {
         $.post('/newProject', { name, userID }, function (data, status) {
             updateSidebar(userID);
+            alert('project created!!');
         });
     } else {
         alert('Please log In');
@@ -63,7 +64,7 @@ function addNewGroup() {
     var groupName = document.getElementById('newGroupTextbox').value;
     var projectID = document.getElementById('newGroupProjectSelect').value;
     $.post('/addNewGroup', { groupName, projectID }, function (data, status) {
-
+        alert('new group added');
     });
 
 }
@@ -108,7 +109,7 @@ function removeProject(){
     var temp = p.options[p.selectedIndex].value;
     console.log(temp);
     $.post('/removeProject',{temp}, function(data, status){
-
+        alert('project deleted');
     });
 }
 
@@ -117,7 +118,7 @@ function removeGroup(){
     var temp = p.options[p.selectedIndex].value;
     console.log(temp);
     $.post('/removeGroup',{temp}, function(data, status){
-        
+        alert('group deleted');
     });
 }
 
@@ -126,6 +127,6 @@ function removeUnit(){
     var temp = p.options[p.selectedIndex].value;
     console.log(temp);
     $.post('/removeUnit',{temp}, function(data, status){
-        
+        alert('unit deleted');
     });
 }

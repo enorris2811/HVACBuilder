@@ -112,4 +112,7 @@ router.get('/sequence/project/:project/group/:group',projectController.get_group
 router.get('/sequence/project/:project/group/:group/unit/:unit',projectController.get_unit_sequence);
 router.get('/sequence/project/:project',projectController.get_project_sequence);
 router.post('/updateUnitOptions',projectController.updateUnitOptions);
+router.post('/removeProject',projectController.remove_project);
+router.post('/removeGroup', projectController.remove_group);
+router.post('/removeUnit',projectController.remove_unit);
 module.exports = router;
