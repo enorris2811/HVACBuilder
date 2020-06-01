@@ -294,6 +294,23 @@ exports.remove_project = function (req, res){
     project.findOneAndDelete({'_id': id}).exec(function(err,data){
         if(err){console.log(err);}else{
             console.log(data);
+            ahu.deleteMany({'project':id}, function(err){
+                if (err){
+                    console.log(err);
+                }else{
+                    console.log('deleted many units');
+                }
+
+                
+            });
+
+            group.deleteMany({'project':id},function(err){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log('Deleted project groups');
+                }
+            })
         }
     });
 }
@@ -303,6 +320,14 @@ exports.remove_group = function (req, res){
     group.findOneAndDelete({'_id': id}).exec(function(err,data){
         if(err){console.log(err);}else{
             console.log(data);
+            ahu.deleteMany({'group':id},function(err){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log('Deleted Groups units');
+                }
+            }
+    )
         }
     });
 }
