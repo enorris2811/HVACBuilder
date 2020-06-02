@@ -1286,34 +1286,198 @@ follows:<br>
 
 
 
- <strong>Return Air Carbon Dioxide (CO2):</strong>Return Air Carbon Dioxide (CO2) Concentration Monitoring:<br>The
- Controller will measure the return air CO2 leavels.<br><br><ul>Alrams will be provided as follows:<li>High Return Air
- Carbon Dioxide Concentration:<br>If the return air CO2 concentration is greater than <input placeholder='500' type='numnber'>ppm while
- the unit is running.</li></ul><br><br>
+            <strong>Return Air Carbon Dioxide (CO2):</strong>Return Air Carbon Dioxide (CO2) Concentration
+            Monitoring:<br>The
+            Controller will measure the return air CO2 leavels.<br><br>
+            <ul>Alrams will be provided as follows:<li>High Return Air
+                    Carbon Dioxide Concentration:<br>If the return air CO2 concentration is greater than <input
+                        placeholder='500' type='numnber'>ppm while
+                    the unit is running.</li>
+            </ul><br><br>
 
 
 
 
 
- <strong>Face and Bypass Dampers Control:</strong><br>The unit will maintain space heating and cooling setpoints (if
- equipped with associated heating and cooling coils) by modulating the face and bypass dampers through one of the
- following:<br><br>
- <ul>Cooling:
-     <li>When the space temperature is greater than the cooling setpoint, the face and bypass dampers will modulate open
-         to
-         face position (closed to bypass position) to maintain supply air temperature setpoint by modulating the air
-         passing
-         over the cooling coil (if present). The supply air temperature setpoint will be reset downwards as the space
-         temperature rises above its cooling setpoint.</li>
-     <li>When the space temperature is less than the cooling setpoint, the face and bypass dampers will close to face
-         position (open to bypass position).</li>
- </ul><br><br>
- <ul>Heating:
-     <li>When the space temperature is less than the heating setpoint, the face and bypass dampers will modulate open to
-         face position (closed to bypass position) to maintain supply air temperature setpoint by modulating the air
-         passing
-         over the heating coil (if present). The supply air temperature setpoint will be reset upwards as the space
-         temperature drops below its heating setpoint.</li>
-     <li>When the space temperature is greater than the ehating setpoint, the face and bypass dampers will close to face
-         position (open to bypass position).</li>
- </ul><br><br>
+            <strong>Face and Bypass Dampers Control:</strong><br>The unit will maintain space heating and cooling
+            setpoints (if
+            equipped with associated heating and cooling coils) by modulating the face and bypass dampers through one of
+            the
+            following:<br><br>
+            <ul>Cooling:
+                <li>When the space temperature is greater than the cooling setpoint, the face and bypass dampers will
+                    modulate open
+                    to
+                    face position (closed to bypass position) to maintain supply air temperature setpoint by modulating
+                    the air
+                    passing
+                    over the cooling coil (if present). The supply air temperature setpoint will be reset downwards as
+                    the space
+                    temperature rises above its cooling setpoint.</li>
+                <li>When the space temperature is less than the cooling setpoint, the face and bypass dampers will close
+                    to face
+                    position (open to bypass position).</li>
+            </ul><br><br>
+            <ul>Heating:
+                <li>When the space temperature is less than the heating setpoint, the face and bypass dampers will
+                    modulate open to
+                    face position (closed to bypass position) to maintain supply air temperature setpoint by modulating
+                    the air
+                    passing
+                    over the heating coil (if present). The supply air temperature setpoint will be reset upwards as the
+                    space
+                    temperature drops below its heating setpoint.</li>
+                <li>When the space temperature is greater than the ehating setpoint, the face and bypass dampers will
+                    close to face
+                    position (open to bypass position).</li>
+            </ul><br><br>
+
+<!--CV Zone Sensor-->
+
+
+            <strong>Run Conditions:</strong> The unit will supply conditioned air to its designated zone or linked air
+            terminals and
+            operates a constant volume air unit. The unit will run acccording to the following user selectable
+            modes:<br>
+            <ul>
+                <li>Off</li>
+                <li> Continuously</li>
+                <li> via BAS Command</li>
+                <li> as Locally Scheduled</li>
+                <li> via Link Schedule</li>
+            </ul><br> <br><strong>Off Mode:</strong> The unit will run and all dampers, valves and fans will remain in
+            their off
+            position.<br> <br><strong>Continuously:</strong>The unit will run continuously in the occupied mode.<br><br>
+            <strong> via BAS Command:</strong> The unit will be enabled and disabled via a Bacnet Binary Command, either
+            from a remote source or locally through the software interface. Once enabled the unit will run continuously
+            in the
+            occupied mode. <br><br><strong> as Locally Scheduled:</strong><br> The air handling unit will operate as a
+            constant
+            volume unit having setpoints that represent those of a single zone unit. The unit will then run according to
+            a user
+            finable time schdule in the follow modes: <br>
+            <ul>Occupied Mode:
+                <li> the unit will maintain A <input type='text' id='occHighSetpoint'placeholder='72'> degrees F space cooling setpoint.
+                </li>
+                <li> A <input type='text' id='occLowSetpoint' placeholder='68'> degrees F space heating set point.</li>
+            </ul>
+            <ul>Unoccupied Mode (night setback):<li> The unit will maintain A <input type='text' id='unOccHighSetpoint'placehyolder='72'>
+                degrees F space cooling setpoint. </li>
+                <li> A <input type='text' id='unOccLowSetpoint'placeholder='68'> degress F space heating setpoint.</li>
+            </ul><br><br> <strong>via Linked Scheduled:</strong> the air handling unit will exchange information with
+            the terminal
+            units as follows: <br><br>
+            <ul>
+                <li>Calculated information sent from the Air Handling Unit to the Terminal Units:</li>
+                <li>Current Mode of operation</li>
+                <li>Current supply air temperatur</li>
+                <li>Current outside Air Temperature</li>
+            </ul><br><br>Caluculated information representative of all terminal units sent from the terminal units to
+            the air
+            handling unit:<br><br>
+            <ul>
+                <li>Space Temperatur</li>
+                <li>Setpoints, both occupied and unoocupied</li>
+                <li>Maximum Damper Position</li>
+                <li>Indoor air quality</li>
+                <li>Space relative humidity (if present)</li>
+            </ul><br><br> Based off the above information exchange, the air handling unit will determine which operation
+            best meets
+            the needs of the terminal units. The air handling unit will then operate as a constant volume unit, but one
+            having
+            setpoints representative of its designated group of terminal units. The unit will then run according to a
+            user definable
+            time schedule in the following modes<br><br>Occupied Mode: the unit will maintain<br><br>
+            <ul>
+                <li>A <input type='text' id='occCoolingSetpoint' placeholder='74'>degrees F space cooling setpoint</li>
+                <li>A <input type='text' id='occHeatingSetpoint' placeholder='70'>degrees F space heating setpoint </li>
+            </ul><br><br>Unoccupied Mode(night setback): The unit will maintain<br><br>
+            <ul>
+                <li>A <input type='text' id='unOccCoolingSetpoint' placeholder='85'>degrees F space cooling setpint</li>
+                <li>A <input type='text' id='unOccHeatingSetpoint' placeholder='55'>degrees F space heating setpoint
+                </li>
+            </ul><br><br><strong>Unit Optimal Start:</strong><br>The unit will use an optimal start algorithm for
+            morning start up.
+            This algorithm will minimize the unoocupied warm up or cool down period while still achieving comfort
+            conditions of
+            scheduled occupied period.<br><br><strong>Alarms will be provided as follows</strong><br>
+            <ul>
+                <li>High Space Temp: If the zone temperature is greater than the cooling sepoint by a user definable
+                    amount.</li>
+                <li>Low Space Temp: If the zone temperature is less that the heating setpoint by a user definable
+                    amount.</li>
+            </ul><br><br><strong>Power up start Delay:</strong><br>There will be a 60 second delay in enabling the
+            equipment on
+            intial start up or after a power loss.<br><br><strong>Demand Limiting - Setpoint
+                Optimization:</strong><br>To lower
+            power consumption, the cooling and heating setpoints will automatically relax(offset up when cooling and
+            down when
+            heating) when the facility power consumption exceeds definable thresholds. The amount of relaxation will be
+            user
+            configurable. The setpoints will automatically return to their previous settings when the facility power
+            consumption
+            drops below the thresholds.<br><br><strong>Rnet wireless Gateway:</strong>The Rnet Wireless Gateway is
+            designed for
+            use within the building interior. The wireless signals can pass through a drop ceiling and up to two walls
+            made of
+            gypsum and steel studs with minimal degradation.<br><br>
+
+
+
+
+            <!--CV WS Sensor-->
+
+<strong>Run Conditions:</strong> The unit will supply conditioned air to its designated zone or linked air terminals and
+    operates a constant air volumeunit. The unit will run acccording to the following user selectable modes:<br>
+Off,<br> Continuously,<br> via BAS Command,<br> as Locally Scheduled,<br> via Link Schedule.<br> <strong>Off
+    Mode</strong>:<br> The unit will run and all dampers, valves and fans will remain in their off position.<br>
+<strong>Continuously</strong>: <br>The unit will run continuously in the occupied mode.<br> <strong> via BAS
+    Command</strong>:<br> The unit will be enabled and disabled via a Bacnet Binary Command, either from a remote source
+or locally through the software interface. Once enabled the unit will run continuously in the occupied mode.
+<br><strong> as Locally Scheduled</strong>: The air handling unit will operate as a constant volume unit having
+setpoints that represent those of a single zone unit. The unit will then run according to a user finable time schdule in
+the follow modes: <br> Occupied Mode: the unit will maintain A <input type='text' id='occHighSetpoint' placeholder='72'> degrees F
+space cooling setpoint. <br> A <input type='text' id='occLowSetpoint' placeholder='68'> degrees F space heating set point. <br>
+Unoccupied Mode (night setback): The unit will maintain A <input type='text' id='unOccHighSetpoint'placeholder='72'> degrees F space
+cooling setpoint. <br> A <input type='text' id='unOccLowSetpoint'placeholder='68'> degress F space heating setpoint.<br><br>
+<strong>via Linked Scheduled:</strong> the air handling unit will exchange information with the terminal units as
+follows: <br><br>
+<ul>Calculated information sent from the Air Handling Unit to the Terminal Units: <br>
+    <ul>Current Mode of operation</ul><br>
+    <ul>Current supply air temperatur</ul><br>
+    <ul>Current outside Air Temperature</ul>
+</ul><br><br>
+<ul>Caluculated information representative of all terminal units sent from the terminal units to the air handling
+    unit:<br><br>
+    <ul>Space Temperatur</ul><br>
+    <ul>Setpoints, both occupied and unoocupied</ul><br>
+    <ul>Maximum Damper Position</ul><br>
+    <ul>Indoor air quality</ul><br>
+    <ul>Space relative humidity (if present)</ul>
+</ul><br><br> Based of the above information exchange, the air handling unit will determin which operation best meets
+the needs of teh terminal units. The air handling unit will then operate as a constant volume unit, but one having
+setpoints representative of its designated group of terminal units. The unit will then run according to a user definable
+time schedule in the following modes<br><br>
+<ul>Occupied Mode: the unit will maintain<br><br>
+    <ul> A <input type=\'text\' id=\'occCoolingSetpoint\' default=\'74\'>degrees F space cooling setpoint<br></ul>
+    <ul>A <input type=\'text\' id=\'occHeatingSetpoint\' default=\'70\'>degrees F space heating setpoint </ul><br><br>
+</ul>
+<ul>Unoccupied Mode(night setback): The unit will maintain<br><br>
+    <ul>A <input type=\'text\'id=\'unOccCoolingSetpoint\'default=\'85\'>degrees F space cooling setpint</ul><br>
+    <ul>A <input type=\'text\'id=\'unOccHeatingSetpoint\'default=\'55\'>degrees F space heating setpoint</ul>
+</ul><br><br><strong>Unit Optimal Start:</strong><br>The unit will use an optimal start algorithm for morning start up.
+This algorithm will minimize the unoocupied warm up or cool down period while still achieving comfort conditions of
+scheduled occupied period.<br><br><strong>Alarms will be provided as follows</strong><br>
+<ul>High Space Temp: If the zone temperature is greater than the cooling sepoint by a user definable amount.<br></ul>
+<ul>Low Space Temp: If the zone temperature is less that the heating setpoint by a user definable amount.</ul>
+<br><br><strong>Power up start Delay:</strong><br>There will be a 60 second delay in enabling the equipment on intial
+start up or after a power loss.<br><br><strong>Demand Limiting - Setpoint Optimization:</strong><br>To lower power
+consumption, the cooling and heating setpoints will automatically relax(offset up when cooling and down when heating)
+when the facility power consumption exceeds definable thresholds. The amount of relaxation will be user configurable.
+The setpoints will automatically return to their previous settings when the facility power consumption drops below the
+thresholds.<br><br><strong>Rnet wireless Gateway</strong>:<br>The Rnet Wireless Gateway is designed for use within the
+building interior. The wireless signals can pass through a drop ceiling and up to two walls made of gypsum and steel
+studs with minimal degradation.<br><br>
+
+
+
