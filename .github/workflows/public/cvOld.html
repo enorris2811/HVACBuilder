@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HVAC Builder</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type='text/css' href="/stylesheets/newStyle.css">
+</head>
+
+<body>
+
+    <nav id='navTop' class="navbar navbar-expand-sm">
+        <ul class="navbar-nav" id='navbar'>
+            <img src="/images/CCG_Logo_New.bmp" class="align-self-*-start" alt="CCG LOGO">
+            <li class="nav-item">
+                <a class="nav-link" id='home' href="/">Get Started</a>
+            </li>
+            <li class="nav-item">
+                <a class='nav-link' id='options' href="/options">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id='points' href='/points'>Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id='loginLink' data-target="#loginForm" data-toggle='collapse'>login</a>
+            </li>
+            <li class="collapse nav-item" id='loginForm'>
+
+                <label for='userName'>User Name:</label>
+                <input type='text' id='userName'>
+                <label for='password'>Password:</label>
+                <input type='text' id='password'>
+                <button id='loginButton' data-toggle='collapse' data-target='#loginForm'
+                    onclick='login()'>Submit</button>
+                <button id='newUserButton' data-toggle='collapse' data-target='#loginForm' onclick='newuser()'>New
+                    User</button>
+
+            </li>
+        </ul>
+    </nav>
+    <div class='row'>
+        <div class='container col-sm-3' id='sidebar'>
+            <h2>Projects Controls</h2>
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="home-list" data-toggle="list" href="#home"
+                    role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="newProject-list" data-toggle="list"
+                    href="#newProject" role="tab" aria-controls="newProject">New Project</a>
+                <a class="list-group-item list-group-item-action" id="newGroup-list" data-toggle="list" href="#newGroup"
+                    role="tab" aria-controls="newGroup">New Group</a>
+                <a class="list-group-item list-group-item-action" id="newUnit-list" data-toggle="list" href="#newUnit"
+                    role="tab" aria-controls="newUnit">New Unit</a>
+
+            </div>
+        </div>
+
+
+
+
+
+        <div id='navBottom' class='container col-sm-9'>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href='/overview'>Overview</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/options'>Options</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/points'>Points</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/sequence'>Sequence</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/drawings'>Drawings</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/material'>Material</a>
+                </li>
+
+
+            </ul>
+
+            <div class="container">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class='tab-pane fade show active' id='home' role='tabpanel' aria-labelledby="home-list">
+                        <h1>Constant Volume</h1>
+                        <div id='selectAHUDiv'>
+
+                            <label>Select an AHU unit in the Project</label>
+                            <select id='selectAHU'>
+                                <option>select...</option>
+                            </select>
+                            <button id='ahuButton' type='button'>Select Unit Options</button>
+
+
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="newProject" role="tabpanel" aria-labelledby="newProject-list">
+                        <label for='newProjectTextbox'>Enter the name for a new project</label>
+                        <input type='text' id='newProjectTextbox'>
+
+                        <button type='submit' onclick='createNewProject()'>Submit</button>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="newGroup" role="tabpanel" aria-labelledby="newGroup-list">
+
+                        <label for='newGroupTextbox'>Enter a name for a group</label>
+                        <input type='text' id='newGroupTextbox'>
+                        <select id='newGroupProjectSelect'>
+                            <option value=''>....</option>
+                        </select>
+                        <button type='submit' id='newGroupSubmit' onclick='addNewGroup()'>Submit</button>
+                    </div>
+
+                    <div class="tab-pane fade" id="newUnit" role="tabpanel" aria-labelledby="newUnit-list">
+
+                        <ul class='list-group'>
+
+                            <li class='list-group-item'>
+                                <label for="AHUType">Select AHU Style</label>
+                                <select id="AHUOptions">
+                                    <option value="">Select....</option>
+                                    <option value="Constant Volume">Constant Volume</option>
+                                    <option value="VAV">VAV</option>
+                                </select>
+                            </li>
+
+                            <li class='list-group-item'>
+                                <label for='ahuName'>Enter the Name of The AHU</label>
+                                <input id='ahuName' type='text'>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='projectSelect'>Select the project for the AHU:</label>
+                                <select id='projectSelect'>
+                                    <option value=''>Select....</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='groupSelect'>Select the Group</label>
+                                <select id='groupSelect'>
+                                    <option value=''>Select....</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='ahuSize'>Select the Size of the AHU</label>
+                                <select id='ahuSize'>
+                                    <option value='small'>Small(0 to 9999k CFM) </option>
+                                    <option value='medium'>Medium(10k to 15999k CFM)</option>
+                                    <option value='large'>Large (16K to 20k CFM)</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='controllerSelect'>Select the controller manufacturer</label>
+                                <select id='controllerSelect'>
+                                    <option value='siemens'>Siemens</option>
+                                    <option value='carrier'>Carrier</option>
+                                    <option value='distech'>Distech</option>
+                                    <option value='trane'>Trane</option>
+                                </select>
+                            </li>
+                            <br>
+                            <br>
+                            <button type='submit' onclick='addAHU()'>Submit new AHU</button>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <form><label for="runCond">Run Conditions</label>
+                <select class="runConditons" id="runConditions" name="runCond">
+                    <option value="ZSSensorWithLinkage">ZS Sensor with Linkage</option>
+                    <option value="WSSensorWithLinkage">WS Sensor with Linkage</option>
+                </select>
+                <br><br>
+                <label for="safties">Safeties</label>
+                <input id="freezeProtection" type="checkbox" value="1">Freeze Protection
+                <input id="returnAirSmokeDetector" type="checkbox" value="1">Return Air Smoke Detector
+                <input id="supplyAirSmokeDetector" type="checkbox" value="1">Supply Air Smoke Detector
+                <br><br>
+                <label for="SmokeControl">Smoke Control</label>
+                <input id="fireShutdown" type="checkbox" value="1">Fire Shutdown
+                <input id="evacuation" type="checkbox" value="1">Evacuation
+                <input id="pressurization" type="checkbox" value="1">Pressurization
+                <input id="purge" type="checkbox" name="Purge" value="1">Purge
+                <br><br>
+                <label for="OAT">Outdoor Air Temperature</label>
+                <select id="outdoorAirTemp" name="OAT">
+                    <option value="physicalInput">Physical Input</option>
+                    <option value="networkInput">Network Input</option>
+                </select><br><br>
+                <label for="SF">Supply Fan</label>
+                <select id="supplyFan" name="SF">
+                    <option value="blowThrough">Blow Through -- On - Off</option>
+                    <option value="drawThrough">Draw Through -- On - Off</option>
+                </select>
+                <br><br>
+                <label for="VFD">VFD</label>
+                <input id="vfd" type="checkbox" value="1">Single Zone VFD<br><br>
+                <label for="ReturnFan">Return Fan</label>
+                <select id="returnFan" name="RF">
+                    <option value="none">None</option>
+                    <option value="onOff">On - Off</option>
+                </select><br><br>
+                <label for="EF">Exhaust Fan</label>
+                <select id="exhaustFan" name="EF">
+                    <option value="none">None</option>
+                    <option value="onOff">On - Off</option>
+                </select><br><br>
+                <label for="Preheating">Preheating</label>
+                <select id="preHeating" name="Preheating">
+                    <option value="none">None</option>
+                    <option value="electricStaging">Electric Staging</option>
+                    <option value="SCRElectric">SCR Electric</option>
+                    <option value="hotWaterModulating">Hot Water: Modulating</option>
+                    <option value="hotWaterModulationCoilDeltaT">Hot Water: Modulating Coil Delta T</option>
+                    <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass</option>
+                    <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass</option>
+                </select><br><br>
+                <label for="FaceBypassD">Face and Bypass Dampers</label>
+                <select id="faceAndBypassDampers" name="FaceBypassD">
+                    <option value="none">None</option>
+                    <option value="external">External Bypass</option>
+                    <option value="internal">Internal Bypass</option>
+                </select><br><br>
+                <label for="Heating">Heating</label>
+                <select name="Heating" id="heating">
+                    <option value="none">None</option>
+                    <option value="electricStaging1">Electric Staging 1</option>
+                    <option value="electricStaging2">Electric Staging 2</option>
+                    <option value="electricStaging3">Electric Staging 3</option>
+                    <option value="electricStaging4">Electric Staging 4</option>
+                    <option value="electricStaging5">Electric Staging 5</option>
+                    <option value="electricStaging6">Electric Staging 6</option>
+                    <option value="gasStaging1">Gas Staging 1</option>
+                    <option value="gasStaging2">Gas Staging 2</option>
+                    <option value="gasStaging3">Gas Staging 3</option>
+                    <option value="gasStaging4">Gas Staging 4</option>
+                    <option value="gasStaging5">Gas Staging 5</option>
+                    <option value="gasStaging6">Gas Staging 6</option>
+                    <option value="SCRElectric">SCR Electric</option>
+                    <option value="hotWaterModulating">Hot Water: Modulating</option>
+                    <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass</option>
+                    <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass</option>
+                    <option value="hotWaterIntegralFaceAndBypass">Hot Water: Integral Face and Bypass</option>
+                    <option value="steamModulating">Steam: Modulating</option>
+                    <option value="steamExternalFaceBypass">Steam: External Face and Bypass</option>
+                    <option value="steamInternalFaceAndBypass">Steam: Internal Face and Bypass</option>
+                    <option value="steamIntegralFaceAndBypass">Steam: Integral Face and Bypass</option>
+                </select>
+                <br><br>
+                <label for="Cooling">Cooling</label>
+                <select id="cooling" name="Cooling">
+                    <option value="none">None</option>
+                    <option value="dXCooling">Dx Cooling</option>
+                    <option value="chilledWaterModulating">Chilled Water: Modulating</option>
+                    <option value="chilledWaterModulatingCoilDeltaT">Chilled Water: Modulating Coil Delta T</option>
+                    <option value="chilledWaterExternalFaceBypass">Chilled Water: External Face and Bypass</option>
+                    <option value="chilledWaterInternalFaceBypass">Chilled Water: Internal Face and Bypass</option>
+                </select>
+                <br><br>
+                <label for="MAD">Mixed Air Dampers</label>
+                <select id="mixedAirDamper" name="MAD">
+                    <option value="none">None</option>
+                    <option value="economizerOAEnthalpySwitch">Economizer: OA Enthalpy Switch</option>
+                    <option value="economizerOAEnthalpySensor">Economizer: OA Enthalpy Sensor</option>
+                    <option value="economizerOADifferentialEnthalpy">Economizer: OA Differential Enthalpy</option>
+                    <option value="economizerOADryBulb">Economizer: OA Dry Bulb</option>
+                </select>
+                <br><br>
+                <label for="mOA">Minimum Outside Air</label>
+                <select id="minOutsideAir" name="mOA">
+                    <option value="none">None</option>
+                    <option value="differentialCO2">Differential CO2</option>
+                    <option value="returnSpaceCO2">Return/Space CO2</option>
+                </select>
+                <br><br>
+                <label for="humidityControl">Humiditiy Control</label>
+                <input id="humidityControl" type="checkbox" name="humdidtyControl">Dehumidification
+                <br><br>
+                <label for="humidifier">Humidifier</label>
+                <select id="humidifier" name="humidifier">
+                    <option value="none">None</option>
+                    <option value="SS">Humidifier SS</option>
+                    <option value="sSAndModulation">Humidifier SS and Modulation</option>
+                </select>
+                <br><br>
+                <label for="RARH">Misc Monitoring</label>
+                <input id="RARH" type="checkbox" name="RARH">Return Air Relative Humidity<br>
+                <input id="OARH" type="checkbox" name="OARH">Outdoor Air
+                Relative Humidity
+                <br><br>
+                <label for="f1M">Filter 1 Monitoring</label>
+                <select id="filterOneMonitoring" name="f1M">
+                    <option value="none">None</option>
+                    <option value="hours">Hours</option>
+                    <option value="status">Status</option>
+                    <option value="differentialPressure">Differential Pressure</option>
+                </select>
+                <br><br>
+                <label for="f2M">Filter 2 Monitoring</label>
+                <select id="filterTwoMonitoring" name="f2M">
+                    <option value="none">None</option>
+                    <option value="hours">Hours</option>
+                    <option value="status">Status</option>
+                    <option value="differentialPressure">Differential Pressure</option>
+                </select>
+                <br><br>
+            </form>
+
+            <button onclick="submitCV()">Submit</button>
+        </div>
+    </div>
+</body>
+<script>
+
+
+    $(document).ready(function () {
+        var project = JSON.parse(localStorage.getItem('project'));
+        var url = document.URL;
+        console.log(url);
+        if (project != undefined) {
+            var x;
+            for (x in project.units) {
+
+                var option = document.createElement('option');
+                var parentNode = document.getElementById('selectAHU');
+                parentNode.appendChild(option);
+                option.textContent = project.units[x].name;
+                var unit = project.units[x];
+                if (unit.points != null) {
+
+                }
+            }
+
+        }
+    })
+    document.getElementById('ahuButton').onclick = function () {
+        var s = document.getElementById('selectAHU').selectedIndex - 1;
+        var project = JSON.parse(localStorage.getItem('project'));
+        console.log(project.units);
+        console.log(s);
+        var modelType = project.units[s].type;
+        console.log(modelType);
+
+        switch (modelType) {
+            case 'cv':
+                $.get('/options/cv', function (data, status) {
+                    console.log('called cv');
+                });
+                break;
+            case 'vav':
+                $.get('/options/vav', function (data, status) {
+                    console.log('called vav');
+                });
+                break;
+
+        }
+    }
+
+    function submitCV() {
+
+        $.get('/cvModel', function (data, status) {
+            console.log(data);
+            var cv = data.ahu;
+            console.log(JSON.stringify(cv));
+            var x = document.getElementById('runConditions');
+            var v = x.selectedIndex;
+            if (v == 0) {
+                cv.runConditions.ZSSensorWithLinkage.isUsed = true;
+
+            } else if (v == 1) {
+
+                cv.runConditions.WSSensorWithLinkage.isUsed = true;
+            }
+            x = document.getElementById('freezeProtection');
+            if (x.checked == true) {
+                cv.safties.freezeProtection.isUsed = true;
+            }
+            x = document.getElementById('returnAirSmokeDetector');
+            if (x.checked == true) {
+                cv.safties.returnAirSmokeDetector.isUsed = true;
+            }
+            x = document.getElementById('supplyAirSmokeDetector');
+            if (x.checked == true) {
+                cv.safties.supplyAirSmokeDetector.isUsed = true;
+            }
+            x = document.getElementById('fireShutdown');
+            if (x.checked == true) {
+                cv.smokeControl.fireShutdown.isUsed = true;
+            }
+            x = document.getElementById('evacuation');
+            if (x.checked == true) {
+                cv.smokeControl.evacuation.isUsed = true;
+            }
+            x = document.getElementById('pressurization');
+            if (x.checked == true) {
+                cv.smokeControl.pressurization.isUsed = true;
+            }
+            x = document.getElementById('purge');
+            if (x.checked == true) {
+                cv.smokeControl.purge.isUsed = true;
+            }
+            x = document.getElementById('outdoorAirTemp');
+            v = x.selectedIndex;
+            if (v == 0) {
+                cv.outdoorAirTemp.physicalInput.isUsed = true;
+
+            } else if (v == 1) {
+
+                cv.outdoorAirTemp.networkInput.isUsed = true;
+            }
+            x = document.getElementById('supplyFan');
+            v = x.selectedIndex;
+            if (v == 0) {
+                cv.supplyFan.blowThrough.isUsed = true;
+
+            } else if (v == 1) {
+
+                cv.supplyFan.drawThrough.isUsed = true;
+            }
+            x = document.getElementById('vfd');
+            if (x.checked == true) {
+                cv.vfd.isUsed = true;
+            } else {
+                cv.vfd.isUsed = false;
+            }
+            x = document.getElementById('returnFan');
+            v = x.selectedIndex;
+            if (v == 0) {
+                cv.returnFan.none.isUsed = true;
+
+            } else if (v == 1) {
+
+                cv.returnFan.onOff.isUsed = true;
+            }
+            x = document.getElementById('exhaustFan');
+            v = x.selectedIndex;
+            if (v == 0) {
+                cv.exhaustFan.none = true;
+            } else if (v == 1) {
+
+                cv.exhaustFan.onOff.isUsed = true;
+            }
+            x = document.getElementById('preHeating');
+            v = x.selectedIndex;
+            if (v == 0) {
+                cv.preHeating.none.isUsed = true;
+
+
+            } else if (v == 1) {
+
+                cv.preHeating.electricStaging.isUsed = true;
+
+            } else if (v == 2) {
+
+                cv.preHeating.SCRElectric.isUsed = true;
+
+            } else if (v == 3) {
+
+                cv.preHeating.hotWaterModulating.isUsed = true;
+
+            } else if (v == 4) {
+
+                cv.preHeating.hotWaterFaceBypass.isUsed = true;
+
+            } else if (v == 5) {
+                cv.preHeating.steamModulating.isUsed = true;
+            } else if (v == 6) {
+                cv.preHeating.none = 0;
+
+                cv.preHeating.steamFaceBypass.isUsed = true;
+            }
+            x = document.getElementById('faceAndBypassDampers');
+            v = x.selectedIndex;
+            if (v == 0) {
+                cv.faceAndBypassDampers.none.isUsed = true;
+
+            } else if (v == 1) {
+                cv.faceAndBypassDampers.external.isUsed = true;
+
+            } else if (v == 2) {
+                cv.faceAndBypassDampers.internal.isUsed = true;
+            }
+            x = document.getElementById('heating').selectedIndex;
+            if (x == 0) {
+                cv.heating.none.isUsed = true;
+            } else if (x == 1) {
+
+                cv.heating.electricStaging.isUsed = true;
+                cv.heating.electricStaging.points.stages = 1;
+            } else if (x == 2) {
+
+                cv.heating.electricStaging.isUsed = true;
+                cv.heating.electricStaging.points.stages = 2;
+
+            } else if (x == 3) {
+
+                cv.heating.electricStaging.isUsed = true;
+                cv.heating.electricStaging.points.stages = 3;
+            } else if (x == 4) {
+
+                cv.heating.electricStaging.isUsed = true;
+                cv.heating.electricStaging.points.stages = 4;
+            } else if (x == 5) {
+
+                cv.heating.electricStaging.isUsed = true;
+                cv.heating.electricStaging.points.stages = 5;
+            } else if (x == 6) {
+
+                cv.heating.electricStaging.isUsed = true;
+                cv.heating.electricStaging.points.stages = 6;
+            } else if (x == 7) {
+
+                cv.heating.gasStage.isUsed = true;
+                cv.heating.gasStage.points.stages = 1;
+            } else if (x == 8) {
+                cv.heating.gasStage.isUsed = true;
+                cv.heating.gasStage.points.stages = 2;
+            } else if (x == 9) {
+                cv.heating.gasStage.isUsed = true;
+                cv.heating.gasStage.points.stages = 3;
+            } else if (x == 10) {
+                cv.heating.gasStage.isUsed = true;
+                cv.heating.gasStage.points.stages = 4;
+            } else if (x == 11) {
+                cv.heating.gasStage.isUsed = true;
+                cv.heating.gasStage.points.stages = 5;
+            } else if (x == 12) {
+                cv.heating.gasStage.isUsed = true;
+                cv.heating.gasStage.points.stages = 6;
+            } else if (x == 13) {
+
+                cv.heating.SCRElectric.isUsed = true;
+
+            } else if (x == 14) {
+
+                cv.heating.hotWaterModulating.isUsed = true;
+
+            } else if (x == 15) {
+
+                cv.heating.hotWaterExternalFaceAndBypass.isUsed = true;
+
+            } else if (x == 16) {
+
+                cv.heating.hotWaterInternalFaceAndBypass.isUsed = true;
+
+            } else if (x == 17) {
+
+                cv.heating.hotWaterIntegralFaceAndBypass.isUsed = true;
+
+            } else if (x == 18) {
+
+                cv.heating.steamModulating.isUsed = true;
+
+            } else if (x == 19) {
+
+                cv.heating.steamExternalFaceBypass.isUsed = true;
+
+            } else if (x == 20) {
+
+                cv.heating.steamInternalFaceAndBypass.isUsed = true;
+
+            } else if (x == 21) {
+
+                cv.heating.steamIntegralFaceAndBypass.isUsed = 1;
+            }
+            x = document.getElementById('cooling').selectedIndex;
+            if (x == 0) {
+                cv.cooling.none.isUsed = true;
+
+            } else if (x == 1) {
+
+                cv.cooling.dXCooling.isUsed = true;
+                cv.cooling.dXCooling.points.stages = 1;
+            } else if (x == 2) {
+
+                cv.cooling.chilledWaterModulating.isUsed = true;
+
+            } else if (x == 3) {
+
+                cv.cooling.chilledWaterModulatingCoilDeltaT.isUsed = true;
+
+            } else if (x == 4) {
+
+                cv.cooling.chilledWaterExternalFaceBypass.isUsed = true;
+
+            } else if (x == 5) {
+
+                cv.cooling.chilledWaterInternalFaceBypass.isUsed = true;
+            }
+            x = document.getElementById('mixedAirDamper').selectedIndex;
+            if (x == 0) {
+                cv.mixedAirDamper.none.isUsed = true;
+
+            } else if (x == 1) {
+                cv.mixedAirDamper.economizerOAEnthalpySwitch.isUsed = true
+            } else if (x == 2) {
+
+
+                cv.mixedAirDamper.economizerOAEnthalpySensor.isUsed = true;
+
+            } else if (x == 3) {
+
+                cv.mixedAirDamper.economizerOADifferentialEnthalpy.isUsed = true;
+
+            } else if (x == 4) {
+
+                cv.mixedAirDamper.economizerOADryBulb.isUsed = true;
+            }
+            x = document.getElementById('minOutsideAir').selectedIndex;
+            if (x == 0) {
+                cv.minOutsideAir.none.isUsed = true;
+
+            } else if (x == 1) {
+
+                cv.minOutsideAir.differentialCO2.isUsed = true;
+
+            } else if (x == 2) {
+
+                cv.minOutsideAir.returnSpaceCO2.isUsed = true;
+            }
+            x = document.getElementById('humidityControl');
+            if (x.checked == true) {
+                cv.humidityControl.isUsed = true;
+            } else {
+                cv.humidityControl.isUsed = false;
+            }
+            x = document.getElementById('humidifier').selectedIndex;
+            if (x == 0) {
+                cv.humidifier.none.isUsed = true;
+
+            } else if (x == 1) {
+
+                cv.humidifier.SS.isUsed = true;
+
+            } else if (x == 2) {
+
+                cv.humidifier.sSAndModulation.isUsed = true;
+            }
+            x = document.getElementById('RARH');
+            if (x.checked == true) {
+                cv.RARH.isUsed = true;
+            } else {
+                cv.RARH.isUsed = false;
+            }
+            x = document.getElementById('OARH');
+            if (x.checked == true) {
+                cv.OARH.isUsed = true;
+            } else {
+                cv.OARH.isUsed = false;
+            }
+            x = document.getElementById('filterOneMonitoring').selectedIndex;
+            if (x == 0) {
+                cv.filterOneMonitoring.none.isUsed = true;
+
+            } else if (x == 1) {
+
+                cv.filterOneMonitoring.hours.isUsed = true;
+
+            } else if (x == 2) {
+
+                cv.filterOneMonitoring.status.isUsed = true;
+
+            } else if (x == 3) {
+
+                cv.filterOneMonitoring.differentialPressure.isUsed = true;
+            }
+            x = document.getElementById('filterTwoMonitoring').selectedIndex;
+            if (x == 0) {
+                cv.filterTwoMonitoring.none.isUsed = true;
+
+            } else if (x == 1) {
+
+                cv.filterTwoMonitoring.hours.isUsed = true;
+
+            } else if (x == 2) {
+
+                cv.filterTwoMonitoring.status.isUsed = true;
+
+            } else if (x == 3) {
+
+                cv.filterTwoMonitoring.differentialPressure.isUsed = true;
+            }
+            console.log(JSON.stringify(cv));
+            localStorage.setItem('ahu', JSON.stringify(cv));
+            var project = JSON.parse(localStorage.getItem('project'));
+            var abc = document.getElementById('selectAHU').selectedIndex;
+            console.log(project);
+            console.log(abc);
+            project.units[abc - 1].points = cv;
+
+            localStorage.setItem('project', JSON.stringify(project));
+
+        });
+    }
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HVAC Builder</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type='text/css' href="/stylesheets/newStyle.css">
+</head>
+
+<body>
+
+    <nav id='navTop' class="navbar navbar-expand-sm">
+        <ul class="navbar-nav" id='navbar'>
+            <img src="/images/CCG_Logo_New.bmp" class="align-self-*-start" alt="CCG LOGO">
+            <li class="nav-item">
+                <a class="nav-link" id='home' href="/">Get Started</a>
+            </li>
+            <li class="nav-item">
+                <a class='nav-link' id='options' href="/">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
+                    data-target="#modalContactForm">Contact</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm"
+                    id='loginLink'>Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm"
+                    id='singupLink'>New User</a>
+            </li>
+        </ul>
+    </nav>
+    <div class='row'>
+        <div class='container col-sm-3'>
+            <h2>Projects Controls</h2>
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="home-list" data-toggle="list" href="#home"
+                    role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="newProject-list" data-toggle="list"
+                    href="#newProject" role="tab" aria-controls="newProject">New Project</a>
+                <a class="list-group-item list-group-item-action" id="newGroup-list" data-toggle="list" href="#newGroup"
+                    role="tab" aria-controls="newGroup">New Group</a>
+                <a class="list-group-item list-group-item-action" id="newUnit-list" data-toggle="list" href="#newUnit"
+                    role="tab" aria-controls="newUnit">New Unit</a>
+                <a class="list-group-item list-group-item-action" id="remove-list" data-toggle="list" href="#removeUnit"
+                    role="tab" aria-controls="removeUnit">Remove Unit</a>
+            </div>
+            <h4>Overview Selector</h4>
+            <div id='sidebar'></div>
+        </div>
+
+
+
+
+
+        <div id='navBottom' class='container col-sm-9'>
+            <ul class="nav nav-tabs" id='projectNav'>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" id='breadcrumb'>
+                        <li class='breadcrumb-item active' aria-current="page">Home</li>
+                    </ol>
+                </nav>
+                <li class="nav-item">
+                    <a class="nav-link" id='overviewLink' href='/overview'>Overview</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id='optionsLink' href='/options'>Options</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" id='pointsLink' href='/points'>Points</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id='sequenceLink' href='/sequence'>Sequence</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/drawings'>Drawings</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/material'>Material</a>
+                </li>
+
+            </ul>
+            <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="userName" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="userName">Your
+                                    email</label>
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="password" id="password" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="password">Your
+                                    password</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-default" onclick='login()'>Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="userNameNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="userNameNew">Your name</label>
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="emailNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="emailNew">Your email</label>
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="password" id="passwordNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="passwordNew">Your
+                                    password</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-deep-orange" onclick='newUser()'>Sign up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="form34" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="form29" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-tag prefix grey-text"></i>
+                                <input type="text" id="form32" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form32">Subject</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fas fa-pencil prefix grey-text"></i>
+                                <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                                <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class='tab-pane fade show active' id='home' role='tabpanel' aria-labelledby="home-list">
+                        <h1>HVAC Builder</h1>
+                        <p>Welcome to the CCG Equipment Configurator. LogIn to access
+                            saved projects and equipment, or create a new user and start
+                            configuring a equipment and organizing a project now! </p>
+                    </div>
+
+                    <div class="tab-pane fade" id="newProject" role="tabpanel" aria-labelledby="newProject-list">
+                        <label for='newProjectTextbox'>Enter the name for a new project</label>
+                        <input type='text' id='newProjectTextbox'>
+
+                        <button type='submit' onclick='createNewProject()'>Submit</button>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="newGroup" role="tabpanel" aria-labelledby="newGroup-list">
+
+                        <label for='newGroupTextbox'>Enter a name for a group</label>
+                        <input type='text' id='newGroupTextbox'>
+                        <select id='newGroupProjectSelect'>
+                            <option value=''>....</option>
+                        </select>
+                        <button type='submit' id='newGroupSubmit' onclick='addNewGroup()'>Submit</button>
+                    </div>
+
+                    <div class="tab-pane fade" id="newUnit" role="tabpanel" aria-labelledby="newUnit-list">
+
+                        <ul class='list-group'>
+
+                            <li class='list-group-item'>
+                                <label for="AHUType">Select AHU Style</label>
+                                <select id="AHUOptions">
+                                    <option value="">Select....</option>
+                                    <option value="Constant Volume">Constant Volume</option>
+                                    <option value="VAV">VAV</option>
+                                </select>
+                            </li>
+
+                            <li class='list-group-item'>
+                                <label for='ahuName'>Enter the Name of The AHU</label>
+                                <input id='ahuName' type='text'>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='projectSelect'>Select the project for the AHU:</label>
+                                <select id='projectSelect'>
+                                    <option value=''>Select....</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='groupSelect'>Select the Group</label>
+                                <select id='groupSelect'>
+                                    <option value=''>Select....</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='ahuSize'>Select the Size of the AHU</label>
+                                <select id='ahuSize'>
+                                    <option value='small'>Small(0 to 9999k CFM) </option>
+                                    <option value='medium'>Medium(10k to 15999k CFM)</option>
+                                    <option value='large'>Large (16K to 20k CFM)</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='controllerSelect'>Select the controller manufacturer</label>
+                                <select id='controllerSelect'>
+                                    <option value='siemens'>Siemens</option>
+                                    <option value='carrier'>Carrier</option>
+                                    <option value='distech'>Distech</option>
+                                    <option value='trane'>Trane</option>
+                                </select>
+                            </li>
+                            <br>
+                            <br>
+                            <button type='submit' onclick='addAHU()'>Submit new AHU</button>
+
+                        </ul>
+
+                    </div>
+                    <div class="tab-pane fade" id="removeUnit" role="tabpanel" aria-labelledby="remove-list">
+                        <ul>
+                            <li>
+                                <label for='removeProjectSelect'>Select Project for Deletion </label>
+                                <select id='removeProjectSelect'>
+                                    <option value=''>....</option>
+                                </select>
+                                <button type='button' id='removeProjectSubmit' onclick='removeProject()'>Submit</button>
+                            </li>
+                            <li>
+                                <label for='removeGrouptSelect'>Select Group for Deletion</label>
+                                <select id='removeGroupSelect'>
+                                    <option value=''>....</option>
+                                </select>
+                                <button type='button' id='removeGrouptSubmit' onclick='removeGroup()'>Submit</button>
+                            </li>
+                            <li>
+                                <label for='removeUnitSelect'>Select Unit for Deletion</label>
+                                <select id='removeUnitSelect'>
+                                    <option value=''>....</option>
+                                </select>
+                                <button type='button' id='removeUnitSubmit' onclick='removeUnit()'>Submit</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="container">
+                <table id='ahuTable' class='table'>
+                    <div class='tableHeader'>
+                        <tr id='tableHeader' class='rowHeader'>
+                            <th>
+                                Point Name
+                            </th>
+                            <th>
+                                Analog Input
+                            </th>
+                            <th>
+                                Analog Output
+                            </th>
+                            <th>
+                                Binary Input
+                            </th>
+                            <th>
+                                Binary Output
+                            </th>
+                            <th>
+                                Analog Value
+                            </th>
+                            <th>
+                                Binary Value
+                            </th>
+                            <th>
+                                Loop
+                            </th>
+                            <th>
+                                Schedule
+                            </th>
+                            <th>
+                                Trend
+                            </th>
+                            <th>
+                                Alarm
+                            </th>
+                            <th>
+                                Show on Graphic
+                            </th>
+                        </tr>
+                    </div>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src='/javascripts/login.js'></script>
+    <script src='/javascripts/loadSideBar.js'></script>
+    <script src='/javascripts/breadcrumb.js'></script>
+    <script src='/javascripts/projectControl.js'></script>
+    <script src='/javascripts/getUnit.js'></script>
+    <script src='/javascripts/helper.js'></script>
+</body>
+
+<script>
+    $(document).ready(function () {
+
+
+        var user = sessionStorage.getItem('user');
+        if (user != undefined) {
+            var isUnit = getURL(document.URL);
+            helper(user);
+            var temp = document.getElementById('optionsLink');
+           
+
+            var projects = JSON.parse(sessionStorage.getItem('projects'));
+            if (projects != undefined) {
+                updateSidebar();
+
+                
+                if (isUnit) {
+                    var ahu = getUnit();
+                    if (ahu != null) {
+                        removeNodes();
+                        populateTable(ahu);
+                    }
+                }
+                loadProjectSelect('projectSelect', 'projects');
+                loadProjectSelect('newGroupProjectSelect','projects');
+                loadProjectSelect('removeProjectSelect', 'projects');
+                var groups = JSON.parse(sessionStorage.getItem('groups'));
+                if (groups != undefined) {
+                    loadProjectSelect('removeGroupSelect', 'groups');
+                }
+                var units = JSON.parse(sessionStorage.getItem('units'));
+                if (units != undefined) {
+                    loadProjectSelect('removeUnitSelect', 'units');
+                }
+            }
+
+        }
+
+    });
+
+
+    function removeNodes() {
+        var nodeTop = document.getElementById('ahuTable');
+        console.log(nodeTop);
+        console.log(nodeTop.hasChildNodes());
+        var x = nodeTop.childElementCount;
+        while (x > 1) {
+            console.log(bottomNode);
+            var bottomNode = nodeTop.lastChild;
+            bottomNode.remove();
+            console.log('hello hello hello');
+            x = nodeTop.childElementCount;
+        }
+        console.log('all nodes removed');
+    }
+
+    function populateTable(x) {
+        $.get('/pointsModel', function (data, status) {
+
+            var points = data.points;
+            //var ahu = project.units[a].points;
+            var hardPoint = points.hardware;
+            var softPoint = points.software;
+            var AI = 0,
+                AO = 0,
+                BI = 0,
+                BO = 0,
+                AV = 0,
+                BV = 0,
+                Loop = 0,
+                Schedule = 0,
+                Trend = 0,
+                Alarm = 0,
+                Graphics = 0;
+            var totals = {
+                AI,
+                AO,
+                BI,
+                BO,
+                AV,
+                BV,
+                Loop,
+                Schedule,
+                Trend,
+                Alarm,
+                Graphics
+            };
+
+            //console.log(JSON.stringify(ahu));
+            //console.log(ahu);
+            var unit = x;
+            //var unit = JSON.parse(unitT);
+            console.log(unit.points);
+            if (unit.points.length == 0) {
+                var temp = document.getElementById('ahuTable');
+                var tempP = document.createElement('p');
+                tempP.innerText = "Unit has not Been configured!!";
+                temp.appendChild(tempP);
+            }
+            for (p in unit.points) {
+                var pointName = unit.points[p];
+
+
+
+                // console.log(uniy.points);
+
+                var tableTop = document.getElementById('ahuTable');
+                var tableRow = document.createElement("tr");
+                tableRow.class = 'tableRow';
+
+                tableTop.appendChild(tableRow);
+
+                var temp;
+                for (temp in hardPoint) {
+                    var wx = hardPoint[temp];
+                    var wy = temp;
+                    //console.log(wx);
+                    if (pointName == wy) {
+                        //console.log("ANd AGAIN RIGHT HERE!!!");
+                        if (wx.isUsed == false) {
+
+                            wx.isUsed == true;
+                            for (a = 0; a < 12; a++) {
+                                var tableColumn = document.createElement('td');
+                                tableColumn.class = "tableCell";
+                                var textNode = document.createTextNode('0');
+                                tableColumn.appendChild(textNode);
+                                tableRow.appendChild(tableColumn);
+                                // console.log(a);
+                                switch (a) {
+                                    case (0):
+
+                                        console.log(preparePointName(JSON.stringify(pointName)));
+                                        textNode.textContent = preparePointName(JSON.stringify(pointName));
+
+                                        break;
+                                    case (1):
+                                        console.log(wx);
+                                        textNode.textContent = wx.points.AI;
+                                        if (wx.points.AI == 1) {
+                                            totals.AI = totals.AI + 1;
+
+                                        }
+
+                                        break;
+                                    case (2):
+                                        textNode.textContent = wx.points.AO;
+                                        if (wx.points.AO == 1) {
+                                            totals.AO++;
+                                        }
+
+                                        break;
+                                    case (3):
+                                        textNode.textContent = wx.points.BI;
+                                        if (wx.points.BI == 1) {
+                                            totals.BI++;
+
+                                        }
+                                        break;
+                                    case (4):
+                                        textNode.textContent = wx.points.BO;
+                                        if (wx.points.BO == 1) {
+                                            totals.BO++;
+                                        }
+
+                                        break;
+                                    case (5):
+                                        textNode.textContent = wx.points.AV;
+                                        if (wx.points.AV == 1) {
+                                            totals.AV++;
+                                        }
+
+                                        break;
+                                    case (6):
+                                        textNode.textContent = wx.points.BV;
+                                        if (wx.points.BV == 1) {
+                                            totals.BV++;
+                                        }
+
+
+                                        break;
+                                    case (7):
+                                        textNode.textContent = wx.points.Loop;
+                                        if (wx.points.Loop == 1) {
+                                            totals.Loop++
+                                        }
+
+                                        break;
+                                    case (8):
+                                        textNode.textContent = wx.points.Schedule;
+                                        if (wx.points.Schedule == 1) {
+                                            totals.Schedule++;
+                                        }
+
+                                        break;
+                                    case (9):
+                                        textNode.textContent = wx.points.Trend;
+                                        if (wx.points.Trend == 1) {
+                                            totals.Trend++;
+                                        }
+
+                                        break;
+                                    case (10):
+                                        textNode.textContent = wx.points.Alarm;
+                                        if (wx.points.Alarm == 1) {
+
+                                            totals.Alarm++;
+                                        }
+                                        break;
+                                    case (11):
+                                        textNode.textContent = wx.points.Graphics;
+                                        if (wx.points.Graphics == 1) {
+                                            totals.Graphics++;
+                                        }
+
+                                        break;
+                                }
+
+
+                            }
+                        }
+                    }
+
+                }
+
+                var temp2;
+                for (temp2 in softPoint) {
+                    var wx = softPoint[temp2];
+                    var wy = temp2;
+                    //console.log(wx);
+                    if (pointName == wy) {
+                        // console.log("ANd AGAIN RIGHT HERE!!!");
+                        if (wx.isUsed == false) {
+                            wx.isUsed == true;
+
+                            for (a = 0; a < 12; a++) {
+                                var tableColumn = document.createElement('td');
+                                tableColumn.class = "tableCell";
+                                var textNode = document.createTextNode("0");
+                                tableColumn.appendChild(textNode);
+                                tableRow.appendChild(tableColumn);
+                                switch (a) {
+                                    case (0):
+                                        console.log(preparePointName(JSON.stringify(pointName)));
+                                        textNode.textContent = preparePointName(JSON.stringify(pointName));
+
+                                        break;
+                                    case (1):
+                                        console.log(wx);
+                                        textNode.textContent = wx.points.AI;
+                                        if (wx.points.AI == 1) {
+                                            totals.AI = totals.AI + 1;
+
+                                        }
+
+                                        break;
+                                    case (2):
+                                        textNode.textContent = wx.points.AO;
+                                        if (wx.points.AO == 1) {
+                                            totals.AO++;
+                                        }
+
+                                        break;
+                                    case (3):
+                                        textNode.textContent = wx.points.BI;
+                                        if (wx.points.BI == 1) {
+                                            totals.BI++;
+
+                                        }
+                                        break;
+                                    case (4):
+                                        textNode.textContent = wx.points.BO;
+                                        if (wx.points.BO == 1) {
+                                            totals.BO++;
+                                        }
+
+                                        break;
+                                    case (5):
+                                        textNode.textContent = wx.points.AV;
+                                        if (wx.points.AV == 1) {
+                                            totals.AV++;
+                                        }
+
+                                        break;
+                                    case (6):
+                                        textNode.textContent = wx.points.BV;
+                                        if (wx.points.BV == 1) {
+                                            totals.BV++;
+                                        }
+
+
+                                        break;
+                                    case (7):
+                                        textNode.textContent = wx.points.Loop;
+                                        if (wx.points.Loop == 1) {
+                                            totals.Loop++
+                                        }
+
+                                        break;
+                                    case (8):
+                                        textNode.textContent = wx.points.Schedule;
+                                        if (wx.points.Schedule == 1) {
+                                            totals.Schedule++;
+                                        }
+
+                                        break;
+                                    case (9):
+                                        textNode.textContent = wx.points.Trend;
+                                        if (wx.points.Trend == 1) {
+                                            totals.Trend++;
+                                        }
+
+                                        break;
+                                    case (10):
+                                        textNode.textContent = wx.points.Alarm;
+                                        if (wx.points.Alarm == 1) {
+
+                                            totals.Alarm++;
+                                        }
+                                        break;
+                                    case (11):
+                                        textNode.textContent = wx.points.Graphics;
+                                        if (wx.points.Graphics == 1) {
+                                            totals.Graphics++;
+                                        }
+
+                                        break;
+                                }
+
+
+                            }
+                        }
+                    }
+
+                }
+
+
+
+
+            }
+
+            var tableTop = document.getElementById('ahuTable');
+            var tableRow = document.createElement("tr");
+            tableRow.class = 'tableTotals';
+
+            tableTop.appendChild(tableRow);
+            var temp = document.createElement('td');
+
+            tableRow.appendChild(temp);
+            temp.innerText = "totals:"
+            for (x in totals) {
+                var tempNode = document.createElement('td');
+                tableRow.appendChild(tempNode);
+                console.log();
+                tempNode.innerText = totals[x];
+            }
+            console.log(unit);
+        });
+
+
+    }
+
+    function preparePointName(s) {
+        var i = s.indexOf('"');
+        var n = s.lastIndexOf(s.length, '"');
+        // console.log(i);
+        //console.log(n);
+        var temp = s.substring((i + 1), s.length);
+        // console.log(temp);
+        s = temp.substring(0, temp.length - 1);
+        s = addSpaces(s)
+        return s;
+    }
+
+    function addSpaces(s) {
+
+        var n = s.length;
+        var temp = [];
+        for (x in s) {
+            // console.log(s[x].charCodeAt(0));
+            var i = s[x].charCodeAt(0);
+            if ((i <= 90) && (i >= 65)) {
+                temp.push(x);
+            }
+        }
+        console.log(temp);
+        var newS = "";
+        var last = 0;
+        for (z in temp) {
+            var cap = temp[z];
+            newS += s.substring(last, cap) + " ";
+            //console.log(newS);
+            last = cap;
+        }
+        newS += s.substring(last, s.length);
+        //console.log(newS);
+        return newS;
+    }
+</script>
+
+</html>

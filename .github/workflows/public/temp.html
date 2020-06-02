@@ -1,0 +1,1809 @@
+<!--VAV Run Conditions-->
+
+<strong>Run Conditions</strong>
+<p>The Unit will supply conditioned air to its designated terminal units and operate as a variable air volume unit. The
+    unit will run according to the folling user selectable modes:</p>
+<ul>
+    <li>
+        Off
+    </li>
+    <li>
+        Continuously
+    </li>
+    <li>
+        via BAS Command
+    </li>
+    <li>
+        as Locally Scheduled
+    </li>
+    <li '>
+        via Linked Scheduled
+    </li>
+</ul>
+<strong>Off Mode:</strong>
+<p>The unit will not run and all dampers, valves and fans will remain in their off position</p>
+<strong>Continuously</strong>
+<p>The unit will run continuously in the occupied mode.</p>
+<strong>via BAS Command</strong>
+<p>The unit will be enabled and disabled via a Bacnet Binary command, either from a remote source, or locally through
+    the software interface. once enabled, the unit will run continuously in the occupied mode.</p>
+<strong>as Locally Scheduled</strong>
+<p>The air handling unit will operate as a variable volume unit, but one having setpoints that represent those of a
+    single zone unit. The unit will then run according to a user definable time schedule in the following modes:</p>
+<ul >Occupied Mode: The unit will maintain:
+    <li >
+        A <input id=' spaceCoolingSetpointOcc' placeholder='72' type='number'> degrees F space cooling setpoint
+    </li>
+    <li>
+        A <input id='spaceHeatingSetpointOc' placeholder='68' type='number'> degrees F space heating setpoint
+    </li>
+</ul>
+<ul>Unoccupied Mode: The unit will maintain:
+    <li>
+        A <input id='spaceCoolingSetpointUnocc' placeholder='72' type='number'> degrees F space cooling setpoint
+    </li>
+    <li>
+        A <input id='spaceHeatingSetpointUnocc' placeholder='68' type='number'> degrees F space heating setpoint
+    </li>
+</ul>
+<strong>Unit Optimal Start</strong>
+<p>The unit will use an optimal start algorithm for morning start-up. This alogorithm will minimize the unoccupied warm
+    up or cool down period while still achieving comfort conditions by the start of scheduled occupied period.</p>
+<p>Alarms will be provided as follows:</p>
+<ul>
+    <li>
+        High Space Temp: If the zone temperature is greater than the cooling setpoint by a user definable amount.
+    </li>
+    <li>
+        Low Space Temp: if the zone temperature is less than the heating setpoint by a user definable amount.
+    </li>
+</ul>
+<strong>via linked Schedule</strong>
+<p>The air handling unit will exchange information with the terminal units as follows:</p>
+<ul>
+    <li>
+        Calculated information sent from the air handling unit to the terminal units:
+        <ul>
+            <li>
+                Current Mode of operation
+            </li>
+            <li>
+                current static pressure
+            </li>
+            <li>
+                current supply air temperature
+            </li>
+            <li>
+                current outside air temperature
+            </li>
+        </ul>
+    </li>
+    <li>
+        Calculated information representative of all terminal units sent from the terminal units to the air handling
+        unit:
+        <ul>
+            <li>
+                Space Temperature
+            </li>
+            <li>
+                Setpoints, both occupied and unoccupied
+            </li>
+            <li>
+                maximum damper position
+            </li>
+            <li>
+                indoor air quality (if present)
+            </li>
+            <li>
+                space relative humidity (if present)
+            </li>
+        </ul>
+    </li>
+</ul>
+<strong>Power-up Start-up Delay</strong>
+<p>There will be a 60 second delay in enabling the equipment on intial start up or after a power loss.</p>
+<strong>Demand limiting - Setpoint Optimization</strong>
+<p>To lower power consumption, the cooling and heating setpoints will automatically relax (offset up when cooling and
+    down when heating) when the facility power consumption exceeds definable thresholds. the amount of relaxation will
+    be user configurable. The setpoints will automatically return to their previous settings when the facility power
+    consumption drops below the thresholds.</p>
+
+
+
+<div>
+    <table id='overviewTable'>
+        <th>
+        <td>Name</td>
+        <td>Size</td>
+        <td>Controller Type</td>
+        <td>Unit Type</td>
+        </th>
+
+    </table>
+</div>
+
+<!--CV OPTIONS HMTL-->
+'<div id="accordion">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0"> <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne"> Run Conditions </button> </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body"> <label for="runCond">Run Conditions</label> <select class="runConditons"
+                    id="runConditions" name="runCond">
+                    <option value="ZSSensorWithLinkage">ZS Sensor with Linkage</option>
+                    <option value="WSSensorWithLinkage">WS Sensor with Linkage</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="false" aria-controls="collapseTwo"> Safeties </button> </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+                <ul>
+                    <li><input id="freezeProtection" type="checkbox" value="1">Freeze Protection </li>
+                    <li><input id="returnAirSmokeDetector" type="checkbox" value="1">Return Air
+                        Smoke Detector</li>
+                    <li> <input id="supplyAirSmokeDetector" type="checkbox" value="1">Supply Air Smoke Detector</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingThree">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="false" aria-controls="collapseThree"> Smoke Control </button> </h5>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+                <ul>
+                    <li><input id="fireShutdown" type="checkbox" value="1">Fire Shutdown</li>
+                    <li><input id="evacuation" type="checkbox" value="1">Evacuation</li>
+                    <li><input id="pressurization" type="checkbox" value="1">Pressurization </li>
+                    <li><input id="purge" type="checkbox" name="Purge" value="1">Purge </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingThree">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour"
+                    aria-expanded="false" aria-controls="collapseFour"> Outdoor Air Temperature </button> </h5>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+            <div class="card-body"> <label for="OAT">Outdoor Air Temperature</label> <select id="outdoorAirTemp"
+                    name="OAT">
+                    <option value="physicalInput">Physical Input</option>
+                    <option value="networkInput">Network Input</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingFive">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive"
+                    aria-expanded="false" aria-controls="collapseFive"> Supply Fan </button> </h5>
+        </div>
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+            <div class="card-body"> <label for="SF">Supply Fan</label> <select id="supplyFan" name="SF">
+                    <option value="blowThrough">Blow Through -- On - Off</option>
+                    <option value="drawThrough">Draw Through -- On - Off</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingSix">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix"
+                    aria-expanded="false" aria-controls="collapseSix"> VFD </button> </h5>
+        </div>
+        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+            <div class="card-body"> <label for="VFD">VFD</label> <input id="vfd" type="checkbox" value="1">Single Zone
+                VFD<br><br> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingSeven">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSeven"
+                    aria-expanded="false" aria-controls="collapseSeven"> Return Fan </button> </h5>
+        </div>
+        <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+            <div class="card-body"> <label for="ReturnFan">Return Fan</label> <select id="returnFan" name="RF">
+                    <option value="none">None</option>
+                    <option value="onOff">On - Off</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingEight">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight"
+                    aria-expanded="false" aria-controls="collapseEight"> Exhaust Fan </button> </h5>
+        </div>
+        <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+            <div class="card-body"> <label for="EF">Exhaust Fan</label> <select id="exhaustFan" name="EF">
+                    <option value="none">None</option>
+                    <option value="onOff">On - Off</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingNine">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseNine"
+                    aria-expanded="false" aria-controls="collapseNine"> Pre-heating </button> </h5>
+        </div>
+        <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
+            <div class="card-body"> <label for="Preheating">Preheating</label> <select id="preHeating"
+                    name="Preheating">
+                    <option value="none">None</option>
+                    <option value="electricStaging">Electric Staging</option>
+                    <option value="SCRElectric">SCR Electric</option>
+                    <option value="hotWaterModulating">Hot Water: Modulating</option>
+                    <option value="hotWaterModulationCoilDeltaT">Hot Water: Modulating Coil Delta T </option>
+                    <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass </option>
+                    <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass </option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingTen">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTen"
+                    aria-expanded="false" aria-controls="collapseTen"> Face and Bypass Dampers </button> </h5>
+        </div>
+        <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
+            <div class="card-body"> <label for="FaceBypassD">Face and Bypass Dampers</label> <select
+                    id="faceAndBypassDampers" name="FaceBypassD">
+                    <option value="none">None</option>
+                    <option value="external">External Bypass</option>
+                    <option value="internal">Internal Bypass</option>
+                </select><br><br> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingEleven">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                    data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven"> Heating
+                </button> </h5>
+        </div>
+        <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion">
+            <div class="card-body"> <label for="Heating">Heating</label> <select name="Heating" id="heating">
+                    <option value="none">None</option>
+                    <option value="electricStaging1">Electric Staging 1</option>
+                    <option value="electricStaging2">Electric Staging 2</option>
+                    <option value="electricStaging3">Electric Staging 3</option>
+                    <option value="electricStaging4">Electric Staging 4</option>
+                    <option value="electricStaging5">Electric Staging 5</option>
+                    <option value="electricStaging6">Electric Staging 6</option>
+                    <option value="gasStaging1">Gas Staging 1</option>
+                    <option value="gasStaging2">Gas Staging 2</option>
+                    <option value="gasStaging3">Gas Staging 3</option>
+                    <option value="gasStaging4">Gas Staging 4</option>
+                    <option value="gasStaging5">Gas Staging 5</option>
+                    <option value="gasStaging6">Gas Staging 6</option>
+                    <option value="SCRElectric">SCR Electric</option>
+                    <option value="hotWaterModulating">Hot Water: Modulating</option>
+                    <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass </option>
+                    <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass </option>
+                    <option value="hotWaterIntegralFaceAndBypass">Hot Water: Integral Face and Bypass </option>
+                    <option value="steamModulating">Steam: Modulating</option>
+                    <option value="steamExternalFaceBypass">Steam: External Face and Bypass</option>
+                    <option value="steamInternalFaceAndBypass">Steam: Internal Face and Bypass</option>
+                    <option value="steamIntegralFaceAndBypass">Steam: Integral Face and Bypass</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingTwelve">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                    data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve"> Cooling
+                </button> </h5>
+        </div>
+        <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordion">
+            <div class="card-body"> <label for="Cooling">Cooling</label> <select id="cooling" name="Cooling">
+                    <option value="none">None</option>
+                    <option value="dXCooling">Dx Cooling</option>
+                    <option value="chilledWaterModulating">Chilled Water: Modulating</option>
+                    <option value="chilledWaterModulatingCoilDeltaT">Chilled Water: Modulating Coil Delta T</option>
+                    <option value="chilledWaterExternalFaceBypass">Chilled Water: External Face and Bypass</option>
+                    <option value="chilledWaterInternalFaceBypass">Chilled Water: Internal Face and Bypass</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="heading13">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse13"
+                    aria-expanded="false" aria-controls="collapse13"> Mixed Air Damper </button> </h5>
+        </div>
+        <div id="collapse13" class="collapse" aria-labelledby="heading13" data-parent="#accordion">
+            <div class="card-body"> <label for="MAD">Mixed Air Dampers</label> <select id="mixedAirDamper" name="MAD">
+                    <option value="none">None</option>
+                    <option value="economizerOAEnthalpySwitch">Economizer: OA Enthalpy Switch</option>
+                    <option value="economizerOAEnthalpySensor">Economizer: OA Enthalpy Sensor</option>
+                    <option value="economizerOADifferentialEnthalpy">Economizer: OA Differential Enthalpy</option>
+                    <option value="economizerOADryBulb">Economizer: OA Dry Bulb</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="heading14">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse14"
+                    aria-expanded="false" aria-controls="collapse14"> Minimum Outside Air </button> </h5>
+        </div>
+        <div id="collapse14" class="collapse" aria-labelledby="heading14" data-parent="#accordion">
+            <div class="card-body"> <label for="mOA">Minimum Outside Air</label> <select id="minOutsideAir" name="mOA">
+                    <option value="none">None</option>
+                    <option value="differentialCO2">Differential CO2</option>
+                    <option value="returnSpaceCO2">Return/Space CO2</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="heading15">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse15"
+                    aria-expanded="false" aria-controls="collapse15"> Mixed Air Damper </button> </h5>
+        </div>
+        <div id="collapse15" class="collapse" aria-labelledby="heading15" data-parent="#accordion">
+            <div class="card-body"> <label for="MAD">Mixed Air Dampers</label> <select id="mixedAirDamper" name="MAD">
+                    <option value="none">None</option>
+                    <option value="economizerOAEnthalpySwitch">Economizer: OA Enthalpy Switch</option>
+                    <option value="economizerOAEnthalpySensor">Economizer: OA Enthalpy Sensor</option>
+                    <option value="economizerOADifferentialEnthalpy">Economizer: OA Differential Enthalpy</option>
+                    <option value="economizerOADryBulb">Economizer: OA Dry Bulb</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="heading16">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse16"
+                    aria-expanded="false" aria-controls="collapse16"> Humidity Control </button> </h5>
+        </div>
+        <div id="collapse16" class="collapse" aria-labelledby="heading16" data-parent="#accordion">
+            <div class="card-body"> <label for="humidityControl">Humiditiy Control</label> <input id="humidityControl"
+                    type="checkbox" name="humdidtyControl">Dehumidification <br><br> <label
+                    for="humidifier">Humidifier</label> <select id="humidifier" name="humidifier">
+                    <option value="none">None</option>
+                    <option value="SS">Humidifier SS</option>
+                    <option value="sSAndModulation">Humidifier SS and Modulation</option>
+                </select> </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="heading17">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse17"
+                    aria-expanded="false" aria-controls="collapse17"> Mixed Monitoring </button> </h5>
+        </div>
+        <div id="collapse17" class="collapse" aria-labelledby="heading17" data-parent="#accordion">
+            <div class="card-body">
+                <ul>
+                    <li><input id="RARH" type="checkbox" name="RARH">Return Air Relative Humidity</li>
+                    <li><input id="OARH" type="checkbox" name="OARH">Outdoor
+                        Air Relative Humidity</li>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="heading18">
+            <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse18"
+                    aria-expanded="false" aria-controls="collapse18"> Filter Monitoring </button> </h5>
+        </div>
+        <div id="collapse18" class="collapse" aria-labelledby="heading18" data-parent="#accordion">
+            <div class="card-body"> <label for="f1M">Filter 1 Monitoring</label> <select id="filterOneMonitoring"
+                    name="f1M">
+                    <option value="none">None</option>
+                    <option value="hours">Hours</option>
+                    <option value="status">Status</option>
+                    <option value="differentialPressure">Differential Pressure</option>
+                </select> <br><br> <label for="f2M">Filter 2 Monitoring</label> <select id="filterTwoMonitoring"
+                    name="f2M">
+                    <option value="none">None</option>
+                    <option value="hours">Hours</option>
+                    <option value="status">Status</option>
+                    <option value="differentialPressure">Differential Pressure</option>
+                </select> </div>
+        </div>
+    </div>
+</div> <button onclick="submitCV()">Generate Points List and Seqence</button> </div> ';
+
+
+<strong>Filter Two Differential Pressure:</strong><br>The controller will monitor Filter 2 differential pressure in
+H2O.<br><br>Gain used to smooth the filter differential pressure input reading is <input type=\'number\'
+    id=\'filter2DiffPress\'>, where 1 = no smoothing and 10 = maximum smoothing.<br><br>Alarms will be provided as
+follows:<br>
+<ul>Filter Two change required: Filter Two differential pressure exceeds a user definable limit <input type=\'number\'
+        id=\'filter2DiffPressLimit\'> in H2O.<br><br>
+
+
+
+    <div class='card'><strong>Filter two Status:</strong>the controller will monitor filter 2 status.<br><br>Alarms will
+        be provided
+        as follows:<br>
+        <ul>Filter 2 change required: Filter 2 differential pressure exceeds a user definable limit.<br><br>
+    </div>
+
+    <strong>Filter Two Hours:</strong><br>The controller will monitor the fan runtime.<br><br>Alarms will be provided as
+    follows:<br>
+    <ul>Filter two change required: Filter 2 has been in use for more than <input type=\'number\'
+            id=\'filter2hoursSetpoint\'> hours.</ul><br><br>
+
+    <!--VAV OPTIONS HTML-->
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0"> <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne"> Remote Occupancy </button> </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body"> <label for="runCond">Remote Occupancy</label> <select id="remoteOccupancy"
+                        name="runCond">
+                        <option value="none">none</option>
+                        <option value="BinaryInput">binary Input</option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> Safeties
+                    </button> </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li><input id="freezeProtection" type="checkbox" value="1">Freeze Protection</li>
+                        <li><input id="returnAirSmokeDetector" type="checkbox" value="1">Return Air Smoke Detector</li>
+                        <li><input id="supplyAirSmokeDetector" type="checkbox" value="1">Supply Air Smoke Detector</li>
+                    </ul>>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Smoke
+                        Control </button> </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li> <input id="fireShutdown" type="checkbox" value="1">Fire Shutdown </li>
+                        <li><input id="evacuation" type="checkbox" value="1">Evacuation </li>
+                        <li><input id="pressurization" type="checkbox" value="1">Pressurization</li>
+                        <li><input id="purge" type="checkbox" name="Purge" value="1">Purge </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"> Outdoor Air
+                        Temperature </button> </h5>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                <div class="card-body"> <label for="OAT">Outdoor Air Temperature</label> <select id="outdoorAirTemp"
+                        name="OAT">
+                        <option value="physicalInput">Physical Input</option>
+                        <option value="networkInput">Network Input</option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFive">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"> Supply Fan
+                    </button> </h5>
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                <div class="card-body"> <label for="SF">Supply Fan</label> <select id="supplyFan" name="SF">
+                        <option value="blowThrough">Blow Through -- On - Off</option>
+                        <option value="drawThrough">Draw Through -- On - Off</option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingSix">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix"> VFD </button>
+                </h5>
+            </div>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                <div class="card-body"> <label for="VFD">VFD</label> <input id="vfd" type="checkbox" value="1">Single
+                    Zone VFD<br><br> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingSeven">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven"> Return Fan
+                    </button> </h5>
+            </div>
+            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+                <div class="card-body"> <label for="ReturnFan">Return Fan</label> <select id="returnFan" name="RF">
+                        <option value="none">None</option>
+                        <option value="onOff">On - Off</option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingEight">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight"> Exhaust Fan
+                    </button> </h5>
+            </div>
+            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+                <div class="card-body"> <label for="EF">Exhaust Fan</label> <select id="exhaustFan" name="EF">
+                        <option value="none">None</option>
+                        <option value="onOff">On - Off</option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingNine">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine"> Pre-heating
+                    </button> </h5>
+            </div>
+            <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
+                <div class="card-body"> <label for="Preheating">Preheating</label> <select id="preHeating"
+                        name="Preheating">
+                        <option value="none">None</option>
+                        <option value="electricStaging">Electric Staging</option>
+                        <option value="SCRElectric">SCR Electric</option>
+                        <option value="hotWaterModulating">Hot Water: Modulating</option>
+                        <option value="hotWaterModulationCoilDeltaT">Hot Water: Modulating Coil Delta T </option>
+                        <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass </option>
+                        <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass </option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTen">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen"> Face and Bypass
+                        Dampers </button> </h5>
+            </div>
+            <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
+                <div class="card-body"> <label for="FaceBypassD">Face and Bypass Dampers</label> <select
+                        id="faceAndBypassDampers" name="FaceBypassD">
+                        <option value="none">None</option>
+                        <option value="external">External Bypass</option>
+                        <option value="internal">Internal Bypass</option>
+                    </select><br><br> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingEleven">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven"> Heating
+                    </button> </h5>
+            </div>
+            <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion">
+                <div class="card-body"> <label for="Heating">Heating</label> <select id="heating">
+                        <option value="none">None</option>
+                        <option value="electricStaging1">Electric Staging 1</option>
+                        <option value="electricStaging2">Electric Staging 2</option>
+                        <option value="electricStaging3">Electric Staging 3</option>
+                        <option value="electricStaging4">Electric Staging 4</option>
+                        <option value="electricStaging5">Electric Staging 5</option>
+                        <option value="electricStaging6">Electric Staging 6</option>
+                        <option value="gasStaging1">Gas Staging 1</option>
+                        <option value="gasStaging2">Gas Staging 2</option>
+                        <option value="gasStaging3">Gas Staging 3</option>
+                        <option value="gasStaging4">Gas Staging 4</option>
+                        <option value="gasStaging5">Gas Staging 5</option>
+                        <option value="gasStaging6">Gas Staging 6</option>
+                        <option value="SCRElectric">SCR Electric</option>
+                        <option value="hotWaterModulating">Hot Water: Modulating</option>
+                        <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass </option>
+                        <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass </option>
+                        <option value="hotWaterIntegralFaceAndBypass">Hot Water: Integral Face and Bypass </option>
+                        <option value="steamModulating">Steam: Modulating</option>
+                        <option value="steamExternalFaceBypass">Steam: External Face and Bypass</option>
+                        <option value="steamInternalFaceAndBypass">Steam: Internal Face and Bypass</option>
+                        <option value="steamIntegralFaceAndBypass">Steam: Integral Face and Bypass</option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwelve">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve"> Cooling
+                    </button> </h5>
+            </div>
+            <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordion">
+                <div class="card-body"> <label for="Cooling">Cooling</label> <select id="cooling" name="Cooling">
+                        <option value="none">None</option>
+                        <option value="dXCooling">Dx Cooling</option>
+                        <option value="chilledWaterModulating">Chilled Water: Modulating</option>
+                        <option value="chilledWaterModulatingCoilDeltaT">Chilled Water: Modulating Coil Delta T
+                        </option>
+                        <option value="chilledWaterExternalFaceBypass">Chilled Water: External Face and Bypass
+                        </option>
+                        <option value="chilledWaterInternalFaceBypass">Chilled Water: Internal Face and Bypass
+                        </option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="heading13">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapse13" aria-expanded="false" aria-controls="collapse13"> Mixed Air Damper
+                    </button> </h5>
+            </div>
+            <div id="collapse13" class="collapse" aria-labelledby="heading13" data-parent="#accordion">
+                <div class="card-body"> <label for="MAD">Mixed Air Dampers</label> <select id="mixedAirDamper"
+                        name="MAD">
+                        <option value="none">None</option>
+                        <option value="economizerOAEnthalpySwitch">Economizer: OA Enthalpy Switch</option>
+                        <option value="economizerOAEnthalpySensor">Economizer: OA Enthalpy Sensor</option>
+                        <option value="economizerOADifferentialEnthalpy">Economizer: OA Differential Enthalpy
+                        </option>
+                        <option value="economizerOADryBulb">Economizer: OA Dry Bulb</option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="heading14">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapse14" aria-expanded="false" aria-controls="collapse14"> Minimum Outside
+                        Air </button> </h5>
+            </div>
+            <div id="collapse14" class="collapse" aria-labelledby="heading14" data-parent="#accordion">
+                <div class="card-body"> <label for="mOA">Minimum Outside Air</label> <select id="minOutsideAir"
+                        name="mOA">
+                        <option value="none">None</option>
+                        <option value="differentialCO2">Differential CO2</option>
+                        <option value="returnSpaceCO2">Return/Space CO2</option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="heading15">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapse15" aria-expanded="false" aria-controls="collapse15"> Mixed Air Damper
+                    </button> </h5>
+            </div>
+            <div id="collapse15" class="collapse" aria-labelledby="heading15" data-parent="#accordion">
+                <div class="card-body"> <label for="MAD">Mixed Air Dampers</label> <select id="mixedAirDamper"
+                        name="MAD">
+                        <option value="none">None</option>
+                        <option value="economizerOAEnthalpySwitch">Economizer: OA Enthalpy Switch</option>
+                        <option value="economizerOAEnthalpySensor">Economizer: OA Enthalpy Sensor</option>
+                        <option value="economizerOADifferentialEnthalpy">Economizer: OA Differential Enthalpy
+                        </option>
+                        <option value="economizerOADryBulb">Economizer: OA Dry Bulb</option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="heading16">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapse16" aria-expanded="false" aria-controls="collapse16"> Humidity Control
+                    </button> </h5>
+            </div>
+            <div id="collapse16" class="collapse" aria-labelledby="heading16" data-parent="#accordion">
+                <div class="card-body"> <label for="humidityControl">Humiditiy Control</label> <input
+                        id="humidityControl" type="checkbox" name="humdidtyControl">Dehumidification <br><br> <label
+                        for="humidifier">Humidifier</label> <select id="humidifier" name="humidifier">
+                        <option value="none">None</option>
+                        <option value="SS">Humidifier SS</option>
+                        <option value="sSAndModulation">Humidifier SS and Modulation</option>
+                    </select> </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="heading17">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapse17" aria-expanded="false" aria-controls="collapse17"> Mixed Monitoring
+                    </button> </h5>
+            </div>
+            <div id="collapse17" class="collapse" aria-labelledby="heading17" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li><input id="RARH" type="checkbox" name="RARH">Return Air Relative Humidity</li>
+                        <li><input id="OARH" type="checkbox" name="OARH">Outdoor Air Relative Humidity</li>
+                        <li> <input id="RACO2" type="checkbox">Return Air
+                            CO2</li>
+                        <li><input id="OACO2" type="checkbox">Outdoor Air CO2</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="heading18">
+                <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapse18" aria-expanded="false" aria-controls="collapse18"> Filter Monitoring
+                    </button> </h5>
+            </div>
+            <div id="collapse18" class="collapse" aria-labelledby="heading18" data-parent="#accordion">
+                <div class="card-body"> <label for="f1M">Filter 1 Monitoring</label> <select id="filterOneMonitoring"
+                        name="f1M">
+                        <option value="none">None</option>
+                        <option value="hours">Hours</option>
+                        <option value="status">Status</option>
+                        <option value="differentialPressure">Differential Pressure</option>
+                    </select> <br><br> <label for="f2M">Filter 2 Monitoring</label> <select id="filterTwoMonitoring"
+                        name="f2M">
+                        <option value="none">None</option>
+                        <option value="hours">Hours</option>
+                        <option value="status">Status</option>
+                        <option value="differentialPressure">Differential Pressure</option>
+                    </select> </div>
+            </div>
+        </div>
+    </div> <button onclick="submitVAV()">Generate Points List and Seqence</button> </div> ';
+
+
+    <!---->
+
+    <strong>Freeze Protection</strong>:<br>The unit will shut down and generate an alarm upon receiving a freezestat
+    status.<br><br>
+    <!--VAV Smoke Evacuation-->
+    <strong>Smoke Evacuation</strong>:<br>K1 Open(off), K2 Closed(on), <br>
+    <ul>Upon receiving a smoke evacuation status signal
+        the unit will:
+        <li>Shut down the supply fan</li>
+        <li>And start the return Fan</li>
+        <li>AND close the outdoor and return air dampers</li>
+        <li>AND open the exhaust air damper</li>
+    </ul><br><br>
+    <ul>Alarm will be provided as follows:
+        <li>Smoke Evacuation Alarm: Unit smoke evacuation input is on and unit is in area smoke evacuation mode.</li>
+    </ul>
+
+    <!--VAV Smoke Pressurization-->
+    <strong>Smoke Pressurization</strong>:<br> K1 Closed(on), K2 Open(off)<br><br>
+    <ul>Upon receiving a smoke pressurization status signal, the unit will:
+        <li>Start the supply fan</li>
+        <li>AND stop the return fan</li>
+        <li>AND open the outdoor air dampers</li>
+        <li>AND close the return and exhaust air damper</li>
+    </ul>
+    <br><br>
+    <ul>Alarm will be provided as follows:
+        <li>Smoke Pressurization Alarm: Unit smoke pressurization input is on and unit is in area pressurization
+            mode.</li>
+    </ul>
+
+    <!--VAV Smoke Purge-->
+
+    <strong>Smoke Purge</strong>: K1 Open(off), K2 Open(off)<br><br>
+    Upon receiving a smoke purge signal, the unit
+    will:<br>
+    <ul>
+        <li>Start the supply fan</li>
+        <li>And start the return fan</li>
+        <li>AND open the outdoor and exhaust air dampers</li>
+        <li>AND close the return damper</li>
+    </ul><br><br>
+    <ul>Alarm will be provided as follows:<li>
+            Smoke Purge Alarm: Unit smoke purge input is on and unit is in area smoke purge mode.</li>
+    </ul><br><br>
+    <!--VAV Supply Fan-->
+    <strong>Supply Fan:</strong>The supply fan will run anytime the unit is commanded to run, unless shutdown on
+    safeties. To prevent short cycling, the supply fan will have a user definable minimum runtime.<br><br>
+    <ul>Alarms will be
+        provided as follows:
+        <li>Supply Fan Failure: Commanded on but the status is off</li><br>
+        <li>Supply Fan in Hand:Commanded off, but the status in on</li><br>
+        <li>Supply Fan Runtime Exceeded: Status runtime exceeds a user definable limit.</li>
+    </ul><br><br>
+
+    <!--VAV Exhaust Fan-->
+
+
+    <strong>Exhuast Fan:</strong>The Exhaust Fan will run whenever the supply fan runs.<br><br>
+    <ul>Alarms will be provided
+        as follows:
+        <li>Exhaust Fan Failure: Commanded on but the status is off</li><br>
+        <li>Exhaust Fan in Hand: Commanded off, but status is on.</li><br>
+        <li>Exhaust Fan Runtime Exceeded: Status runtime exceeds a user definable limit.</li>
+    </ul><br><br><strong>Building StaticPressure Control:</strong><br>The controller will measure building static
+    pressue and modulate the exhaust fan
+    VFD speed to maintain a building static pressure setpoint of <input placeholder='0.05' type='number'> in H2O. The
+    exhause fan VFD
+    speed PID will be upper limited by keeping the Exhaust Fan Inlet of P1 differential pressure sensor more megative
+    (fixed 0.05 in H20) than Supply Fan side of Mixed Air Damper P1 differential pressure sensor.<br><br>Alarm will be
+    provided as follows:<br>
+    <ul>
+        <li>High building Static Pressure: If the building air static pressure is <input type='number'> percent
+            greater than the setpoint </li>
+        <li>Low Building Static Pressure: If the building air static pressure is <input type='number'> less than the
+            setpoint</li>
+    </ul><br><br>
+
+
+
+
+    <strong>Electric Preheating Stages - AP to Stage Sequencer:</strong>The controller will measure the preheat
+    discharge air temperature and stage the preheating through an external stage sequencer to maintain its setpoint
+    <input type='text' id='preheatTempSetpoint' placeholder='50'> degrees F. The preheating will be enabled whenever
+    the supply fan status is on.<br><br>
+    <ul>The preheating stages will run for freeze protection whenever:<br><br>
+        <li>Preheat air temperature drops from <input type='text' id='preheatDeadBandHigh' placeholder='40'> degrees F
+            to
+            <input type='text' id='preheatDeadbandLow' placeholder='35'> degrees F.</li>
+        <li>AND the supply fan status is on.</li>
+    </ul><br><br>
+
+
+    <strong>SCR Electric Heat:</strong>The controller will measure the preheat discharge air temperature and modulate
+    the output to the SCR control interface to maintain its setpoint <input type='text' id='preheatTempSetpoint'
+        placeholder='50'> degrees F. The preheating will be enabled whenever the supply fan status is on.<br><br>
+    <ul>The
+        preheating stages will run for freeze protection whenever:<br><br>
+        <li>Mixed air temperature drops from <input type='text' id='preheatDeadBandHigh' placeholder='40'> degrees F to
+            <input type='text' id='preheatDeadbandLow' placeholder='35'> degrees F.</li><br>
+        <li>AND the supply fan status is on.</li>
+    </ul><br><br>
+
+
+    <strong>Preheating Coil Valve</strong>:<br>The controller will measure the preheat discharge air temperature and
+    modulate the preheating coil valve to maintain its setpoint <input type='text' id='preheatTempSetpoint'
+        placeholder='50'> degrees F. The preheating stages will run for freeze protection whenever preheat air
+    temperature
+    drops from <input type='text' id='preheatDeadBandHigh' placeholder='40'> degrees F to <input type='text'
+        id='preheatDeadbandLow' placeholder='35'> degrees F or if the freezestat is on and present.<br><br>
+
+
+
+    <strong>Preheating Integral Face and Bypass Coil</strong>:<br>The controller will measure the preheat discharge air
+    temperature and modulate the preheating integral bypass damper and open the coil valve to maintain its setpoint
+    <input type='text' id='preheatTempSetpoint' placeholder='50'> degrees F. The preheating coil steam valve will open
+    for freeze protection whenever preheat air temperature drops from <input type='text' id='preheatDeadBandHigh'
+        placeholder='40'> degrees F to <input type='text' id='preheatDeadbandLow' placeholder='35'> degrees F or if the
+    freezestat is on and present.<br><br>
+
+
+
+
+    Preheating Coil Valve</strong>:<br>The controller will measure the preheat discharge air temperature and modulate
+    the preheating coil valve to maintain its setpoint <input type='text' id='preheatTempSetpoint' placeholder='50'>
+    degrees F. The preheating stages will run for freeze protection whenever preheat air temperature drops from <input
+        type='text' id='preheatDeadBandHigh' placeholder='40'> degrees F to <input type='text' id='preheatDeadbandLow'
+        placeholder='35'> degrees F or if the freezestat is on and present.<br><br>
+
+
+    <strong>Preheating Integral Face and Bypass Coil</strong>:<br>The controller will measure the preheat discharge
+    air temperature and modulate the preheating integral bypass damper and open the coil valve to maintain its
+    setpoint <input type='text' id='preheatTempSetpoint' placeholder='50'> degrees F. The preheating coil steam
+    valve will open for freeze protection whenever preheat air temperature drops from <input type='text'
+        id='preheatDeadBandHigh' placeholder='40'> degrees F to <input type='text' id='preheatDeadbandLow'
+        placeholder='35'> degrees F or if the freezestat is on and present.<br><br>
+
+
+
+    <strong>Electric Heating Stages</strong>:<br>The controller will measure the supply air temperature and
+    stage the heating to maintain its heating setpoint. to prevent short cycling there will be a user definable
+    delay between stages, and each stage will have a user definable minimum runtime.<br><br>
+    <ul>The heating will be
+        enabled whenever:
+        <li>Outside aire temperature is less than <input type='text' id='minOATSetpoin' placeholder='65'>
+            degrees
+            F.</li>
+        <li>AND the supply air temperature is below heating setpoint.</li>
+        <li>AND the cooling (if present) is not active.</li>
+        <li>AND the supply fan status is on.</li>
+    </ul><br>
+
+
+
+
+    <strong>Electric Heating Stages - AO to Stage Sequencer</strong>:<br>The controller will measure the supply
+    air temperature and stage the heating through an external stage sequencer to maintain its heating setpoint.
+    to prevent short cycling there will be a user definable delay between stages, and each stage will have a
+    user definable minimum runtime.<br><br>
+    <ul>The heating will be enabled whenever:
+        <li>Outside aire temperature is less than <input type='text' id='minOATSetpoin' placeholder='65'>
+            degrees
+            F.</li>
+        <li>AND the supply air temperature is below heating setpoint.</li>
+        <li>AND the cooling (if present) is not active.</li>
+        <li>AND the supply fan status is on.</li>
+    </ul><br><br>
+
+
+
+    <strong>SCR Electric Heat</strong>:<br>The controller will compare the space temperature to the space
+    temperature setpoint, and compute a target Supply Air Temperature setpoint in order to satisfy the required
+    Space Temperature conditions.The output to the SCR control interface will be modulated to main the target
+    Supply Air setpoint. Th supply air temperature setpoint will be reset as needed to satisfy Space
+    conditions.<br><br>
+    <ul>The heating will be enabled whenever:<br><br>
+        <li>Outside aire temperature is less than <input type='text' id='minOATSetpoin' placeholder='65'> degrees
+            F.</li><br>
+        <li>AND the supply air temperature is below heating setpoint.</li>
+        <li>AND the cooling (if present) is not active.</li><br>
+        <li>AND the supply fan status is on.</li>
+    </ul><br><br>
+
+
+    <strong>Heating Coil Valve</strong>:<br>The controller will measure the supply air temperature and modulate
+    the heating coil valve to maintain its setpoint. The supply air temperature setpoint will be reset upwards
+    as the space temperature drops below its heating setpoint.<br><br>
+    <ul>The heating will be enabled
+        whenever:<br><br>
+        <li>Outside air temperature is less than <input type='text' id='minOATSetpoint' placeholder='65'> degress
+            F.</li><br>
+        <li>AND the space temperature is below heating setpoint.</li><br>
+        <li>AND the supply fan status is on.</li><br>
+        <li>AND the cooling (if present) is not active.</li>
+    </ul><br><br>The heating coil valve will open whenever the
+    freezestat (if present) is on.<br><br>
+
+
+    <strong>Heating Coil Valve</strong>:<br>The controller will measure the supply air temperature and modulate the
+    heating
+    coil valve to maintain its setpoint. The supply air temperature setpoint will be reset upwards as the space
+    temperature
+    drops below its heating setpoint.<br><br>
+    <ul>The heating will be enabled whenever:<br><br>
+        <li>Outside air temperature is less than <input type='text' id='minOATSetpoint' placeholder='65'> degress F.
+        </li>
+        <li>AND the space temperature is below heating setpoint.</li>
+        <li>AND the supply fan status is on.</li>
+        <li>AND the cooling (if present) is not active.</li>
+    </ul><br><br>The heating coil valve will open whenever the freezestat (if
+    present) is on.<br><br><strong>Delta T Algorithm</strong>:<br>The purpose of this algorithm is to always maintain at
+    least the manufacturers desgin coil delta T so as not to increase water flow above the coils design flow
+    requirement.
+    Under full load conditions, the water valve will be modulated to maintain the desired leaving supply air temperature
+    if
+    a dual loop (master/ submaster) is used or if a single loop is used, insure that the space temperature meets the
+    heating
+    setpoint. This enhancement insures that the valve is never opened more than the amount necessary to provide full
+    heating
+    capacity from the coil and provide the design water temperature differential between the coil inlet and outlet, thus
+    preventing excessive water flow through the coil.<br><br>The algorithm will monitor a leaving water temperature
+    sensor
+    on the coil and also utilize either an entering water temperature sensor or a network value from a boiler (and then
+    add
+    a fixed, user configurable constant to represent the heat gain in the water loop pipping). The difference between
+    these
+    two values (sensor input) will be compared to a user adjustable limit (default 35 degF with a range of 10 to 50 degF
+    setpoint). A PID will be used to generate an output that will feed a high limit on the actual valve position to
+    maintian
+    the water flow so as to devlop the required minimum delta T across the heating coil.
+
+
+
+    <strong>Heating Coil Valve</strong>:<br>The controller will measure the Space temperature and open the heating coil
+    valve in sequence with the face and bypass dampers to maintain its Heating setpoint.<br><br>The heating will be
+    enabled
+    whenever:<br><br>
+    <ul>Outside air temperature is less than <input type=\'text\' id=\'minOATSetpoint\' default=\'65\'> degress F.</ul>
+    <br>
+    <ul>AND the space temperature is below heating setpoint.</ul><br>
+    <ul>AND the supply fan status is on.</ul><br>
+    <ul>AND the cooling (if present) is not active.</ul><br><br>The heating coil valve will open whenever the freezestat
+    (if
+    present) is on.<br><br>
+
+
+
+    <strong>Heating Coil Valve</strong>:<br>The controller will measure the Space temperature and open the heating coil
+    valve in sequence with the face and bypass dampers to maintain its Heating setpoint.<br><br>
+    <ul>The heating will be enabled
+        whenever:<br><br>
+        <li>Outside air temperature is less than <input type='text' id='minOATSetpoint' placeholder='65'> degress F.
+        </li>
+        <li>AND the space temperature is below heating setpoint.</li>
+        <li>AND the supply fan status is on.</li>
+        <li>AND the cooling (if present) is not active.</li>
+    </ul><br><br>The heating coil valve will open whenever the freezestat (if
+    present) is on.<br><br>
+
+
+
+    <strong>Heating Coil Valve</strong>:<br>The controller will measure the supply air temperature and modulate the
+    heating
+    integral damper and open the coil valve to maintain its Heating setpoint. The supply air temperature setpoint will
+    be
+    reset upwards as the space temperature drops below its heating setpoint.<br><br>
+    <ul>The heating will be enabled
+        whenever:
+        <li>Outside air temperature is less than <input type='text' id='minOATSetpoint' placeholder='65'> degress F.
+        </li>
+        <li>AND the space temperature is below heating setpoint.</li>
+        <li>AND the supply fan status is on.</li>
+        <li>AND the cooling (if present) is not active.</li>
+    </ul><br><br>The heating coil valve will open whenever the freezestat (if
+    present) is on.<br><br>
+
+
+
+    <strong>Heating Coil Valve</strong>:<br>The controller will measure the supply air temperature and open the coil
+    valve
+    to maintain its Heating setpoint. The supply air temperature setpoint will be reset upwards as the space temperature
+    drops below its heating setpoint.<br><br>
+    <ul>The heating will be enabled whenever:
+        <li>Outside air temperature is less than <input type='text' id='minOATSetpoint' placeholder='65'> degress F.
+        </li>
+        <li>AND the space temperature is below heating setpoint.</li>
+        <li>AND the supply fan status is on.</li>
+        <li>AND the cooling (if present) is not active.</li>
+    </ul><br><br>The heating coil valve will open whenever the freezestat (if
+    present) is on.<br><br>
+
+
+
+    <strong>Heating Coil Valve</strong>:<br>The controller will measure the Space temperature and open the heating coil
+    valve in sequence with the face and bypass dampers to maintain its Heating setpoint.<br><br>
+    <ul>The heating will be enabled
+        whenever:
+        <li>Outside air temperature is less than <input type='text' id='minOATSetpoint' placeholder='65'> degress F.
+        </li>
+        <li>AND the space temperature is below heating setpoint.</li>
+        <li>AND the supply fan status is on.</li>
+        <li>AND the cooling (if present) is not active.</li>
+    </ul><br><br>The heating coil valve will open whenever the freezestat (if
+    present) is on.<br><br>
+
+
+
+    <strong>Heating Coil Valve</strong>:<br>The controller will measure the Space temperature and open the heating coil
+    valve in sequence with the face and bypass dampers to maintain its Heating setpoint.<br><br>
+    <ul>The heating will be enabled
+        whenever:
+        <li>Outside air temperature is less than <input type='text' id='minOATSetpoint' placeholder='65'> degress F.
+        </li>
+        <li>AND the space temperature is below heating setpoint.</li>
+        <li>AND the supply fan status is on.</li>
+        <li>AND the cooling (if present) is not active.</li>
+    </ul><br><br>The heating coil valve will open whenever the freezestat (if
+    present) is on.<br><br>
+
+
+    <strong>Heating Coil Valve</strong>:<br>The controller will measure the supply air temperature and modulate the
+    heating
+    integral damper and open the coil valve to maintain its Heating setpoint. The supply air temperature setpoint will
+    be
+    reset upwards as the space temperature drops below its heating setpoint.<br><br>
+    <ul>The heating will be enabled
+        whenever:
+        <li>Outside air temperature is less than <input type='text' id='minOATSetpoint' placeholder='65'> degress F.
+        </li>
+        <li>AND the space temperature is below heating setpoint.</li>
+        <li>AND the supply fan status is on.</li>
+        <li>AND the cooling (if present) is not active.
+    </ul><br><br>The heating coil valve will open whenever the freezestat (if
+    present) is on.<br><br>
+
+    <strong>Cooling Stages:</strong><br>The controller will measure the space temperature and stage the cooling to
+    maintain its cooling setpoint. To prevent short cycling, there will be a user definable delay between stages, and
+    each stage will have a user definable minimum runtime.<br><br>
+    <ul>The cooling will be enabled whenever:
+        <li>Outside air temperature is greater than <input type='text\' id='coolingSetpoint' placeholder='60'> degree F
+        </li>
+        <li>AND the economizer (if present)is disabled or fully open</li>
+        <li>AND the space temperature is above cooling setpoint</li>
+        <li>AND the supply fan status is on</li>
+        <li>AND the heating (if present) is not active</li>
+    </ul><br><br>
+
+
+
+    <strong>Cooling Coil Valve:</strong><br>The controller will measure the supply air temperature and modulate the
+    cooling
+    coil valve to maintain its cooling setpoint. The supply air temperature setoint will be reset downards as the space
+    temperature rises above its cooling setpoint.<br><br>
+    <ul>The cooling will be enabled whenever:
+        <li>Outside air temperature is greater than <input type='text' id='coolingSetpoint' placeholder='60'> degree F
+        </li>
+
+        <li>AND the economizer (if present)is disabled or fully open</li>
+        <li>AND the supply fan status is on</li>
+        < <li>AND the heating (if present) is not active</li>
+    </ul><br><br>The cooling coil valve will open to <input type='text' id='minCoolingCoilAnalog' placeholder='50'>
+    percent
+    whenever the freezestat (if present) is on<br><br>
+
+
+
+    <strong>Cooling Coil Valve:</strong><br>The controller will measure the supply air temperature and modulate the
+    cooling
+    coil valve to maintain its cooling setpoint. The supply air temperature setoint will be reset downards as the space
+    temperature rises above its cooling setpoint.<br><br>
+    <ul>The cooling will be enabled whenever:
+        <li>Outside air temperature is greater than <input type='text' id='coolingSetpoint' placeholder='60'> degree F
+        </li>
+
+        <li>AND the economizer (if present)is disabled or fully open</li>
+        <li>AND the space temperature is above cooling setpoint</li>
+        <li>AND the supply fan status is on</li>
+        <li>AND the heating (if present) is not active</li>
+    </ul><br><br>The cooling coil valve will open to <input type='text' id='minCoolingCoilAnalog' placeholder='50'>
+    percent
+    whenever the freezestat (if present) is
+    on<br><br><strong>Delta T Algorithm:</strong>The purpose of this algorithm is to always maintain at least the
+    manufacturers design coil delta T so as not to increase water flow above the coils design flow requirement. Under
+    full
+    load condition, the water valve will be modulated to maintain the desired leaving supply air temperature if a dual
+    loop
+    (master / submaster) is used or if a single loop is used, insure that the space temperature meets the cooling
+    setpoint.
+    THis enhancement insures that the valve is never opened more than the amount necessary to provide full cooling
+    capacity
+    from the coil and provide the design water temperature differential between the coil inlet and outlet, thus
+    preventing
+    excessive water flow through the coil.<br><br>The algorithm will monitor a leaving water temperature sensor on the
+    coil
+    and also utilize either an entering water temperature sensor or a network value from a chiller plant (and then add a
+    fixed, user configurable constant to represent the heat gain in the water loop piping). The difference between these
+    two
+    values (sensor input) will be compared to a user adjustable limit (default 12 degF with a range of 5 to 25 degF
+    setpoint). A PID will be used to generate an output that will feed a high limit on the actual valve poisition to
+    maintain the water flow so as to develop the required minimum delta T across the cooling coil.<br><br>
+
+
+
+
+    <strong>Cooling Coil Valve:</strong><br>The controller will measure the space temperature and open the cooling coil
+    valve in sequence with the face and bypass dampers to maintain its cooling setpoint.<br><br>
+    <ul>The cooling will be enabled
+        whenever:
+        <li>Outside air temperature is greater than <input type='text' id='coolingSetpoint' placeholder='60'> degree F
+        </li>
+
+        <li>AND the economizer (if present)is disabled or fully open</li>
+        <li>AND the space temperature is above cooling setpoint</li>
+        <li>AND the supply fan status is on</li>
+        <li>AND the heating (if present) is not active</li>
+    </ul><br><br>The cooling coil valve will open whenever the freezestat (if
+    present) is on<br><br>
+
+
+
+
+    <strong>Cooling Coil Valve:</strong><br>The controller will measure the space temperature and open the cooling coil
+    valve in sequence with the face and bypass dampers to maintain its cooling setpoint.<br><br>The cooling will be
+    enabled
+    whenever:<br><br>
+    <ul>Outside air temperature is greater than <input type=\'text\' id=\'coolingSetpoint\' placeholder\'60\'> degree F
+    </ul>
+    <br>
+    <ul>AND the economizer (if present)is disabled or fully open</ul><br>
+    <ul>AND the space temperature is above cooling setpoint</ul><br>
+    <ul>AND the supply fan status is on</ul><br>
+    <ul>AND the heating (if present) is not active</ul><br><br>The cooling coil valve will open whenever the freezestat
+    (if
+    present) is on<br><br>
+
+
+    <strong>Economizer:</strong><br>The controller will measure the mixed air temperature and modulate the economizer
+    dampers in sequence to maintain a setpoint <input type='number' id='economizerDeadbandSetpoint' placeholder='68'>
+    degrees F less than
+    the supply air temperature setpoint. The outside air dampers will maintain a minimum adustable position of <input
+        type='number' id='minEconomizerPos' placeholder='68'>percent whenever occupied.<br><br>
+    <ul> The economizer will be enabled whenever:
+        <li>Outside air temper is less than <input type='number' id='minEconomizerOAT' placeholder='68'> degress F</li>
+        <li>AND the outside air enthalpy is less than the enthalpy switch setpoint.</li>
+        <li>AND not in heating mode</li>
+        <li>AND the supply fan status is on.</li>
+    </ul>
+    <br><br>
+    <ul>The Economizer will close whenever:
+        <li>Mixed air temperature drops from <input type='number' id='highEconomizerDeadbandTemp' placeholder='68'>
+            degrees
+            F to <input type='number' id='lowEconomizerDeadbandTemp' placeholder='68'> degrees F</li>
+        <li>Or on loss of supply fan status</li>
+        <li>Or freezestat (if present) is on.</li>
+    </ul><br><br>The economizer\'s opening rate will be limited to 5% per miute when
+    the outside air temperature is less than 45 deg F.<br><br>The outside and exhaust air dampers will close and return
+    air
+    damper will open when the unit is off. If optimal Start up is available, the mixed air damper will operate as
+    described
+    in the occupied mode except that the outside air damper will modulate to fully closed<br><br><strong>Nighttime Free
+        Cooling Mode:</strong><br>The nighttime free cooling mode will operate only during unoccupied hours. When
+    enabled,
+    the controller will measure the space temperature and modulate the economizer to maintain the space occupied cooling
+    setpoint. This mode will be enabled via a user selectable swithc.<br><br><strong>Night Purge Mode:</strong><br>The
+    night
+    purge mode will begin at a preset time prior to scheduled occupancy time and operate during optimal start. When
+    enabled,
+    the controller will measure the space temperature and modulate the economizer to maintain the optimal start space
+    cooling setpoint, regardless of outside air temperature. This mode will be enabled via a user selectable
+    switch.<br><br>
+
+
+    <strong>Economizer:</strong><br>The controller will measure the mixed air temperature and modulate the economizer
+    dampers in sequence to maintain a setpoint <input type=\'number\' id=\'economizerDeadbandSetpoint\'> degrees F less
+    than
+    the supply air temperature setpoint. The outside air dampers will maintain a minimum adustable position of <input
+        type=\'number\' id=\'minEconomizerPos\' percent whenever occupied.<br><br> The economizer will be enabled
+    whenever:<br><br>
+    <ul>Outside air temper is less than <input type=\'number\' id=\'minEconomizerOAT\'> degress F</ul><br>
+    <ul>AND the outside air enthalpy is less than the enthalpy switch setpoint.</ul><br>
+    <ul>AND not in heating mode</ul><br>
+    <ul>AND the supply fan status is on.</ul><br><br>The Economizer will close whenever:<br><br>
+    <ul>Mixed air temperature drops from <input type=\'number\' id=\'highEconomizerDeadbandTemp\'> degrees F to <input
+            type=\'number\' id=lowEconomizerDeadbandTemp\'> degrees F</ul><br>
+    <ul>Or on loss of supply fan status</ul><br>
+    <ul>Or freezestat (if present) is on.</ul><br><br>The economizer\'s opening rate will be limited to 5% per miute
+    when
+    the outside air temperature is less than 45 deg F.<br><br>The outside and exhaust air dampers will close and return
+    air
+    damper will open when the unit is off. If optimal Start up is available, the mixed air damper will operate as
+    described
+    in the occupied mode except that the outside air damper will modulate to fully closed<br><br><strong>Nighttime Free
+        Cooling Mode:</strong><br>The nighttime free cooling mode will operate only during unoccupied hours. When
+    enabled,
+    the controller will measure the space temperature and modulate the economizer to maintain the space occupied cooling
+    setpoint. This mode will be enabled via a user selectable swithc.<br><br><strong>Night Purge Mode:</strong><br>The
+    night
+    purge mode will begin at a preset time prior to scheduled occupancy time and operate during optimal start. When
+    enabled,
+    the controller will measure the space temperature and modulate the economizer to maintain the optimal start space
+    cooling setpoint, regardless of outside air temperature. This mode will be enabled via a user selectable
+    switch.<br><br>
+
+
+
+
+    <strong>Economizer:</strong><br>The controller will measure the mixed air temperature and modulate the economizer
+    dampers in sequence to maintain a setpoint <input type=\'number\' id=\'economizerDeadbandSetpoint\'> degrees F less
+    than
+    the supply air temperature setpoint. The outside air dampers will maintain a minimum adustable position of <input
+        type=\'number\' id=\'minEconomizerPos\' percent whenever occupied.<br><br> The economizer will be enabled
+    whenever:<br><br>
+    <ul>Outside air temper is less than <input type=\'number\' id=\'minEconomizerOAT\'> degress F</ul><br>
+    <ul>AND the outside air enthalpy is less than the enthalpy switch setpoint.</ul><br>
+    <ul>AND not in heating mode</ul><br>
+    <ul>AND the supply fan status is on.</ul><br><br>The Economizer will close whenever:<br><br>
+    <ul>Mixed air temperature drops from <input type=\'number\' id=\'highEconomizerDeadbandTemp\'> degrees F to <input
+            type=\'number\' id=lowEconomizerDeadbandTemp\'> degrees F</ul><br>
+    <ul>Or on loss of supply fan status</ul><br>
+    <ul>Or freezestat (if present) is on.</ul><br><br>The economizer\'s opening rate will be limited to 5% per miute
+    when
+    the outside air temperature is less than 45 deg F.<br><br>The outside and exhaust air dampers will close and return
+    air
+    damper will open when the unit is off. If optimal Start up is available, the mixed air damper will operate as
+    described
+    in the occupied mode except that the outside air damper will modulate to fully closed<br><br><strong>Nighttime Free
+        Cooling Mode:</strong><br>The nighttime free cooling mode will operate only during unoccupied hours. When
+    enabled,
+    the controller will measure the space temperature and modulate the economizer to maintain the space occupied cooling
+    setpoint. This mode will be enabled via a user selectable swithc.<br><br><strong>Night Purge Mode:</strong><br>The
+    night
+    purge mode will begin at a preset time prior to scheduled occupancy time and operate during optimal start. When
+    enabled,
+    the controller will measure the space temperature and modulate the economizer to maintain the optimal start space
+    cooling setpoint, regardless of outside air temperature. This mode will be enabled via a user selectable
+    switch.<br><br>
+
+    <strong>Minimum Outside Air Ventilation - Carbon Dioxide (CO2) Control:</strong><br>When in the occupied mode, the
+    controller will measure the differeence between return air and outside air CO2 levels. The controller will then
+    modulate
+    the outside air dampers open on rising return air CO2 concentrations, overriding normal damper operation to maintain
+    return air CO2 concentrations no more than <input type=\'number\' id=\'maxReturnAirCO2\'> ppm above outside air CO2
+    levels.<br><br>
+
+
+    <strong>Return Air Relative Humidity (RARH):<strong><br>The controller will measure return air relative humidity
+            percentage levels.<br><br>
+
+
+
+            <strong>Return Air Carbon Dioxide (CO2):</strong>Return Air Carbon Dioxide (CO2) Concentration
+            Monitoring:<br>The
+            Controller will measure the return air CO2 leavels.<br><br>
+            <ul>Alrams will be provided as follows:<li>High Return Air
+                    Carbon Dioxide Concentration:<br>If the return air CO2 concentration is greater than <input
+                        placeholder='500' type='numnber'>ppm while
+                    the unit is running.</li>
+            </ul><br><br>
+
+
+
+
+
+            <strong>Face and Bypass Dampers Control:</strong><br>The unit will maintain space heating and cooling
+            setpoints (if
+            equipped with associated heating and cooling coils) by modulating the face and bypass dampers through one of
+            the
+            following:<br><br>
+            <ul>Cooling:
+                <li>When the space temperature is greater than the cooling setpoint, the face and bypass dampers will
+                    modulate open
+                    to
+                    face position (closed to bypass position) to maintain supply air temperature setpoint by modulating
+                    the air
+                    passing
+                    over the cooling coil (if present). The supply air temperature setpoint will be reset downwards as
+                    the space
+                    temperature rises above its cooling setpoint.</li>
+                <li>When the space temperature is less than the cooling setpoint, the face and bypass dampers will close
+                    to face
+                    position (open to bypass position).</li>
+            </ul><br><br>
+            <ul>Heating:
+                <li>When the space temperature is less than the heating setpoint, the face and bypass dampers will
+                    modulate open to
+                    face position (closed to bypass position) to maintain supply air temperature setpoint by modulating
+                    the air
+                    passing
+                    over the heating coil (if present). The supply air temperature setpoint will be reset upwards as the
+                    space
+                    temperature drops below its heating setpoint.</li>
+                <li>When the space temperature is greater than the ehating setpoint, the face and bypass dampers will
+                    close to face
+                    position (open to bypass position).</li>
+            </ul><br><br>
+
+            <!--CV Zone Sensor-->
+
+
+            <strong>Run Conditions:</strong> The unit will supply conditioned air to its designated zone or linked air
+            terminals and
+            operates a constant volume air unit. The unit will run acccording to the following user selectable
+            modes:<br>
+            <ul>
+                <li>Off</li>
+                <li> Continuously</li>
+                <li> via BAS Command</li>
+                <li> as Locally Scheduled</li>
+                <li> via Link Schedule</li>
+            </ul><br> <br><strong>Off Mode:</strong> The unit will run and all dampers, valves and fans will remain in
+            their off
+            position.<br> <br><strong>Continuously:</strong>The unit will run continuously in the occupied mode.<br><br>
+            <strong> via BAS Command:</strong> The unit will be enabled and disabled via a Bacnet Binary Command, either
+            from a remote source or locally through the software interface. Once enabled the unit will run continuously
+            in the
+            occupied mode. <br><br><strong> as Locally Scheduled:</strong><br> The air handling unit will operate as a
+            constant
+            volume unit having setpoints that represent those of a single zone unit. The unit will then run according to
+            a user
+            finable time schdule in the follow modes: <br>
+            <ul>Occupied Mode:
+                <li> the unit will maintain A <input type='text' id='occHighSetpoint' placeholder='72'> degrees F space
+                    cooling setpoint.
+                </li>
+                <li> A <input type='text' id='occLowSetpoint' placeholder='68'> degrees F space heating set point.</li>
+            </ul>
+            <ul>Unoccupied Mode (night setback):<li> The unit will maintain A <input type='text' id='unOccHighSetpoint'
+                        placehyolder='72'>
+                    degrees F space cooling setpoint. </li>
+                <li> A <input type='text' id='unOccLowSetpoint' placeholder='68'> degress F space heating setpoint.</li>
+            </ul><br><br> <strong>via Linked Scheduled:</strong> the air handling unit will exchange information with
+            the terminal
+            units as follows: <br><br>
+            <ul>
+                <li>Calculated information sent from the Air Handling Unit to the Terminal Units:</li>
+                <li>Current Mode of operation</li>
+                <li>Current supply air temperatur</li>
+                <li>Current outside Air Temperature</li>
+            </ul><br><br>Caluculated information representative of all terminal units sent from the terminal units to
+            the air
+            handling unit:<br><br>
+            <ul>
+                <li>Space Temperatur</li>
+                <li>Setpoints, both occupied and unoocupied</li>
+                <li>Maximum Damper Position</li>
+                <li>Indoor air quality</li>
+                <li>Space relative humidity (if present)</li>
+            </ul><br><br> Based off the above information exchange, the air handling unit will determine which operation
+            best meets
+            the needs of the terminal units. The air handling unit will then operate as a constant volume unit, but one
+            having
+            setpoints representative of its designated group of terminal units. The unit will then run according to a
+            user definable
+            time schedule in the following modes<br><br>Occupied Mode: the unit will maintain<br><br>
+            <ul>
+                <li>A <input type='text' id='occCoolingSetpoint' placeholder='74'>degrees F space cooling setpoint</li>
+                <li>A <input type='text' id='occHeatingSetpoint' placeholder='70'>degrees F space heating setpoint </li>
+            </ul><br><br>Unoccupied Mode(night setback): The unit will maintain<br><br>
+            <ul>
+                <li>A <input type='text' id='unOccCoolingSetpoint' placeholder='85'>degrees F space cooling setpint</li>
+                <li>A <input type='text' id='unOccHeatingSetpoint' placeholder='55'>degrees F space heating setpoint
+                </li>
+            </ul><br><br><strong>Unit Optimal Start:</strong><br>The unit will use an optimal start algorithm for
+            morning start up.
+            This algorithm will minimize the unoocupied warm up or cool down period while still achieving comfort
+            conditions of
+            scheduled occupied period.<br><br><strong>Alarms will be provided as follows</strong><br>
+            <ul>
+                <li>High Space Temp: If the zone temperature is greater than the cooling sepoint by a user definable
+                    amount.</li>
+                <li>Low Space Temp: If the zone temperature is less that the heating setpoint by a user definable
+                    amount.</li>
+            </ul><br><br><strong>Power up start Delay:</strong><br>There will be a 60 second delay in enabling the
+            equipment on
+            intial start up or after a power loss.<br><br><strong>Demand Limiting - Setpoint
+                Optimization:</strong><br>To lower
+            power consumption, the cooling and heating setpoints will automatically relax(offset up when cooling and
+            down when
+            heating) when the facility power consumption exceeds definable thresholds. The amount of relaxation will be
+            user
+            configurable. The setpoints will automatically return to their previous settings when the facility power
+            consumption
+            drops below the thresholds.<br><br><strong>Rnet wireless Gateway:</strong>The Rnet Wireless Gateway is
+            designed for
+            use within the building interior. The wireless signals can pass through a drop ceiling and up to two walls
+            made of
+            gypsum and steel studs with minimal degradation.<br><br>
+
+
+
+
+            <!--CV WS Sensor-->
+
+            <strong>Run Conditions:</strong> The unit will supply conditioned air to its designated zone or linked air
+            terminals and
+            operates a constant air volumeunit. The unit will run acccording to the following user selectable modes:<br>
+            Off,<br> Continuously,<br> via BAS Command,<br> as Locally Scheduled,<br> via Link Schedule.<br> <strong>Off
+                Mode</strong>:<br> The unit will run and all dampers, valves and fans will remain in their off
+            position.<br>
+            <strong>Continuously</strong>: <br>The unit will run continuously in the occupied mode.<br> <strong> via BAS
+                Command</strong>:<br> The unit will be enabled and disabled via a Bacnet Binary Command, either from a
+            remote source
+            or locally through the software interface. Once enabled the unit will run continuously in the occupied mode.
+            <br><strong> as Locally Scheduled</strong>: The air handling unit will operate as a constant volume unit
+            having
+            setpoints that represent those of a single zone unit. The unit will then run according to a user finable
+            time schdule in
+            the follow modes: <br> Occupied Mode: the unit will maintain A <input type='text' id='occHighSetpoint'
+                placeholder='72'> degrees F
+            space cooling setpoint. <br> A <input type='text' id='occLowSetpoint' placeholder='68'> degrees F space
+            heating set point. <br>
+            Unoccupied Mode (night setback): The unit will maintain A <input type='text' id='unOccHighSetpoint'
+                placeholder='72'> degrees F space
+            cooling setpoint. <br> A <input type='text' id='unOccLowSetpoint' placeholder='68'> degress F space heating
+            setpoint.<br><br>
+            <strong>via Linked Scheduled:</strong> the air handling unit will exchange information with the terminal
+            units as
+            follows: <br><br>
+            <ul>Calculated information sent from the Air Handling Unit to the Terminal Units: <br>
+                <ul>Current Mode of operation</ul><br>
+                <ul>Current supply air temperatur</ul><br>
+                <ul>Current outside Air Temperature</ul>
+            </ul><br><br>
+            <ul>Caluculated information representative of all terminal units sent from the terminal units to the air
+                handling
+                unit:<br><br>
+                <ul>Space Temperatur</ul><br>
+                <ul>Setpoints, both occupied and unoocupied</ul><br>
+                <ul>Maximum Damper Position</ul><br>
+                <ul>Indoor air quality</ul><br>
+                <ul>Space relative humidity (if present)</ul>
+            </ul><br><br> Based of the above information exchange, the air handling unit will determin which operation
+            best meets
+            the needs of teh terminal units. The air handling unit will then operate as a constant volume unit, but one
+            having
+            setpoints representative of its designated group of terminal units. The unit will then run according to a
+            user definable
+            time schedule in the following modes<br><br>
+            <ul>Occupied Mode: the unit will maintain<br><br>
+                <ul> A <input type=\'text\' id=\'occCoolingSetpoint\' default=\'74\'>degrees F space cooling
+                    setpoint<br></ul>
+                <ul>A <input type=\'text\' id=\'occHeatingSetpoint\' default=\'70\'>degrees F space heating setpoint
+                </ul><br><br>
+            </ul>
+            <ul>Unoccupied Mode(night setback): The unit will maintain<br><br>
+                <ul>A <input type=\'text\'id=\'unOccCoolingSetpoint\'default=\'85\'>degrees F space cooling setpint</ul>
+                <br>
+                <ul>A <input type=\'text\'id=\'unOccHeatingSetpoint\'default=\'55\'>degrees F space heating setpoint
+                </ul>
+            </ul><br><br><strong>Unit Optimal Start:</strong><br>The unit will use an optimal start algorithm for
+            morning start up.
+            This algorithm will minimize the unoocupied warm up or cool down period while still achieving comfort
+            conditions of
+            scheduled occupied period.<br><br><strong>Alarms will be provided as follows</strong><br>
+            <ul>High Space Temp: If the zone temperature is greater than the cooling sepoint by a user definable
+                amount.<br></ul>
+            <ul>Low Space Temp: If the zone temperature is less that the heating setpoint by a user definable amount.
+            </ul>
+            <br><br><strong>Power up start Delay:</strong><br>There will be a 60 second delay in enabling the equipment
+            on intial
+            start up or after a power loss.<br><br><strong>Demand Limiting - Setpoint Optimization:</strong><br>To lower
+            power
+            consumption, the cooling and heating setpoints will automatically relax(offset up when cooling and down when
+            heating)
+            when the facility power consumption exceeds definable thresholds. The amount of relaxation will be user
+            configurable.
+            The setpoints will automatically return to their previous settings when the facility power consumption drops
+            below the
+            thresholds.<br><br><strong>Rnet wireless Gateway</strong>:<br>The Rnet Wireless Gateway is designed for use
+            within the
+            building interior. The wireless signals can pass through a drop ceiling and up to two walls made of gypsum
+            and steel
+            studs with minimal degradation.<br><br>
+
+
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0"> <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne"> Run Conditions </button> </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body"> <label for="runCond">Run Conditions</label> <select class="runConditons"
+                                id="runConditions" name="runCond">
+                                <option value="ZSSensorWithLinkage">ZS Sensor with Linkage</option>
+                                <option value="WSSensorWithLinkage">WS Sensor with Linkage</option>
+                            </select> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> Safeties
+                            </button> </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                            <ul>
+                                <li><input id="freezeProtection" type="checkbox" value="1">Freeze Protection </li>
+                                <li><input id="returnAirSmokeDetector" type="checkbox" value="1">Return Air Smoke
+                                    Detector</li>
+                                <li> <input id="supplyAirSmokeDetector" type="checkbox" value="1">Supply Air Smoke
+                                    Detector</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Smoke
+                                Control </button> </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body">
+                            <ul>
+                                <li><input id="fireShutdown" type="checkbox" value="1">Fire Shutdown</li>
+                                <li><input id="evacuation" type="checkbox" value="1">Evacuation</li>
+                                <li><input id="pressurization" type="checkbox" value="1">Pressurization </li>
+                                <li><input id="purge" type="checkbox" name="Purge" value="1">Purge </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"> Outdoor
+                                Air Temperature </button> </h5>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                        <div class="card-body"> <label for="OAT">Outdoor Air Temperature</label> <select
+                                id="outdoorAirTemp" name="OAT">
+                                <option value="physicalInput">Physical Input</option>
+                                <option value="networkInput">Network Input</option>
+                            </select> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingFive">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"> Supply
+                                Fan </button> </h5>
+                    </div>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                        <div class="card-body"> <label for="SF">Supply Fan</label> <select id="supplyFan" name="SF">
+                                <option value="blowThrough">Blow Through -- On - Off</option>
+                                <option value="drawThrough">Draw Through -- On - Off</option>
+                            </select> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingSix">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix"> VFD
+                            </button> </h5>
+                    </div>
+                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                        <div class="card-body"> <label for="VFD">VFD</label> <input id="vfd" type="checkbox"
+                                value="1">Single Zone VFD<br><br> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingSeven">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven"> Return
+                                Fan </button> </h5>
+                    </div>
+                    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+                        <div class="card-body"> <label for="ReturnFan">Return Fan</label> <select id="returnFan"
+                                name="RF">
+                                <option value="none">None</option>
+                                <option value="onOff">On - Off</option>
+                            </select> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingEight">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                Exhaust Fan </button> </h5>
+                    </div>
+                    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+                        <div class="card-body"> <label for="EF">Exhaust Fan</label> <select id="exhaustFan" name="EF">
+                                <option value="none">None</option>
+                                <option value="onOff">On - Off</option>
+                            </select> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingNine">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                Pre-heating </button> </h5>
+                    </div>
+                    <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
+                        <div class="card-body"> <label for="Preheating">Preheating</label> <select id="preHeating"
+                                name="Preheating">
+                                <option value="none">None</option>
+                                <option value="electricStaging">Electric Staging</option>
+                                <option value="SCRElectric">SCR Electric</option>
+                                <option value="hotWaterModulating">Hot Water: Modulating</option>
+                                <option value="hotWaterModulationCoilDeltaT">Hot Water: Modulating Coil Delta T
+                                </option>
+                                <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass
+                                </option>
+                                <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass
+                                </option>
+                            </select> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTen">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen"> Face and
+                                Bypass Dampers </button> </h5>
+                    </div>
+                    <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
+                        <div class="card-body"> <label for="FaceBypassD">Face and Bypass Dampers</label> <select
+                                id="faceAndBypassDampers" name="FaceBypassD">
+                                <option value="none">None</option>
+                                <option value="external">External Bypass</option>
+                                <option value="internal">Internal Bypass</option>
+                            </select><br><br> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingEleven">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                                Heating </button> </h5>
+                    </div>
+                    <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion">
+                        <div class="card-body"> <label for="Heating">Heating</label> <select name="Heating"
+                                id="heating">
+                                <option value="none">None</option>
+                                <option value="electricStaging1">Electric Staging 1</option>
+                                <option value="electricStaging2">Electric Staging 2</option>
+                                <option value="electricStaging3">Electric Staging 3</option>
+                                <option value="electricStaging4">Electric Staging 4</option>
+                                <option value="electricStaging5">Electric Staging 5</option>
+                                <option value="electricStaging6">Electric Staging 6</option>
+                                <option value="gasStaging1">Gas Staging 1</option>
+                                <option value="gasStaging2">Gas Staging 2</option>
+                                <option value="gasStaging3">Gas Staging 3</option>
+                                <option value="gasStaging4">Gas Staging 4</option>
+                                <option value="gasStaging5">Gas Staging 5</option>
+                                <option value="gasStaging6">Gas Staging 6</option>
+                                <option value="SCRElectric">SCR Electric</option>
+                                <option value="hotWaterModulating">Hot Water: Modulating</option>
+                                <option value="hotWaterExternalFaceAndBypass">Hot Water: External Face and Bypass
+                                </option>
+                                <option value="hotWaterInternalFaceAndBypass">Hot Water: Internal Face and Bypass
+                                </option>
+                                <option value="hotWaterIntegralFaceAndBypass">Hot Water: Integral Face and Bypass
+                                </option>
+                                <option value="steamModulating">Steam: Modulating</option>
+                                <option value="steamExternalFaceBypass">Steam: External Face and Bypass</option>
+                                <option value="steamInternalFaceAndBypass">Steam: Internal Face and Bypass</option>
+                                <option value="steamIntegralFaceAndBypass">Steam: Integral Face and Bypass</option>
+                            </select> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwelve">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+                                Cooling </button> </h5>
+                    </div>
+                    <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordion">
+                        <div class="card-body"> <label for="Cooling">Cooling</label> <select id="cooling"
+                                name="Cooling">
+                                <option value="none">None</option>
+                                <option value="dXCooling">Dx Cooling</option>
+                                <option value="chilledWaterModulating">Chilled Water: Modulating</option>
+                                <option value="chilledWaterModulatingCoilDeltaT">Chilled Water: Modulating Coil Delta T
+                                </option>
+                                <option value="chilledWaterExternalFaceBypass">Chilled Water: External Face and Bypass
+                                </option>
+                                <option value="chilledWaterInternalFaceBypass">Chilled Water: Internal Face and Bypass
+                                </option>
+                            </select> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="heading13">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapse13" aria-expanded="false" aria-controls="collapse13"> Mixed Air
+                                Damper </button> </h5>
+                    </div>
+                    <div id="collapse13" class="collapse" aria-labelledby="heading13" data-parent="#accordion">
+                        <div class="card-body"> <label for="MAD">Mixed Air Dampers</label> <select id="mixedAirDamper"
+                                name="MAD">
+                                <option value="none">None</option>
+                                <option value="economizerOAEnthalpySwitch">Economizer: OA Enthalpy Switch</option>
+                                <option value="economizerOAEnthalpySensor">Economizer: OA Enthalpy Sensor</option>
+                                <option value="economizerOADifferentialEnthalpy">Economizer: OA Differential Enthalpy
+                                </option>
+                                <option value="economizerOADryBulb">Economizer: OA Dry Bulb</option>
+                            </select> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="heading14">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapse14" aria-expanded="false" aria-controls="collapse14"> Minimum
+                                Outside Air </button> </h5>
+                    </div>
+                    <div id="collapse14" class="collapse" aria-labelledby="heading14" data-parent="#accordion">
+                        <div class="card-body"> <label for="mOA">Minimum Outside Air</label> <select id="minOutsideAir"
+                                name="mOA">
+                                <option value="none">None</option>
+                                <option value="differentialCO2">Differential CO2</option>
+                                <option value="returnSpaceCO2">Return/Space CO2</option>
+                            </select> </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header" id="heading16">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapse16" aria-expanded="false" aria-controls="collapse16"> Humidity
+                                Control </button> </h5>
+                    </div>
+                    <div id="collapse16" class="collapse" aria-labelledby="heading16" data-parent="#accordion">
+                        <div class="card-body"> <label for="humidityControl">Humiditiy Control</label> <input
+                                id="humidityControl" type="checkbox" name="humdidtyControl">Dehumidification <br><br>
+                            <label for="humidifier">Humidifier</label> <select id="humidifier" name="humidifier">
+                                <option value="none">None</option>
+                                <option value="SS">Humidifier SS</option>
+                                <option value="sSAndModulation">Humidifier SS and Modulation</option>
+                            </select> </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="heading17">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapse17" aria-expanded="false" aria-controls="collapse17"> Miscellaneous
+                                Monitoring </button> </h5>
+                    </div>
+                    <div id="collapse17" class="collapse" aria-labelledby="heading17" data-parent="#accordion">
+                        <div class="card-body">
+                            <ul>
+                                <li><input id="RARH" type="checkbox" name="RARH">Return Air Relative Humidity</li>
+                                <li><input id="OARH" type="checkbox" name="OARH">Outdoor Air Relative Humidity</li>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="heading18">
+                        <h5 class="mb-0"> <button class="btn btn-link collapsed" data-toggle="collapse"
+                                data-target="#collapse18" aria-expanded="false" aria-controls="collapse18"> Filter
+                                Monitoring </button> </h5>
+                    </div>
+                    <div id="collapse18" class="collapse" aria-labelledby="heading18" data-parent="#accordion">
+                        <div class="card-body"> <label for="f1M">Filter 1 Monitoring</label> <select
+                                id="filterOneMonitoring" name="f1M">
+                                <option value="none">None</option>
+                                <option value="hours">Hours</option>
+                                <option value="status">Status</option>
+                                <option value="differentialPressure">Differential Pressure</option>
+                            </select> <br><br> <label for="f2M">Filter 2 Monitoring</label> <select
+                                id="filterTwoMonitoring" name="f2M">
+                                <option value="none">None</option>
+                                <option value="hours">Hours</option>
+                                <option value="status">Status</option>
+                                <option value="differentialPressure">Differential Pressure</option>
+                            </select> </div>
+                    </div>
+                </div>
+            </div> <button onclick="submitCV()">Generate Points List and Seqence</button> </div> ';

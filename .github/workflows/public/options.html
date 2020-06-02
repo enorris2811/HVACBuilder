@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HVAC Builder</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" type='text/css' href="/stylesheets/newStyle.css">
+</head>
+
+<body>
+
+    <nav id='navTop' class="navbar navbar-expand-sm">
+        <ul class="navbar-nav" id='navbar'>
+            <img src="/images/CCG_Logo_New.bmp" class="align-self-*-start" alt="CCG LOGO">
+            <li class="nav-item">
+                <a class="nav-link" id='home' href="/">Get Started</a>
+            </li>
+            <li class="nav-item">
+                <a class='nav-link' id='options' href="/">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
+                    data-target="#modalContactForm">Contact</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm"
+                    id='loginLink'>Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm"
+                    id='singupLink'>New User</a>
+            </li>
+        </ul>
+    </nav>
+    <div class='row'>
+        <div class='container col-sm-3'>
+            <h2>Projects Controls</h2>
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="home-list" data-toggle="list" href="#home"
+                    role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="newProject-list" data-toggle="list"
+                    href="#newProject" role="tab" aria-controls="newProject">New Project</a>
+                <a class="list-group-item list-group-item-action" id="newGroup-list" data-toggle="list" href="#newGroup"
+                    role="tab" aria-controls="newGroup">New Group</a>
+                <a class="list-group-item list-group-item-action" id="newUnit-list" data-toggle="list" href="#newUnit"
+                    role="tab" aria-controls="newUnit">New Unit</a>
+                <a class="list-group-item list-group-item-action" id="remove-list" data-toggle="list" href="#removeUnit"
+                    role="tab" aria-controls="removeUnit">Remove Unit</a>
+
+            </div>
+            <h4>Overview Selector</h4>
+            <div id='sidebar'></div>
+        </div>
+
+
+
+
+
+        <div id='navBottom' class='container col-sm-9'>
+            <ul class="nav nav-tabs" id='projectNav'>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" id='breadcrumb'>
+                        <li class='breadcrumb-item active' aria-current="page">Home</li>
+                    </ol>
+                </nav>
+                <li class="nav-item">
+                    <a class="nav-link" id='overviewLink' href='/overview'>Overview</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" id='optionsLink' href='/options'>Options</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id='pointsLink' href='/points'>Points</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id='sequenceLink' href='/sequence'>Sequence</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/drawings'>Drawings</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href='/material'>Material</a>
+                </li>
+
+            </ul>
+            <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="userName" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="userName">Your
+                                    email</label>
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="password" id="password" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="password">Your
+                                    password</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-default" onclick='login()'>Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="userNameNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="userNameNew">Your name</label>
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="emailNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="emailNew">Your email</label>
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="password" id="passwordNew" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="passwordNew">Your
+                                    password</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-deep-orange" onclick='newUser()'>Sign up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="form34" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="email" id="form29" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-tag prefix grey-text"></i>
+                                <input type="text" id="form32" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form32">Subject</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fas fa-pencil prefix grey-text"></i>
+                                <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                                <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class='tab-pane fade show active' id='home' role='tabpanel' aria-labelledby="home-list">
+                        <h1>HVAC Builder</h1>
+                        <p>Welcome to the CCG Equipment Configurator. LogIn to access
+                            saved projects and equipment, or create a new user and start
+                            configuring a equipment and organizing a project now! </p>
+                    </div>
+
+                    <div class="tab-pane fade" id="newProject" role="tabpanel" aria-labelledby="newProject-list">
+                        <label for='newProjectTextbox'>Enter the name for a new project</label>
+                        <input type='text' id='newProjectTextbox'>
+
+                        <button type='submit' onclick='createNewProject()'>Submit</button>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="newGroup" role="tabpanel" aria-labelledby="newGroup-list">
+
+                        <label for='newGroupTextbox'>Enter a name for a group</label>
+                        <input type='text' id='newGroupTextbox'>
+                        <select id='newGroupProjectSelect'>
+                            <option value=''>....</option>
+                        </select>
+                        <button type='submit' id='newGroupSubmit' onclick='addNewGroup()'>Submit</button>
+                    </div>
+
+                    <div class="tab-pane fade" id="newUnit" role="tabpanel" aria-labelledby="newUnit-list">
+
+                        <ul class='list-group'>
+
+                            <li class='list-group-item'>
+                                <label for="AHUType">Select AHU Style</label>
+                                <select id="AHUOptions">
+                                    <option value="">Select....</option>
+                                    <option value="Constant Volume">Constant Volume</option>
+                                    <option value="VAV">VAV</option>
+                                </select>
+                            </li>
+
+                            <li class='list-group-item'>
+                                <label for='ahuName'>Enter the Name of The AHU</label>
+                                <input id='ahuName' type='text'>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='projectSelect'>Select the project for the AHU:</label>
+                                <select id='projectSelect'>
+                                    <option value=''>Select....</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='groupSelect'>Select the Group</label>
+                                <select id='groupSelect'>
+                                    <option value=''>Select....</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='ahuSize'>Select the Size of the AHU</label>
+                                <select id='ahuSize'>
+                                    <option value='small'>Small(0 to 9999k CFM) </option>
+                                    <option value='medium'>Medium(10k to 15999k CFM)</option>
+                                    <option value='large'>Large (16K to 20k CFM)</option>
+                                </select>
+                            </li>
+                            <li class='list-group-item'>
+                                <label for='controllerSelect'>Select the controller manufacturer</label>
+                                <select id='controllerSelect'>
+                                    <option value='siemens'>Siemens</option>
+                                    <option value='carrier'>Carrier</option>
+                                    <option value='distech'>Distech</option>
+                                    <option value='trane'>Trane</option>
+                                </select>
+                            </li>
+                            <br>
+                            <br>
+                            <button type='submit' onclick='addAHU()'>Submit new AHU</button>
+
+                        </ul>
+
+                    </div>
+                    <div class="tab-pane fade" id="removeUnit" role="tabpanel" aria-labelledby="remove-list">
+                        <ul>
+                            <li>
+                                <label for='removeProjectSelect'>Select Project for Deletion </label>
+                                <select id='removeProjectSelect'>
+                                    <option value=''>....</option>
+                                </select>
+                                <button type='button' id='removeProjectSubmit' onclick='removeProject()'>Submit</button>
+                            </li>
+                            <li>
+                                <label for='removeGrouptSelect'>Select Group for Deletion</label>
+                                <select id='removeGroupSelect'>
+                                    <option value=''>....</option>
+                                </select>
+                                <button type='button' id='removeGrouptSubmit' onclick='removeGroup()'>Submit</button>
+                            </li>
+                            <li>
+                                <label for='removeUnitSelect'>Select Unit for Deletion</label>
+                                <select id='removeUnitSelect'>
+                                    <option value=''>....</option>
+                                </select>
+                                <button type='button' id='removeUnitSubmit' onclick='removeUnit()'>Submit</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div id='optionsDiv'>
+
+
+            </div>
+        </div>
+    </div>
+    <script src='/javascripts/helper.js'></script>
+    <script src='/javascripts/login.js'></script>
+    <script src='/javascripts/projectControl.js'></script>
+    <script src='/javascripts/loadSideBar.js'></script>
+    <script src='/javascripts/breadcrumb.js'></script>
+    <script src='/javascripts/getUnit.js'></script>
+    <script src='/javascripts/getPoints.js'></script>
+    <script src='/javascripts/getCV.js'></script>
+    <script src='/javascripts/getVAV.js'></script>
+    <script src='/javascripts/submitVAV.js'></script>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        var user = sessionStorage.getItem('user');
+        var userID = sessionStorage.getItem('userID');
+
+        if (user != undefined) {
+            var isUnit = getURL(document.URL);
+
+            helper(user);
+
+
+            var projects = JSON.parse(sessionStorage.getItem('projects'));
+            if (projects != undefined) {
+                updateSidebar();
+                
+                loadProjectSelect('projectSelect', 'projects');
+                loadProjectSelect('newGroupProjectSelect','projects');
+                loadProjectSelect('removeProjectSelect', 'projects');
+                loadProjectSelect('removeGroupSelect', 'groups');
+                loadProjectSelect('removeUnitSelect', 'units');
+                var unit;
+                if (isUnit) {
+                    unit = getUnit();
+
+                    console.log(unit);
+                    if (unit.type == 'Constant Volume') {
+                        getCVHTML();
+                        getOptions(unit);
+                    } else if (unit.type == 'VAV') {
+                        getVAV();
+                        getOptions(unit);
+                    }
+                }
+            }
+        } else {
+
+        }
+    });
+
+
+
+
+
+
+    function getLink() {
+        var tempP = document.getElementById('projectSlice');
+        var link = "";
+        if (tempP != null) {
+            link = '/project/' + tempP.innerText;
+            var tempG = document.getElementById('groupSlice');
+            if (tempG != null) {
+                link = link + '/group/' + tempG.innerText;
+                var tempU = document.getElementById('unitSlice');
+                if (tempU != null) {
+                    link = link + '/unit/' + tempU.innerText;
+                }
+
+            }
+        } else {
+            return false;
+        }
+
+        return link;
+    }
+
+
+
+
+    function getUnitOptionsModel() {
+        var projectName = document.getElementById('projectSlice').innerText;
+        var groupName = document.getElementById('groupSlice').innerText;
+        var unitName = document.getElementById('unitSlice').innerText;
+        var projects = JSON.parse(sessionStorage.getItem('projects'));
+        var groups = JSON.parse(sessionStorage.getItem('groups'));
+        var units = JSON.parse(sessionStorage.getItem('units'));
+        var project = project.name;
+        var group = groups.name;
+        var unit = units.name;
+        if (unit.type == 'cv') {
+
+        }
+    }
+</script>
+
+</html>
