@@ -1,11 +1,10 @@
-
 //updateSidebar();
 
 function updateSidebar() {
     var topNode = document.getElementById('sidebar');
-    
+
     var x = topNode.childElementCount;
-    for(var i = 0;i< x; i++){
+    for (var i = 0; i < x; i++) {
         topNode.lastChild.remove();
     }
 
@@ -21,69 +20,90 @@ function updateSidebar() {
     var newNode = document.createElement('ul');
     newNode.className = 'list-group nested';
     topNode.appendChild(newNode);
-    while (projects.length > 0) {
-        var tempProject = projects.shift();
-        var newUL = addNewSideBarItem(null, null, tempProject, newNode);
+    if (projects.length != null) {
+        while (projects.length > 0) {
+            var tempProject = projects.shift();
+            var newUL = addNewSideBarItem(null, tempProject, newNode);
 
-        for (var x = 0; x < groups.length; x++) {
-            var tempGroup = groups[x];
-            if (tempGroup.project == tempProject._id) {
-                var nextUL = addNewSideBarItem(tempProject.name, null, tempGroup, newUL);
-
-                for (var y = 0; y < units.length; y++) {
-                    var tempUnit = units[y];
-                    if (tempUnit.group == tempGroup._id) {
-                        var dump = addNewSideBarItem(tempGroup.name, tempProject.name, tempUnit, nextUL);
-                    }
+            for (var y = 0; y < units.length; y++) {
+                var tempUnit = units[y];
+                if (tempUnit.project == tempProject._id) {
+                    var dump = addNewSideBarItem(tempProject.name, tempUnit, newUL);
                 }
-
             }
-
         }
+
     }
+
 }
 
-function addNewSideBarItem(name, name2, project, topNode) {
+function addNewSideBarItem(name, project, topNode) {
     var newListItem = document.createElement('li');
-    
+
     topNode.appendChild(newListItem);
     var newA = document.createElement('a');
-    newA.textContent = project.name;
+    newA.textContent = project.name + " overview";
     newListItem.appendChild(newA);
-    newA.id = project.name;
+    newA.name = project.name;
+    console.log(project._id);
+    newA.id = project._id;
     newA.className = 'list-group-item';
 
-    //newA.setAttribute('data-toggle', 'collapse');
 
+    var newB = document.createElement('a');
+    newB.textContent = 'Remove ' + project.name;
+
+
+    newB.id = project._id;
+
+    var newC = document.createElement('a');
+    newC.textContent = 'Configure ' + project.name;
+
+    var newD = document.createElement('a');
+    newD.textContent = 'Points ' + project.name;
+
+    var newE = document.createElement('a');
+    newE.textContent = 'Sequence ' + project.name;
     var newUL = document.createElement('ul');
     if (name == null) {
         //  newA.setAttribute('data-target', '#' + project.name + 'List');
-        newUL.id = project.name + 'List';
+        newUL.name = project.name + 'List';
         newA.setAttribute('href', '/overview/project/' + project.name);
+        newB.setAttribute('onclick', 'removeProject(this.id)');
 
-    } else {
-        //  newA.setAttribute('data-target', '#' + name + project.name + 'List');
-        newUL.id = name + project.name + 'List';
-        newA.setAttribute('href', '/overview/project/' + name + '/group/' + project.name);
+        var t = document.createElement('ul');
+        t.className = 'nested';
+        newA.appendChild(t);
+        var l = document.createElement('li');
+        t.appendChild(l);
+        l.appendChild(newB);
 
+    } else if (name != null) {
+        newA.setAttribute('href', '/overview/project/' + name + '/unit/' + project.name);
+        newB.setAttribute('onclick', 'removeUnit(this.id)');
+        newC.setAttribute('href', '/options/project/'  + name + '/unit/' + project.name);
+        newD.setAttribute('href', '/points/project/' + name +  '/unit/' + project.name);
+        newE.setAttribute('href', '/sequence/project/'  + name + '/unit/' + project.name);
+        var t = document.createElement('ul');
+        t.className = 'nested';
+        newA.appendChild(t);
+        var l = document.createElement('li');
+        t.appendChild(l);
+        l.appendChild(newB);
+        var l = document.createElement('li');
+        t.appendChild(l);
+        l.appendChild(newC);
+        var l = document.createElement('li');
+        t.appendChild(l);
+        l.appendChild(newD);
+        var l = document.createElement('li');
+        t.appendChild(l);
+        l.appendChild(newE);
     }
-    if (name2 != null) {
-        newA.setAttribute('href', '/overview/project/' + name2 + '/group/' + name + '/unit/' + project.name);
-    }
+
 
     newUL.className = 'nested';
 
     newListItem.appendChild(newUL);
     return newUL;
-}
-
-
-var toggler = document.getElementsByClassName("caret");
-var i;
-
-for (i = 0; i < toggler.length; i++) {
-  toggler[i].addEventListener("click", function() {
-    this.parentElement.querySelector(".nested").classList.toggle("active");
-    this.classList.toggle("caret-down");
-  });
 }

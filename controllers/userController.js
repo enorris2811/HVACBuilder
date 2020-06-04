@@ -24,13 +24,13 @@ exports.get_user = function (req, res) {
     console.log(tempPassword + tempUserName);
     console.log(req.body);
     if ((tempUserName != "") || (tempUserName != undefined)) {
-        user.find({ 'userName': tempUserName }, function (err, result) {
+        user.find({'email': tempUserName }, function (err, result) {
             if (err) { console.log(err) } else {
                 console.log('the results of the login query are:' + result[0]);
 
                 if (tempPassword == result[0].password) {
                     console.log('true');
-                    res.json({ 'userID': result[0]._id, 'auth': true });
+                    res.json({ 'result': result[0], 'auth': true });
                 } else {
 
                     console.log('false');

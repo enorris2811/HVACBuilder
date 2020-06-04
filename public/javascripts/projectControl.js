@@ -6,8 +6,7 @@ function addAHU() {
     var name = x.value;
     x = document.getElementById('projectSelect');
     var project = x[x.selectedIndex].value;
-    x = document.getElementById('groupSelect');
-    var group = x[x.selectedIndex].value;
+
     x = document.getElementById('ahuSize');
     var size = x[x.selectedIndex].value;
     x = document.getElementById('controllerSelect');
@@ -23,7 +22,15 @@ function addAHU() {
     console.log(manu);
 
 
-    $.post('/addAHU', { name, type, project, size, user, manu, group }, function (data, status) {
+    $.post('/addAHU', {
+        name,
+        type,
+        project,
+        size,
+        user,
+        manu
+
+    }, function (data, status) {
         //sessionStorage.clear();
         getUserData(userID);
         updateSidebar(userID);
@@ -43,7 +50,10 @@ function createNewProject() {
     var userID = sessionStorage.getItem('userID');
 
     if (userID != undefined) {
-        $.post('/newProject', { name, userID }, function (data, status) {
+        $.post('/newProject', {
+            name,
+            userID
+        }, function (data, status) {
             updateSidebar(userID);
             alert('project created!!');
         });
@@ -53,29 +63,37 @@ function createNewProject() {
 }
 
 function saveProject(project) {
-    $.post('/saveProject', { project }, function (data, status) {
+    $.post('/saveProject', {
+        project
+    }, function (data, status) {
         console.log('save maybe');
         if (status == 400 || status == 200) {
             console.log(data);
         }
     });
 }
+
 function addNewGroup() {
     var groupName = document.getElementById('newGroupTextbox').value;
     var projectID = document.getElementById('newGroupProjectSelect').value;
-    $.post('/addNewGroup', { groupName, projectID }, function (data, status) {
+    $.post('/addNewGroup', {
+        groupName,
+        projectID
+    }, function (data, status) {
         alert('new group added');
     });
 
 }
 
+document.getElementById('newUnit').onclick = loadProjectSelect();
 
-function loadProjectSelect(eleID, item) {
-
-    var projects = JSON.parse(sessionStorage.getItem(item));
-    var topNode = document.getElementById(eleID);
-
-    for (x in projects) {
+function loadProjectSelect() {
+    console.log('clicked');
+    var projects = JSON.parse(sessionStorage.getItem('projects'));
+    var topNode = document.getElementById('projectSelect');
+    var i = projects.length;
+    console.log(i);
+    for (var x = 0; x < projects.length; x++) {
         console.log(projects[x]);
         var temp = document.createElement('option');
         temp.textContent = projects[x].name;
@@ -91,42 +109,36 @@ document.getElementById('projectSelect').onchange = function () {
     var val = this.options[this.selectedIndex].value;
     console.log(val);
 
+    var groups = JSON.parse(sessionStorage.getItem('groups'));
 
-    $.post('/getGroups', { id: val }, function (data, status) {
-        var groups = data.list;
-        for (x in groups) {
+    for (x in groups) {
+        if (val == groups[x].project) {
             var newOption = document.createElement('option');
             newOption.value = groups[x]._id;
             newOption.textContent = groups[x].name;
             groupSelect.appendChild(newOption);
         }
-    });
+    }
+
 
 }
 
-function removeProject(){
-    var p = document.getElementById('removeProjectSelect');
-    var temp = p.options[p.selectedIndex].value;
+function removeProject(temp) {
     console.log(temp);
-    $.post('/removeProject',{temp}, function(data, status){
+    $.post('/removeProject', {
+        temp
+    }, function (data, status) {
         alert('project deleted');
     });
 }
 
-function removeGroup(){
-    var p = document.getElementById('removeGroupSelect');
-    var temp = p.options[p.selectedIndex].value;
-    console.log(temp);
-    $.post('/removeGroup',{temp}, function(data, status){
-        alert('group deleted');
-    });
-}
+function removeUnit(a) {
 
-function removeUnit(){
-    var p = document.getElementById('removeUnitSelect');
-    var temp = p.options[p.selectedIndex].value;
-    console.log(temp);
-    $.post('/removeUnit',{temp}, function(data, status){
+    console.log('clicked' + a);
+
+    $.post('/removeUnit', {
+        a
+    }, function (data, status) {
         alert('unit deleted');
     });
 }

@@ -2,15 +2,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var nodemailer = require('nodemailer');
 
 var indexRouter = require('./routes/index.js');
 var usersRouter = require('./routes/users.js');
 var projectRouter = require('./routes/projects.js');
 
+
+
 var app = express();
 var db = require('./db.js')
-
+var email = require('./email.js');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -45,17 +47,17 @@ app.use('/login', indexRouter);
 app.use('/addNewGroup',indexRouter);
 app.use('/overview',indexRouter);
 app.use('/overview/project/:project/group/:group',indexRouter);
-app.use('/overview/project/:project/group/:group/unit/:unit',indexRouter);
+app.use('/overview/project/:project/unit/:unit',indexRouter);
 app.use('/overview/project/:project',indexRouter);
 app.use('/options', indexRouter);
 app.use('/options/project/:project/group/:group',indexRouter);
-app.use('/options/project/:project/group/:group/unit/:unit',indexRouter);
+app.use('/options/project/:project/unit/:unit',indexRouter);
 app.use('/options/project/:project',indexRouter);
 app.use('/points/project/:project/group/:group',indexRouter);
-app.use('/points/project/:project/group/:group/unit/:unit',indexRouter);
+app.use('/points/project/:project/unit/:unit',indexRouter);
 app.use('/points/project/:project',indexRouter);
 app.use('/sequence/project/:project/group/:group',indexRouter);
-app.use('/sequence/project/:project/group/:group/unit/:unit',indexRouter);
+app.use('/sequence/project/:project/unit/:unit',indexRouter);
 app.use('/sequence/project/:project',indexRouter);
 app.use('/updateUnitOptions',indexRouter);
 app.use('/getUserProjects',indexRouter);

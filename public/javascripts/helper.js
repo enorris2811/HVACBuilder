@@ -3,17 +3,13 @@ function getLink() {
     var link = "";
     if (tempP != null) {
         link = '/project/' + tempP.innerText;
-        var tempG = document.getElementById('groupSlice');
 
-
-        if (tempG != null) {
-            link = link + '/group/' + tempG.innerText;
-            var tempU = document.getElementById('unitSlice');
-            if (tempU != null) {
-                link = link + '/unit/' + tempU.innerText;
-            }
-
+        var tempU = document.getElementById('unitSlice');
+        if (tempU != null) {
+            link = link + '/unit/' + tempU.innerText;
         }
+
+
     } else {
         return "";
     }
@@ -57,7 +53,7 @@ function updateSession(p, g, u) {
 
 function getUserData(userID) {
     var id;
-    
+
     $.post('/getProjects', {
         userID
     }, function (data, status) {
@@ -70,16 +66,16 @@ function getUserData(userID) {
             var id = projects[0]._id;
             console.log(id);
             sessionStorage.setItem('projects', JSON.stringify(projects));
-            $.get('/getGroups',  function (data, status) {
+            $.get('/getGroups', function (data, status) {
                 sessionStorage.setItem('groups', JSON.stringify(data.list));
                 console.log(data);
             });
-            $.get('/getUnits',  function (data, status) {
+            $.get('/getUnits', function (data, status) {
                 console.log(data);
                 sessionStorage.setItem('units', JSON.stringify(data.list));
             });
         } else {
-           // return false;
+            // return false;
         }
     });
 
@@ -88,5 +84,5 @@ function getUserData(userID) {
     console.log(JSON.parse(sessionStorage.getItem('projects')));
     console.log(sessionStorage.getItem('groups'));
     console.log(sessionStorage.getItem('units'));
-    
+
 }

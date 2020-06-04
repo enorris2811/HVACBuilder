@@ -14,14 +14,24 @@ exports.updateUnitOptions = function (req, res) {
     console.log(unit);
     var points = unit.points;
     // console.log(points);
-    ahu.findOneAndUpdate({ '_id': unit._id }, { 'points': unit.points, 'sequence': unit.sequence,'model':unit.model }, { 'useFindAndModify': false }).exec(function (err, temp) {
+    ahu.findOneAndUpdate({
+        '_id': unit._id
+    }, {
+        'points': unit.points,
+        'sequence': unit.sequence,
+        'model': unit.model
+    }, {
+        'useFindAndModify': false
+    }).exec(function (err, temp) {
         if (err) {
             console.log(err);
         } else {
             //temp.sequence = unit.sequence;
             //temp.points = unit.points;
             console.log(temp);
-            res.json({ temp });
+            res.json({
+                temp
+            });
         }
     });
 
@@ -83,7 +93,9 @@ exports.add_new_group = function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.json({ 'saved': true });
+            res.json({
+                'saved': true
+            });
         }
     });
 }
@@ -91,12 +103,18 @@ exports.create_project = function (req, res) {
     var temp = req.body.name;
     var tempUserID = req.body.userID;
     console.log(req.body);
-    var tempGroup = new group({ name: 'floorOne' });
-    var tempInstance = new project({ name: temp, groups: tempGroup, user: tempUserID });
-    tempGroup.project = tempInstance;
+
+    var tempInstance = new project({
+        name: temp,
+    
+        user: tempUserID
+    });
+
     console.log(tempInstance);
-    tempGroup.save(function (err) { if (err) console.log(err) });
-    tempInstance.save(function (err) { if (err) console.log(err) });
+ 
+    tempInstance.save(function (err) {
+        if (err) console.log(err)
+    });
 
     res.send('saved!');
 }
@@ -104,12 +122,16 @@ exports.get_units = function (req, res) {
     console.log(req.body);
     var id = req.body.id;
     console.log(id);
-    ahu.find({ 'project': id }).exec(function (err, units) {
+    ahu.find({
+        'project': id
+    }).exec(function (err, units) {
         if (err) {
             console.log(err);
         } else {
             console.log(units);
-            res.json({ units });
+            res.json({
+                units
+            });
         }
     });
 }
@@ -121,30 +143,46 @@ exports.add_ahu = function (req, res) {
     var projectTemp = req.body.project;
     var size = req.body.size;
     var conttroller = req.body.manu;
-    var group = req.body.group;
-    var tempInstance = new ahu({ name: name });
+    
+    var tempInstance = new ahu({
+        name: name
+    });
     tempInstance.type = type;
     tempInstance.project = projectTemp;
     tempInstance.size = size;
     tempInstance.controller = conttroller;
-    tempInstance.group = group;
     
-    tempInstance.save(function (err) { if (err) { console.log(err); } else { res.json({"auth":true }); } });
+
+    tempInstance.save(function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json({
+                "auth": true
+            });
+        }
+    });
 
 }
 exports.find_ahu_all = function (req, res) {
     console.log(req.body);
     ahu.find({}, 'name').exec(function (err, list) {
         if (err) console.log(err);
-        res.json({ list });
+        res.json({
+            list
+        });
     })
 }
 exports.find_ahu_by_project = function (req, res) {
     console.log(req.body);
     var temp = req.body.project;
-    ahu.find({ temp }, 'project').exec(function (err, list) {
+    ahu.find({
+        temp
+    }, 'project').exec(function (err, list) {
         if (err) console.log(err);
-        res.json({ list });
+        res.json({
+            list
+        });
     });
 
 }
@@ -152,9 +190,13 @@ exports.find_ahu_by_project = function (req, res) {
 exports.find_ahu_by_type = function (req, res) {
     console.log(req.body);
     var temp = req.body.type;
-    ahu.find({ temp }, 'type').exec(function (err, list) {
+    ahu.find({
+        temp
+    }, 'type').exec(function (err, list) {
         if (err) console.log(err);
-        res.json({ list });
+        res.json({
+            list
+        });
     })
 }
 
@@ -169,12 +211,16 @@ exports.get_groups = function (req, res) {
     console.log('called get groups');
     var projectID = req.body.id;
     console.log(req.body);
-    group.find({ project: projectID }).exec(function (err, list) {
+    group.find({
+        project: projectID
+    }).exec(function (err, list) {
         if (err) {
             console.log(err);
         } else {
             console.log(list)
-            res.json({ list });
+            res.json({
+                list
+            });
         }
     });
 }
@@ -184,7 +230,9 @@ exports.get_projects = function (req, res) {
     project.find({}, 'name').exec(function (err, list) {
         if (err) console.log(err);
         console.log(list);
-        res.json({ list });
+        res.json({
+            list
+        });
 
     })
 };
@@ -205,11 +253,15 @@ exports.load_project = function (req, res) {
     var temp = req.body.userID;
     console.log(temp);
 
-    project.find({ 'user': temp }, function (err, projects) {
+    project.find({
+        'user': temp
+    }, function (err, projects) {
         if (err) console.log(err);
         else {
             console.log(projects);
-            res.json({ projects });
+            res.json({
+                projects
+            });
         }
     });
     console.log(project);
@@ -220,7 +272,9 @@ exports.get_all_groups = function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.json({ list });
+            res.json({
+                list
+            });
         }
     })
 };
@@ -230,7 +284,9 @@ exports.get_all_units = function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.json({ list });
+            res.json({
+                list
+            });
         }
     })
 }
@@ -242,36 +298,33 @@ exports.get_projects_login = function (req, res) {
     var p = [];
     var g = [];
     var u = [];
-    project.find({ 'user': temp }, function (err, projects) {
+    project.find({
+        'user': temp
+    }, function (err, projects) {
         if (err) console.log(err);
         else {
-           // console.log(projects);
+            // console.log(projects);
             p = projects;
             for (var x = 0; x < projects.length; x++) {
 
-                group.find({ }, function (err, groups) {
+                
+
+                ahu.find({}).exec(function (err, units) {
                     if (err) {
                         console.log(err);
                     } else {
-                        //console.log('the results of the group query are:' + groups);
-
-                        g.push(groups);
-
-                    }
-                });
-
-                ahu.find({ }).exec(function (err, units) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                       // console.log('the results of the units query are:' + units);
+                        // console.log('the results of the units query are:' + units);
 
                         u.push(units);
 
                     }
                 });
             }
-            res.json({ 'projects': p, 'groups': g, 'units': u });
+            res.json({
+                'projects': p,
+                'groups': g,
+                'units': u
+            });
         }
     });
 
@@ -289,55 +342,65 @@ exports.get_unit_options = function (req, res) {
 }
 
 
-exports.remove_project = function (req, res){
+exports.remove_project = function (req, res) {
     var id = req.body.temp;
-    project.findOneAndDelete({'_id': id}).exec(function(err,data){
-        if(err){console.log(err);}else{
+    project.findOneAndDelete({
+        '_id': id
+    }).exec(function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
             console.log(data);
-            ahu.deleteMany({'project':id}, function(err){
-                if (err){
+            ahu.deleteMany({
+                'project': id
+            }, function (err) {
+                if (err) {
                     console.log(err);
-                }else{
+                } else {
                     console.log('deleted many units');
                 }
 
-                
+
             });
 
-            group.deleteMany({'project':id},function(err){
-                if(err){
+            
+        }
+    });
+}
+
+exports.remove_group = function (req, res) {
+    var id = req.body.temp;
+    group.findOneAndDelete({
+        '_id': id
+    }).exec(function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(data);
+            ahu.deleteMany({
+                'group': id
+            }, function (err) {
+                if (err) {
                     console.log(err);
-                }else{
-                    console.log('Deleted project groups');
+                } else {
+                    console.log('Deleted Groups units');
                 }
             })
         }
     });
 }
 
-exports.remove_group = function (req, res){
-    var id = req.body.temp;
-    group.findOneAndDelete({'_id': id}).exec(function(err,data){
-        if(err){console.log(err);}else{
-            console.log(data);
-            ahu.deleteMany({'group':id},function(err){
-                if(err){
-                    console.log(err);
-                }else{
-                    console.log('Deleted Groups units');
-                }
-            }
-    )
-        }
-    });
-}
-
-exports.remove_unit = function (req,res){
-    var id = req.body.temp;
+exports.remove_unit = function (req, res) {
+    var id = req.body.a;
     console.log(id);
-    ahu.findOneAndDelete({'_id':id}).exec(function(err,data){
-        if(err){console.log(err);}else{
+    ahu.findOneAndDelete({
+        '_id': id
+    }).exec(function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
             console.log(data);
+            res.json(JSON.stringify(data));
         }
     });
 }

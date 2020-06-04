@@ -1,5 +1,7 @@
 var points = {
     'hardware': {
+        'heatingCoilReturnTemperature':{ 'isUsed': false, 'points': { 'AI': 1, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
+        'heatingCoilSupplyTemperature':{ 'isUsed': false, 'points': { 'AI': 1, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'remoteOccupancy':{ 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'mixedAirDampers': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },
         'compressorStage': { 'isUsed': false, 'points': { 'AI': 0, 'AO': 0, 'BI': 0, 'BO': 0, 'AV': 1, 'BV': 0, 'Loop': 0, 'Schedule': 0, 'Trend': 1, 'Alarm': 0, 'Graphics': 1 } },

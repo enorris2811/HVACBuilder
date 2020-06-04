@@ -39,16 +39,14 @@
         <div class='container col-sm-3' id='sidebarTop'>
             <h2>Projects Controls</h2>
             <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="home-list" data-toggle="list" href="#home"
-                    role="tab" aria-controls="home">Home</a>
-                <a class="list-group-item list-group-item-action" id="newProject-list" data-toggle="list"
-                    href="#newProject" role="tab" aria-controls="newProject">New Project</a>
-                <a class="list-group-item list-group-item-action" id="newGroup-list" data-toggle="list" href="#newGroup"
-                    role="tab" aria-controls="newGroup">New Group</a>
-                <a class="list-group-item list-group-item-action" id="newUnit-list" data-toggle="list" href="#newUnit"
-                    role="tab" aria-controls="newUnit">New Unit</a>
-                <a class="list-group-item list-group-item-action" id="remove-list" data-toggle="list" href="#removeUnit"
-                    role="tab" aria-controls="removeUnit">Remove Unit</a>
+
+
+                <a class="list-group-item list-group-item-action" id="newProject-list" data-toggle="modal"
+                    data-target="#newProject" role="tab" aria-controls="newProject">New Project</a>
+
+                <a class="list-group-item list-group-item-action" id="newUnit-list" data-toggle="modal"
+                    data-target="#newUnit" role="tab" aria-controls="newUnit">New Unit</a>
+
             </div>
             <h4>Select a link to configure</h4>
             <div id='sidebar'>
@@ -117,6 +115,8 @@
                                 <label data-error="wrong" data-success="right" for="password">Your
                                     password</label>
                             </div>
+                            <label for='resetPassword'>Forgot Password??</label>
+                            <button class="btn btn-default" onclick='resetPassword()'>Reset</button>
 
                         </div>
                         <div class="modal-footer d-flex justify-content-center">
@@ -203,117 +203,102 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="tab-content" id="nav-tabContent">
-                    <div class='tab-pane fade show active' id='home' role='tabpanel' aria-labelledby="home-list">
-                        <h1>HVAC Builder</h1>
-                        <p>Welcome to the CCG Equipment Configurator. LogIn to access
-                            saved projects and equipment, or create a new user and start
-                            configuring a equipment and organizing a project now! </p>
-                    </div>
 
-                    <div class="tab-pane fade" id="newProject" role="tabpanel" aria-labelledby="newProject-list">
-                        <label for='newProjectTextbox'>Enter the name for a new project</label>
-                        <input type='text' id='newProjectTextbox'>
+            <div class="modal fade" id="newProject" tabindex="-1" role="dialog" aria-labelledby="newProject-list"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">New Project</h4>
+                        </div>
+                        <div class='modal-body mx-3'>
+                            <label for='newProjectTextbox'>Enter the name for a new project</label>
+                            <input type='text' id='newProjectTextbox'>
 
-                        <button type='submit' onclick='createNewProject()'>Submit</button>
+                            <button type='submit' onclick='createNewProject()'>Submit</button>
 
-                    </div>
-
-                    <div class="tab-pane fade" id="newGroup" role="tabpanel" aria-labelledby="newGroup-list">
-                        
-                        <label for='newGroupTextbox'>Enter a name for a group</label>
-                        <input type='text' id='newGroupTextbox'>
-                        <select id='newGroupProjectSelect'>
-                            <option value=''>....</option>
-                        </select>
-                        <button type='submit' id='newGroupSubmit' onclick='addNewGroup()'>Submit</button>
-                    </div>
-
-                    <div class="tab-pane fade" id="newUnit" role="tabpanel" aria-labelledby="newUnit-list">
-
-                        <ul class='list-group'>
-
-                            <li class='list-group-item'>
-                                <label for="AHUType">Select AHU Style</label>
-                                <select id="AHUOptions">
-                                    <option value="">Select....</option>
-                                    <option value="Constant Volume">Constant Volume</option>
-                                    <option value="VAV">VAV</option>
-                                </select>
-                            </li>
-
-                            <li class='list-group-item'>
-                                <label for='ahuName'>Enter the Name of The AHU</label>
-                                <input id='ahuName' type='text'>
-                            </li>
-                            <li class='list-group-item'>
-                                <label for='projectSelect'>Select the project for the AHU:</label>
-                                <select id='projectSelect'>
-                                    <option value=''>Select....</option>
-                                </select>
-                            </li>
-                            <li class='list-group-item'>
-                                <label for='groupSelect'>Select the Group</label>
-                                <select id='groupSelect'>
-                                    <option value=''>Select....</option>
-                                </select>
-                            </li>
-                            <li class='list-group-item'>
-                                <label for='ahuSize'>Select the Size of the AHU</label>
-                                <select id='ahuSize'>
-                                    <option value='small'>Small(0 to 9999k CFM) </option>
-                                    <option value='medium'>Medium(10k to 15999k CFM)</option>
-                                    <option value='large'>Large (16K to 20k CFM)</option>
-                                </select>
-                            </li>
-                            <li class='list-group-item'>
-                                <label for='controllerSelect'>Select the controller manufacturer</label>
-                                <select id='controllerSelect'>
-                                    <option value='siemens'>Siemens</option>
-                                    <option value='carrier'>Carrier</option>
-                                    <option value='distech'>Distech</option>
-                                    <option value='trane'>Trane</option>
-                                </select>
-                            </li>
-                            <br>
-                            <br>
-                            <button type='submit' onclick='addAHU()'>Submit new AHU</button>
-
-                        </ul>
+                        </div>
 
                     </div>
-                    <div class="tab-pane fade" id="removeUnit" role="tabpanel" aria-labelledby="remove-list">
-                        <ul class='list-group'>
-                            <li class='list-group-item'>
-                                <label for='removeProjectSelect'>Select Project for Deletion </label>
-                                <select id='removeProjectSelect'>
-                                    <option value=''>....</option>
-                                </select>
-                                <button type='button' id='removeProjectSubmit' onclick='removeProject()'>Submit</button>
-                            </li>
-                            <li class='list-group-item'>
-                                <label for='removeGrouptSelect'>Select Group for Deletion</label>
-                                <select id='removeGroupSelect'>
-                                    <option value=''>....</option>
-                                </select>
-                                <button type='button' id='removeGrouptSubmit' onclick='removeGroup()'>Submit</button>
-                            </li>
-                            <li class='list-group-item'>
-                                <label for='removeUnitSelect'>Select Unit for Deletion</label>
-                                <select id='removeUnitSelect'>
-                                    <option value=''>....</option>
-                                </select>
-                                <button type='button' id='removeUnitSubmit' onclick='removeUnit()'>Submit</button>
-                            </li>
-                        </ul>
-                    </div>
-
                 </div>
+            </div>
+            <div class="modal fade" id="newUnit" tabindex="-1" role="dialog" aria-labelledby="newUnit-list"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">New Unit</h4>
+                        </div>
+                        <div class='modal-body mx-3'>
+                            <ul class='list-group'>
 
+                                <li class='list-group-item'>
+                                    <label for="AHUType">Select AHU Style</label>
+                                    <select id="AHUOptions">
+                                        <option value="">Select....</option>
+                                        <option value="Constant Volume">Constant Volume</option>
+                                        <option value="VAV">VAV</option>
+                                    </select>
+                                </li>
+
+                                <li class='list-group-item'>
+                                    <label for='ahuName'>Enter the Name of The AHU</label>
+                                    <input id='ahuName' type='text'>
+                                </li>
+                                <li class='list-group-item'>
+                                    <label for='projectSelect'>Select the project for the AHU:</label>
+                                    <select id='projectSelect'>
+                                        <option value=''>Select....</option>
+                                    </select>
+                                </li>
+                              
+                                <li class='list-group-item'>
+                                    <label for='ahuSize'>Select the Size of the AHU</label>
+                                    <select id='ahuSize'>
+                                        <option value='small'>Small(0 to 9999k CFM) </option>
+                                        <option value='medium'>Medium(10k to 15999k CFM)</option>
+                                        <option value='large'>Large (16K to 20k CFM)</option>
+                                    </select>
+                                </li>
+                                <li class='list-group-item'>
+                                    <label for='controllerSelect'>Select the controller manufacturer</label>
+                                    <select id='controllerSelect'>
+                                        <option value='siemens'>Siemens</option>
+                                        <option value='carrier'>Carrier</option>
+                                        <option value='distech'>Distech</option>
+                                        <option value='trane'>Trane</option>
+                                    </select>
+                                </li>
+                                <br>
+                                <br>
+                                <button type='submit' onclick='addAHU()'>Submit new AHU</button>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h1>
+                    Welcome to the CCG AHU configurator!
+    
+                    
+                </h1>
+                <ul>
+                    <li>Step 1:  Login or Create a New User Profile!!</li>
+                    <li>Step 2:  Create a New Project</li>
+                    <li>Step 3:  Add Units to projects</li>
+                    <li>Step 4:  Configure added units</li>
+                    <li>Step 5:  Once Units are added and configured the points list and sequence will be automatically configured and saved</li>
+                </ul>
             </div>
         </div>
+
+        
+
     </div>
+
     <script src='/javascripts/login.js'></script>
     <script src='/javascripts/loadSideBar.js'></script>
     <script src='/javascripts/breadcrumb.js'></script>
@@ -328,18 +313,13 @@
             helper(user);
             var temp = document.getElementById('list-tab');
             temp.className = 'list-group';
-           getUserData(userID);
-           var projects = JSON.stringify(sessionStorage.getItem('projects'));
-           if(projects != undefined){
-            updateSidebar();
-            loadProjectSelect('projectSelect', 'projects');
-            //loadProjectSelect('groupSelect','groups');
-            loadProjectSelect('newGroupProjectSelect','projects');
-            loadProjectSelect('removeProjectSelect','projects');
-            loadProjectSelect('removeGroupSelect','groups');
-            loadProjectSelect('removeUnitSelect','units');
-           }
-           
+            getUserData(userID);
+            var projects = JSON.stringify(sessionStorage.getItem('projects'));
+            if (projects != undefined) {
+                updateSidebar();
+               
+            }
+
         }
 
     });

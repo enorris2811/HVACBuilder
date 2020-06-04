@@ -5,10 +5,14 @@ var Schema = mongoose.Schema;
 
 
 
-var projectSchema = new Schema(
-            {name:{type:String},
-             groups:[{type:Schema.Types.ObjectId, ref:'groupModel',default:undefined}],
-             user:{type:Schema.Types.ObjectId}
+var projectSchema = new Schema({
+    name: {
+        type: String
+    },
+
+    user: {
+        type: Schema.Types.ObjectId
+    }
 });
 
 
