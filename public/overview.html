@@ -209,24 +209,34 @@
                     <div class="modal-content">
                         <div class="modal-header text-center">
                             <h4 class="modal-title w-100 font-weight-bold">New Project</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class='modal-body mx-3'>
                             <label for='newProjectTextbox'>Enter the name for a new project</label>
                             <input type='text' id='newProjectTextbox'>
 
-                            <button type='submit' onclick='createNewProject()'>Submit</button>
+
 
                         </div>
-
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-unique" onclick='createNewProject()'>Submit<i
+                                    class="fas fa-paper-plane-o ml-1"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="modal fade" id="newUnit" tabindex="-1" role="dialog" aria-labelledby="newUnit-list"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header text-center">
                             <h4 class="modal-title w-100 font-weight-bold">New Unit</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class='modal-body mx-3'>
                             <ul class='list-group'>
@@ -270,21 +280,24 @@
                                 </li>
                                 <br>
                                 <br>
-                                <button type='submit' onclick='addAHU()'>Submit new AHU</button>
 
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button class="btn btn-unique" onclick='addAHU()'>Submit New AHU <i
+                                            class="fas fa-paper-plane-o ml-1"></i></button>
+                                </div>
                             </ul>
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div id='overviewContent'>
-
-            </div>
         </div>
+        <div id='overviewContent'>
 
-
+        </div>
     </div>
+
+
 
     <script src='/javascripts/login.js'></script>
     <script src='/javascripts/getUnit.js'></script>
