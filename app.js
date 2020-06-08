@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var nodemailer = require('nodemailer');
+//var nodemailer = require('nodemailer');
 
 var indexRouter = require('./routes/index.js');
 var usersRouter = require('./routes/users.js');
@@ -12,7 +12,7 @@ var projectRouter = require('./routes/projects.js');
 
 var app = express();
 var db = require('./db.js')
-var email = require('./email.js');
+//var email = require('./email.js');
 
 app.use(logger('dev'));
 app.use(express.json());
