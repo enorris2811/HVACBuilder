@@ -8,6 +8,7 @@ var pointsModel = require('../models/points.js');
 var projectController = require('../controllers/project.js');
 var ahu = require('../models/ahu.js');
 var userController = require('../controllers/userController.js');
+var email = require('../controllers/email.js');
 /* GET home page. */
 
 
@@ -115,4 +116,6 @@ router.post('/updateUnitOptions',projectController.updateUnitOptions);
 router.post('/removeProject',projectController.remove_project);
 router.post('/removeGroup', projectController.remove_group);
 router.post('/removeUnit',projectController.remove_unit);
+router.post('/resetPassword',email.resetPassword);
+router.post('/sendSupport',email.sendSupport);
 module.exports = router;

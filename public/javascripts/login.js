@@ -1,6 +1,4 @@
 
-var nodemailer = require('nodemailer');
-
 
 
 
@@ -52,31 +50,26 @@ function logOut() {
 
 function resetPassword(){
     var email = document.getElementById('userName').textContent;
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'g0nefishin34@gmail.com',
-          pass: 'hey12chuck'
-        }
-      });
-      
-      var mailOptions = {
-        from: 'g0nefishin34@gmail.com',
-        to: 'enorris2811@gmail.com',
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!'
-      };
-    console.log('mmmmmmmm');    
-    if (email != undefined){
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
-          });
-    }
-}
 
+    $.post('/resetPassword', {email}, function(data, status){
 
+      console.log(data);
+    });
+  }
+
+  function sendSupport(){
+    var email = document.getElementById('contactEmail').value;
+    var name = document.getElementById('contactName').value;
+    var subject = document.getElementById('contactSubject').value;
+    var message = document.getElementById('contactMessage').value;
+    
+    console.log(email);
+    console.log(name);
+    console.log(subject);
+    console.log(message);
+
+    $.post('/sendSupport',{email,name,subject,message},function(data,status){
+      console.log('YAYAYAYAYAYYAYAYAYAYAYAY');
+    });
+  }
 

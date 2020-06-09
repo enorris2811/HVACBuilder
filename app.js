@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-//var nodemailer = require('nodemailer');
+
 
 var indexRouter = require('./routes/index.js');
 var usersRouter = require('./routes/users.js');
@@ -12,7 +12,7 @@ var projectRouter = require('./routes/projects.js');
 
 var app = express();
 var db = require('./db.js')
-//var email = require('./email.js');
+var email = require('./controllers/email.js');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -64,7 +64,8 @@ app.use('/getUserProjects',indexRouter);
 app.use('/removeProject',indexRouter);
 app.use('/removeGroup',indexRouter);
 app.use('/removeUnit',indexRouter);
-
+app.use('/resetPassword',indexRouter);
+app.use('/sendSupport',indexRouter);
 if(process.env.NODE_ENV === 'production'){
     //set static folder
     app.use(express.static('client/build'));
