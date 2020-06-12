@@ -1,4 +1,12 @@
+
+
+/*
 var nodemailer = require('nodemailer');
+const cryptoRandomString = require('crypto-random-string');
+var mongoose = require('mongoose').MongoClient;
+var user = require('../models/user');
+
+
 
 var transporter = nodemailer.createTransport({
     host: 'smtp.office365.com',
@@ -14,12 +22,7 @@ var transporter = nodemailer.createTransport({
 
 });
 
-const mailOptions = {
-    from: 'support@ccgohio.com', // sender address
-    to: 'g0nefishin34@gmail.com', // list of receivers
-    subject: 'test', // Subject line
-    html: '<p>this is a test</p>' // plain text body
-};
+
 // verify connection configuration
 transporter.verify(function (error, success) {
     if (error) {
@@ -44,7 +47,16 @@ exports.resetPassword = function (req, res) {
         }
     
     });
-    console.log('found!!! ' + req.email);
+    var newPassword = cryptoRandomString({length:10});
+
+    var mailOptions = {
+        from: 'support@ccgohio.com',
+        to: req.body.email,
+        subject: req.body.subject,
+        html: '<p> Your New Password is:'+ newPassword  + '<p>'
+    }
+
+    console.log('found!!! ' + req.body.email);
     transporter.sendMail(mailOptions, function (err, info) {
         if (err)
             console.log(err)
@@ -88,3 +100,4 @@ exports.sendSupport = function (req, res) {
     });
     transporter.close();
 }
+*/
