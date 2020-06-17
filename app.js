@@ -1,5 +1,5 @@
 var express = require('express');
-var result = require('dotenv').config();
+//var result = require('dotenv').config();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -19,11 +19,6 @@ var email = require('./controllers/email.js');
 require('./config/passport');
 
  
-if (result.error) {
-  throw result.error;
-}
- 
-console.log(result.parsed);
 
 
 
