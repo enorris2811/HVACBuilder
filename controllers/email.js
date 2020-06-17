@@ -1,6 +1,6 @@
 
 
-/*
+
 var nodemailer = require('nodemailer');
 const cryptoRandomString = require('crypto-random-string');
 var mongoose = require('mongoose').MongoClient;
@@ -17,7 +17,7 @@ var transporter = nodemailer.createTransport({
     },
     auth: {
         user: 'support@ccgohio.com',
-        pass: 'Zol30755'
+        pass: process.env.SUPPORT_EMAIL_PASSWORD
     }
 
 });
@@ -43,7 +43,7 @@ exports.resetPassword = function (req, res) {
         },
         auth: {
             user: 'support@ccgohio.com',
-            pass: 'Zol30755'
+            pass: process.env.SUPPORT_EMAIL_PASSWORD
         }
     
     });
@@ -76,7 +76,7 @@ exports.sendSupport = function (req, res) {
         },
         auth: {
             user: 'support@ccgohio.com',
-            pass: 'Zol30755'
+            pass: process.env.SUPPORT_EMAIL_PASSWORD
         }
     
     });
@@ -100,4 +100,3 @@ exports.sendSupport = function (req, res) {
     });
     transporter.close();
 }
-*/
